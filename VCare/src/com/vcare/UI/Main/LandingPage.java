@@ -83,16 +83,16 @@ public class LandingPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        header.setBackground(new java.awt.Color(204, 0, 51));
+        header.setBackground(new java.awt.Color(22, 116, 66));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
         header.setLayout(new java.awt.BorderLayout());
 
-        iconmaxclose.setBackground(new java.awt.Color(204, 0, 51));
+        iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
 
-        buttonClose.setBackground(new java.awt.Color(204, 0, 51));
+        buttonClose.setBackground(new java.awt.Color(22, 116, 66));
 
         close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete_32px.png"))); // NOI18N
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/delete_32px.png"))); // NOI18N
         close.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeMouseClicked(evt);
@@ -120,10 +120,10 @@ public class LandingPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        buttonMax.setBackground(new java.awt.Color(204, 0, 51));
+        buttonMax.setBackground(new java.awt.Color(22, 116, 66));
 
         max.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        max.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/full_screen_32px.png"))); // NOI18N
+        max.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/full_screen_32px.png"))); // NOI18N
         max.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 maxMouseClicked(evt);
@@ -203,7 +203,7 @@ public class LandingPage extends javax.swing.JFrame {
         hidemenu.setLayout(new java.awt.BorderLayout());
 
         buttonhidemenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonhidemenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back_32px.png"))); // NOI18N
+        buttonhidemenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/back_32px.png"))); // NOI18N
         buttonhidemenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonhidemenuMouseClicked(evt);
@@ -243,7 +243,7 @@ public class LandingPage extends javax.swing.JFrame {
         setting.setLayout(new java.awt.BorderLayout());
 
         buttonSetting.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonSetting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings_32px.png"))); // NOI18N
+        buttonSetting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/settings_32px.png"))); // NOI18N
         buttonSetting.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonSettingMouseClicked(evt);
@@ -342,11 +342,11 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
-        changecolor(buttonClose, new Color(255, 0, 51));
+        changecolor(buttonClose, new Color(35, 166, 97));
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
-        changecolor(buttonClose, new Color(204, 0, 51));
+        changecolor(buttonClose, new Color(22,116,66));
     }//GEN-LAST:event_closeMouseExited
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
@@ -362,11 +362,11 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_maxMouseClicked
 
     private void maxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseEntered
-        changecolor(buttonMax, new Color(255, 0, 51));
+        changecolor(buttonMax, new Color(35, 166, 97));
     }//GEN-LAST:event_maxMouseEntered
 
     private void maxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseExited
-        changecolor(buttonMax, new Color(204, 0, 51));
+        changecolor(buttonMax, new Color(22,116,66));
     }//GEN-LAST:event_maxMouseExited
 
     private void buttonhidemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseClicked
@@ -383,7 +383,7 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonhidemenuMouseClicked
 
     private void buttonhidemenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseEntered
-        changecolor(linehidemenu, new Color(255, 0, 51));
+        changecolor(linehidemenu, new Color(35, 166, 97));
     }//GEN-LAST:event_buttonhidemenuMouseEntered
 
     private void buttonhidemenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseExited
@@ -395,7 +395,7 @@ public class LandingPage extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonSettingMouseClicked
 
     private void buttonSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSettingMouseEntered
-        changecolor(lineSetting, new Color(255, 0, 51));
+        changecolor(lineSetting, new Color(35, 166, 97));
     }//GEN-LAST:event_buttonSettingMouseEntered
 
     private void buttonSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSettingMouseExited

@@ -2,11 +2,15 @@
 package com.vcare.UI.LoginComponents;
 
 import com.vcare.UI.Components.Button;
+import com.vcare.UI.Components.Combobox;
 import com.vcare.UI.Components.MyPasswordField;
 import com.vcare.UI.Components.MyTextField;
+import com.vcare.model.ModelUser;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,15 +18,20 @@ import net.miginfocom.swing.MigLayout;
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
-    public PanelLoginAndRegister() {
+    private ModelUser user;
+
+    public ModelUser getUser() {
+        return user;
+    }
+    public PanelLoginAndRegister(ActionListener eventRegister) {
         initComponents();
-        initRegister();
+        initRegister(eventRegister);
         initLogin();
         login.setVisible(false);
         register.setVisible(true);
     }
 
-    private void initRegister() {
+    private void initRegister(ActionListener eventRegister) {
         register.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
         JLabel label = new JLabel("Create Account");
         label.setFont(new Font("sansserif", 1, 30));
@@ -40,11 +49,32 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         txtPass.setPrefixIcon(new ImageIcon(getClass().getResource("/com/vcare/icon/pass.png")));
         txtPass.setHint("Password");
         register.add(txtPass, "w 60%");
+        Combobox txtRole = new Combobox();
+        txtRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "System Admin", "Hospital Admin" }));
+        txtRole.setSelectedIndex(-1);
+        txtRole.setLabeText("Admin Role");
+      
+        register.add(txtRole, "w 60%");
         Button cmd = new Button();
         cmd.setBackground(new Color(7, 164, 121));
         cmd.setForeground(new Color(250, 250, 250));
+        cmd.addActionListener(eventRegister);
         cmd.setText("SIGN UP");
         register.add(cmd, "w 40%, h 40");
+        cmd.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                String userName = txtUser.getText().trim();
+                String email = txtEmail.getText().trim();
+                String password = String.valueOf(txtPass.getPassword());
+                String role = txtRole.getSelectedItem().toString();
+                user=new ModelUser(0,userName, email, password, role);
+                
+            }
+        });
+        
     }
 
     private void initLogin() {
