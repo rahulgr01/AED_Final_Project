@@ -1,15 +1,18 @@
-
 package com.vcare.UI.Login;
-
 
 import com.vcare.UI.LoginComponents.Message;
 import com.vcare.UI.LoginComponents.PanelCover;
 import com.vcare.UI.LoginComponents.PanelLoading;
 import com.vcare.UI.LoginComponents.PanelLoginAndRegister;
 import com.vcare.UI.LoginComponents.PanelVerifyCode;
+import com.vcare.connection.DatabaseConnection;
+import com.vcare.model.ModelMessage;
 import com.vcare.model.ModelUser;
+import com.vcare.service.ServiceMail;
+import com.vcare.service.ServiceUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -24,13 +27,14 @@ public class Login extends javax.swing.JFrame {
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
     private MigLayout layout;
     private PanelCover cover;
-    private PanelLoginAndRegister loginAndRegister;
-    private PanelVerifyCode verifyCode;
     private PanelLoading loading;
-    private boolean isLogin = true;
+    private PanelVerifyCode verifyCode;
+    private PanelLoginAndRegister loginAndRegister;
+    private boolean isLogin;
     private final double addSize = 30;
     private final double coverSize = 40;
     private final double loginSize = 60;
+    private ServiceUser service;
 
     public Login() {
         initComponents();
@@ -38,13 +42,14 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void init() {
+        service = new ServiceUser();
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
         loading = new PanelLoading();
         verifyCode = new PanelVerifyCode();
         ActionListener eventRegister = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent ae) {
                 register();
             }
         };
@@ -97,14 +102,12 @@ public class Login extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         animator.setResolution(0);  //  for smooth animation
         bg.setLayout(layout);
-        bg.setLayer(loading,JLayeredPane.POPUP_LAYER);
-        bg.setLayer(verifyCode,JLayeredPane.POPUP_LAYER);
-        bg.add(loading,"pos 0 0 100% 100%");
-        bg.add(verifyCode,"pos 0 0 100% 100%");
-        bg.add(cover, "width " + coverSize + "%, pos " + (isLogin ? "1al" : "0al") + " 0 n 100%");
-        bg.add(loginAndRegister, "width " + loginSize + "%, pos " + (isLogin ? "0al" : "1al") + " 0 n 100%"); //  1al as 100%
-        loginAndRegister.showRegister(!isLogin);
-        cover.login(isLogin);
+        bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
+        bg.setLayer(verifyCode, JLayeredPane.POPUP_LAYER);
+        bg.add(loading, "pos 0 0 100% 100%");
+        bg.add(verifyCode, "pos 0 0 100% 100%");
+        bg.add(cover, "width " + coverSize + "%, pos 0al 0 n 100%");
+        bg.add(loginAndRegister, "width " + loginSize + "%, pos 1al 0 n 100%"); //  1al as 100%
         cover.addEvent(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -113,14 +116,52 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         });
+        verifyCode.addEventButtonOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                try {
+                    ModelUser user = loginAndRegister.getUser();
+                    if (service.verifyCodeWithUser(user.getUserID(), verifyCode.getInputCode())) {
+                        service.doneVerify(user.getUserID());
+                        showMessage(Message.MessageType.SUCCESS, "Register sucess");
+                        verifyCode.setVisible(false);
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Verify code incorrect");
+                    }
+                } catch (SQLException e) {
+                    showMessage(Message.MessageType.ERROR, "Error");
+                }
+            }
+        });
     }
-    private void register()
-    {
-       ModelUser user = loginAndRegister.getUser();
+
+    private void register() {
+        ModelUser user = loginAndRegister.getUser();
+        try {
        
-        showMessage(Message.MessageType.ERROR, "Test Message");
-        
+                service.insertUser(user);
+                sendMain(user);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+//            showMessage(Message.MessageType.ERROR, "Error Register");
+        }
     }
+
+    private void sendMain(ModelUser user) {
+        new Thread(() -> {
+            loading.setVisible(true);
+            ModelMessage ms = new ServiceMail().sendMain(user.getEmail(), user.getVerifyCode());
+            if (ms.isSuccess()) {
+                loading.setVisible(false);
+                verifyCode.setVisible(true);
+            } else {
+                loading.setVisible(false);
+                showMessage(Message.MessageType.ERROR, ms.getMessage());
+            }
+        }).start();
+    }
+
     private void showMessage(Message.MessageType messageType, String message) {
         Message ms = new Message();
         ms.showMessage(messageType, message);
@@ -175,6 +216,7 @@ public class Login extends javax.swing.JFrame {
             }
         }).start();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -214,7 +256,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    public static void main(String args[]) {
+     public static void main(String args[]) {
       
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -232,16 +274,19 @@ public class Login extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
+       
+//        try {
+//            DatabaseConnection.getInstance().connectToDatabase();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
             }
         });
     }
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLayeredPane bg;

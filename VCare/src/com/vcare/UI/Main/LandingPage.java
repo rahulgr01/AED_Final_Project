@@ -1,12 +1,14 @@
 
 package com.vcare.UI.Main;
 
+import com.vcare.UI.Login.Admin;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -45,10 +47,10 @@ public class LandingPage extends javax.swing.JFrame {
     public void hideshow(JPanel menushowhide, boolean dashboard, JLabel button) {
         if (dashboard == true) {
             menushowhide.setPreferredSize(new Dimension(50, menushowhide.getHeight()));
-            changeImage(button, "/icon/menu_32px.png");
+            changeImage(button, "/com/vcare/icon/menu_32px.png"); 
         } else {
             menushowhide.setPreferredSize(new Dimension(270, menushowhide.getHeight()));
-            changeImage(button, "/icon/back_32px.png");
+            changeImage(button, "/com/vcare/icon/back_32px.png"); 
         }
     }
     
@@ -69,16 +71,10 @@ public class LandingPage extends javax.swing.JFrame {
         buttonhidemenu = new javax.swing.JLabel();
         lineSetting = new javax.swing.JPanel();
         setting = new javax.swing.JPanel();
-        buttonSetting = new javax.swing.JLabel();
+        buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -242,20 +238,20 @@ public class LandingPage extends javax.swing.JFrame {
         setting.setPreferredSize(new java.awt.Dimension(50, 50));
         setting.setLayout(new java.awt.BorderLayout());
 
-        buttonSetting.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        buttonSetting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/settings_32px.png"))); // NOI18N
-        buttonSetting.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        buttonLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/logout_30px.png"))); // NOI18N
+        buttonLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonSettingMouseClicked(evt);
+                buttonLogoutMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonSettingMouseEntered(evt);
+                buttonLogoutMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                buttonSettingMouseExited(evt);
+                buttonLogoutMouseExited(evt);
             }
         });
-        setting.add(buttonSetting, java.awt.BorderLayout.CENTER);
+        setting.add(buttonLogout, java.awt.BorderLayout.CENTER);
 
         MenuIcon.add(setting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 50, 50));
 
@@ -269,54 +265,17 @@ public class LandingPage extends javax.swing.JFrame {
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel1.setText("Test");
-
-        jTextField1.setText("jTextField1");
-
-        jLabel2.setText("jLabel2");
-
-        jTextField2.setText("jTextField2");
+        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 561, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -390,17 +349,25 @@ public class LandingPage extends javax.swing.JFrame {
         changecolor(linehidemenu, new Color(0, 0, 0));
     }//GEN-LAST:event_buttonhidemenuMouseExited
 
-    private void buttonSettingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSettingMouseClicked
-       
-    }//GEN-LAST:event_buttonSettingMouseClicked
+    private void buttonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseClicked
+       clickmenu(setting, hidemenu, 1);
+        int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            this.dispose();
+            Admin x = new Admin();
+        x.show(); //display View LoginPage Form
+        //dispose(); //Close SystemAdmin Form
+        x.setVisible(true);
+        }
+    }//GEN-LAST:event_buttonLogoutMouseClicked
 
-    private void buttonSettingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSettingMouseEntered
+    private void buttonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseEntered
         changecolor(lineSetting, new Color(35, 166, 97));
-    }//GEN-LAST:event_buttonSettingMouseEntered
+    }//GEN-LAST:event_buttonLogoutMouseEntered
 
-    private void buttonSettingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonSettingMouseExited
+    private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
         changecolor(lineSetting, new Color(0, 0, 0));
-    }//GEN-LAST:event_buttonSettingMouseExited
+    }//GEN-LAST:event_buttonLogoutMouseExited
 
     private void buttonhidemenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseReleased
        changecolor(linehidemenu, new Color(0, 0, 0));
@@ -444,20 +411,14 @@ public class LandingPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
     private javax.swing.JPanel buttonClose;
+    private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
-    private javax.swing.JLabel buttonSetting;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel mainPanel;

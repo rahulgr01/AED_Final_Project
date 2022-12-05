@@ -1,23 +1,6 @@
 
 package com.vcare.model;
-
-
 public class ModelUser {
-    
-    int userID;
-    String userName;
-    String email;
-    String password;
-    String role;
-    String verifyCode;
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public int getUserID() {
         return userID;
@@ -58,24 +41,28 @@ public class ModelUser {
     public void setVerifyCode(String verifyCode) {
         this.verifyCode = verifyCode;
     }
-    
-    
-    public ModelUser(int userID, String userName, String email, String password,String role, String verifyCode)
-    {
-        this.userID=userID;
-        this.userName=userName;
-        this.email=email;
-        this.password=password;
-        this.role=role;
-        this.verifyCode=verifyCode;
+
+    public ModelUser(int userID, String userName, String email, String password, String verifyCode) {
+        this.userID = userID;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.verifyCode = verifyCode;
     }
-    public ModelUser(int userID, String userName, String email, String password,String role)
-    {
-        this.userID=userID;
-        this.userName=userName;
-        this.email=email;
-        this.password=password;
-        this.role=role;
+
+    public ModelUser(int userID, String userName, String email, String password) {
+        this.userID = userID;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
     }
-         
+
+    public ModelUser() {
+    }
+
+    private int userID;
+    private String userName;
+    private String email;
+    private String password;
+    private String verifyCode;
 }

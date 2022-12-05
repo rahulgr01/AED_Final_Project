@@ -49,32 +49,26 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         txtPass.setPrefixIcon(new ImageIcon(getClass().getResource("/com/vcare/icon/pass.png")));
         txtPass.setHint("Password");
         register.add(txtPass, "w 60%");
-        Combobox txtRole = new Combobox();
-        txtRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "System Admin", "Hospital Admin" }));
-        txtRole.setSelectedIndex(-1);
-        txtRole.setLabeText("Admin Role");
-      
-        register.add(txtRole, "w 60%");
-        Button cmd = new Button();
+//        Combobox txtRole = new Combobox();
+//        txtRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SystemAdmin", "HospitalAdmin" }));
+//        txtRole.setSelectedIndex(-1);
+//        txtRole.setLabeText("Admin Role");
+//        register.add(txtRole, "w 60%");
+         Button cmd = new Button();
         cmd.setBackground(new Color(7, 164, 121));
         cmd.setForeground(new Color(250, 250, 250));
         cmd.addActionListener(eventRegister);
         cmd.setText("SIGN UP");
         register.add(cmd, "w 40%, h 40");
-        cmd.addActionListener(new ActionListener()
-        {
+        cmd.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae)
-            {
+            public void actionPerformed(ActionEvent ae) {
                 String userName = txtUser.getText().trim();
                 String email = txtEmail.getText().trim();
                 String password = String.valueOf(txtPass.getPassword());
-                String role = txtRole.getSelectedItem().toString();
-                user=new ModelUser(0,userName, email, password, role);
-                
+                user = new ModelUser(0, userName, email, password);
             }
         });
-        
     }
 
     private void initLogin() {
