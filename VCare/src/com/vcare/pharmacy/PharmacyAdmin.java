@@ -1,6 +1,7 @@
 
-package com.vcare.UI.Main;
+package com.vcare.pharmacy;
 
+import com.vcare.UI.Main.*;
 import com.vcare.UI.Login.Admin;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,11 +13,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class LandingPage extends javax.swing.JFrame {
+public class PharmacyAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
-    public LandingPage() {
+    public PharmacyAdmin() {
         initComponents();
     }
     //Method to change panel color on hover
@@ -73,7 +74,6 @@ public class LandingPage extends javax.swing.JFrame {
         setting = new javax.swing.JPanel();
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
-        menuhide1 = new javax.swing.JPanel();
         managePharmacy = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -262,11 +262,8 @@ public class LandingPage extends javax.swing.JFrame {
 
         menu.add(MenuIcon, java.awt.BorderLayout.LINE_START);
 
-        menuhide.setBackground(new java.awt.Color(51, 51, 51));
+        menuhide.setBackground(new java.awt.Color(0, 51, 51));
         menuhide.setLayout(new java.awt.BorderLayout());
-
-        menuhide1.setBackground(new java.awt.Color(0, 51, 51));
-        menuhide1.setLayout(new java.awt.BorderLayout());
 
         managePharmacy.setBackground(new java.awt.Color(51, 51, 51));
         managePharmacy.setPreferredSize(new java.awt.Dimension(220, 50));
@@ -323,13 +320,12 @@ public class LandingPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        menuhide1.add(managePharmacy, java.awt.BorderLayout.PAGE_START);
-
-        menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
+        menuhide.add(managePharmacy, java.awt.BorderLayout.PAGE_START);
 
         menu.add(menuhide, java.awt.BorderLayout.CENTER);
 
@@ -382,9 +378,9 @@ public class LandingPage extends javax.swing.JFrame {
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            LandingPage.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            PharmacyAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            LandingPage.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            PharmacyAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -445,19 +441,19 @@ public class LandingPage extends javax.swing.JFrame {
        changecolor(linehidemenu, new Color(0, 0, 0));
     }//GEN-LAST:event_buttonhidemenuMouseReleased
 
-    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managePharmacyMouseClicked
-
     private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
         changecolor(managePharmacy, new Color(51,51,51));
         changecolor(side1, new Color(35,166,97));
     }//GEN-LAST:event_managePharmacyMouseEntered
 
     private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
-        changecolor(managePharmacy, new Color(0,51,51));
+       changecolor(managePharmacy, new Color(0,51,51));
         changecolor(side1, new Color(0,51,51));
     }//GEN-LAST:event_managePharmacyMouseExited
+
+    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_managePharmacyMouseClicked
 
     /**
      * @param args the command line arguments
@@ -476,20 +472,21 @@ public class LandingPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LandingPage().setVisible(true);
+                new PharmacyAdmin().setVisible(true);
             }
         });
     }
@@ -514,7 +511,6 @@ public class LandingPage extends javax.swing.JFrame {
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
-    private javax.swing.JPanel menuhide1;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     // End of variables declaration//GEN-END:variables
