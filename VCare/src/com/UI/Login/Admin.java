@@ -316,7 +316,8 @@ private Animator animatorLogin;
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSignInActionPerformed
-    
+        
+        animatorLogin.start();
         if (txtEmail.getText().isEmpty()) {
            txtEmail.setHelperText("Please enter your email");
         }
@@ -329,10 +330,10 @@ private Animator animatorLogin;
              verificationCode.setHelperText("Please enter Verification Code");
         } 
       else {
-           
+           animatorLogin.start();
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps;
-
+            animatorLogin.stop();
             try {
                  
                 ps = con.prepareStatement("select * from administrator where email = ? and password = ?");
@@ -345,18 +346,13 @@ private Animator animatorLogin;
                     if (rs.next()) {
 //                        if (rs.getString(9).equals("Approve")) {
 //                            id = u.getUserId(rs.getString(3));
-                           animatorLogin.start();
-                            animatorLogin.stop();
                             LandingPage lp = new LandingPage();
                             lp.setVisible(true);
                             lp.pack();
 //                            lp.username.setText(rs.getString(2).toUpperCase());
 //                            setValue();
 //                            showDetails();
-                            this.dispose();
-//                        }
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Please wait for administrator approval");
+                          this.dispose();
 //                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Incorrect email or Password", "Login Failed", 2);
