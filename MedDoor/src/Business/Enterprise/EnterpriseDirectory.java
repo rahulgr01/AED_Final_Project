@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class EnterpriseDirectory {
     
     private ArrayList<Enterprise> enterpriseList;
+    
     public EnterpriseDirectory() {
         enterpriseList = new ArrayList<>();
     }
@@ -24,22 +25,26 @@ public class EnterpriseDirectory {
     
     public Enterprise createAndAddEnterprise(String name, Enterprise.EnterpriseType type){
         Enterprise enterprise = null;
-//        if (type == Enterprise.EnterpriseType.Hospital){
-//            enterprise = new HospitalEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        }
-//        else if (type == Enterprise.EnterpriseType.Government){
-//            enterprise = new GovernmentEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        }
-//        else  if (type == Enterprise.EnterpriseType.NonProfit){
-//            enterprise = new NonProfitEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        }
-//        else  if (type == Enterprise.EnterpriseType.AirAmbulance){
-//            enterprise = new AirAmbulanceEnterprise(name);
-//            enterpriseList.add(enterprise);
-//        }
+        if (null != type)switch (type) {
+            case Hospital -> {
+                enterprise = new HospitalEnterprise(name);
+                enterpriseList.add(enterprise);
+            }
+            case Insurance -> {
+                enterprise = new InsuranceEnterprise(name);
+                enterpriseList.add(enterprise);
+            }
+            case Volunteer -> {
+                enterprise = new VolunteerEnterprise(name);
+                enterpriseList.add(enterprise);
+            }
+            case Diagnostics -> {
+                enterprise = new DiagnosticsEnterprise(name);
+                enterpriseList.add(enterprise);
+            }
+            default -> {
+            }
+        }
      
         return enterprise;
     }

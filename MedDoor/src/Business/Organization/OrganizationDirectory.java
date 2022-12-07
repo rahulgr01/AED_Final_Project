@@ -24,6 +24,7 @@ public class OrganizationDirectory {
     
      public Organization createOrganization(Type type, String name){
         Organization organization = null;
+        // create organizations
         return organization;  
      }
     

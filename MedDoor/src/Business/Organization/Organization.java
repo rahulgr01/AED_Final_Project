@@ -4,6 +4,7 @@
  */
 package Business.Organization;
 
+import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
@@ -17,6 +18,7 @@ public abstract class Organization {
     private String name;
     private WorkQueue workQueue;
     private UserAccountDirectory userAccountDirectory;
+    private EmployeeDirectory employeeDirectory;
     
     public enum Type{
         LabService("LabService Organization"),Pharmacy("Pharmacy Organization"),Doctor("Doctor Organization"),Hospitalstaff("HospitalStaff Organization"), Admin("Admin Organization"), SurveyVolunteer("SurveyVolunteer Organization"), HomeCareVolunteer("HomeCareVolunteer Organization"), Policy("Policy Organization"), Claims("Claims Organization");
@@ -39,7 +41,10 @@ public abstract class Organization {
     }
 //     public abstract HashSet<Role> getSupportedRole();
         
-
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccountDirectory;
+    }
+    
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
@@ -52,7 +57,7 @@ public abstract class Organization {
         this.workQueue = workQueue;
     }
 
-        @Override
+    @Override
     public String toString() {
         return name;
     }
