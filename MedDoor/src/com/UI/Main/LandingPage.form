@@ -27,7 +27,7 @@
     <Container class="javax.swing.JPanel" name="header">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="42" green="74" red="16" type="rgb"/>
+          <Color blue="f5" green="98" red="1b" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[800, 50]"/>
@@ -80,7 +80,7 @@
             <Container class="javax.swing.JPanel" name="buttonClose">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="42" green="74" red="16" type="rgb"/>
+                  <Color blue="f5" green="98" red="1b" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -121,7 +121,7 @@
             <Container class="javax.swing.JPanel" name="buttonMax">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="42" green="74" red="16" type="rgb"/>
+                  <Color blue="f5" green="98" red="1b" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -183,7 +183,7 @@
         <Container class="javax.swing.JPanel" name="MenuIcon">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="14" green="10" red="4" type="rgb"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[50, 450]"/>
@@ -230,7 +230,7 @@
             <Container class="javax.swing.JPanel" name="hidemenu">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
+                  <Color blue="14" green="10" red="4" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[50, 50]"/>
@@ -255,7 +255,6 @@
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonhidemenuMouseClicked"/>
                     <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonhidemenuMouseEntered"/>
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonhidemenuMouseExited"/>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="buttonhidemenuMouseReleased"/>
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -296,7 +295,7 @@
             <Container class="javax.swing.JPanel" name="setting">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
+                  <Color blue="14" green="10" red="4" type="rgb"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[50, 50]"/>
@@ -349,7 +348,7 @@
             <Container class="javax.swing.JPanel" name="menuhide1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="0" type="rgb"/>
+                  <Color blue="95" green="5b" red="0" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -363,7 +362,7 @@
                 <Container class="javax.swing.JPanel" name="managePharmacy">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="33" red="33" type="rgb"/>
+                      <Color blue="95" green="5b" red="0" type="rgb"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[220, 50]"/>
@@ -409,7 +408,7 @@
                     <Container class="javax.swing.JPanel" name="side1">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="61" green="a6" red="23" type="rgb"/>
+                          <Color blue="95" green="5b" red="0" type="rgb"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[5, 50]"/>

@@ -1,5 +1,5 @@
 
-package com.Diagnostics;
+package Business.Diagnostics;
 
 import com.UI.Login.Admin;
 import java.awt.Color;
@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class DiagnosticsAdmin extends javax.swing.JFrame {
+public class PharmacyAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
-    public DiagnosticsAdmin() {
+    public PharmacyAdmin() {
         initComponents();
     }
     //Method to change panel color on hover
@@ -376,9 +376,9 @@ public class DiagnosticsAdmin extends javax.swing.JFrame {
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            DiagnosticsAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            PharmacyAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            DiagnosticsAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            PharmacyAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -470,14 +470,18 @@ public class DiagnosticsAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiagnosticsAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiagnosticsAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiagnosticsAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiagnosticsAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -486,7 +490,7 @@ public class DiagnosticsAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DiagnosticsAdmin().setVisible(true);
+                new PharmacyAdmin().setVisible(true);
             }
         });
     }
