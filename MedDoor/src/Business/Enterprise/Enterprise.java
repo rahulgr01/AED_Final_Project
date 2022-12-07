@@ -20,9 +20,16 @@ public abstract class Enterprise extends Organization {
         this.enterpriseType = type;
         organizationDirectory = new OrganizationDirectory();
     }
+
+    public void setEnterpriseType(EnterpriseType enterpriseType) {
+        this.enterpriseType = enterpriseType;
+    }
     
     public enum EnterpriseType{
-        Hospital("Hospital"),Insurance("Insurance"), Volunteer("Volunteer"), Diagnostics("Diagnostics");
+        Hospital("Hospital"),
+        Insurance("Insurance"),
+        Volunteer("Volunteer"), 
+        Diagnostics("Diagnostics");
         
         private String value;
 

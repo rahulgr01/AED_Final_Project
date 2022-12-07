@@ -24,7 +24,54 @@ public class OrganizationDirectory {
     
      public Organization createOrganization(Type type, String name){
         Organization organization = null;
-        // create organizations
+        if (type.getValue().equals(Type.LabService.getValue())){
+            organization = new LabServiceOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.Admin.getValue())){
+            organization = new AdminOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+           
+        else if (type.getValue().equals(Type.Pharmacy.getValue())){
+            organization = new PharmacyOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.Doctor.getValue())){
+            organization = new DoctorOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+         else if (type.getValue().equals(Type.HospitalStaff.getValue())){
+            organization = new HospitalStaffOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Type.SurveyVolunteer.getValue())){
+            organization = new SurveyVolunteerOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+          else if (type.getValue().equals(Type.HomeCareVolunteer.getValue())){
+            organization = new HomeCareVolunteerOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+           else if (type.getValue().equals(Type.Policy.getValue())){
+            organization = new PolicyOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+         else if (type.getValue().equals(Type.Claims.getValue())){
+            organization = new ClaimsOrganization();
+            organization.setName(name);
+            organizationList.add(organization);
+        }
+        
+        
         return organization;  
      }
     

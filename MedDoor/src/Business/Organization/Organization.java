@@ -21,7 +21,15 @@ public abstract class Organization {
     private EmployeeDirectory employeeDirectory;
     
     public enum Type{
-        LabService("LabService Organization"),Pharmacy("Pharmacy Organization"),Doctor("Doctor Organization"),Hospitalstaff("HospitalStaff Organization"), Admin("Admin Organization"), SurveyVolunteer("SurveyVolunteer Organization"), HomeCareVolunteer("HomeCareVolunteer Organization"), Policy("Policy Organization"), Claims("Claims Organization");
+        LabService("LabService Organization"),
+        Pharmacy("Pharmacy Organization"),
+        Doctor("Doctor Organization"),
+        HospitalStaff("HospitalStaff Organization"),
+        Admin("Admin Organization"), 
+        SurveyVolunteer("SurveyVolunteer Organization"), 
+        HomeCareVolunteer("HomeCareVolunteer Organization"),
+        Policy("Policy Organization"),
+        Claims("Claims Organization");
         private String value;
         private Type(String value) {
             this.value = value;

@@ -317,7 +317,7 @@ private Animator animatorLogin;
 
     private void cmdSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSignInActionPerformed
         
-        animatorLogin.start();
+       
         if (txtEmail.getText().isEmpty()) {
            txtEmail.setHelperText("Please enter your email");
         }
@@ -333,7 +333,7 @@ private Animator animatorLogin;
            animatorLogin.start();
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement ps;
-            animatorLogin.stop();
+            
             try {
                  
                 ps = con.prepareStatement("select * from administrator where email = ? and password = ?");

@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class EnterpriseDirectory {
     
     private ArrayList<Enterprise> enterpriseList;
+
+    public void setEnterpriseList(ArrayList<Enterprise> enterpriseList) {
+        this.enterpriseList = enterpriseList;
+    }
     
     public EnterpriseDirectory() {
         enterpriseList = new ArrayList<>();
