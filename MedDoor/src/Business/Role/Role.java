@@ -13,8 +13,31 @@ import javax.swing.JPanel;
 public abstract class Role {
     
     public enum RoleType{
+        
+        DoctorRole("DocorRole"),
+        Patient("Patient"),
+        AmbulanceDriver("AmbulanceDriver"),
+        StaffRole("StaffRole"),
+        Accountant("Accountant"),
+        ClaimHandler("ClaimHandler"),
+        InsuranceAgent("InsuranceAgent"),
+        Phamacist("Phamacist"),
+        DeliveryRole("DeliveryRole"),
+        MedicineSupplier("MedicineSupplier"),
+        LabAssistant("LabAssistant"),
+        SurveyVolunteer("LabAssistant"),
+        HomeCareVolunteer("HomeCareVolunteer"),
+        
         AdminRole("AdminRole"),
-        DoctorRole("DocorRole");
+        SystemAdminRole("SystemAdminRole"),
+        HospitalAdminRole("HospitalAdminRole"),
+        CommunityAdminRole("CommunityAdminRole"),
+        VolunteerAdminRole("VolunteerAdminRole"),
+        DiagnosticAdminRole("DiagnosticAdminRole"),
+        InsuranceAdminRole("InsuranceAdminRole");
+        
+        
+        
         private String value;
         private RoleType(String value){
             this.value = value;
