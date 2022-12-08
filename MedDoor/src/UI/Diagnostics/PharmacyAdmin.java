@@ -1424,16 +1424,24 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         changecolor(side5, new Color(0,91,149));
     }//GEN-LAST:event_manageSupplierMouseExited
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        MessageFormat header = new MessageFormat("MedDoor Pharmacy Category Report");
+        MessageFormat footer = new MessageFormat("Northeastern University");
+        try{
+            medicineTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,"Cannot be print");
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     private void deleteMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMedicineActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_deleteMedicineActionPerformed
 
-    private void categoryIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoryIDActionPerformed
-
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-       MessageFormat header = new MessageFormat("MedDoor Pharmacy Category Report");
+        MessageFormat header = new MessageFormat("MedDoor Pharmacy Category Report");
         MessageFormat footer = new MessageFormat("Northeastern University");
         try{
             categoryTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
@@ -1444,17 +1452,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-      MessageFormat header = new MessageFormat("MedDoor Pharmacy Category Report");
-        MessageFormat footer = new MessageFormat("Northeastern University");
-        try{
-            medicineTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null,"Cannot be print");
-        }
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void categoryIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoryIDActionPerformed
 
     /**
      * @param args the command line arguments

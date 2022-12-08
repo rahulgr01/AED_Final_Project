@@ -63,7 +63,7 @@ public class TextAreaScroll extends JScrollPane {
         if (mouseOver) {
             g2.setColor(lineColor);
         } else {
-            g2.setColor(new Color(150, 150, 150));
+            g2.setColor(new Color(51,51,51));
         }
         g2.fillRect(2, height - 1, width - 4, 1);
         createHintText(g2);
@@ -73,7 +73,7 @@ public class TextAreaScroll extends JScrollPane {
 
     private void createHintText(Graphics2D g2) {
         Insets in = getInsets();
-        g2.setColor(new Color(150, 150, 150));
+        g2.setColor(new Color(51,51,51));
         FontMetrics ft = g2.getFontMetrics();
         Rectangle2D r2 = ft.getStringBounds(labelText, g2);
         double height = in.top;

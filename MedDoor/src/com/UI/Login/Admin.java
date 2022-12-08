@@ -71,7 +71,6 @@ private Animator animatorLogin;
         txtPass = new com.UI.Components.MyPasswordFieldLogin();
         cmdSignIn = new com.UI.Components.Button();
         txtEmail = new com.UI.Components.MyTextFieldLogin();
-        cmdRegister = new com.UI.Components.Button();
         jPanel2 = new javax.swing.JPanel();
         verificationCode = new com.UI.Components.MyTextFieldLogin();
         vcode = new javax.swing.JLabel();
@@ -111,16 +110,6 @@ private Animator animatorLogin;
         txtEmail.setBackground(new java.awt.Color(245, 245, 245));
         txtEmail.setLabelText("Email");
         txtEmail.setLineColor(new java.awt.Color(27, 152, 245));
-
-        cmdRegister.setBackground(new java.awt.Color(27, 152, 245));
-        cmdRegister.setForeground(new java.awt.Color(255, 255, 255));
-        cmdRegister.setText("REGISTER");
-        cmdRegister.setToolTipText("");
-        cmdRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdRegisterActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -168,10 +157,8 @@ private Animator animatorLogin;
                                 .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                                 .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(signuppanelLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmdRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(161, 161, 161)
+                        .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         signuppanelLayout.setVerticalGroup(
@@ -185,9 +172,7 @@ private Animator animatorLogin;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -337,10 +322,6 @@ private Animator animatorLogin;
 //        }
     }//GEN-LAST:event_cmdSignInActionPerformed
 
-    private void cmdRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegisterActionPerformed
-        animatorLogin.start();
-    }//GEN-LAST:event_cmdRegisterActionPerformed
-
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
@@ -388,7 +369,6 @@ private Animator animatorLogin;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel close;
-    private com.UI.Components.Button cmdRegister;
     private com.UI.Components.Button cmdSignIn;
     private javax.swing.JPanel header;
     private javax.swing.JPanel iconmaxclose;
