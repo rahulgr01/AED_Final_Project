@@ -18,11 +18,11 @@ public class LabServiceOrganization extends Organization {
        
     }
     
-//    @Override
-//    public ArrayList<Role> getSupportedRole() {
-//        ArrayList<Role> roles = new ArrayList();
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList();
 //        roles.add(new DoctorRole());
-//        return roles;
-//    }
+        return roles;
+    }
     
 }

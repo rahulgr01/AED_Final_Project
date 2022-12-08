@@ -4,6 +4,7 @@
  */
 package Business.UserAccount;
 
+import Business.Employee.Employee;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
 
@@ -14,7 +15,7 @@ import Business.WorkQueue.WorkQueue;
 public class UserAccount {
     private String username;
     private String password;
-  //  private Employee employee;
+   private Employee employee;
     private Role role;
    private WorkQueue workQueue;
 
@@ -41,18 +42,18 @@ public class UserAccount {
     public Role getRole() {
         return role;
     }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
-//
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     public void setRole(Role role) {
         this.role = role;
     }
-//
-//    public Employee getEmployee() {
-//        return employee;
-//    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
 
     public WorkQueue getWorkQueue() {
         return workQueue;

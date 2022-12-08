@@ -20,13 +20,22 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
+    private JFrame userProcessContainer;
     public PharmacyAdmin() {
         initComponents();
            TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
            TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
     }
     //Method to change panel color on hover
+ 
+    public PharmacyAdmin(JFrame userProcessContainer) {
+        initComponents();
+        this.userProcessContainer=userProcessContainer;
+    }
 
+   
+
+  
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }

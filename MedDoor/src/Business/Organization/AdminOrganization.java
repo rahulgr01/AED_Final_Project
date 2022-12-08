@@ -4,6 +4,9 @@
  */
 package Business.Organization;
 
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author Dell
@@ -15,10 +18,10 @@ public class AdminOrganization extends Organization {
        
     }
     
-//    @Override
-//    public ArrayList<Role> getSupportedRole() {
-//        ArrayList<Role> roles = new ArrayList();
-////        roles.add(new DoctorRole());
-//        return roles;
-//    }
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList();
+//        roles.add(new DoctorRole());
+        return roles;
+    }
 }

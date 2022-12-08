@@ -10,10 +10,44 @@ import Business.UserAccount.UserAccount;
 public class Pharmacy extends UserAccount {
     private String orderId;
 //    private SystemAdminRole systemAdmin;
-//    private DeliveryMan deliveryMan;
+//    private DeliveryRole delivery;
     private String pharmacyName;
     private PharmacyInventory menu;
     private String address;
+//    private Community community;
+    private String contact;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+//
+//    public DeliveryRole getDelivery() {
+//        return delivery;
+//    }
+//
+//    public void setDelivery(DeliveryRole delivery) {
+//        this.delivery = delivery;
+//    }
+//
+//    public Community getCommunity() {
+//        return community;
+//    }
+//
+//    public void setCommunity(Community community) {
+//        this.community = community;
+//    }
+    
+//    public SystemAdminRole getSystemAdmin() {
+//        return systemAdmin;
+//    }
+//
+//    public void setSystemAdmin(SystemAdminRole systemAdmin) {
+//        this.systemAdmin = systemAdmin;
+//    }
 
     public String getAddress() {
         return address;
@@ -30,7 +64,7 @@ public class Pharmacy extends UserAccount {
     public void setContact(String contact) {
         this.contact = contact;
     }
-    private String contact;
+ 
 
     public PharmacyInventory getMenu() {
         return menu;
@@ -48,29 +82,8 @@ public class Pharmacy extends UserAccount {
         this.pharmacyName = pharmacyName;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
 
-//    public SystemAdminRole getSystemAdmin() {
-//        return systemAdmin;
-//    }
-//
-//    public void setSystemAdmin(SystemAdminRole systemAdmin) {
-//        this.systemAdmin = systemAdmin;
-//    }
-
-//    public DeliveryMan getDeliveryMan() {
-//        return deliveryMan;
-//    }
-//
-//    public void setDeliveryMan(DeliveryMan deliveryMan) {
-//        this.deliveryMan = deliveryMan;
-//    }
     @Override
     public String toString() {
         return pharmacyName;

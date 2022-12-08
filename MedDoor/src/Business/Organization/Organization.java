@@ -8,6 +8,7 @@ import Business.Employee.EmployeeDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -19,6 +20,15 @@ public abstract class Organization {
     private WorkQueue workQueue;
     private UserAccountDirectory userAccountDirectory;
     private EmployeeDirectory employeeDirectory;
+    
+
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employeeDirectory;
+    }
+
+    public void setEmployeeDirectory(EmployeeDirectory employeeDirectory) {
+        this.employeeDirectory = employeeDirectory;
+    }
     
     public enum Type{
         LabService("LabService Organization"),
@@ -47,7 +57,7 @@ public abstract class Organization {
        public String getName() {
         return name;
     }
-//     public abstract HashSet<Role> getSupportedRole();
+    public abstract ArrayList<Role> getSupportedRole();
         
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;

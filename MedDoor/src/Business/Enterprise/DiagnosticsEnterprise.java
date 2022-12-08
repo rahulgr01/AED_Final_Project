@@ -4,6 +4,9 @@
  */
 package Business.Enterprise;
 
+import Business.Role.Role;
+import java.util.ArrayList;
+
 /**
  *
  * @author ashikakalmady
@@ -11,5 +14,10 @@ package Business.Enterprise;
 public class DiagnosticsEnterprise extends Enterprise{
     public DiagnosticsEnterprise(String name) {
         super(name, EnterpriseType.Diagnostics);
+    }
+    
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        return null;
     }
 }

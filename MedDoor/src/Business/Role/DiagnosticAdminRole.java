@@ -4,6 +4,8 @@
  */
 package Business.Role;
 
+import UI.Diagnostics.PharmacyAdmin;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -13,8 +15,8 @@ import javax.swing.JPanel;
 public class DiagnosticAdminRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public JFrame createWorkArea(JFrame userProcessContainer) {
+         return new PharmacyAdmin(userProcessContainer);
     }
      @Override
     public String toString(){

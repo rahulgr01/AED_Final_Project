@@ -1,6 +1,8 @@
 
 package com.UI.Login;
 
+import Business.DB4O.DB4OUtil;
+import Business.EcoSystem;
 import UI.Diagnostics.PharmacyAdmin;
 import com.UI.Main.LandingPage;
 import com.connection.DatabaseConnection;
@@ -27,9 +29,13 @@ private Animator animatorLogin;
 
     private int id;
     static boolean maximized = true;
+    private EcoSystem system;
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     int verifyCode = new Random().nextInt(1022 + 1) + 1000;
+    
     public Admin() {
         initComponents();
+        system=dB4OUtil.retrieveSystem();
         vcode.setText(String.valueOf(verifyCode));
          getContentPane().setBackground(new Color(245, 245, 245));
            TimingTarget targetLogin = new TimingTargetAdapter() {
@@ -382,4 +388,6 @@ private Animator animatorLogin;
     private javax.swing.JLabel vcode;
     private com.UI.Components.MyTextFieldLogin verificationCode;
     // End of variables declaration//GEN-END:variables
+
+    
 }

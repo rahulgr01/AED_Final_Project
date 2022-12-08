@@ -4,6 +4,7 @@
  */
 package Business.Role;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -52,7 +53,7 @@ public abstract class Role {
             return value;
         }
     }
-    public abstract JPanel createWorkArea(JPanel userProcessContainer);
+    public abstract JFrame createWorkArea(JFrame userProcessContainer);
     @Override
     public String toString() {
         return this.getClass().getName();
