@@ -1,6 +1,7 @@
 
 package com.UI.Login;
 
+import UI.Diagnostics.PharmacyAdmin;
 import com.UI.Main.LandingPage;
 import com.connection.DatabaseConnection;
 import java.awt.Color;
@@ -95,9 +96,9 @@ private Animator animatorLogin;
 
         txtPass.setBackground(new java.awt.Color(245, 245, 245));
         txtPass.setLabelText("Password");
-        txtPass.setLineColor(new java.awt.Color(22, 116, 66));
+        txtPass.setLineColor(new java.awt.Color(27, 152, 245));
 
-        cmdSignIn.setBackground(new java.awt.Color(27, 138, 101));
+        cmdSignIn.setBackground(new java.awt.Color(27, 152, 245));
         cmdSignIn.setForeground(new java.awt.Color(255, 255, 255));
         cmdSignIn.setText("SIGN IN");
         cmdSignIn.setToolTipText("");
@@ -109,9 +110,9 @@ private Animator animatorLogin;
 
         txtEmail.setBackground(new java.awt.Color(245, 245, 245));
         txtEmail.setLabelText("Email");
-        txtEmail.setLineColor(new java.awt.Color(22, 116, 66));
+        txtEmail.setLineColor(new java.awt.Color(27, 152, 245));
 
-        cmdRegister.setBackground(new java.awt.Color(27, 138, 101));
+        cmdRegister.setBackground(new java.awt.Color(27, 152, 245));
         cmdRegister.setForeground(new java.awt.Color(255, 255, 255));
         cmdRegister.setText("REGISTER");
         cmdRegister.setToolTipText("");
@@ -125,7 +126,7 @@ private Animator animatorLogin;
 
         verificationCode.setBackground(new java.awt.Color(245, 245, 245));
         verificationCode.setLabelText("Verify Code");
-        verificationCode.setLineColor(new java.awt.Color(27, 138, 101));
+        verificationCode.setLineColor(new java.awt.Color(27, 152, 245));
 
         vcode.setFont(new java.awt.Font("Curlz MT", 3, 26)); // NOI18N
         vcode.setForeground(new java.awt.Color(0, 0, 255));
@@ -190,13 +191,13 @@ private Animator animatorLogin;
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        header.setBackground(new java.awt.Color(22, 116, 66));
+        header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
 
-        buttonClose.setBackground(new java.awt.Color(22, 116, 66));
+        buttonClose.setBackground(new java.awt.Color(27, 152, 245));
 
         close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/delete_32px.png"))); // NOI18N
@@ -218,16 +219,14 @@ private Animator animatorLogin;
             buttonCloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonCloseLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
         );
         buttonCloseLayout.setVerticalGroup(
             buttonCloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonCloseLayout.createSequentialGroup()
-                .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        buttonMax.setBackground(new java.awt.Color(22, 116, 66));
+        buttonMax.setBackground(new java.awt.Color(27, 152, 245));
 
         max.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         max.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/full_screen_32px.png"))); // NOI18N
@@ -249,12 +248,12 @@ private Animator animatorLogin;
             buttonMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buttonMaxLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addComponent(max, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addComponent(max, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
         );
         buttonMaxLayout.setVerticalGroup(
             buttonMaxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonMaxLayout.createSequentialGroup()
-                .addComponent(max, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(max, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -271,10 +270,10 @@ private Animator animatorLogin;
         iconmaxcloseLayout.setVerticalGroup(
             iconmaxcloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(iconmaxcloseLayout.createSequentialGroup()
-                .addGroup(iconmaxcloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(buttonClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonMax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
+                .addGroup(iconmaxcloseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonClose, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         header.add(iconmaxclose, java.awt.BorderLayout.LINE_END);
@@ -316,55 +315,26 @@ private Animator animatorLogin;
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSignInActionPerformed
-        
+        PharmacyAdmin pa = new PharmacyAdmin();
+                           pa.setVisible(true);
        
-        if (txtEmail.getText().isEmpty()) {
-           txtEmail.setHelperText("Please enter your email");
-        }
-        if (String.valueOf(txtPass.getPassword()).isEmpty()) {
-            
-            txtPass.setHelperText("Please enter your password");
-        }
-        if (verificationCode.getText().isEmpty()) {
-            
-             verificationCode.setHelperText("Please enter Verification Code");
-        } 
-      else {
-           animatorLogin.start();
-            Connection con = DatabaseConnection.getConnection();
-            PreparedStatement ps;
-            
-            try {
-                 
-                ps = con.prepareStatement("select * from administrator where email = ? and password = ?");
-                ps.setString(1, txtEmail.getText());
-                ps.setString(2, String.valueOf(txtPass.getPassword()));
-                int getcode = Integer.parseInt(verificationCode.getText());
-                ResultSet rs = ps.executeQuery();
-                if (verifyCode == getcode) {
-                    
-                    if (rs.next()) {
-//                        if (rs.getString(9).equals("Approve")) {
-//                            id = u.getUserId(rs.getString(3));
-                            LandingPage lp = new LandingPage();
-                            lp.setVisible(true);
-                            lp.pack();
-//                            lp.username.setText(rs.getString(2).toUpperCase());
-//                            setValue();
-//                            showDetails();
-                          this.dispose();
-//                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Incorrect email or Password", "Login Failed", 2);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Verification code did not match", "Login Failed", 2);
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if (txtEmail.getText().isEmpty()) {
+//           txtEmail.setHelperText("Please enter your email");
+//        }
+//        if (String.valueOf(txtPass.getPassword()).isEmpty()) {
+//            
+//            txtPass.setHelperText("Please enter your password");
+//        }
+//        if (verificationCode.getText().isEmpty()) {
+//            
+//             verificationCode.setHelperText("Please enter Verification Code");
+//        } 
+//      else {
+//                            LandingPage lp = new LandingPage();
+//                            lp.setVisible(true);
+//                            lp.pack();
+////                    
+//        }
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void cmdRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegisterActionPerformed
@@ -376,11 +346,11 @@ private Animator animatorLogin;
     }//GEN-LAST:event_closeMouseClicked
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
-        changecolor(buttonClose, new Color(35, 166, 97));
+        changecolor(buttonClose, new Color(3,138,255));
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
-        changecolor(buttonClose, new Color(22,116,66));
+        changecolor(buttonClose, new Color(27,152,245));
     }//GEN-LAST:event_closeMouseExited
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
@@ -396,11 +366,11 @@ private Animator animatorLogin;
     }//GEN-LAST:event_maxMouseClicked
 
     private void maxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseEntered
-        changecolor(buttonMax, new Color(35, 166, 97));
+        changecolor(buttonMax, new Color(3,138,255));
     }//GEN-LAST:event_maxMouseEntered
 
     private void maxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseExited
-        changecolor(buttonMax, new Color(22,116,66));
+        changecolor(buttonMax, new Color(27,152,245));
     }//GEN-LAST:event_maxMouseExited
 
   
