@@ -635,8 +635,6 @@ public class SystemAdmin extends javax.swing.JFrame {
         jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
         jTabbedPane2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
 
-        jPanel3.setBackground(new java.awt.Color(217, 241, 255));
-
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
