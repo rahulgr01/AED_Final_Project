@@ -6,6 +6,7 @@ package Business;
 
 import Business.Employee.Employee;
 import Business.Role.DiagnosticAdminRole;
+import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
 /**
@@ -15,9 +16,10 @@ import Business.UserAccount.UserAccount;
 public class ConfigureASystem {
     public static EcoSystem configure(){
         EcoSystem system = EcoSystem.getInstance(); 
-        Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
-        
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new DiagnosticAdminRole());
+        Employee admin = system.getEmployeeDirectory().createEmployee("sysadmin");
+        Employee pharmacyadmin = system.getEmployeeDirectory().createEmployee("pharmacyadmin");
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", admin, new SystemAdminRole());
+        UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("padmin", "padmin", pharmacyadmin, new DiagnosticAdminRole());
         
         return system;
     }

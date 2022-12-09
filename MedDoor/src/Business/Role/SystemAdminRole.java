@@ -8,26 +8,24 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UI.Diagnostics.PharmacyAdmin;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import UI.SystemAdmin.SystemAdmin;
 
 /**
  *
- * @author ashikakalmady
+ * @author Dell
  */
-public class DiagnosticAdminRole extends Role {
+public class SystemAdminRole extends Role {
 
     @Override
     public void createWorkArea(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new SystemAdmin(account,organization, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.DiagnosticAdminRole.getValue();
+        return RoleType.SystemAdminRole.getValue();
     }
     
     

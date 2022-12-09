@@ -3,6 +3,10 @@ package UI.Login;
 
 import Business.DB4O.DB4OUtil;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import UI.Diagnostics.PharmacyAdmin;
 
 import java.awt.Color;
@@ -53,9 +57,9 @@ private Animator animatorLogin;
                   
          
     public void clearLogin() {
-        txtEmail.setText("");
+        txtUsername.setText("");
         txtPass.setText("");
-        txtEmail.setHelperText("");
+        txtUsername.setHelperText("");
         txtPass.setHelperText("");
         verificationCode.setHelperText("");
     } 
@@ -76,7 +80,7 @@ private Animator animatorLogin;
         jLabel1 = new javax.swing.JLabel();
         txtPass = new UI.Components.MyPasswordFieldLogin();
         cmdSignIn = new UI.Components.Button();
-        txtEmail = new UI.Components.MyTextFieldLogin();
+        txtUsername = new UI.Components.MyTextFieldLogin();
         jPanel2 = new javax.swing.JPanel();
         verificationCode = new UI.Components.MyTextFieldLogin();
         vcode = new javax.swing.JLabel();
@@ -113,9 +117,9 @@ private Animator animatorLogin;
             }
         });
 
-        txtEmail.setBackground(new java.awt.Color(245, 245, 245));
-        txtEmail.setLabelText("Email");
-        txtEmail.setLineColor(new java.awt.Color(27, 152, 245));
+        txtUsername.setBackground(new java.awt.Color(245, 245, 245));
+        txtUsername.setLabelText("Username");
+        txtUsername.setLineColor(new java.awt.Color(27, 152, 245));
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
 
@@ -161,7 +165,7 @@ private Animator animatorLogin;
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(signuppanelLayout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -172,7 +176,7 @@ private Animator animatorLogin;
             .addGroup(signuppanelLayout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -305,27 +309,82 @@ private Animator animatorLogin;
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+@SuppressWarnings("empty-statement")
     private void cmdSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSignInActionPerformed
-        PharmacyAdmin pa = new PharmacyAdmin();
-                           pa.setVisible(true);
        
-//        if (txtEmail.getText().isEmpty()) {
-//           txtEmail.setHelperText("Please enter your email");
-//        }
-//        if (String.valueOf(txtPass.getPassword()).isEmpty()) {
-//            
-//            txtPass.setHelperText("Please enter your password");
-//        }
-//        if (verificationCode.getText().isEmpty()) {
-//            
-//             verificationCode.setHelperText("Please enter Verification Code");
-//        } 
-//      else {
-//                            LandingPage lp = new LandingPage();
-//                            lp.setVisible(true);
-//                            lp.pack();
-////                    
-//        }
+        if (txtUsername.getText().isEmpty()) {
+           txtUsername.setHelperText("Please enter your Username");
+        }
+        if (String.valueOf(txtPass.getPassword()).isEmpty()) {
+            
+            txtPass.setHelperText("Please enter your password");
+        }
+        if (String.valueOf(txtPass.getPassword()).length()<8) {
+            txtPass.setHelperText("Password is too Short");
+            
+        }
+         if (String.valueOf(txtPass.getPassword()).length()>14) {
+            txtPass.setHelperText("Password is too Long");
+            
+        }
+        if (verificationCode.getText().isEmpty()) {
+            
+             verificationCode.setHelperText("Please enter Verification Code");
+        } 
+      else 
+        {
+     
+                String userName=txtUsername.getText();
+               String password=String.valueOf(txtPass.getPassword());
+                int getcode = Integer.parseInt(verificationCode.getText());
+               if (verifyCode == getcode) {
+ //Step1: Check in the system admin user account directory if you have the user
+        UserAccount userAccount=system.getUserAccountDirectory().verifyUser(userName, password);
+        
+        Enterprise inEnterprise=null;
+        Organization inOrganization=null;
+        
+        if(userAccount==null){
+            //Step 2: Go inside each network and check each enterprise
+            for(Network network:system.getNetworkList()){
+                //Step 2.a: check against each enterprise
+                for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                    userAccount=enterprise.getUserAccountDirectory().verifyUser(userName, password);
+                    if(userAccount==null){
+                       //Step 3:check against each organization for each enterprise
+                       for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                           userAccount=organization.getUserAccountDirectory().verifyUser(userName, password);
+                           if(userAccount!=null){
+                               inEnterprise=enterprise;
+                               inOrganization=organization;
+                               break;
+                           }
+                       }
+                        
+                    }
+                    else{
+                       inEnterprise=enterprise;
+                       break;
+                    }
+                    if(inOrganization!=null){
+                        break;
+                    }  
+                }
+                if(inEnterprise!=null){
+                    break;
+                }
+            }
+        }
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+             
+            userAccount.getRole().createWorkArea(userAccount, inOrganization, inEnterprise, system);
+        }
+  }
+        }  
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
@@ -383,8 +442,8 @@ private Animator animatorLogin;
     private javax.swing.JLabel max;
     private javax.swing.JPanel panelLogin;
     private javax.swing.JPanel signuppanel;
-    private UI.Components.MyTextFieldLogin txtEmail;
     private UI.Components.MyPasswordFieldLogin txtPass;
+    private UI.Components.MyTextFieldLogin txtUsername;
     private javax.swing.JLabel vcode;
     private UI.Components.MyTextFieldLogin verificationCode;
     // End of variables declaration//GEN-END:variables
