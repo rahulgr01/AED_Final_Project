@@ -2,8 +2,8 @@
 package UI.Diagnostics;
 
 
-import com.UI.Components.TableCustom;
-import com.UI.Login.Admin;
+import UI.Components.TableCustom;
+import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -121,15 +121,15 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         categoryTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        categoryID = new com.UI.Components.TextField();
-        categoryName = new com.UI.Components.TextField();
+        categoryID = new UI.Components.TextField();
+        categoryName = new UI.Components.TextField();
         jPanel6 = new javax.swing.JPanel();
-        deleteCategory = new com.UI.Components.Button();
-        clearCategory = new com.UI.Components.Button();
-        updateCategory = new com.UI.Components.Button();
-        addCategory = new com.UI.Components.Button();
-        categoryDescription = new com.UI.Components.TextAreaScroll();
-        textArea1 = new com.UI.Components.TextArea();
+        deleteCategory = new UI.Components.Button();
+        clearCategory = new UI.Components.Button();
+        updateCategory = new UI.Components.Button();
+        addCategory = new UI.Components.Button();
+        categoryDescription = new UI.Components.TextAreaScroll();
+        textArea1 = new UI.Components.TextArea();
         searchPanel = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -143,15 +143,15 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         medicineTable = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        medicineName = new com.UI.Components.TextField();
-        medicinePrice = new com.UI.Components.TextField();
-        medicineQuantity = new com.UI.Components.TextField();
+        medicineName = new UI.Components.TextField();
+        medicinePrice = new UI.Components.TextField();
+        medicineQuantity = new UI.Components.TextField();
         jPanel9 = new javax.swing.JPanel();
-        deleteMedicine = new com.UI.Components.Button();
-        clearMedicine = new com.UI.Components.Button();
-        updateMedicine = new com.UI.Components.Button();
-        addMedicine = new com.UI.Components.Button();
-        combobox1 = new com.UI.Components.Combobox();
+        deleteMedicine = new UI.Components.Button();
+        clearMedicine = new UI.Components.Button();
+        updateMedicine = new UI.Components.Button();
+        addMedicine = new UI.Components.Button();
+        combobox1 = new UI.Components.Combobox();
         searchMedicine = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
@@ -687,11 +687,11 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 773, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGap(0, 677, Short.MAX_VALUE)
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -707,11 +707,11 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 773, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGap(0, 677, Short.MAX_VALUE)
         );
 
         pharmacy.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -862,7 +862,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -901,7 +901,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
             searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 205, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         searchPanelLayout.setVerticalGroup(
@@ -926,7 +926,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1062,7 +1062,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(0, 51, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -1216,7 +1216,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         searchPanel2.setLayout(searchPanel2Layout);
         searchPanel2Layout.setHorizontalGroup(
             searchPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 773, Short.MAX_VALUE)
         );
         searchPanel2Layout.setVerticalGroup(
             searchPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1231,7 +1231,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 429, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1257,7 +1257,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
@@ -1326,7 +1326,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
             this.dispose();
-            Admin x = new Admin();
+            MainLoginPage x = new MainLoginPage();
         x.show(); //display View LoginPage Form
         //dispose(); //Close SystemAdmin Form
         x.setVisible(true);
@@ -1503,24 +1503,24 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
-    private com.UI.Components.Button addCategory;
-    private com.UI.Components.Button addMedicine;
+    private UI.Components.Button addCategory;
+    private UI.Components.Button addMedicine;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JPanel category;
-    private com.UI.Components.TextAreaScroll categoryDescription;
-    private com.UI.Components.TextField categoryID;
-    private com.UI.Components.TextField categoryName;
+    private UI.Components.TextAreaScroll categoryDescription;
+    private UI.Components.TextField categoryID;
+    private UI.Components.TextField categoryName;
     private javax.swing.JTable categoryTable;
-    private com.UI.Components.Button clearCategory;
-    private com.UI.Components.Button clearMedicine;
+    private UI.Components.Button clearCategory;
+    private UI.Components.Button clearMedicine;
     private javax.swing.JLabel close;
-    private com.UI.Components.Combobox combobox1;
+    private UI.Components.Combobox combobox1;
     private javax.swing.JPanel dashboard;
-    private com.UI.Components.Button deleteCategory;
-    private com.UI.Components.Button deleteMedicine;
+    private UI.Components.Button deleteCategory;
+    private UI.Components.Button deleteMedicine;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
@@ -1569,9 +1569,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel manageSupplierlbl;
     private javax.swing.JLabel max;
     private javax.swing.JPanel medicine;
-    private com.UI.Components.TextField medicineName;
-    private com.UI.Components.TextField medicinePrice;
-    private com.UI.Components.TextField medicineQuantity;
+    private UI.Components.TextField medicineName;
+    private UI.Components.TextField medicinePrice;
+    private UI.Components.TextField medicineQuantity;
     private javax.swing.JTable medicineTable;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
@@ -1591,8 +1591,8 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
     private javax.swing.JPanel supplier;
-    private com.UI.Components.TextArea textArea1;
-    private com.UI.Components.Button updateCategory;
-    private com.UI.Components.Button updateMedicine;
+    private UI.Components.TextArea textArea1;
+    private UI.Components.Button updateCategory;
+    private UI.Components.Button updateMedicine;
     // End of variables declaration//GEN-END:variables
 }

@@ -597,7 +597,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="com.UI.Components.TextAreaScroll" name="textAreaScroll1">
+            <Container class="UI.Components.TextAreaScroll" name="textAreaScroll1">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
             </Container>

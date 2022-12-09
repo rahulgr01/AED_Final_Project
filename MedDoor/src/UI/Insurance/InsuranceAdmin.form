@@ -960,7 +960,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="com.UI.Components.Button" name="refresh">
+                <Component class="UI.Components.Button" name="refresh">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Refresh"/>
                   </Properties>
@@ -968,12 +968,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="com.UI.Components.Button" name="assign">
+                <Component class="UI.Components.Button" name="assign">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Assign"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.Button" name="process">
+                <Component class="UI.Components.Button" name="process">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Process"/>
                   </Properties>
@@ -1147,22 +1147,22 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.UI.Components.TextField" name="textField1">
+                        <Component class="UI.Components.TextField" name="textField1">
                           <Properties>
                             <Property name="labelText" type="java.lang.String" value="Company Name"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.TextField" name="textField2">
+                        <Component class="UI.Components.TextField" name="textField2">
                           <Properties>
                             <Property name="labelText" type="java.lang.String" value="Company Address"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.TextField" name="textField3">
+                        <Component class="UI.Components.TextField" name="textField3">
                           <Properties>
                             <Property name="labelText" type="java.lang.String" value="Company Email"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.TextField" name="textField4">
+                        <Component class="UI.Components.TextField" name="textField4">
                           <Properties>
                             <Property name="labelText" type="java.lang.String" value="Company Contact"/>
                           </Properties>
@@ -1206,22 +1206,22 @@
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="com.UI.Components.Button" name="addCompany">
+                            <Component class="UI.Components.Button" name="addCompany">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="ADD"/>
                               </Properties>
                             </Component>
-                            <Component class="com.UI.Components.Button" name="updateCompany">
+                            <Component class="UI.Components.Button" name="updateCompany">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="UPDATE"/>
                               </Properties>
                             </Component>
-                            <Component class="com.UI.Components.Button" name="clearCompany">
+                            <Component class="UI.Components.Button" name="clearCompany">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="CLEAR"/>
                               </Properties>
                             </Component>
-                            <Component class="com.UI.Components.Button" name="deleteCompany">
+                            <Component class="UI.Components.Button" name="deleteCompany">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="DELETE"/>
                               </Properties>
@@ -1589,32 +1589,32 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="com.UI.Components.TextField" name="textField5">
+                <Component class="UI.Components.TextField" name="textField5">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Holder ID"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.TextField" name="textField6">
+                <Component class="UI.Components.TextField" name="textField6">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Policy ID"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.TextField" name="textField7">
+                <Component class="UI.Components.TextField" name="textField7">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Holder Name"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.TextField" name="textField8">
+                <Component class="UI.Components.TextField" name="textField8">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Holder Address"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.TextField" name="textField9">
+                <Component class="UI.Components.TextField" name="textField9">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Holder Email"/>
                   </Properties>
                 </Component>
-                <Component class="com.UI.Components.TextField" name="textField10">
+                <Component class="UI.Components.TextField" name="textField10">
                   <Properties>
                     <Property name="labelText" type="java.lang.String" value="Holder Contact"/>
                   </Properties>
@@ -1658,22 +1658,22 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="com.UI.Components.Button" name="addCompany1">
+                    <Component class="UI.Components.Button" name="addCompany1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="ADD"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.Button" name="updateCompany1">
+                    <Component class="UI.Components.Button" name="updateCompany1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="UPDATE"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.Button" name="clearCompany1">
+                    <Component class="UI.Components.Button" name="clearCompany1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="CLEAR"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.Button" name="deleteCompany1">
+                    <Component class="UI.Components.Button" name="deleteCompany1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="DELETE"/>
                       </Properties>
@@ -1908,27 +1908,27 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="com.UI.Components.TextField" name="textField11">
+                    <Component class="UI.Components.TextField" name="textField11">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Policy ID"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField12">
+                    <Component class="UI.Components.TextField" name="textField12">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Company Name"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField13">
+                    <Component class="UI.Components.TextField" name="textField13">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Policy Name"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField14">
+                    <Component class="UI.Components.TextField" name="textField14">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Policy Desc"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField15">
+                    <Component class="UI.Components.TextField" name="textField15">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Policy Amount"/>
                       </Properties>
@@ -1972,22 +1972,22 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.UI.Components.Button" name="addPolicy">
+                        <Component class="UI.Components.Button" name="addPolicy">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="ADD"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.Button" name="updatePolicy">
+                        <Component class="UI.Components.Button" name="updatePolicy">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="UPDATE"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.Button" name="clearPolicy">
+                        <Component class="UI.Components.Button" name="clearPolicy">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="CLEAR"/>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.Button" name="deletePolicy">
+                        <Component class="UI.Components.Button" name="deletePolicy">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="DELETE"/>
                           </Properties>
@@ -2101,31 +2101,31 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="com.UI.Components.TextField" name="textField16">
+                    <Component class="UI.Components.TextField" name="textField16">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Patient Name"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField17">
+                    <Component class="UI.Components.TextField" name="textField17">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Amount Requested"/>
                       </Properties>
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField18">
+                    <Component class="UI.Components.TextField" name="textField18">
                     </Component>
-                    <Component class="com.UI.Components.TextField" name="textField19">
+                    <Component class="UI.Components.TextField" name="textField19">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Amount Approved"/>
                       </Properties>
                     </Component>
-                    <Container class="com.UI.Components.TextAreaScroll" name="textAreaScroll1">
+                    <Container class="UI.Components.TextAreaScroll" name="textAreaScroll1">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Message"/>
                       </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="com.UI.Components.TextArea" name="textArea1">
+                        <Component class="UI.Components.TextArea" name="textArea1">
                           <Properties>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
@@ -2181,7 +2181,7 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.UI.Components.Button" name="button2">
+                        <Component class="UI.Components.Button" name="button2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Calculate"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -2189,7 +2189,7 @@
                             </Property>
                           </Properties>
                         </Component>
-                        <Component class="com.UI.Components.CheckBox" name="checkBox1">
+                        <Component class="UI.Components.CheckBox" name="checkBox1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Approve"/>
                           </Properties>
@@ -2197,7 +2197,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBox1ActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="com.UI.Components.CheckBox" name="checkBox2">
+                        <Component class="UI.Components.CheckBox" name="checkBox2">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Reject"/>
                           </Properties>
@@ -2205,7 +2205,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkBox2ActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="com.UI.Components.Button" name="button1">
+                        <Component class="UI.Components.Button" name="button1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Submit Result"/>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -2215,7 +2215,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="com.UI.Components.Button" name="button3">
+                    <Component class="UI.Components.Button" name="button3">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Refresh"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

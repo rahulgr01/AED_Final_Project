@@ -1,7 +1,8 @@
 
-package UI.Diagnostics;
+package UI.SystemAdmin;
 
 
+import UI.Diagnostics.*;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
@@ -14,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Test extends javax.swing.JFrame {
+public class SystemAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
-    public Test() {
+    public SystemAdmin() {
         initComponents();
      
     }
@@ -97,6 +98,9 @@ public class Test extends javax.swing.JFrame {
         side5 = new javax.swing.JPanel();
         manageSupplierlbl = new javax.swing.JLabel();
         manageSupplierIcon = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -310,7 +314,7 @@ public class Test extends javax.swing.JFrame {
         statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
         statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Pharmacy Statistics");
+        statisticslbl.setText("Manage Network");
 
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
@@ -368,10 +372,10 @@ public class Test extends javax.swing.JFrame {
         managePharmacylbl.setBackground(new java.awt.Color(51, 51, 51));
         managePharmacylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         managePharmacylbl.setForeground(new java.awt.Color(255, 255, 255));
-        managePharmacylbl.setText("Manage Pharmacy");
+        managePharmacylbl.setText("Manage Volunteer");
 
         managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
+        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/earth_care_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout managePharmacyLayout = new javax.swing.GroupLayout(managePharmacy);
         managePharmacy.setLayout(managePharmacyLayout);
@@ -426,10 +430,10 @@ public class Test extends javax.swing.JFrame {
         manageCategorylbl.setBackground(new java.awt.Color(51, 51, 51));
         manageCategorylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageCategorylbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageCategorylbl.setText("Manage Category");
+        manageCategorylbl.setText("Manage Hospital");
 
         manageCategoryIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/category_40px.png"))); // NOI18N
+        manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Hospital Bed_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageCategoryLayout = new javax.swing.GroupLayout(manageCategory);
         manageCategory.setLayout(manageCategoryLayout);
@@ -484,10 +488,10 @@ public class Test extends javax.swing.JFrame {
         manageMedicinelbl.setBackground(new java.awt.Color(51, 51, 51));
         manageMedicinelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageMedicinelbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl.setText("Manage Medicine");
+        manageMedicinelbl.setText("Manage Diagnostics");
 
         manageMedicineIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
+        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageMedicineLayout = new javax.swing.GroupLayout(manageMedicine);
         manageMedicine.setLayout(manageMedicineLayout);
@@ -542,10 +546,10 @@ public class Test extends javax.swing.JFrame {
         manageSupplierlbl.setBackground(new java.awt.Color(51, 51, 51));
         manageSupplierlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageSupplierlbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageSupplierlbl.setText("Manage Supplier");
+        manageSupplierlbl.setText("Manage Insurance");
 
         manageSupplierIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/supplier_40px.png"))); // NOI18N
+        manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/insurance_agent_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageSupplierLayout = new javax.swing.GroupLayout(manageSupplier);
         manageSupplier.setLayout(manageSupplierLayout);
@@ -599,15 +603,36 @@ public class Test extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setBackground(new java.awt.Color(27, 152, 245));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 561, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 451, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Manage Network", jPanel1);
+
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            Test.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            SystemAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Test.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            SystemAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -738,12 +763,12 @@ public class Test extends javax.swing.JFrame {
     }//GEN-LAST:event_manageSupplierMouseClicked
 
     private void manageSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseEntered
-        changecolor(manageSupplier, new Color(3,138,255));
+        changecolor(manageMedicine, new Color(3,138,255));
         changecolor(side5, new Color(190, 224, 236));
     }//GEN-LAST:event_manageSupplierMouseEntered
 
     private void manageSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseExited
-        changecolor(manageSupplier, new Color(0,91,149));
+        changecolor(manageMedicine, new Color(0,91,149));
         changecolor(side5, new Color(0,91,149));
     }//GEN-LAST:event_manageSupplierMouseExited
 
@@ -764,14 +789,18 @@ public class Test extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -780,7 +809,7 @@ public class Test extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Test().setVisible(true);
+                new SystemAdmin().setVisible(true);
             }
         });
     }
@@ -795,6 +824,9 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel manageCategory;

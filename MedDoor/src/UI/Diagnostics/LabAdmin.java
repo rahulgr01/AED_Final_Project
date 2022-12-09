@@ -2,8 +2,8 @@
 package UI.Diagnostics;
 
 
-import com.UI.Components.TableCustom;
-import com.UI.Login.Admin;
+import UI.Components.TableCustom;
+import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -650,7 +650,7 @@ public class LabAdmin extends javax.swing.JFrame {
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
             this.dispose();
-            Admin x = new Admin();
+            MainLoginPage x = new MainLoginPage();
         x.show(); //display View LoginPage Form
         //dispose(); //Close SystemAdmin Form
         x.setVisible(true);

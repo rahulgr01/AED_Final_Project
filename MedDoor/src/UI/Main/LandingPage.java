@@ -1,5 +1,5 @@
 
-package UI.Diagnostics;
+package UI.Main;
 
 import UI.Login.MainLoginPage;
 import java.awt.Color;
@@ -12,11 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Dummy extends javax.swing.JFrame {
+public class LandingPage extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
-    public Dummy() {
+    public LandingPage() {
         initComponents();
     }
     //Method to change panel color on hover
@@ -29,10 +29,10 @@ public class Dummy extends javax.swing.JFrame {
     public void clickmenu(JPanel h1, JPanel h2, int numberbool) {
         if (numberbool == 1) {
             h1.setBackground(new Color(51, 51, 51));
-            h2.setBackground(new Color(0, 0, 0));
+            h2.setBackground(new Color(4,16,20));
 
         } else {
-            h1.setBackground(new Color(0, 0, 0));
+            h1.setBackground(new Color(4,16,20));
             h2.setBackground(new Color(51, 51, 51));
         }
     }
@@ -73,28 +73,24 @@ public class Dummy extends javax.swing.JFrame {
         setting = new javax.swing.JPanel();
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
+        menuhide1 = new javax.swing.JPanel();
         managePharmacy = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        managePharmacy1 = new javax.swing.JPanel();
-        side2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        textAreaScroll1 = new UI.Components.TextAreaScroll();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        header.setBackground(new java.awt.Color(22, 116, 66));
+        header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
 
-        buttonClose.setBackground(new java.awt.Color(22, 116, 66));
+        buttonClose.setBackground(new java.awt.Color(27, 152, 245));
 
         close.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/delete_32px.png"))); // NOI18N
@@ -125,7 +121,7 @@ public class Dummy extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        buttonMax.setBackground(new java.awt.Color(22, 116, 66));
+        buttonMax.setBackground(new java.awt.Color(27, 152, 245));
 
         max.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         max.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/full_screen_32px.png"))); // NOI18N
@@ -183,7 +179,7 @@ public class Dummy extends javax.swing.JFrame {
         menu.setPreferredSize(new java.awt.Dimension(270, 450));
         menu.setLayout(new java.awt.BorderLayout());
 
-        MenuIcon.setBackground(new java.awt.Color(0, 0, 0));
+        MenuIcon.setBackground(new java.awt.Color(4, 16, 20));
         MenuIcon.setPreferredSize(new java.awt.Dimension(50, 450));
         MenuIcon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -203,7 +199,7 @@ public class Dummy extends javax.swing.JFrame {
 
         MenuIcon.add(linehidemenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 5));
 
-        hidemenu.setBackground(new java.awt.Color(0, 0, 0));
+        hidemenu.setBackground(new java.awt.Color(4, 16, 20));
         hidemenu.setPreferredSize(new java.awt.Dimension(50, 50));
         hidemenu.setLayout(new java.awt.BorderLayout());
 
@@ -218,9 +214,6 @@ public class Dummy extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 buttonhidemenuMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                buttonhidemenuMouseReleased(evt);
             }
         });
         hidemenu.add(buttonhidemenu, java.awt.BorderLayout.CENTER);
@@ -243,7 +236,7 @@ public class Dummy extends javax.swing.JFrame {
 
         MenuIcon.add(lineSetting, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 50, 5));
 
-        setting.setBackground(new java.awt.Color(0, 0, 0));
+        setting.setBackground(new java.awt.Color(4, 16, 20));
         setting.setPreferredSize(new java.awt.Dimension(50, 50));
         setting.setLayout(new java.awt.BorderLayout());
 
@@ -266,9 +259,13 @@ public class Dummy extends javax.swing.JFrame {
 
         menu.add(MenuIcon, java.awt.BorderLayout.LINE_START);
 
-        menuhide.setBackground(new java.awt.Color(0, 51, 51));
+        menuhide.setBackground(new java.awt.Color(51, 51, 51));
+        menuhide.setLayout(new java.awt.BorderLayout());
 
-        managePharmacy.setBackground(new java.awt.Color(51, 51, 51));
+        menuhide1.setBackground(new java.awt.Color(0, 91, 149));
+        menuhide1.setLayout(new java.awt.BorderLayout());
+
+        managePharmacy.setBackground(new java.awt.Color(0, 91, 149));
         managePharmacy.setPreferredSize(new java.awt.Dimension(220, 50));
         managePharmacy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -282,7 +279,7 @@ public class Dummy extends javax.swing.JFrame {
             }
         });
 
-        side1.setBackground(new java.awt.Color(35, 166, 97));
+        side1.setBackground(new java.awt.Color(0, 91, 149));
         side1.setPreferredSize(new java.awt.Dimension(5, 50));
 
         javax.swing.GroupLayout side1Layout = new javax.swing.GroupLayout(side1);
@@ -327,79 +324,9 @@ public class Dummy extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        managePharmacy1.setBackground(new java.awt.Color(51, 51, 51));
-        managePharmacy1.setPreferredSize(new java.awt.Dimension(220, 50));
-        managePharmacy1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                managePharmacy1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                managePharmacy1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                managePharmacy1MouseExited(evt);
-            }
-        });
+        menuhide1.add(managePharmacy, java.awt.BorderLayout.PAGE_START);
 
-        side2.setBackground(new java.awt.Color(35, 166, 97));
-        side2.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
-        side2.setLayout(side2Layout);
-        side2Layout.setHorizontalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side2Layout.setVerticalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        jLabel3.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Manage Pharmacy");
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
-        jLabel4.setText("jLabel2");
-
-        javax.swing.GroupLayout managePharmacy1Layout = new javax.swing.GroupLayout(managePharmacy1);
-        managePharmacy1.setLayout(managePharmacy1Layout);
-        managePharmacy1Layout.setHorizontalGroup(
-            managePharmacy1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(managePharmacy1Layout.createSequentialGroup()
-                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        managePharmacy1Layout.setVerticalGroup(
-            managePharmacy1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managePharmacy1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        javax.swing.GroupLayout menuhideLayout = new javax.swing.GroupLayout(menuhide);
-        menuhide.setLayout(menuhideLayout);
-        menuhideLayout.setHorizontalGroup(
-            menuhideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(managePharmacy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        menuhideLayout.setVerticalGroup(
-            menuhideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuhideLayout.createSequentialGroup()
-                .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(managePharmacy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
 
         menu.add(menuhide, java.awt.BorderLayout.CENTER);
 
@@ -413,17 +340,11 @@ public class Dummy extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(292, Short.MAX_VALUE))
+            .addGap(0, 561, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+            .addGap(0, 484, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -449,18 +370,18 @@ public class Dummy extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
-        changecolor(buttonClose, new Color(35, 166, 97));
+        changecolor(buttonClose, new Color(3,138,255));
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
-        changecolor(buttonClose, new Color(22,116,66));
+        changecolor(buttonClose, new Color(27,152,245));
     }//GEN-LAST:event_closeMouseExited
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            Dummy.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            LandingPage.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            Dummy.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            LandingPage.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -469,11 +390,11 @@ public class Dummy extends javax.swing.JFrame {
     }//GEN-LAST:event_maxMouseClicked
 
     private void maxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseEntered
-        changecolor(buttonMax, new Color(35, 166, 97));
+        changecolor(buttonMax, new Color(3,138,255));
     }//GEN-LAST:event_maxMouseEntered
 
     private void maxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseExited
-        changecolor(buttonMax, new Color(22,116,66));
+        changecolor(buttonMax, new Color(27,152,245));
     }//GEN-LAST:event_maxMouseExited
 
     private void buttonhidemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseClicked
@@ -490,11 +411,12 @@ public class Dummy extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonhidemenuMouseClicked
 
     private void buttonhidemenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseEntered
-        changecolor(linehidemenu, new Color(35, 166, 97));
+        changecolor(linehidemenu, new Color(190,224,236));
+         
     }//GEN-LAST:event_buttonhidemenuMouseEntered
 
     private void buttonhidemenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseExited
-        changecolor(linehidemenu, new Color(0, 0, 0));
+        changecolor(linehidemenu, new Color(4,16,20));
     }//GEN-LAST:event_buttonhidemenuMouseExited
 
     private void buttonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseClicked
@@ -510,44 +432,26 @@ public class Dummy extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
     private void buttonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseEntered
-        changecolor(lineSetting, new Color(35, 166, 97));
+        changecolor(lineSetting, new Color(190,224,236));
     }//GEN-LAST:event_buttonLogoutMouseEntered
 
     private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
-        changecolor(lineSetting, new Color(0, 0, 0));
+        changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void buttonhidemenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseReleased
-       changecolor(linehidemenu, new Color(0, 0, 0));
-    }//GEN-LAST:event_buttonhidemenuMouseReleased
+    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_managePharmacyMouseClicked
 
     private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
-        changecolor(managePharmacy, new Color(51,51,51));
-        changecolor(side1, new Color(35,166,97));
+        changecolor(managePharmacy, new Color(3,138,255));
+        changecolor(side1, new Color(190, 224, 236));
     }//GEN-LAST:event_managePharmacyMouseEntered
 
     private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
-       changecolor(managePharmacy, new Color(0,51,51));
-        changecolor(side1, new Color(0,51,51));
+        changecolor(managePharmacy, new Color(0,91,149));
+        changecolor(side1, new Color(0,91,149));
     }//GEN-LAST:event_managePharmacyMouseExited
-
-    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
-//        ManageCategory manageCategory = new ManageCategory();
-//        manageCategory.setVisible(true);
-//        manageCategory.pack();
-    }//GEN-LAST:event_managePharmacyMouseClicked
-
-    private void managePharmacy1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacy1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managePharmacy1MouseClicked
-
-    private void managePharmacy1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacy1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managePharmacy1MouseEntered
-
-    private void managePharmacy1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacy1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_managePharmacy1MouseExited
 
     /**
      * @param args the command line arguments
@@ -566,51 +470,20 @@ public class Dummy extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dummy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dummy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dummy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dummy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LandingPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dummy().setVisible(true);
+                new LandingPage().setVisible(true);
             }
         });
     }
@@ -627,20 +500,16 @@ public class Dummy extends javax.swing.JFrame {
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel managePharmacy;
-    private javax.swing.JPanel managePharmacy1;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
+    private javax.swing.JPanel menuhide1;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
-    private javax.swing.JPanel side2;
-    private UI.Components.TextAreaScroll textAreaScroll1;
     // End of variables declaration//GEN-END:variables
 }
