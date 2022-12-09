@@ -8,23 +8,24 @@ package Business.Diagnostics;
  *
  * @author Dell
  */
-public class PharmacyMedicine {
+public class Medicine {
     private String name;
-    private PharmacyCategory category;
+    private Category category;
     private double price;
     private int qty;
 
-    public PharmacyCategory getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(PharmacyCategory category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     
    
-    public PharmacyMedicine(String name, double price, int qty) {
+    public Medicine(String name, Category category, double price, int qty) {
         this.name = name;
+        this.category=category;
         this.price = price;
         this.qty = qty;
         

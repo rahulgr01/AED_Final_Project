@@ -697,7 +697,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         dashboard.setLayout(new java.awt.BorderLayout());
 
-        jPanel3.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel3.setBackground(new java.awt.Color(217, 241, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -794,7 +794,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         companies.setLayout(new java.awt.BorderLayout());
 
-        jPanel6.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel6.setBackground(new java.awt.Color(217, 241, 255));
 
         companyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -832,9 +832,9 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(companyTable);
 
-        jPanel7.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel7.setBackground(new java.awt.Color(217, 241, 255));
 
-        jPanel8.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel8.setBackground(new java.awt.Color(217, 241, 255));
 
         textField1.setLabelText("Company Name");
 
@@ -909,7 +909,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                         .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(textField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -954,7 +954,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -967,7 +967,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         searchPanel1Layout.setHorizontalGroup(
             searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1018,9 +1018,10 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         insuranceAdmin.addTab("Company", companies);
 
+        holders.setBackground(new java.awt.Color(217, 241, 255));
         holders.setLayout(new java.awt.BorderLayout());
 
-        jPanel10.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel10.setBackground(new java.awt.Color(217, 241, 255));
 
         holderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1097,7 +1098,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel22Layout.setVerticalGroup(
@@ -1110,7 +1111,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         searchPanel2Layout.setHorizontalGroup(
             searchPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1139,7 +1140,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         textField10.setLabelText("Holder Contact");
 
-        jPanel11.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel11.setBackground(new java.awt.Color(217, 241, 255));
 
         addCompany1.setText("ADD");
 
@@ -1227,7 +1228,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         policies.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
         policyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1281,7 +1282,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel25Layout.setVerticalGroup(
@@ -1294,7 +1295,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         searchPanel3Layout.setHorizontalGroup(
             searchPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1312,7 +1313,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel2.setBackground(new java.awt.Color(217, 241, 255));
 
         textField11.setLabelText("Policy ID");
 
@@ -1324,7 +1325,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         textField15.setLabelText("Policy Amount");
 
-        jPanel12.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel12.setBackground(new java.awt.Color(217, 241, 255));
 
         addPolicy.setText("ADD");
 
@@ -1401,7 +1402,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3)
-            .addComponent(searchPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(searchPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -1418,11 +1419,12 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         insuranceAdmin.addTab("Policy", policies);
 
+        claims.setBackground(new java.awt.Color(217, 241, 255));
         claims.setLayout(new java.awt.BorderLayout());
 
-        jPanel5.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel5.setBackground(new java.awt.Color(217, 241, 255));
 
-        jPanel13.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel13.setBackground(new java.awt.Color(217, 241, 255));
 
         textField16.setLabelText("Patient Name");
 
@@ -1436,11 +1438,12 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         textArea1.setRows(5);
         textAreaScroll1.setViewportView(textArea1);
 
-        jPanel14.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel14.setBackground(new java.awt.Color(217, 241, 255));
 
         button2.setText("Calculate");
         button2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
+        checkBox1.setBackground(new java.awt.Color(217, 241, 255));
         checkBox1.setText("Approve");
         checkBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1448,6 +1451,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
             }
         });
 
+        checkBox2.setBackground(new java.awt.Color(217, 241, 255));
         checkBox2.setText("Reject");
         checkBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1466,14 +1470,14 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 5, Short.MAX_VALUE)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addComponent(checkBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(checkBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 5, Short.MAX_VALUE))
                     .addComponent(button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1513,7 +1517,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(75, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1836,7 +1840,6 @@ public class InsuranceAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JTabbedPane insuranceAdmin;
     private javax.swing.JPanel insuranceStaistics;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1849,10 +1852,8 @@ public class InsuranceAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -1897,7 +1898,6 @@ public class InsuranceAdmin extends javax.swing.JFrame {
     private javax.swing.JTable policyTable;
     private UI.Components.Button process;
     private UI.Components.Button refresh;
-    private javax.swing.JPanel searchPanel;
     private javax.swing.JPanel searchPanel1;
     private javax.swing.JPanel searchPanel2;
     private javax.swing.JPanel searchPanel3;
