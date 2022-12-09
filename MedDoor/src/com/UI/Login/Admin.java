@@ -35,6 +35,7 @@ private Animator animatorLogin;
     
     public Admin() {
         initComponents();
+        System.out.println("Test");
         system=dB4OUtil.retrieveSystem();
         vcode.setText(String.valueOf(verifyCode));
          getContentPane().setBackground(new Color(245, 245, 245));

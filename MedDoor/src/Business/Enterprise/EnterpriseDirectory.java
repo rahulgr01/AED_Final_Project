@@ -28,26 +28,21 @@ public class EnterpriseDirectory {
     }
     
     public Enterprise createAndAddEnterprise(String name, Enterprise.EnterpriseType type){
-        Enterprise enterprise = null;
-        if (null != type)switch (type) {
-            case Hospital -> {
-                enterprise = new HospitalEnterprise(name);
-                enterpriseList.add(enterprise);
-            }
-            case Insurance -> {
-                enterprise = new InsuranceEnterprise(name);
-                enterpriseList.add(enterprise);
-            }
-            case Volunteer -> {
-                enterprise = new VolunteerEnterprise(name);
-                enterpriseList.add(enterprise);
-            }
-            case Diagnostics -> {
-                enterprise = new DiagnosticsEnterprise(name);
-                enterpriseList.add(enterprise);
-            }
-            default -> {
-            }
+       Enterprise enterprise=null;
+        if(type==Enterprise.EnterpriseType.Hospital){
+            enterprise=new HospitalEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
+        if(type==Enterprise.EnterpriseType.Insurance){
+            enterprise=new InsuranceEnterprise(name);
+            enterpriseList.add(enterprise);
+        }
+        if(type==Enterprise.EnterpriseType.Volunteer){
+            enterprise=new VolunteerEnterprise(name);
+            enterpriseList.add(enterprise);
+        }if(type==Enterprise.EnterpriseType.Diagnostics){
+            enterprise=new DiagnosticsEnterprise(name);
+            enterpriseList.add(enterprise);
         }
      
         return enterprise;

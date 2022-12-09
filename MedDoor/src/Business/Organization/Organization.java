@@ -49,9 +49,12 @@ public abstract class Organization {
         }
     }
       public Organization(String name) {
-        this.name = name;
+         this.name = name;
         workQueue = new WorkQueue();
+        employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
+//        organizationID = counter;
+//        ++counter;
       }
       
        public String getName() {
