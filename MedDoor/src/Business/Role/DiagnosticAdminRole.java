@@ -4,6 +4,10 @@
  */
 package Business.Role;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import UI.Diagnostics.PharmacyAdmin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,8 +19,11 @@ import javax.swing.JPanel;
 public class DiagnosticAdminRole extends Role {
 
     @Override
-    public JFrame createWorkArea(JFrame userProcessContainer) {
-         return new PharmacyAdmin(userProcessContainer);
+    public JFrame createWorkArea(UserAccount account, 
+            Organization organization, 
+            Enterprise enterprise, 
+            EcoSystem business) {
+         return new PharmacyAdmin(account,organization, enterprise, business);
     }
      @Override
     public String toString(){
