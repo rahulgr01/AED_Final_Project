@@ -1,6 +1,8 @@
 
 package Business.Diagnostics;
 
+import Business.Role.DiagnosticAdminRole;
+import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
 /**
@@ -9,13 +11,38 @@ import Business.UserAccount.UserAccount;
  */
 public class Pharmacy extends UserAccount {
     private String orderId;
-//    private SystemAdminRole systemAdmin;
-//    private DeliveryRole delivery;
+    private SystemAdminRole sysAdmin;
+    private DiagnosticAdminRole dadmin;
     private String pharmacyName;
-    private PharmacyInventory menu;
+    private MedicineInventory menu;
+    private CategoryInventory cmenu;
     private String address;
 //    private Community community;
     private String contact;
+
+    public SystemAdminRole getSysAdmin() {
+        return sysAdmin;
+    }
+
+    public void setSysAdmin(SystemAdminRole sysAdmin) {
+        this.sysAdmin = sysAdmin;
+    }
+
+    public DiagnosticAdminRole getDadmin() {
+        return dadmin;
+    }
+
+    public void setDadmin(DiagnosticAdminRole dadmin) {
+        this.dadmin = dadmin;
+    }
+
+    public CategoryInventory getCmenu() {
+        return cmenu;
+    }
+
+    public void setCmenu(CategoryInventory cmenu) {
+        this.cmenu = cmenu;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -24,15 +51,7 @@ public class Pharmacy extends UserAccount {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
-//
-//    public DeliveryRole getDelivery() {
-//        return delivery;
-//    }
-//
-//    public void setDelivery(DeliveryRole delivery) {
-//        this.delivery = delivery;
-//    }
-//
+
 //    public Community getCommunity() {
 //        return community;
 //    }
@@ -41,13 +60,7 @@ public class Pharmacy extends UserAccount {
 //        this.community = community;
 //    }
     
-//    public SystemAdminRole getSystemAdmin() {
-//        return systemAdmin;
-//    }
-//
-//    public void setSystemAdmin(SystemAdminRole systemAdmin) {
-//        this.systemAdmin = systemAdmin;
-//    }
+
 
     public String getAddress() {
         return address;
@@ -66,11 +79,11 @@ public class Pharmacy extends UserAccount {
     }
  
 
-    public PharmacyInventory getMenu() {
+    public MedicineInventory getMenu() {
         return menu;
     }
 
-    public void setMenu(PharmacyInventory menu) {
+    public void setMenu(MedicineInventory menu) {
         this.menu = menu;
     }
 
@@ -81,8 +94,6 @@ public class Pharmacy extends UserAccount {
     public void setPharmacyName(String pharmacyName) {
         this.pharmacyName = pharmacyName;
     }
-
-
 
     @Override
     public String toString() {

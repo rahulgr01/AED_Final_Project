@@ -319,10 +319,10 @@ private Animator animatorLogin;
             
             txtPass.setHelperText("Please enter your password");
         }
-        if (String.valueOf(txtPass.getPassword()).length()<8) {
-            txtPass.setHelperText("Password is too Short");
-            
-        }
+//        if (String.valueOf(txtPass.getPassword()).length()<8) {
+//            txtPass.setHelperText("Password is too Short");
+//            
+//        }
          if (String.valueOf(txtPass.getPassword()).length()>14) {
             txtPass.setHelperText("Password is too Long");
             
