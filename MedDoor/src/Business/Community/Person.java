@@ -31,7 +31,7 @@ import java.util.Date;
     public Person() {
         
     }
-    public Person(String fName, String lName, Date dob, String gender,Integer Age, House residence) {
+    public Person(String fName, String lName, Date dob, String gender,Integer age, House residence) {
         this.firstName = fName;
         this.lastName = lName;
         this.dateOfBirth = dob;

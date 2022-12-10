@@ -7,6 +7,7 @@ package Business.Community;
 import Business.Network.Network;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -17,12 +18,27 @@ public class Community {
     private String communityName; 
     private Integer zipCode; 
     private Network city;
-    public HouseList house;
+    public HouseList houselist;
+
+    public HouseList getHouse() {
+        return houselist;
+    }
+
+    public void setHouse(HouseList house) {
+        this.houselist = house;
+    }
+    
+    public House createAndAddHouse(String houseNumber, String houseAddress){
+         House newHouse = new House(houseNumber, houseAddress, this);
+         houselist.addNewHouse(newHouse);
+         return newHouse;
+    }
     
     public Community() {}
     
-    public Community(String communityId, String communityName, Integer zipCode, Network city) {
-        this.communityId = communityId;
+    public Community(String communityName, Integer zipCode, Network city) {
+        String uniqueID = UUID.randomUUID().toString();
+        this.communityId = uniqueID;
         this.communityName = communityName;
         this.zipCode = zipCode;
         this.city = city;
@@ -60,6 +76,9 @@ public class Community {
         this.communityName = name;
     }
     
-    
+    @Override
+    public String toString() {
+        return communityName;
+    }
 }
 
