@@ -5,7 +5,7 @@
 package Business;
 
 import Business.Employee.Employee;
-import Business.Role.ParmacyAdminRole;
+import Business.Role.PharmacyAdminRole;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
@@ -19,7 +19,7 @@ public class ConfigureASystem {
         Employee admin = system.getEmployeeDirectory().createEmployee("sysadmin");
        // Employee pharmacyadmin = system.getEmployeeDirectory().createEmployee("pharmacyadmin");
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", admin, new SystemAdminRole());
-       // UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("padmin", "padmin", pharmacyadmin, new ParmacyAdminRole());
+       // UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("padmin", "padmin", pharmacyadmin, new PharmacyAdminRole());
         
         return system;
     }

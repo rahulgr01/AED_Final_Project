@@ -25,11 +25,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     boolean a = true;
     static boolean maximized = true;
     private JFrame userProcessContainer;
+    JFrame parentFrame;
     public VolunteerAdmin(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
-            EcoSystem business) {
+            EcoSystem business,JFrame parentFrame) {
         initComponents();
+          this.parentFrame = parentFrame;
            
     }
     //Method to change panel color on hover
@@ -880,11 +882,8 @@ public class VolunteerAdmin extends javax.swing.JFrame {
        clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            this.dispose();
-            MainLoginPage x = new MainLoginPage();
-        x.show(); //display View LoginPage Form
-        //dispose(); //Close SystemAdmin Form
-        x.setVisible(true);
+            this.setVisible(false);
+           parentFrame.setVisible(true);;
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
@@ -921,7 +920,8 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);
+        this.setVisible(false);
+           parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
     private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked

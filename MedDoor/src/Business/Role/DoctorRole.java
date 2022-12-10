@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.HospitalAdmin.DoctorInterface;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -15,13 +16,13 @@ import javax.swing.JFrame;
  *
  * @author Dell
  */
-public class Doctor extends Role {
+public class DoctorRole extends Role {
      @Override
     public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new DoctorInterface(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

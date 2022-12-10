@@ -35,13 +35,15 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     Organization organization;
     UserAccount account;
     Enterprise enterprise;
-    public PharmacyAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
+    JFrame parentFrame;
+    public PharmacyAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
         initComponents();
 //        initListners();
        this.business = business;
         this.account = account;
         this.organization=organization;
         this.enterprise=enterprise;
+        this.parentFrame = parentFrame;
            TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
            TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
            dtm = (DefaultTableModel) categoryTable.getModel();
@@ -1373,11 +1375,8 @@ public class PharmacyAdmin extends javax.swing.JFrame {
        clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            this.dispose();
-            MainLoginPage x = new MainLoginPage();
-        x.show(); //display View LoginPage Form
-        //dispose(); //Close SystemAdmin Form
-        x.setVisible(true);
+           this.setVisible(false);
+           parentFrame.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
@@ -1462,7 +1461,8 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);
+       this.setVisible(false);
+           parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
     private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked

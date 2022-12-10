@@ -1,7 +1,7 @@
 
 package Business.Pharmacy;
 
-import Business.Role.ParmacyAdminRole;
+import Business.Role.PharmacyAdminRole;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
@@ -12,7 +12,7 @@ import Business.UserAccount.UserAccount;
 public class Pharmacy extends UserAccount {
     private String orderId;
     private SystemAdminRole sysAdmin;
-    private ParmacyAdminRole dadmin;
+    private PharmacyAdminRole dadmin;
     private String pharmacyName;
     private MedicineInventory menu;
     private CategoryInventory cmenu;
@@ -28,11 +28,11 @@ public class Pharmacy extends UserAccount {
         this.sysAdmin = sysAdmin;
     }
 
-    public ParmacyAdminRole getDadmin() {
+    public PharmacyAdminRole getDadmin() {
         return dadmin;
     }
 
-    public void setDadmin(ParmacyAdminRole dadmin) {
+    public void setDadmin(PharmacyAdminRole dadmin) {
         this.dadmin = dadmin;
     }
 

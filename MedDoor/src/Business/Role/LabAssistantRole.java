@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.LabAdmin.LabAssistant;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -15,16 +16,16 @@ import javax.swing.JFrame;
  *
  * @author Dell
  */
-public class SurveyVolunteer extends Role{
+public class LabAssistantRole extends Role{
      @Override
     public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.SurveyVolunteer.getValue();
+        return RoleType.LabAssistant.getValue();
     }
 }
