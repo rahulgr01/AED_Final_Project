@@ -2,7 +2,6 @@
 package UI.Hospital;
 
 
-import UI.Diagnostics.*;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
