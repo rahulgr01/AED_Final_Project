@@ -1,5 +1,6 @@
 package Business.Network;
 
+import Business.Community.CommunityList;
 import Business.Enterprise.EnterpriseDirectory;
 
 /*
@@ -12,15 +13,19 @@ import Business.Enterprise.EnterpriseDirectory;
  * @author ashikakalmady
  */
 public class Network {
-     private String name;
+    private String name;
     private EnterpriseDirectory enterpriseDirectory;
-
+    private CommunityList communityDirectory;
+    
     public Network() {
-       
         enterpriseDirectory = new EnterpriseDirectory();
+        this.communityDirectory = new CommunityList();
     }
     
-
+    public CommunityList getCommunityDirectory() {
+        return communityDirectory;
+    }
+    
     public EnterpriseDirectory getEnterpriseDirectory() {
         return enterpriseDirectory;
     }

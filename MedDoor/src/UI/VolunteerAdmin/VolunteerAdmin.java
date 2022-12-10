@@ -4,6 +4,7 @@ package UI.VolunteerAdmin;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.VolunteerEnterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.Components.TableCustom;
@@ -26,16 +27,27 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     static boolean maximized = true;
     private JFrame userProcessContainer;
     JFrame parentFrame;
+    VolunteerEnterprise vEnterPrise;
     public VolunteerAdmin(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business,JFrame parentFrame) {
-        initComponents();
+          initComponents();
+          vEnterPrise = (VolunteerEnterprise) enterprise;
           this.parentFrame = parentFrame;
-           
+          vAdminTab.setSelectedIndex(0);
     }
     //Method to change panel color on hover
  
+    
+    public void populateVolunteerEnterpriseOrganizations() {
+         vOrganizationsCombo.removeAllItems();
+        
+        for (Organization org : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
+            vOrganizationsCombo.addItem(org);
+        }
+    }
+    
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -106,15 +118,16 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         side5 = new javax.swing.JPanel();
         manageSupplierlbl = new javax.swing.JLabel();
         manageSupplierIcon = new javax.swing.JLabel();
-        pharmacyAdmin = new javax.swing.JTabbedPane();
+        vAdminTab = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         addVolunteer = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
-        combobox2 = new UI.Components.Combobox();
+        vOrganizationsCombo = new UI.Components.Combobox();
         myTextFieldLogin6 = new UI.Components.MyTextFieldLogin();
         myTextFieldLogin7 = new UI.Components.MyTextFieldLogin();
         button1 = new UI.Components.Button();
+        myTextFieldLogin9 = new UI.Components.MyTextFieldLogin();
         manageTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -598,6 +611,12 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
+        vAdminTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vAdminTabMouseClicked(evt);
+            }
+        });
+
         dashboard.setBackground(new java.awt.Color(255, 255, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
@@ -607,7 +626,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 825, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -616,9 +635,9 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Dashboard", dashboard);
+        vAdminTab.addTab("Dashboard", dashboard);
 
-        combobox2.setLabeText("Organization");
+        vOrganizationsCombo.setLabeText("Organization");
 
         myTextFieldLogin6.setLabelText("Username");
 
@@ -630,6 +649,18 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         });
 
         button1.setText("Create User");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
+        myTextFieldLogin9.setLabelText("Name");
+        myTextFieldLogin9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myTextFieldLogin9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -638,28 +669,31 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
+                        .addGap(243, 243, 243)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(myTextFieldLogin7, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
+                        .addGap(300, 300, 300)
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(17, 17, 17)
                 .addComponent(myTextFieldLogin7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addGap(18, 18, 18)
+                .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(372, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
@@ -673,7 +707,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pharmacyAdmin.addTab("Add Volunteer", addVolunteer);
+        vAdminTab.addTab("Add Volunteer", addVolunteer);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -714,7 +748,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 274, Short.MAX_VALUE))
+                .addGap(0, 299, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,7 +804,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                             .addComponent(combobox7, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combobox6, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combobox8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -827,9 +861,9 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pharmacyAdmin.addTab("Assign Task", manageTask);
+        vAdminTab.addTab("Assign Task", manageTask);
 
-        getContentPane().add(pharmacyAdmin, java.awt.BorderLayout.CENTER);
+        getContentPane().add(vAdminTab, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -896,7 +930,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLogoutMouseExited
 
     private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
-         pharmacyAdmin.setSelectedIndex(0);
+         vAdminTab.setSelectedIndex(0);
          changecolor(pharmacyStaistics, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
     }//GEN-LAST:event_pharmacyStaisticsMouseClicked
@@ -925,7 +959,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked
-         pharmacyAdmin.setSelectedIndex(4);
+         vAdminTab.setSelectedIndex(4);
           changecolor(manageSupplier, new Color(3,138,255));
         changecolor(side5, new Color(190, 224, 236));
     }//GEN-LAST:event_manageSupplierMouseClicked
@@ -967,6 +1001,35 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private void myTextFieldLogin7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextFieldLogin7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_myTextFieldLogin7ActionPerformed
+
+    private void vAdminTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTabMouseClicked
+        // TODO add your handling code here:
+        int index = vAdminTab.getSelectedIndex();
+       
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                populateVolunteerEnterpriseOrganizations();
+                break;
+            case 2:
+                
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_vAdminTabMouseClicked
+
+    private void myTextFieldLogin9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextFieldLogin9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_myTextFieldLogin9ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1015,7 +1078,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox2;
     private UI.Components.Combobox combobox4;
     private UI.Components.Combobox combobox5;
     private UI.Components.Combobox combobox6;
@@ -1056,7 +1118,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin myTextFieldLogin6;
     private UI.Components.MyTextFieldLogin myTextFieldLogin7;
     private UI.Components.MyTextFieldLogin myTextFieldLogin8;
-    private javax.swing.JTabbedPane pharmacyAdmin;
+    private UI.Components.MyTextFieldLogin myTextFieldLogin9;
     private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
@@ -1065,5 +1127,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel side7;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
+    private javax.swing.JTabbedPane vAdminTab;
+    private UI.Components.Combobox vOrganizationsCombo;
     // End of variables declaration//GEN-END:variables
 }

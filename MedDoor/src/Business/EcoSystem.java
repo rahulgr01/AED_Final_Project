@@ -20,15 +20,13 @@ public class EcoSystem extends Organization {
     private ArrayList<Network> networkList;
     
     public static EcoSystem getInstance() {
-        System.out.print("ashikkakaka");
         if (business == null) {
-            System.out.print("ash");
             business = new EcoSystem();
         }
         return business;
     }
+    
     private EcoSystem() {
-        
         super(null);
         networkList = new ArrayList<>();
         Network network = createAndAddNetwork();
@@ -41,6 +39,7 @@ public class EcoSystem extends Organization {
      public Network createAndAddNetwork() {
         Network network = new Network();
         network.setName("Boston");
+        
         networkList.add(network);
         return network;
     }
