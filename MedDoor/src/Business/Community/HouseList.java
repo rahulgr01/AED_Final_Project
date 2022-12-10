@@ -25,9 +25,9 @@ public class HouseList {
         this.houseList = house;
     }
     
-    public House addNewHouse(House hospital){
-        houseList.add(hospital); 
-        return hospital;
+    public House addNewHouse(House house){
+        houseList.add(house); 
+        return house;
     }
     
     public House addHouse() {

@@ -4,7 +4,10 @@
  */
 package Business.Community;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import java.util.ArrayList;
 
 /**
@@ -30,9 +33,10 @@ public class CommunityList {
     }
     
     public void tempCommList(Network city) { 
-        addNewCommunity(new Community("com1234", "Allston-Suffolk", 20134, city));
-        addNewCommunity(new Community("com1235", "Allston-Brighton", 20135, city));
+        addNewCommunity(new Community("Allston-Suffolk", 20134, city));
+        addNewCommunity(new Community("Allston-Brighton", 20135, city));
     }   
+    
     
     public Community addNewCommunity(Community community){
         communityList.add(community); 

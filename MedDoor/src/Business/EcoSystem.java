@@ -39,7 +39,7 @@ public class EcoSystem extends Organization {
      public Network createAndAddNetwork() {
         Network network = new Network();
         network.setName("Boston");
-        
+        network.getCommunityDirectory().tempCommList(network);
         networkList.add(network);
         return network;
     }
