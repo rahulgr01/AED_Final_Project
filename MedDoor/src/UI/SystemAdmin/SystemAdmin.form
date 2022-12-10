@@ -1352,7 +1352,7 @@
                 </Component>
                 <Component class="UI.Components.Combobox" name="cEntName">
                   <Properties>
-                    <Property name="labeText" type="java.lang.String" value="Enterprise"/>
+                    <Property name="labeText" type="java.lang.String" value="Enterprise List"/>
                   </Properties>
                 </Component>
                 <Component class="UI.Components.Button" name="cEntCreateButton">

@@ -41,7 +41,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         this.parentFrame = parentFrame;
         sysAdminTab.setSelectedIndex(0);
         network = system.getNetworkList().get(0);
-        System.out.println(network + "43");
+        
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
@@ -952,7 +952,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntUsername.setLabelText("Username");
         cEntUsername.setLineColor(new java.awt.Color(27, 152, 245));
 
-        cEntName.setLabeText("Enterprise");
+        cEntName.setLabeText("Enterprise List");
 
         cEntCreateButton.setText("Create Admin");
         cEntCreateButton.addActionListener(new java.awt.event.ActionListener() {
