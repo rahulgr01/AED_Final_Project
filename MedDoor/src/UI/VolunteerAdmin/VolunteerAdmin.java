@@ -3,9 +3,12 @@ package UI.VolunteerAdmin;
 
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.VolunteerEnterprise;
 import Business.Organization.Organization;
+import Business.Role.HomeCareVolunteerRole;
+import Business.Role.SurveyVolunteerRole;
 import Business.UserAccount.UserAccount;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
@@ -36,6 +39,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
           vEnterPrise = (VolunteerEnterprise) enterprise;
           this.parentFrame = parentFrame;
           vAdminTab.setSelectedIndex(0);
+          vAdminTask.setSelectedIndex(0);
     }
     //Method to change panel color on hover
  
@@ -124,13 +128,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         addVolunteer = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         vOrganizationsCombo = new UI.Components.Combobox();
-        myTextFieldLogin6 = new UI.Components.MyTextFieldLogin();
-        myTextFieldLogin7 = new UI.Components.MyTextFieldLogin();
+        vOrgUN = new UI.Components.MyTextFieldLogin();
+        vOrgUName = new UI.Components.MyTextFieldLogin();
         button1 = new UI.Components.Button();
-        myTextFieldLogin9 = new UI.Components.MyTextFieldLogin();
+        vOrgPW = new UI.Components.MyPasswordFieldLogin();
         manageTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        vAdminTask = new javax.swing.JTabbedPane();
         jPanel23 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -639,12 +643,12 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         vOrganizationsCombo.setLabeText("Organization");
 
-        myTextFieldLogin6.setLabelText("Username");
+        vOrgUN.setLabelText("Username");
 
-        myTextFieldLogin7.setLabelText("Password");
-        myTextFieldLogin7.addActionListener(new java.awt.event.ActionListener() {
+        vOrgUName.setLabelText("Name");
+        vOrgUName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myTextFieldLogin7ActionPerformed(evt);
+                vOrgUNameActionPerformed(evt);
             }
         });
 
@@ -655,12 +659,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
         });
 
-        myTextFieldLogin9.setLabelText("Name");
-        myTextFieldLogin9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myTextFieldLogin9ActionPerformed(evt);
-            }
-        });
+        vOrgPW.setLabelText("Password");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -671,10 +670,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(243, 243, 243)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(myTextFieldLogin7, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(vOrgPW, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(vOrgUN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                            .addComponent(vOrgUName, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -686,12 +686,12 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 .addGap(57, 57, 57)
                 .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(myTextFieldLogin7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vOrgUN, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addComponent(vOrgPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(vOrgUName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(330, Short.MAX_VALUE))
         );
@@ -708,6 +708,12 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         );
 
         vAdminTab.addTab("Add Volunteer", addVolunteer);
+
+        vAdminTask.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vAdminTaskMouseClicked(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -766,7 +772,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 .addContainerGap(218, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Survey Volunteer", jPanel23);
+        vAdminTask.addTab("Survey Volunteer", jPanel23);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -837,17 +843,17 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Home Care Volunteer", jPanel24);
+        vAdminTask.addTab("Home Care Volunteer", jPanel24);
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(vAdminTask)
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(vAdminTask)
         );
 
         javax.swing.GroupLayout manageTaskLayout = new javax.swing.GroupLayout(manageTask);
@@ -998,10 +1004,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_manageVolunteers1MouseExited
 
-    private void myTextFieldLogin7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextFieldLogin7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_myTextFieldLogin7ActionPerformed
-
     private void vAdminTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTabMouseClicked
         // TODO add your handling code here:
         int index = vAdminTab.getSelectedIndex();
@@ -1014,22 +1016,69 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 populateVolunteerEnterpriseOrganizations();
                 break;
             case 2:
-                
                 break;
+            
             default:
                 throw new AssertionError();
         }
     }//GEN-LAST:event_vAdminTabMouseClicked
 
-    private void myTextFieldLogin9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myTextFieldLogin9ActionPerformed
+    private void vOrgUNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vOrgUNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_myTextFieldLogin9ActionPerformed
+    }//GEN-LAST:event_vOrgUNameActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
         
+//         int flag = 0;
+//        String fields[] = {"cEntUsername", "cEntPassword", "cEntEEname"};
+//        for (int i = 0; i < fields.length; i++) {
+//            if (hasError(fields[i])) {
+//                flag++;
+//            }
+//        }
+//        if (flag > 0) {
+//            return;
+//        }
+        Organization org = (Organization) vOrganizationsCombo.getSelectedItem();
+
+        String username = vOrgUN.getText();
+        char[] passwordCharArray = vOrgPW.getPassword();
+        
+        String password = String.valueOf(passwordCharArray);
+        String name = vOrgUName.getText();
+
+        Employee employee = org.getEmployeeDirectory().createEmployee(name);
+        if (EcoSystem.isUserUnique(username)) {
+            if (org.toString() == Organization.Type.SurveyVolunteer.toString()) 
+            {
+                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
+
+            } else if (org.toString() == Organization.Type.HomeCareVolunteer.toString()) {
+                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
+
+            }
+            
+        }
         
     }//GEN-LAST:event_button1ActionPerformed
+
+    private void vAdminTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTaskMouseClicked
+        // TODO add your handling code here:
+        int index = vAdminTask.getSelectedIndex();
+       
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+               // populateVolunteerEnterpriseOrganizations();
+                break;
+           
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_vAdminTaskMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1096,7 +1145,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JPanel lineSetting;
@@ -1115,10 +1163,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin6;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin7;
     private UI.Components.MyTextFieldLogin myTextFieldLogin8;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin9;
     private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
@@ -1128,6 +1173,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
     private javax.swing.JTabbedPane vAdminTab;
+    private javax.swing.JTabbedPane vAdminTask;
+    private UI.Components.MyPasswordFieldLogin vOrgPW;
+    private UI.Components.MyTextFieldLogin vOrgUN;
+    private UI.Components.MyTextFieldLogin vOrgUName;
     private UI.Components.Combobox vOrganizationsCombo;
     // End of variables declaration//GEN-END:variables
 }
