@@ -13,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 public class ServiceMail {
 
-    public ModelMessage sendMain(String toEmail, String code) {
+    public ModelMessage sendMain(String toEmail) {
         ModelMessage ms = new ModelMessage(false, "");
         String from = "rahulgr3001@gmail.com";
         Properties prop = new Properties();
@@ -22,7 +22,7 @@ public class ServiceMail {
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
         String username = "rahulgr3001@gmail.com";
-        String password = "slk@PI2022usa";    //  Your email password here
+        String password = "nitzkpzsqsvdhzvb";    //  Your email password here
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -34,7 +34,7 @@ public class ServiceMail {
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             message.setSubject("Verify Code");
-            message.setText(code);
+//            message.setText(code);
             Transport.send(message);
             ms.setSuccess(true);
         } catch (MessagingException e) {
@@ -45,5 +45,9 @@ public class ServiceMail {
             }
         }
         return ms;
+    }
+    public static void main(String args[]) {
+
+        System.out.println("Testing");
     }
 }
