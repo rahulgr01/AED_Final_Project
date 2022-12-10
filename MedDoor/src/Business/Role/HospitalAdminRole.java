@@ -22,7 +22,7 @@ public class HospitalAdminRole extends Role {
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-        new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+        new HospitalAdmin(account,organization, enterprise, business, parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

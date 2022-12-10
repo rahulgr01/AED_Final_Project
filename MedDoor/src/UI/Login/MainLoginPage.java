@@ -11,6 +11,7 @@ import UI.PharmacyAdmin.PharmacyAdmin;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -390,7 +391,7 @@ private Animator animatorLogin;
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);
+//        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_closeMouseClicked
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered

@@ -10,21 +10,26 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
- * @author Dell
+ * @author ashikakalmady
  */
-public class Patient extends Role {
-     @Override
+public class PharmacyAdminRole extends Role {
+
+    @Override
     public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.Patient.getValue();
+        return RoleType.PharmacyAdminRole.getValue();
     }
+    
+    
+    
 }

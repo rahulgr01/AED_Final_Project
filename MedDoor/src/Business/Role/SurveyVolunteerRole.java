@@ -9,22 +9,23 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
+import UI.VolunteerAdmin.SurveyVolunteer;
 import javax.swing.JFrame;
 
 /**
  *
  * @author Dell
  */
-public class Staff extends Role {
-    @Override
+public class SurveyVolunteerRole extends Role{
+     @Override
     public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new SurveyVolunteer(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.Staff.getValue();
+        return RoleType.SurveyVolunteer.getValue();
     }
 }

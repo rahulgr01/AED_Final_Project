@@ -15,16 +15,16 @@ import javax.swing.JFrame;
  *
  * @author Dell
  */
-public class LabAssistant extends Role{
+public class HomeCareVolunteerRole extends Role {
      @Override
     public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.LabAssistant.getValue();
+        return RoleType.HomeCareVolunteer.getValue();
     }
 }

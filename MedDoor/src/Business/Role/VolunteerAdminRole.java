@@ -23,7 +23,7 @@ public class VolunteerAdminRole extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new VolunteerAdmin(account,organization, enterprise, business).setVisible(true);
+         new VolunteerAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){
