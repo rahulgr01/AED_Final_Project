@@ -19,26 +19,24 @@ public abstract class Role {
     
     public enum RoleType{
         
-        DoctorRole("DocorRole"),
+        Doctor("Docor"),
         Patient("Patient"),
-        AmbulanceDriver("AmbulanceDriver"),
-        StaffRole("StaffRole"),
-        Accountant("Accountant"),
+//        AmbulanceDriver("AmbulanceDriver"),
+        Staff("Staff"),
+//        Accountant("Accountant"),
         ClaimHandler("ClaimHandler"),
         InsuranceAgent("InsuranceAgent"),
         Phamacist("Phamacist"),
-        DeliveryRole("DeliveryRole"),
-        MedicineSupplier("MedicineSupplier"),
         LabAssistant("LabAssistant"),
         SurveyVolunteer("LabAssistant"),
         HomeCareVolunteer("HomeCareVolunteer"),
-        
-        AdminRole("AdminRole"),
+     
+//        AdminRole("AdminRole"),
         SystemAdminRole("SystemAdminRole"),
         HospitalAdminRole("HospitalAdminRole"),
-        CommunityAdminRole("CommunityAdminRole"),
         VolunteerAdminRole("VolunteerAdminRole"),
-        DiagnosticAdminRole("DiagnosticAdminRole"),
+        PharmacyAdminRole("PharmacyAdminRole"),
+        LabAdminRole("LabAdminRole"),
         InsuranceAdminRole("InsuranceAdminRole");
         
         

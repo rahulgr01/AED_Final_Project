@@ -1,11 +1,11 @@
 
-package UI.Diagnostics;
+package UI.PharmacyAdmin;
 
 
 
-import Business.Diagnostics.Category;
-import Business.Diagnostics.CategoryInventory;
-import Business.Diagnostics.Pharmacy;
+import Business.Pharmacy.Category;
+import Business.Pharmacy.CategoryInventory;
+import Business.Pharmacy.Pharmacy;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
@@ -45,7 +45,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
            TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
            TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
            dtm = (DefaultTableModel) categoryTable.getModel();
-          populateCategory();
+//          populateCategory();
     }
     //Method to change panel color on hover
     public void changecolor(JPanel hover, Color rand) {
@@ -826,10 +826,11 @@ public class PharmacyAdmin extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(categoryID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(description, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(categoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(categoryID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                        .addComponent(categoryName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -1510,15 +1511,22 @@ public class PharmacyAdmin extends javax.swing.JFrame {
            if (categoryName.getText().equals("")){
              JOptionPane.showMessageDialog(null,"Category name is empty!!!");
          }
-//           else if(nameJTextField.getText().length()>25) {
-//             JOptionPane.showMessageDialog(null,"Please do not exceed the name by 25 characters !!!");
-//         }
-//         else{
-//        String name = nameJTextField.getText();
-//        
-//        organization.getEmployeeDirectory().createEmployee(name);
-//        populateTable(organization);
-//         }
+           else if(categoryName.getText().length()>25) {
+             JOptionPane.showMessageDialog(null,"Please do not exceed the name by 25 characters !!!");
+         }
+           else if(categoryDescription.getText().isEmpty()) {
+             JOptionPane.showMessageDialog(null,"Please enter Category Description !!!");
+         }
+        else{
+Category item = new Category(Integer.valueOf(categoryID.getText()),categoryName.getText(),categoryDescription.getText());
+CategoryInventory cm = new CategoryInventory();
+             cm.addItem(item);
+//             ph.setCmenu(cm);
+             populateCategory();
+             categoryID.setText("");
+        categoryName.setText("");
+        categoryDescription.setText("");
+           }
     }//GEN-LAST:event_addCategoryActionPerformed
 
     private void categoryIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryIDActionPerformed

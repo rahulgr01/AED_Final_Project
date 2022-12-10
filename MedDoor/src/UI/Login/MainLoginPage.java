@@ -7,7 +7,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UI.Diagnostics.PharmacyAdmin;
+import UI.PharmacyAdmin.PharmacyAdmin;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;

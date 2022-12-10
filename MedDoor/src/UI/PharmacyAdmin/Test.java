@@ -1,5 +1,5 @@
 
-package UI.Diagnostics;
+package UI.PharmacyAdmin;
 
 
 import UI.Components.TableCustom;
@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class LabAdmin extends javax.swing.JFrame {
+public class Test extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
-    public LabAdmin() {
+    public Test() {
         initComponents();
      
     }
@@ -605,9 +605,9 @@ public class LabAdmin extends javax.swing.JFrame {
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            LabAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            Test.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            LabAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            Test.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -738,12 +738,12 @@ public class LabAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_manageSupplierMouseClicked
 
     private void manageSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseEntered
-        changecolor(manageMedicine, new Color(3,138,255));
+        changecolor(manageSupplier, new Color(3,138,255));
         changecolor(side5, new Color(190, 224, 236));
     }//GEN-LAST:event_manageSupplierMouseEntered
 
     private void manageSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseExited
-        changecolor(manageMedicine, new Color(0,91,149));
+        changecolor(manageSupplier, new Color(0,91,149));
         changecolor(side5, new Color(0,91,149));
     }//GEN-LAST:event_manageSupplierMouseExited
 
@@ -764,18 +764,14 @@ public class LabAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LabAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LabAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LabAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LabAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Test.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -784,7 +780,7 @@ public class LabAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LabAdmin().setVisible(true);
+                new Test().setVisible(true);
             }
         });
     }

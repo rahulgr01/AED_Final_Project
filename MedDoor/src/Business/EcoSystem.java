@@ -6,7 +6,7 @@ package Business;
 
 import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Role.DiagnosticAdminRole;
+import Business.Role.ParmacyAdminRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class EcoSystem extends Organization {
       @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList=new ArrayList<Role>();
-        roleList.add(new DiagnosticAdminRole());
+        roleList.add(new ParmacyAdminRole());
         return roleList;
     }
     public boolean isUserUnique(String username) {
