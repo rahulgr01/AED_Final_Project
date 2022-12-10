@@ -1336,19 +1336,15 @@
                           <Component id="cEntCreateButton" min="-2" pref="184" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="cEntPassword" max="32767" attributes="0"/>
-                              <Component id="cEntUsername" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cEntName" max="32767" attributes="0"/>
+                              <Component id="cEntPassword" alignment="1" max="32767" attributes="0"/>
+                              <Component id="cEntUsername" alignment="1" max="32767" attributes="0"/>
                               <Component id="cEntEEname" alignment="0" pref="379" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="cEntName" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
