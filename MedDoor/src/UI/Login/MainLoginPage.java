@@ -392,6 +392,7 @@ private Animator animatorLogin;
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
 //        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+dispose();
     }//GEN-LAST:event_closeMouseClicked
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
