@@ -10,6 +10,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import UI.VolunteerAdmin.VolunteerAdmin;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,7 +19,7 @@ import UI.VolunteerAdmin.VolunteerAdmin;
 public class VolunteerAdminRole extends Role{
 
     @Override
-    public void createWorkArea(UserAccount account, 
+    public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
