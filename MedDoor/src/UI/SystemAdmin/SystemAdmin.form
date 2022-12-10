@@ -1393,19 +1393,15 @@
                           <Component id="cEntCreateButton" min="-2" pref="184" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="182" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="cEntPassword" max="32767" attributes="0"/>
-                              <Component id="cEntUsername" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cEntName" max="32767" attributes="0"/>
+                              <Component id="cEntPassword" alignment="1" max="32767" attributes="0"/>
+                              <Component id="cEntUsername" alignment="1" max="32767" attributes="0"/>
                               <Component id="cEntEEname" alignment="0" pref="379" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="cEntName" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1517,9 +1513,17 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" alignment="1" pref="561" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                          <Component id="combobox4" min="-2" pref="219" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                                  <Component id="vSEnterprise" min="-2" pref="219" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="209" max="-2" attributes="0"/>
+                                  <Component id="button2" min="-2" pref="105" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1528,15 +1532,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="combobox4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="142" max="32767" attributes="0"/>
+                          <Component id="vSEnterprise" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="button2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="81" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="UI.Components.Combobox" name="combobox4">
+                <Component class="UI.Components.Combobox" name="vSEnterprise">
                   <Properties>
                     <Property name="labeText" type="java.lang.String" value="Enterprise"/>
                   </Properties>
@@ -1548,23 +1554,17 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable1">
+                    <Component class="javax.swing.JTable" name="vSEntepriseT">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="10">
+                          <Table columnCount="3" rowCount="10">
                             <Column editable="false" title="Organization" type="java.lang.String"/>
                             <Column editable="false" title="Employee Name" type="java.lang.String"/>
                             <Column editable="false" title="Role" type="java.lang.String"/>
-                            <Column editable="false" title="Community" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -1589,6 +1589,14 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="UI.Components.Button" name="button2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="View Data"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button2ActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
           </SubComponents>

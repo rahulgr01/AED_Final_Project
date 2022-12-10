@@ -15,6 +15,7 @@ import Business.Role.HospitalAdminRole;
 import Business.Role.InsuranceAdminRole;
 import Business.Role.VolunteerAdminRole;
 import Business.UserAccount.UserAccount;
+import UI.Components.Combobox;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import com.model.Validation;
@@ -76,14 +77,36 @@ public class SystemAdmin extends javax.swing.JFrame {
         }
     }
     
-    private void populateEnterpriseName(Network network){
-        cEntName.removeAllItems();
+    private void populateEnterpriseName(Network network, Combobox comboBox){
+        comboBox.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            cEntName.addItem(enterprise);
+            comboBox.addItem(enterprise);
         }
         
     }
+    
+    private void populateHouseTable(Enterprise selectedEnterprise) {
+        try{
+        DefaultTableModel model = (DefaultTableModel) vSEntepriseT.getModel();
+
+        model.setRowCount(0);
+            for (Organization org : selectedEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                for(UserAccount user : org.getUserAccountDirectory().getUserAccountList()){
+                Object[] row = new Object[3];
+                row[0] = org.getName();
+                row[1] = user.getEmployee().getName();
+                row[2] = user.getRole().toString();
+                model.addRow(row);
+                }
+            }
+        }catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+    }
+     
+    
     
      private void populateHouseTable(Community selectedCommunity) {
         try{
@@ -239,9 +262,10 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntPassword = new UI.Components.MyPasswordFieldLogin();
         viewSystemTab = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        combobox4 = new UI.Components.Combobox();
+        vSEnterprise = new UI.Components.Combobox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        vSEntepriseT = new javax.swing.JTable();
+        button2 = new UI.Components.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1145,17 +1169,14 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(182, 182, 182))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cEntPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntEEname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
-                .addGap(89, 89, 89))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(93, 93, 93)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cEntPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cEntUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cEntEEname, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                .addGap(89, 89, 89))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1188,30 +1209,30 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(217, 241, 255));
 
-        combobox4.setLabeText("Enterprise");
+        vSEnterprise.setLabeText("Enterprise");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        vSEntepriseT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Organization", "Employee Name", "Role", "Community"
+                "Organization", "Employee Name", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1222,7 +1243,14 @@ public class SystemAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(vSEntepriseT);
+
+        button2.setText("View Data");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1230,16 +1258,23 @@ public class SystemAdmin extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1599,10 +1634,10 @@ public class SystemAdmin extends javax.swing.JFrame {
                 populateEnterprise();
                 break;
             case 2:
-                populateEnterpriseName(network);
+                populateEnterpriseName(network, cEntName);
                 break;
                 case 3:
-                
+                populateEnterpriseName(network, vSEnterprise);
                 break;
             default:
                 throw new AssertionError();
@@ -1717,6 +1752,14 @@ public class SystemAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addTenantN1ActionPerformed
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+        
+         Enterprise enterprise = (Enterprise) vSEnterprise.getSelectedItem();
+         
+        
+    }//GEN-LAST:event_button2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1768,6 +1811,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.Button addTenantN;
     private UI.Components.Button addTenantN1;
     private UI.Components.Button button1;
+    private UI.Components.Button button2;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1778,7 +1822,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyPasswordFieldLogin cEntPassword;
     private UI.Components.MyTextFieldLogin cEntUsername;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox4;
     private javax.swing.JPanel createEnt;
     private javax.swing.JPanel createEntAdminTab;
     private UI.Components.Button createEnterpriseButton;
@@ -1803,7 +1846,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageCategoryIcon;
@@ -1833,6 +1875,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin tenantEmail;
     private UI.Components.MyTextFieldLogin tenantName;
     private javax.swing.JTable tenantsTable;
+    private javax.swing.JTable vSEntepriseT;
+    private UI.Components.Combobox vSEnterprise;
     private javax.swing.JPanel viewSystem;
     private javax.swing.JPanel viewSystemTab;
     // End of variables declaration//GEN-END:variables
