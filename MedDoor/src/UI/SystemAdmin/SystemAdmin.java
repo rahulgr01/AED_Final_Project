@@ -1009,6 +1009,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntCreateButton.setText("Create Admin");
         cEntCreateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cEntCreateButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cEntCreateButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cEntCreateButtonMouseEntered(evt);
             }
@@ -1040,10 +1043,13 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cEntPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cEntUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cEntEEname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
                 .addGap(89, 89, 89))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1534,6 +1540,10 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
         JOptionPane.showMessageDialog(this, "House Added!");
     }//GEN-LAST:event_addHouseActionPerformed
+
+    private void cEntCreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cEntCreateButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cEntCreateButtonMouseClicked
 
     /**
      * @param args the command line arguments

@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -94,19 +95,19 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        pharmacyStaistics = new javax.swing.JPanel();
+        svolunteerDashboard = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        manageSurveyTask = new javax.swing.JPanel();
+        svolunteerViewTask = new javax.swing.JPanel();
         side7 = new javax.swing.JPanel();
         manageMedicinelbl2 = new javax.swing.JLabel();
         manageMedicineIcon2 = new javax.swing.JLabel();
-        manageSupplier = new javax.swing.JPanel();
+        svolunteerTaskUpdate = new javax.swing.JPanel();
         side5 = new javax.swing.JPanel();
         manageSupplierlbl = new javax.swing.JLabel();
         manageSupplierIcon = new javax.swing.JLabel();
-        pharmacyAdmin = new javax.swing.JTabbedPane();
+        svolunteer = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         viewSurveyTask = new javax.swing.JPanel();
@@ -116,7 +117,6 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         button4 = new UI.Components.Button();
         updateSurveyTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
-        combobox2 = new UI.Components.Combobox();
         combobox9 = new UI.Components.Combobox();
         myTextFieldLogin6 = new UI.Components.MyTextFieldLogin();
         myTextFieldLogin9 = new UI.Components.MyTextFieldLogin();
@@ -130,6 +130,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         button1 = new UI.Components.Button();
         combobox12 = new UI.Components.Combobox();
+        combobox1 = new UI.Components.Combobox();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -323,17 +324,17 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        pharmacyStaistics.setBackground(new java.awt.Color(0, 91, 149));
-        pharmacyStaistics.setPreferredSize(new java.awt.Dimension(220, 50));
-        pharmacyStaistics.addMouseListener(new java.awt.event.MouseAdapter() {
+        svolunteerDashboard.setBackground(new java.awt.Color(0, 91, 149));
+        svolunteerDashboard.setPreferredSize(new java.awt.Dimension(220, 50));
+        svolunteerDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseClicked(evt);
+                svolunteerDashboardMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseEntered(evt);
+                svolunteerDashboardMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseExited(evt);
+                svolunteerDashboardMouseExited(evt);
             }
         });
 
@@ -359,11 +360,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout pharmacyStaisticsLayout = new javax.swing.GroupLayout(pharmacyStaistics);
-        pharmacyStaistics.setLayout(pharmacyStaisticsLayout);
-        pharmacyStaisticsLayout.setHorizontalGroup(
-            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pharmacyStaisticsLayout.createSequentialGroup()
+        javax.swing.GroupLayout svolunteerDashboardLayout = new javax.swing.GroupLayout(svolunteerDashboard);
+        svolunteerDashboard.setLayout(svolunteerDashboardLayout);
+        svolunteerDashboardLayout.setHorizontalGroup(
+            svolunteerDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(svolunteerDashboardLayout.createSequentialGroup()
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,9 +372,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        pharmacyStaisticsLayout.setVerticalGroup(
-            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyStaisticsLayout.createSequentialGroup()
+        svolunteerDashboardLayout.setVerticalGroup(
+            svolunteerDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, svolunteerDashboardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -381,17 +382,17 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageSurveyTask.setBackground(new java.awt.Color(0, 91, 149));
-        manageSurveyTask.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageSurveyTask.addMouseListener(new java.awt.event.MouseAdapter() {
+        svolunteerViewTask.setBackground(new java.awt.Color(0, 91, 149));
+        svolunteerViewTask.setPreferredSize(new java.awt.Dimension(220, 50));
+        svolunteerViewTask.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageSurveyTaskMouseClicked(evt);
+                svolunteerViewTaskMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageSurveyTaskMouseEntered(evt);
+                svolunteerViewTaskMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageSurveyTaskMouseExited(evt);
+                svolunteerViewTaskMouseExited(evt);
             }
         });
 
@@ -417,38 +418,41 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         manageMedicineIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageMedicineIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageSurveyTaskLayout = new javax.swing.GroupLayout(manageSurveyTask);
-        manageSurveyTask.setLayout(manageSurveyTaskLayout);
-        manageSurveyTaskLayout.setHorizontalGroup(
-            manageSurveyTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageSurveyTaskLayout.createSequentialGroup()
+        javax.swing.GroupLayout svolunteerViewTaskLayout = new javax.swing.GroupLayout(svolunteerViewTask);
+        svolunteerViewTask.setLayout(svolunteerViewTaskLayout);
+        svolunteerViewTaskLayout.setHorizontalGroup(
+            svolunteerViewTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(svolunteerViewTaskLayout.createSequentialGroup()
                 .addComponent(side7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        manageSurveyTaskLayout.setVerticalGroup(
-            manageSurveyTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageSurveyTaskLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        svolunteerViewTaskLayout.setVerticalGroup(
+            svolunteerViewTaskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-            .addComponent(side7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, svolunteerViewTaskLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(side7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(svolunteerViewTaskLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        manageSupplier.setBackground(new java.awt.Color(0, 91, 149));
-        manageSupplier.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+        svolunteerTaskUpdate.setBackground(new java.awt.Color(0, 91, 149));
+        svolunteerTaskUpdate.setPreferredSize(new java.awt.Dimension(220, 50));
+        svolunteerTaskUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseClicked(evt);
+                svolunteerTaskUpdateMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseEntered(evt);
+                svolunteerTaskUpdateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseExited(evt);
+                svolunteerTaskUpdateMouseExited(evt);
             }
         });
 
@@ -474,11 +478,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         manageSupplierIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/supplier_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageSupplierLayout = new javax.swing.GroupLayout(manageSupplier);
-        manageSupplier.setLayout(manageSupplierLayout);
-        manageSupplierLayout.setHorizontalGroup(
-            manageSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageSupplierLayout.createSequentialGroup()
+        javax.swing.GroupLayout svolunteerTaskUpdateLayout = new javax.swing.GroupLayout(svolunteerTaskUpdate);
+        svolunteerTaskUpdate.setLayout(svolunteerTaskUpdateLayout);
+        svolunteerTaskUpdateLayout.setHorizontalGroup(
+            svolunteerTaskUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(svolunteerTaskUpdateLayout.createSequentialGroup()
                 .addComponent(side5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageSupplierIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,9 +490,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addComponent(manageSupplierlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        manageSupplierLayout.setVerticalGroup(
-            manageSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageSupplierLayout.createSequentialGroup()
+        svolunteerTaskUpdateLayout.setVerticalGroup(
+            svolunteerTaskUpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, svolunteerTaskUpdateLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(manageSupplierlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -500,23 +504,19 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(manageSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(manageSurveyTask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(svolunteerDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(svolunteerTaskUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(svolunteerViewTask, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
-                .addComponent(manageSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addGap(75, 75, 75)
-                    .addComponent(manageSurveyTask, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(645, Short.MAX_VALUE)))
+                .addComponent(svolunteerDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(svolunteerViewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(svolunteerTaskUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -528,7 +528,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         dashboard.setBackground(new java.awt.Color(255, 255, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -543,7 +543,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Dashboard", dashboard);
+        svolunteer.addTab("Dashboard", dashboard);
+
+        jPanel16.setBackground(new java.awt.Color(217, 241, 255));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -595,9 +597,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pharmacyAdmin.addTab("View Task", viewSurveyTask);
+        svolunteer.addTab("View Task", viewSurveyTask);
 
-        combobox2.setLabeText("Date");
+        jPanel22.setBackground(new java.awt.Color(217, 241, 255));
 
         combobox9.setLabeText("Task");
 
@@ -609,7 +611,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         myTextFieldLogin11.setLabelText("Blood group");
 
-        myTextFieldLogin12.setLabelText("Hight");
+        myTextFieldLogin12.setLabelText("Height");
 
         myTextFieldLogin13.setLabelText("Heart Rate");
 
@@ -621,9 +623,29 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         jLabel6.setText("Tenant health status for past 2 week");
 
+        button1.setBackground(new java.awt.Color(0, 91, 149));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Complete Survey");
+        button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                button1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button1MouseExited(evt);
+            }
+        });
 
         combobox12.setLabeText("Tenant");
+
+        combobox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combobox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -644,7 +666,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
                             .addComponent(combobox11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel22Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -659,10 +681,10 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(206, 206, 206)
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combobox12, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combobox9, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(combobox12, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(combobox9, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(combobox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
@@ -671,13 +693,13 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combobox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combobox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(myTextFieldLogin12, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(myTextFieldLogin10, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -693,13 +715,13 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combobox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combobox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(56, 56, 56)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout updateSurveyTaskLayout = new javax.swing.GroupLayout(updateSurveyTask);
@@ -713,9 +735,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pharmacyAdmin.addTab("Task Update", updateSurveyTask);
+        svolunteer.addTab("Task Update", updateSurveyTask);
 
-        getContentPane().add(pharmacyAdmin, java.awt.BorderLayout.CENTER);
+        getContentPane().add(svolunteer, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -781,21 +803,21 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
-         pharmacyAdmin.setSelectedIndex(0);
-         changecolor(pharmacyStaistics, new Color(3,138,255));
+    private void svolunteerDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerDashboardMouseClicked
+         svolunteer.setSelectedIndex(0);
+         changecolor(svolunteerDashboard, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyStaisticsMouseClicked
+    }//GEN-LAST:event_svolunteerDashboardMouseClicked
 
-    private void pharmacyStaisticsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseEntered
-        changecolor(pharmacyStaistics, new Color(3,138,255));
+    private void svolunteerDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerDashboardMouseEntered
+        changecolor(svolunteerDashboard, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyStaisticsMouseEntered
+    }//GEN-LAST:event_svolunteerDashboardMouseEntered
 
-    private void pharmacyStaisticsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseExited
-        changecolor(pharmacyStaistics, new Color(0,91,149));
+    private void svolunteerDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerDashboardMouseExited
+        changecolor(svolunteerDashboard, new Color(0,91,149));
         changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_pharmacyStaisticsMouseExited
+    }//GEN-LAST:event_svolunteerDashboardMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
@@ -810,33 +832,55 @@ public class SurveyVolunteer extends javax.swing.JFrame {
            parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked
-         pharmacyAdmin.setSelectedIndex(4);
-          changecolor(manageSupplier, new Color(3,138,255));
+    private void svolunteerTaskUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerTaskUpdateMouseClicked
+         svolunteer.setSelectedIndex(2);
+          changecolor(svolunteerTaskUpdate, new Color(3,138,255));
         changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageSupplierMouseClicked
+    }//GEN-LAST:event_svolunteerTaskUpdateMouseClicked
 
-    private void manageSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseEntered
-        changecolor(manageSupplier, new Color(3,138,255));
+    private void svolunteerTaskUpdateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerTaskUpdateMouseEntered
+        changecolor(svolunteerTaskUpdate, new Color(3,138,255));
         changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageSupplierMouseEntered
+    }//GEN-LAST:event_svolunteerTaskUpdateMouseEntered
 
-    private void manageSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseExited
-        changecolor(manageSupplier, new Color(0,91,149));
+    private void svolunteerTaskUpdateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerTaskUpdateMouseExited
+        changecolor(svolunteerTaskUpdate, new Color(0,91,149));
         changecolor(side5, new Color(0,91,149));
-    }//GEN-LAST:event_manageSupplierMouseExited
+    }//GEN-LAST:event_svolunteerTaskUpdateMouseExited
 
-    private void manageSurveyTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSurveyTaskMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageSurveyTaskMouseClicked
+    private void svolunteerViewTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerViewTaskMouseClicked
+         svolunteer.setSelectedIndex(1);
+          changecolor(svolunteerViewTask, new Color(3,138,255));
+        changecolor(side5, new Color(190, 224, 236));
+    }//GEN-LAST:event_svolunteerViewTaskMouseClicked
 
-    private void manageSurveyTaskMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSurveyTaskMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageSurveyTaskMouseEntered
+    private void svolunteerViewTaskMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerViewTaskMouseEntered
+       changecolor(svolunteerViewTask, new Color(3,138,255));
+        changecolor(side5, new Color(190, 224, 236));
+    }//GEN-LAST:event_svolunteerViewTaskMouseEntered
 
-    private void manageSurveyTaskMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSurveyTaskMouseExited
+    private void svolunteerViewTaskMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerViewTaskMouseExited
+       changecolor(svolunteerViewTask, new Color(0,91,149));
+        changecolor(side5, new Color(0,91,149));
+    }//GEN-LAST:event_svolunteerViewTaskMouseExited
+
+    private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_manageSurveyTaskMouseExited
+    }//GEN-LAST:event_combobox1ActionPerformed
+public void changecolorB(JButton hover, Color rand) {
+        hover.setBackground(rand);
+    }
+    private void button1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseClicked
+        
+    }//GEN-LAST:event_button1MouseClicked
+
+    private void button1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseEntered
+       changecolorB(button1, new Color(3,138,255));
+    }//GEN-LAST:event_button1MouseEntered
+
+    private void button1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button1MouseExited
 
     /**
      * @param args the command line arguments
@@ -883,10 +927,10 @@ public class SurveyVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
+    private UI.Components.Combobox combobox1;
     private UI.Components.Combobox combobox10;
     private UI.Components.Combobox combobox11;
     private UI.Components.Combobox combobox12;
-    private UI.Components.Combobox combobox2;
     private UI.Components.Combobox combobox9;
     private javax.swing.JPanel dashboard;
     private javax.swing.JPanel header;
@@ -904,10 +948,8 @@ public class SurveyVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageMedicineIcon2;
     private javax.swing.JLabel manageMedicinelbl2;
-    private javax.swing.JPanel manageSupplier;
     private javax.swing.JLabel manageSupplierIcon;
     private javax.swing.JLabel manageSupplierlbl;
-    private javax.swing.JPanel manageSurveyTask;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
@@ -918,14 +960,16 @@ public class SurveyVolunteer extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin myTextFieldLogin13;
     private UI.Components.MyTextFieldLogin myTextFieldLogin6;
     private UI.Components.MyTextFieldLogin myTextFieldLogin9;
-    private javax.swing.JTabbedPane pharmacyAdmin;
-    private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side5;
     private javax.swing.JPanel side7;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
+    private javax.swing.JTabbedPane svolunteer;
+    private javax.swing.JPanel svolunteerDashboard;
+    private javax.swing.JPanel svolunteerTaskUpdate;
+    private javax.swing.JPanel svolunteerViewTask;
     private javax.swing.JPanel updateSurveyTask;
     private javax.swing.JPanel viewSurveyTask;
     // End of variables declaration//GEN-END:variables
