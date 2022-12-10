@@ -4,6 +4,8 @@
  */
 package Business.Hospital;
 
+import Business.Community.Community;
+
 /**
  *
  * @author Gursheen Kaur
