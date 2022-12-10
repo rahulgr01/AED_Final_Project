@@ -1,8 +1,9 @@
 
-package UI.PharmacyAdmin;
+package UI.DiagnosticAdmin;
 
 
 
+import UI.PharmacyAdmin.*;
 import Business.Pharmacy.Category;
 import Business.Pharmacy.CategoryInventory;
 import Business.Pharmacy.Pharmacy;
@@ -25,7 +26,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-public class PharmacyAdmin extends javax.swing.JFrame {
+public class DiagnosticAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
@@ -35,7 +36,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     Organization organization;
     UserAccount account;
     Enterprise enterprise;
-    public PharmacyAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
+    public DiagnosticAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
 //        initListners();
        this.business = business;
@@ -1328,9 +1329,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            PharmacyAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            DiagnosticAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            PharmacyAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            DiagnosticAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);

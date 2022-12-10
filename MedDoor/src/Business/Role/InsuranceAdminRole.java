@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.InsuranceAdmin.InsuranceAdmin;
+import UI.PharmacyAdmin.PharmacyAdmin;
 
 
 /**
@@ -21,7 +22,7 @@ public class InsuranceAdminRole extends Role {
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new InsuranceAdmin(account,organization, enterprise, business).setVisible(true);
+         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){

@@ -14,16 +14,16 @@ import UI.PharmacyAdmin.PharmacyAdmin;
  *
  * @author Dell
  */
-public class LabAdminRole extends Role{
-      @Override
+public class SurveyVolunteer extends Role{
+     @Override
     public void createWorkArea(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-        new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){
-        return RoleType.LabAdminRole.getValue();
+        return RoleType.SurveyVolunteer.getValue();
     }
 }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Business.Role;
 
 import Business.EcoSystem;
@@ -11,10 +8,7 @@ import Business.UserAccount.UserAccount;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author ashikakalmady
- */
+
 public abstract class Role {
     
     public enum RoleType{
@@ -25,8 +19,7 @@ public abstract class Role {
         Staff("Staff"),
 //        Accountant("Accountant"),
         ClaimHandler("ClaimHandler"),
-        InsuranceAgent("InsuranceAgent"),
-        Phamacist("Phamacist"),
+        Pharmacist("Pharmacist"),
         LabAssistant("LabAssistant"),
         SurveyVolunteer("LabAssistant"),
         HomeCareVolunteer("HomeCareVolunteer"),
@@ -36,6 +29,7 @@ public abstract class Role {
         HospitalAdminRole("HospitalAdminRole"),
         VolunteerAdminRole("VolunteerAdminRole"),
         PharmacyAdminRole("PharmacyAdminRole"),
+        DiagnosticAdminRole("DiagnosticAdminRole"),
         LabAdminRole("LabAdminRole"),
         InsuranceAdminRole("InsuranceAdminRole");
         
