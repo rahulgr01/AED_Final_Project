@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.PharmacyAdmin.PharmacyAdmin;
 
 /**
  *
@@ -19,7 +20,7 @@ public class LabAdminRole extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new LabAdmin(account,organization, enterprise, business).setVisible(true);
+        new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){
