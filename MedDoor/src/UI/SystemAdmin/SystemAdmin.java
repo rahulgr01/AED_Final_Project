@@ -142,7 +142,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         manageMedicinelbl = new javax.swing.JLabel();
         manageMedicineIcon = new javax.swing.JLabel();
         sysAdminTab = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        manageNetworkTab = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         combobox1 = new UI.Components.Combobox();
@@ -176,7 +176,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntCreateButton = new UI.Components.Button();
         cEntEEname = new UI.Components.MyTextFieldLogin();
         cEntPassword = new UI.Components.MyPasswordFieldLogin();
-        jPanel7 = new javax.swing.JPanel();
+        viewSystemTab = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         combobox4 = new UI.Components.Combobox();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -629,7 +629,7 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        manageNetworkTab.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(217, 241, 255));
 
@@ -783,6 +783,11 @@ public class SystemAdmin extends javax.swing.JFrame {
                 addHouseMouseExited(evt);
             }
         });
+        addHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addHouseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -852,6 +857,8 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
+        genderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        genderCombo.setSelectedIndex(-1);
         genderCombo.setLabeText("Gender");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -859,16 +866,16 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 67, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(genderCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tenantName, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(tenantAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 67, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tenantEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
-                .addGap(0, 69, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tenantName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tenantContact, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -877,19 +884,19 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tenantName, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenantContact, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tenantName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
                 .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addGap(51, 51, 51))
         );
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
@@ -919,9 +926,9 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        manageNetworkTab.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        sysAdminTab.addTab("Manage Network", jPanel1);
+        sysAdminTab.addTab("Manage Network", manageNetworkTab);
 
         jPanel11.setBackground(new java.awt.Color(217, 241, 255));
 
@@ -1124,18 +1131,18 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout viewSystemTabLayout = new javax.swing.GroupLayout(viewSystemTab);
+        viewSystemTab.setLayout(viewSystemTabLayout);
+        viewSystemTabLayout.setHorizontalGroup(
+            viewSystemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        viewSystemTabLayout.setVerticalGroup(
+            viewSystemTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        sysAdminTab.addTab("View System", jPanel7);
+        sysAdminTab.addTab("View System", viewSystemTab);
 
         getContentPane().add(sysAdminTab, java.awt.BorderLayout.CENTER);
 
@@ -1220,7 +1227,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_manageNetworkMouseExited
 
     private void manageEnterpriseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageEnterpriseMouseClicked
-       sysAdminTab.setSelectedIndex(0);
+       sysAdminTab.setSelectedIndex(1);
          changecolor(manageEnterprise, new Color(3,138,255));
         changecolor(side2, new Color(190, 224, 236));
     }//GEN-LAST:event_manageEnterpriseMouseClicked
@@ -1253,7 +1260,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_enterpriseAdminMouseExited
 
     private void viewSystemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewSystemMouseClicked
-      sysAdminTab.setSelectedIndex(2);
+      sysAdminTab.setSelectedIndex(3);
          changecolor(viewSystem, new Color(3,138,255));
         changecolor(side4, new Color(190, 224, 236));
     }//GEN-LAST:event_viewSystemMouseClicked
@@ -1290,7 +1297,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tenantAgeActionPerformed
 
     private void addTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Tenant Added!");
     }//GEN-LAST:event_addTenantActionPerformed
 
     private void createEnterpriseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEnterpriseButtonActionPerformed
@@ -1320,6 +1327,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         String name = createEnterpriseName.getText();
         System.out.println(name);
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
+        JOptionPane.showMessageDialog(this, "Enterprise Added");
         createEnterpriseName.setText(null);
          }
     }//GEN-LAST:event_createEnterpriseButtonActionPerformed
@@ -1443,6 +1451,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
             }
         }
+         JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
         clearEnterprise();
     }//GEN-LAST:event_cEntCreateButtonActionPerformed
 
@@ -1459,6 +1468,9 @@ public class SystemAdmin extends javax.swing.JFrame {
                 break;
             case 2:
                 populateEnterpriseName(network);
+                break;
+                case 3:
+                
                 break;
             default:
                 throw new AssertionError();
@@ -1518,6 +1530,10 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable5MouseClicked
+
+    private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
+        JOptionPane.showMessageDialog(this, "House Added!");
+    }//GEN-LAST:event_addHouseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1592,12 +1608,10 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin houseNumber;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1615,6 +1629,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel manageMedicineIcon;
     private javax.swing.JLabel manageMedicinelbl;
     private javax.swing.JPanel manageNetwork;
+    private javax.swing.JPanel manageNetworkTab;
     private javax.swing.JLabel managePharmacyIcon;
     private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JLabel max;
@@ -1634,5 +1649,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin tenantEmail;
     private UI.Components.MyTextFieldLogin tenantName;
     private javax.swing.JPanel viewSystem;
+    private javax.swing.JPanel viewSystemTab;
     // End of variables declaration//GEN-END:variables
 }
