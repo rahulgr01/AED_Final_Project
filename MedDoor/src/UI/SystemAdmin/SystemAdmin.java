@@ -3,8 +3,11 @@ package UI.SystemAdmin;
 
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.VolunteerAdminRole;
 import Business.UserAccount.UserAccount;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
@@ -22,15 +25,35 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
+    private EcoSystem system;
+    private UserAccount userAccount;
+    Enterprise enterprise;
+    Network network;
     public SystemAdmin(UserAccount account, 
-            Organization organization, 
             Enterprise enterprise, 
-            EcoSystem business) {
+            EcoSystem system) {
         initComponents();
-     
+        this.system = system; 
+        sysAdminTab.setSelectedIndex(0);
+        network = system.getNetworkList().get(0);
     }
     //Method to change panel color on hover
-
+    public void populateEnterprise() {
+        System.out.print("inside populate");
+        for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
+            createEnterpriseType.addItem(type);
+        }
+    }
+    
+    private void populateEnterpriseName(Network network){
+        cEntName.removeAllItems();
+        
+        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+            cEntName.addItem(enterprise);
+        }
+        
+    }
+    
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -92,7 +115,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         side2 = new javax.swing.JPanel();
         managePharmacylbl = new javax.swing.JLabel();
         managePharmacyIcon = new javax.swing.JLabel();
-        manageCategory = new javax.swing.JPanel();
+        createEnterpriseAdmin = new javax.swing.JPanel();
         side3 = new javax.swing.JPanel();
         manageCategorylbl = new javax.swing.JLabel();
         manageCategoryIcon = new javax.swing.JLabel();
@@ -104,7 +127,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         side5 = new javax.swing.JPanel();
         manageSupplierlbl = new javax.swing.JLabel();
         manageSupplierIcon = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        sysAdminTab = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -127,6 +150,24 @@ public class SystemAdmin extends javax.swing.JFrame {
         myTextFieldLogin7 = new UI.Components.MyTextFieldLogin();
         combobox2 = new UI.Components.Combobox();
         button3 = new UI.Components.Button();
+        createEnt = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        createEnterpriseName = new UI.Components.MyTextFieldLogin();
+        createEnterpriseType = new UI.Components.Combobox();
+        createEnterpriseButton = new UI.Components.Button();
+        createEntAdminTab = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        cEntPassword = new UI.Components.MyTextFieldLogin();
+        cEntUsername = new UI.Components.MyTextFieldLogin();
+        cEntName = new UI.Components.Combobox();
+        cEntCreateButton = new UI.Components.Button();
+        cEntEEname = new UI.Components.MyTextFieldLogin();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        combobox4 = new UI.Components.Combobox();
+        combobox5 = new UI.Components.Combobox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -398,7 +439,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         managePharmacylbl.setBackground(new java.awt.Color(51, 51, 51));
         managePharmacylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         managePharmacylbl.setForeground(new java.awt.Color(255, 255, 255));
-        managePharmacylbl.setText("Manage Volunteer");
+        managePharmacylbl.setText("Manage Enterprise");
 
         managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/earth_care_40px.png"))); // NOI18N
@@ -425,17 +466,17 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageCategory.setBackground(new java.awt.Color(0, 91, 149));
-        manageCategory.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+        createEnterpriseAdmin.setBackground(new java.awt.Color(0, 91, 149));
+        createEnterpriseAdmin.setPreferredSize(new java.awt.Dimension(220, 50));
+        createEnterpriseAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageCategoryMouseClicked(evt);
+                createEnterpriseAdminMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageCategoryMouseEntered(evt);
+                createEnterpriseAdminMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageCategoryMouseExited(evt);
+                createEnterpriseAdminMouseExited(evt);
             }
         });
 
@@ -456,16 +497,16 @@ public class SystemAdmin extends javax.swing.JFrame {
         manageCategorylbl.setBackground(new java.awt.Color(51, 51, 51));
         manageCategorylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageCategorylbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageCategorylbl.setText("Manage Hospital");
+        manageCategorylbl.setText("Manage Enterprise Admin");
 
         manageCategoryIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Hospital Bed_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageCategoryLayout = new javax.swing.GroupLayout(manageCategory);
-        manageCategory.setLayout(manageCategoryLayout);
-        manageCategoryLayout.setHorizontalGroup(
-            manageCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageCategoryLayout.createSequentialGroup()
+        javax.swing.GroupLayout createEnterpriseAdminLayout = new javax.swing.GroupLayout(createEnterpriseAdmin);
+        createEnterpriseAdmin.setLayout(createEnterpriseAdminLayout);
+        createEnterpriseAdminLayout.setHorizontalGroup(
+            createEnterpriseAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createEnterpriseAdminLayout.createSequentialGroup()
                 .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageCategoryIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,9 +514,9 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(manageCategorylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        manageCategoryLayout.setVerticalGroup(
-            manageCategoryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageCategoryLayout.createSequentialGroup()
+        createEnterpriseAdminLayout.setVerticalGroup(
+            createEnterpriseAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createEnterpriseAdminLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(manageCategorylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -514,7 +555,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         manageMedicinelbl.setBackground(new java.awt.Color(51, 51, 51));
         manageMedicinelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageMedicinelbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl.setText("Manage Diagnostics");
+        manageMedicinelbl.setText("View System");
 
         manageMedicineIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
@@ -605,7 +646,7 @@ public class SystemAdmin extends javax.swing.JFrame {
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(manageCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(createEnterpriseAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -616,7 +657,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(manageCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createEnterpriseAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -629,6 +670,12 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
+        sysAdminTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sysAdminTabMouseClicked(evt);
+            }
+        });
+
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(217, 241, 255));
@@ -636,6 +683,8 @@ public class SystemAdmin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BOSTON CITY SERVICE");
+
+        combobox1.setLabeText("Community");
 
         jTabbedPane2.setBackground(new java.awt.Color(96, 130, 182));
         jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
@@ -714,12 +763,10 @@ public class SystemAdmin extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(0, 129, Short.MAX_VALUE)
-                .addComponent(myTextFieldLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(myTextFieldLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 129, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -736,12 +783,12 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(myTextFieldLogin1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(42, 42, 42)
                     .addComponent(myTextFieldLogin2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(206, Short.MAX_VALUE)))
+                    .addContainerGap(249, Short.MAX_VALUE)))
         );
 
         jTabbedPane2.addTab("Add House", jPanel4);
@@ -799,7 +846,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(myTextFieldLogin5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(myTextFieldLogin7, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -835,9 +882,186 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane1.addTab("Manage Network", jPanel1);
+        sysAdminTab.addTab("Manage Network", jPanel1);
 
-        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        createEnterpriseName.setBackground(new java.awt.Color(245, 245, 245));
+        createEnterpriseName.setLabelText("Enterprise Name");
+        createEnterpriseName.setLineColor(new java.awt.Color(27, 152, 245));
+
+        createEnterpriseType.setLabeText("Enterprise Type");
+
+        createEnterpriseButton.setText("Create Admin");
+        createEnterpriseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createEnterpriseButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(createEnterpriseType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createEnterpriseName, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
+                .addGap(89, 89, 89))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(createEnterpriseType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(createEnterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(263, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout createEntLayout = new javax.swing.GroupLayout(createEnt);
+        createEnt.setLayout(createEntLayout);
+        createEntLayout.setHorizontalGroup(
+            createEntLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        createEntLayout.setVerticalGroup(
+            createEntLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sysAdminTab.addTab("Create Enterprise", createEnt);
+
+        cEntPassword.setBackground(new java.awt.Color(245, 245, 245));
+        cEntPassword.setLabelText("Password");
+        cEntPassword.setLineColor(new java.awt.Color(27, 152, 245));
+
+        cEntUsername.setBackground(new java.awt.Color(245, 245, 245));
+        cEntUsername.setLabelText("Username");
+        cEntUsername.setLineColor(new java.awt.Color(27, 152, 245));
+
+        cEntName.setLabeText("Enterprise");
+
+        cEntCreateButton.setText("Create Admin");
+        cEntCreateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cEntCreateButtonActionPerformed(evt);
+            }
+        });
+
+        cEntEEname.setBackground(new java.awt.Color(245, 245, 245));
+        cEntEEname.setLabelText("Name");
+        cEntEEname.setLineColor(new java.awt.Color(27, 152, 245));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cEntUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cEntPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(cEntEEname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                .addGap(89, 89, 89))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(182, 182, 182)
+                .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(cEntName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cEntUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cEntPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cEntEEname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout createEntAdminTabLayout = new javax.swing.GroupLayout(createEntAdminTab);
+        createEntAdminTab.setLayout(createEntAdminTabLayout);
+        createEntAdminTabLayout.setHorizontalGroup(
+            createEntAdminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        createEntAdminTabLayout.setVerticalGroup(
+            createEntAdminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sysAdminTab.addTab("Create Enterprise Admin", createEntAdminTab);
+
+        combobox4.setLabeText("Enterprise");
+
+        combobox5.setLabeText("Organizations");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(combobox5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(combobox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        sysAdminTab.addTab("View System", jPanel7);
+
+        getContentPane().add(sysAdminTab, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -933,19 +1157,22 @@ public class SystemAdmin extends javax.swing.JFrame {
         changecolor(side2, new Color(0,91,149));
     }//GEN-LAST:event_managePharmacyMouseExited
 
-    private void manageCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseClicked
+    private void createEnterpriseAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createEnterpriseAdminMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_manageCategoryMouseClicked
+       // 
+        sysAdminTab.setSelectedIndex(2);
+        
+    }//GEN-LAST:event_createEnterpriseAdminMouseClicked
 
-    private void manageCategoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseEntered
-      changecolor(manageCategory, new Color(3,138,255));
+    private void createEnterpriseAdminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createEnterpriseAdminMouseEntered
+      changecolor(createEnterpriseAdmin, new Color(3,138,255));
         changecolor(side3, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageCategoryMouseEntered
+    }//GEN-LAST:event_createEnterpriseAdminMouseEntered
 
-    private void manageCategoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseExited
-       changecolor(manageCategory, new Color(0,91,149));
+    private void createEnterpriseAdminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createEnterpriseAdminMouseExited
+       changecolor(createEnterpriseAdmin, new Color(0,91,149));
         changecolor(side3, new Color(0,91,149));
-    }//GEN-LAST:event_manageCategoryMouseExited
+    }//GEN-LAST:event_createEnterpriseAdminMouseExited
 
     private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
         // TODO add your handling code here:
@@ -999,6 +1226,66 @@ public class SystemAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button3ActionPerformed
 
+    private void createEnterpriseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEnterpriseButtonActionPerformed
+        // TODO add your handling code here:
+        
+        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) createEnterpriseType.getSelectedItem();
+
+        if (network == null || type == null) {
+            JOptionPane.showMessageDialog(null, "Invalid Input!");
+            return;
+        }
+        
+        String name = createEnterpriseName.getText();
+        System.out.println(name);
+        Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
+        
+    }//GEN-LAST:event_createEnterpriseButtonActionPerformed
+
+    private void cEntCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEntCreateButtonActionPerformed
+        // TODO add your handling code here:
+         Enterprise enterprise = (Enterprise) cEntName.getSelectedItem();
+
+        String username = cEntUsername.getText();
+        String password = cEntPassword.getText();
+        String name = cEntEEname.getText();
+
+        Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
+        if (EcoSystem.isUserUnique(username)) {
+            UserAccount account = null;
+            if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Volunteer) {
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdminRole());
+            } 
+            
+//            else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Diagnostics) {
+//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new GovernmentAdmin());
+//            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital) {
+//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdmin());
+//            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Insurance) {
+//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
+//      
+        }
+    }//GEN-LAST:event_cEntCreateButtonActionPerformed
+
+    private void sysAdminTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sysAdminTabMouseClicked
+        // TODO add your handling code here:
+        int index = sysAdminTab.getSelectedIndex();
+       
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                populateEnterprise();
+                break;
+            case 2:
+                populateEnterpriseName(network);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_sysAdminTabMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1050,27 +1337,44 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
+    private UI.Components.Button cEntCreateButton;
+    private UI.Components.MyTextFieldLogin cEntEEname;
+    private UI.Components.Combobox cEntName;
+    private UI.Components.MyTextFieldLogin cEntPassword;
+    private UI.Components.MyTextFieldLogin cEntUsername;
     private javax.swing.JLabel close;
     private UI.Components.Combobox combobox1;
     private UI.Components.Combobox combobox2;
+    private UI.Components.Combobox combobox4;
+    private UI.Components.Combobox combobox5;
+    private javax.swing.JPanel createEnt;
+    private javax.swing.JPanel createEntAdminTab;
+    private javax.swing.JPanel createEnterpriseAdmin;
+    private UI.Components.Button createEnterpriseButton;
+    private UI.Components.MyTextFieldLogin createEnterpriseName;
+    private UI.Components.Combobox createEnterpriseType;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
-    private javax.swing.JPanel manageCategory;
     private javax.swing.JLabel manageCategoryIcon;
     private javax.swing.JLabel manageCategorylbl;
     private javax.swing.JPanel manageMedicine;
@@ -1101,5 +1405,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel side5;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
+    private javax.swing.JTabbedPane sysAdminTab;
     // End of variables declaration//GEN-END:variables
 }
