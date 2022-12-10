@@ -88,23 +88,19 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        pharmacyStaistics = new javax.swing.JPanel();
+        hcvDashboard = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        manageVolunteers = new javax.swing.JPanel();
-        side6 = new javax.swing.JPanel();
-        manageMedicinelbl1 = new javax.swing.JLabel();
-        manageMedicineIcon1 = new javax.swing.JLabel();
-        manageVolunteers1 = new javax.swing.JPanel();
-        side7 = new javax.swing.JPanel();
-        manageMedicinelbl2 = new javax.swing.JLabel();
-        manageMedicineIcon2 = new javax.swing.JLabel();
-        manageSupplier = new javax.swing.JPanel();
-        side5 = new javax.swing.JPanel();
-        manageSupplierlbl = new javax.swing.JLabel();
-        manageSupplierIcon = new javax.swing.JLabel();
-        pharmacyAdmin = new javax.swing.JTabbedPane();
+        hcvTaskA = new javax.swing.JPanel();
+        side2 = new javax.swing.JPanel();
+        statisticslbl1 = new javax.swing.JLabel();
+        statisticsimg1 = new javax.swing.JLabel();
+        hcvTaskH = new javax.swing.JPanel();
+        side3 = new javax.swing.JPanel();
+        statisticslbl2 = new javax.swing.JLabel();
+        statisticsimg2 = new javax.swing.JLabel();
+        hcv = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         addVolunteer = new javax.swing.JPanel();
@@ -315,17 +311,17 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        pharmacyStaistics.setBackground(new java.awt.Color(0, 91, 149));
-        pharmacyStaistics.setPreferredSize(new java.awt.Dimension(220, 50));
-        pharmacyStaistics.addMouseListener(new java.awt.event.MouseAdapter() {
+        hcvDashboard.setBackground(new java.awt.Color(0, 91, 149));
+        hcvDashboard.setPreferredSize(new java.awt.Dimension(220, 50));
+        hcvDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseClicked(evt);
+                hcvDashboardMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseEntered(evt);
+                hcvDashboardMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pharmacyStaisticsMouseExited(evt);
+                hcvDashboardMouseExited(evt);
             }
         });
 
@@ -351,11 +347,11 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout pharmacyStaisticsLayout = new javax.swing.GroupLayout(pharmacyStaistics);
-        pharmacyStaistics.setLayout(pharmacyStaisticsLayout);
-        pharmacyStaisticsLayout.setHorizontalGroup(
-            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pharmacyStaisticsLayout.createSequentialGroup()
+        javax.swing.GroupLayout hcvDashboardLayout = new javax.swing.GroupLayout(hcvDashboard);
+        hcvDashboard.setLayout(hcvDashboardLayout);
+        hcvDashboardLayout.setHorizontalGroup(
+            hcvDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hcvDashboardLayout.createSequentialGroup()
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,9 +359,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        pharmacyStaisticsLayout.setVerticalGroup(
-            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyStaisticsLayout.createSequentialGroup()
+        hcvDashboardLayout.setVerticalGroup(
+            hcvDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hcvDashboardLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -373,212 +369,147 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageVolunteers.setBackground(new java.awt.Color(0, 91, 149));
-        manageVolunteers.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageVolunteers.addMouseListener(new java.awt.event.MouseAdapter() {
+        hcvTaskA.setBackground(new java.awt.Color(0, 91, 149));
+        hcvTaskA.setPreferredSize(new java.awt.Dimension(220, 50));
+        hcvTaskA.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseClicked(evt);
+                hcvTaskAMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseEntered(evt);
+                hcvTaskAMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseExited(evt);
+                hcvTaskAMouseExited(evt);
             }
         });
 
-        side6.setBackground(new java.awt.Color(0, 91, 149));
-        side6.setPreferredSize(new java.awt.Dimension(5, 50));
+        side2.setBackground(new java.awt.Color(0, 91, 149));
+        side2.setPreferredSize(new java.awt.Dimension(5, 50));
 
-        javax.swing.GroupLayout side6Layout = new javax.swing.GroupLayout(side6);
-        side6.setLayout(side6Layout);
-        side6Layout.setHorizontalGroup(
-            side6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
+        side2.setLayout(side2Layout);
+        side2Layout.setHorizontalGroup(
+            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 5, Short.MAX_VALUE)
         );
-        side6Layout.setVerticalGroup(
-            side6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        side2Layout.setVerticalGroup(
+            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        manageMedicinelbl1.setBackground(new java.awt.Color(51, 51, 51));
-        manageMedicinelbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageMedicinelbl1.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl1.setText("Manage Patient");
+        statisticslbl1.setBackground(new java.awt.Color(51, 51, 51));
+        statisticslbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        statisticslbl1.setForeground(new java.awt.Color(255, 255, 255));
+        statisticslbl1.setText("Hospital Tasks");
 
-        manageMedicineIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
+        statisticsimg1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        statisticsimg1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/task_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageVolunteersLayout = new javax.swing.GroupLayout(manageVolunteers);
-        manageVolunteers.setLayout(manageVolunteersLayout);
-        manageVolunteersLayout.setHorizontalGroup(
-            manageVolunteersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageVolunteersLayout.createSequentialGroup()
-                .addComponent(side6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout hcvTaskALayout = new javax.swing.GroupLayout(hcvTaskA);
+        hcvTaskA.setLayout(hcvTaskALayout);
+        hcvTaskALayout.setHorizontalGroup(
+            hcvTaskALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hcvTaskALayout.createSequentialGroup()
+                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageMedicineIcon1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(manageMedicinelbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        manageVolunteersLayout.setVerticalGroup(
-            manageVolunteersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageVolunteersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageMedicinelbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(manageMedicineIcon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        manageVolunteers1.setBackground(new java.awt.Color(0, 91, 149));
-        manageVolunteers1.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageVolunteers1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageVolunteers1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageVolunteers1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageVolunteers1MouseExited(evt);
-            }
-        });
-
-        side7.setBackground(new java.awt.Color(0, 91, 149));
-        side7.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side7Layout = new javax.swing.GroupLayout(side7);
-        side7.setLayout(side7Layout);
-        side7Layout.setHorizontalGroup(
-            side7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side7Layout.setVerticalGroup(
-            side7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        manageMedicinelbl2.setBackground(new java.awt.Color(51, 51, 51));
-        manageMedicinelbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageMedicinelbl2.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl2.setText("Manage Prescriptions");
-
-        manageMedicineIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout manageVolunteers1Layout = new javax.swing.GroupLayout(manageVolunteers1);
-        manageVolunteers1.setLayout(manageVolunteers1Layout);
-        manageVolunteers1Layout.setHorizontalGroup(
-            manageVolunteers1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageVolunteers1Layout.createSequentialGroup()
-                .addComponent(side7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statisticsimg1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addComponent(statisticslbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        manageVolunteers1Layout.setVerticalGroup(
-            manageVolunteers1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageVolunteers1Layout.createSequentialGroup()
+        hcvTaskALayout.setVerticalGroup(
+            hcvTaskALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hcvTaskALayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statisticslbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(statisticsimg1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageSupplier.setBackground(new java.awt.Color(0, 91, 149));
-        manageSupplier.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+        hcvTaskH.setBackground(new java.awt.Color(0, 91, 149));
+        hcvTaskH.setPreferredSize(new java.awt.Dimension(220, 50));
+        hcvTaskH.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseClicked(evt);
+                hcvTaskHMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseEntered(evt);
+                hcvTaskHMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageSupplierMouseExited(evt);
+                hcvTaskHMouseExited(evt);
             }
         });
 
-        side5.setBackground(new java.awt.Color(0, 91, 149));
-        side5.setPreferredSize(new java.awt.Dimension(5, 50));
+        side3.setBackground(new java.awt.Color(0, 91, 149));
+        side3.setPreferredSize(new java.awt.Dimension(5, 50));
 
-        javax.swing.GroupLayout side5Layout = new javax.swing.GroupLayout(side5);
-        side5.setLayout(side5Layout);
-        side5Layout.setHorizontalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout side3Layout = new javax.swing.GroupLayout(side3);
+        side3.setLayout(side3Layout);
+        side3Layout.setHorizontalGroup(
+            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 5, Short.MAX_VALUE)
         );
-        side5Layout.setVerticalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        side3Layout.setVerticalGroup(
+            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        manageSupplierlbl.setBackground(new java.awt.Color(51, 51, 51));
-        manageSupplierlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageSupplierlbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageSupplierlbl.setText("Manage Supplier");
+        statisticslbl2.setBackground(new java.awt.Color(51, 51, 51));
+        statisticslbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        statisticslbl2.setForeground(new java.awt.Color(255, 255, 255));
+        statisticslbl2.setText("Admin Tasks");
 
-        manageSupplierIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/supplier_40px.png"))); // NOI18N
+        statisticsimg2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        statisticsimg2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/what_i_do_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageSupplierLayout = new javax.swing.GroupLayout(manageSupplier);
-        manageSupplier.setLayout(manageSupplierLayout);
-        manageSupplierLayout.setHorizontalGroup(
-            manageSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageSupplierLayout.createSequentialGroup()
-                .addComponent(side5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout hcvTaskHLayout = new javax.swing.GroupLayout(hcvTaskH);
+        hcvTaskH.setLayout(hcvTaskHLayout);
+        hcvTaskHLayout.setHorizontalGroup(
+            hcvTaskHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(hcvTaskHLayout.createSequentialGroup()
+                .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageSupplierIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statisticsimg2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statisticslbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        manageSupplierLayout.setVerticalGroup(
-            manageSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageSupplierLayout.createSequentialGroup()
+        hcvTaskHLayout.setVerticalGroup(
+            hcvTaskHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hcvTaskHLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(statisticslbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(manageSupplierIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(statisticsimg2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(side3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout menuhide1Layout = new javax.swing.GroupLayout(menuhide1);
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(manageSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(manageVolunteers, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(manageVolunteers1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(menuhide1Layout.createSequentialGroup()
+                .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(menuhide1Layout.createSequentialGroup()
+                        .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(hcvDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(hcvTaskH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuhide1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(hcvTaskA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
-                .addComponent(manageSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addGap(54, 54, 54)
-                    .addComponent(manageVolunteers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(674, Short.MAX_VALUE)))
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addGap(115, 115, 115)
-                    .addComponent(manageVolunteers1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(613, Short.MAX_VALUE)))
+                .addComponent(hcvDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(hcvTaskH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(hcvTaskA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -590,7 +521,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         dashboard.setBackground(new java.awt.Color(255, 255, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -600,12 +531,14 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 747, Short.MAX_VALUE)
+            .addGap(0, 769, Short.MAX_VALUE)
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Dashboard", dashboard);
+        hcv.addTab("Dashboard", dashboard);
+
+        jPanel17.setBackground(new java.awt.Color(217, 241, 255));
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -620,12 +553,19 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         ));
         jScrollPane6.setViewportView(jTable3);
 
+        button4.setBackground(new java.awt.Color(0, 91, 149));
+        button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("Create Work load for Hospital");
+        button4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         jLabel1.setText("Assigned Patient Deatil:");
 
+        checkBox1.setBackground(new java.awt.Color(0, 91, 149));
+        checkBox1.setForeground(new java.awt.Color(255, 255, 255));
         checkBox1.setText("New Patients");
 
+        checkBox2.setBackground(new java.awt.Color(0, 91, 149));
+        checkBox2.setForeground(new java.awt.Color(255, 255, 255));
         checkBox2.setText("Old Patients");
 
         jLabel2.setText("Assign Hospital: ");
@@ -640,8 +580,8 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(checkBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(checkBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -652,7 +592,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
+                        .addGap(247, 247, 247)
                         .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -670,9 +610,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(94, 94, 94)
+                .addGap(64, 64, 64)
                 .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(395, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
@@ -690,7 +630,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pharmacyAdmin.addTab("Task From Admin", addVolunteer);
+        hcv.addTab("Task From Admin", addVolunteer);
+
+        jPanel22.setBackground(new java.awt.Color(217, 241, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -705,19 +647,23 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        button1.setBackground(new java.awt.Color(0, 91, 149));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Update the record");
+        button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(337, 337, 337))
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGap(297, 297, 297)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
@@ -725,9 +671,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(58, 58, 58)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout manageTaskLayout = new javax.swing.GroupLayout(manageTask);
@@ -741,9 +687,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pharmacyAdmin.addTab("Task From Hospital", manageTask);
+        hcv.addTab("Task From Hospital", manageTask);
 
-        getContentPane().add(pharmacyAdmin, java.awt.BorderLayout.CENTER);
+        getContentPane().add(hcv, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -812,21 +758,21 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
-         pharmacyAdmin.setSelectedIndex(0);
-         changecolor(pharmacyStaistics, new Color(3,138,255));
+    private void hcvDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseClicked
+         hcv.setSelectedIndex(0);
+         changecolor(hcvDashboard, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyStaisticsMouseClicked
+    }//GEN-LAST:event_hcvDashboardMouseClicked
 
-    private void pharmacyStaisticsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseEntered
-        changecolor(pharmacyStaistics, new Color(3,138,255));
+    private void hcvDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseEntered
+        changecolor(hcvDashboard, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyStaisticsMouseEntered
+    }//GEN-LAST:event_hcvDashboardMouseEntered
 
-    private void pharmacyStaisticsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseExited
-        changecolor(pharmacyStaistics, new Color(0,91,149));
+    private void hcvDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseExited
+        changecolor(hcvDashboard, new Color(0,91,149));
         changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_pharmacyStaisticsMouseExited
+    }//GEN-LAST:event_hcvDashboardMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
@@ -840,45 +786,37 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked
-         pharmacyAdmin.setSelectedIndex(4);
-          changecolor(manageSupplier, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageSupplierMouseClicked
+    private void hcvTaskAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskAMouseClicked
+          hcv.setSelectedIndex(1);
+         changecolor(hcvTaskA, new Color(3,138,255));
+        changecolor(side2, new Color(190, 224, 236));
+    }//GEN-LAST:event_hcvTaskAMouseClicked
 
-    private void manageSupplierMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseEntered
-        changecolor(manageSupplier, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageSupplierMouseEntered
+    private void hcvTaskAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskAMouseEntered
+      changecolor(hcvTaskA, new Color(3,138,255));
+        changecolor(side2, new Color(190, 224, 236));
+    }//GEN-LAST:event_hcvTaskAMouseEntered
 
-    private void manageSupplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseExited
-        changecolor(manageSupplier, new Color(0,91,149));
-        changecolor(side5, new Color(0,91,149));
-    }//GEN-LAST:event_manageSupplierMouseExited
+    private void hcvTaskAMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskAMouseExited
+        changecolor(hcvTaskA, new Color(0,91,149));
+        changecolor(side2, new Color(0,91,149));
+    }//GEN-LAST:event_hcvTaskAMouseExited
 
-    private void manageVolunteersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteersMouseClicked
+    private void hcvTaskHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskHMouseClicked
+        hcv.setSelectedIndex(2);
+         changecolor(hcvTaskH, new Color(3,138,255));
+        changecolor(side3, new Color(190, 224, 236));
+    }//GEN-LAST:event_hcvTaskHMouseClicked
 
-    private void manageVolunteersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteersMouseEntered
+    private void hcvTaskHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskHMouseEntered
+       changecolor(hcvTaskH, new Color(3,138,255));
+        changecolor(side3, new Color(190, 224, 236));
+    }//GEN-LAST:event_hcvTaskHMouseEntered
 
-    private void manageVolunteersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteersMouseExited
-
-    private void manageVolunteers1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteers1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteers1MouseClicked
-
-    private void manageVolunteers1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteers1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteers1MouseEntered
-
-    private void manageVolunteers1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteers1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteers1MouseExited
+    private void hcvTaskHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskHMouseExited
+            changecolor(hcvTaskH, new Color(0,91,149));
+        changecolor(side3, new Color(0,91,149));
+    }//GEN-LAST:event_hcvTaskHMouseExited
 
     /**
      * @param args the command line arguments
@@ -930,6 +868,10 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JLabel close;
     private UI.Components.Combobox combobox1;
     private javax.swing.JPanel dashboard;
+    private javax.swing.JTabbedPane hcv;
+    private javax.swing.JPanel hcvDashboard;
+    private javax.swing.JPanel hcvTaskA;
+    private javax.swing.JPanel hcvTaskH;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
@@ -945,28 +887,20 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
-    private javax.swing.JLabel manageMedicineIcon1;
-    private javax.swing.JLabel manageMedicineIcon2;
-    private javax.swing.JLabel manageMedicinelbl1;
-    private javax.swing.JLabel manageMedicinelbl2;
-    private javax.swing.JPanel manageSupplier;
-    private javax.swing.JLabel manageSupplierIcon;
-    private javax.swing.JLabel manageSupplierlbl;
     private javax.swing.JPanel manageTask;
-    private javax.swing.JPanel manageVolunteers;
-    private javax.swing.JPanel manageVolunteers1;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
-    private javax.swing.JTabbedPane pharmacyAdmin;
-    private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
-    private javax.swing.JPanel side5;
-    private javax.swing.JPanel side6;
-    private javax.swing.JPanel side7;
+    private javax.swing.JPanel side2;
+    private javax.swing.JPanel side3;
     private javax.swing.JLabel statisticsimg;
+    private javax.swing.JLabel statisticsimg1;
+    private javax.swing.JLabel statisticsimg2;
     private javax.swing.JLabel statisticslbl;
+    private javax.swing.JLabel statisticslbl1;
+    private javax.swing.JLabel statisticslbl2;
     // End of variables declaration//GEN-END:variables
 }
