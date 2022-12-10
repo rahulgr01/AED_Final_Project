@@ -7,6 +7,9 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.DiagnosticAdminRole;
+import Business.Role.HospitalAdminRole;
+import Business.Role.InsuranceAdminRole;
 import Business.Role.VolunteerAdminRole;
 import Business.UserAccount.UserAccount;
 import UI.Components.TableCustom;
@@ -1256,14 +1259,13 @@ public class SystemAdmin extends javax.swing.JFrame {
             if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Volunteer) {
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdminRole());
             } 
-            
-//            else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Diagnostics) {
-//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new GovernmentAdmin());
-//            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital) {
-//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdmin());
-//            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Insurance) {
-//                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
-//      
+            else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Diagnostics) {
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DiagnosticAdminRole());
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital) {
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Insurance) {
+                account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
+            }
         }
     }//GEN-LAST:event_cEntCreateButtonActionPerformed
 
