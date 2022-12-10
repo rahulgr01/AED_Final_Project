@@ -31,17 +31,29 @@ public class EnterpriseDirectory {
        Enterprise enterprise=null;
         if(type==Enterprise.EnterpriseType.Hospital){
             enterprise=new HospitalEnterprise(name);
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HospitalStaff, "Hospital Staff Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Doctor, "Doctor Org");
+            
             enterpriseList.add(enterprise);
         }
         if(type==Enterprise.EnterpriseType.Insurance){
             enterprise=new InsuranceEnterprise(name);
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Policy, "Insurance Policy Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Claims, "Insurance Claim Org");
+            
             enterpriseList.add(enterprise);
         }
         if(type==Enterprise.EnterpriseType.Volunteer){
             enterprise=new VolunteerEnterprise(name);
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HomeCareVolunteer, "HomeCare Volunteer Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.SurveyVolunteer, "Survey Volunteer Org");
+            
             enterpriseList.add(enterprise);
         }if(type==Enterprise.EnterpriseType.Diagnostics){
             enterprise=new DiagnosticsEnterprise(name);
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Pharmacy, "Pharmacy Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabService, "Lab Service Org");
+            
             enterpriseList.add(enterprise);
         }
      

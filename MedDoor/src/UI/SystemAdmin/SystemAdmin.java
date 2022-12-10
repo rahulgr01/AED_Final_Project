@@ -1431,17 +1431,23 @@ public class SystemAdmin extends javax.swing.JFrame {
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
         if (EcoSystem.isUserUnique(username)) {
             UserAccount account = null;
-            if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Volunteer) {
+            switch (enterprise.getEnterpriseType()) {
+            case Volunteer:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdminRole());
                 System.out.print(account);
-            } 
-            else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Diagnostics) {
+                break;
+            case Diagnostics:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DiagnosticAdminRole());
-            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Hospital) {
+                break;
+            case Hospital:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
-            } else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Insurance) {
+                break;
+            case Insurance:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
-            }
+                break;
+            default:
+                break;
+        }
         }
         clearEnterprise();
     }//GEN-LAST:event_cEntCreateButtonActionPerformed
