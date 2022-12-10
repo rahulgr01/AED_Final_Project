@@ -2,6 +2,9 @@
 package UI.SystemAdmin;
 
 
+import Business.Community.Community;
+import Business.Community.House;
+import Business.Community.Tenant;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -18,6 +21,10 @@ import com.model.Validation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +32,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class SystemAdmin extends javax.swing.JFrame {
 
@@ -36,6 +44,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     Network network;
     JFrame parentFrame;
     Validation fieldValidation;
+
     public SystemAdmin(JFrame parentFrame, UserAccount account, 
             Enterprise enterprise, 
             EcoSystem system) {
@@ -46,9 +55,17 @@ public class SystemAdmin extends javax.swing.JFrame {
         network = system.getNetworkList().get(0);
         fieldValidation = new Validation();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(jScrollPane4, TableCustom.TableType.DEFAULT);
-            TableCustom.apply(jScrollPane5, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(jScrollPane4, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(jScrollPane5, TableCustom.TableType.DEFAULT);
+        populateCommunity();
         
+    }
+    
+    public void populateCommunity() {
+       addHouseComCombo.removeAll();
+       for (Community type : network.getCommunityDirectory().getCommunityList()) {
+            addHouseComCombo.addItem(type);
+        } 
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
@@ -66,6 +83,47 @@ public class SystemAdmin extends javax.swing.JFrame {
             cEntName.addItem(enterprise);
         }
         
+    }
+    
+     private void populateHouseTable(Community selectedCommunity) {
+        try{
+        DefaultTableModel model = (DefaultTableModel) houseTable.getModel();
+
+        model.setRowCount(0);
+            for (House house : selectedCommunity.houselist.getHouses()) {
+                Object[] row = new Object[4];
+                row[0] = house.getHouseNumer();
+                row[1] = house.getStreeAdredss();
+                row[2] = network;
+                row[3] = selectedCommunity.getZipCode();
+                model.addRow(row);
+                
+            }
+        }catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+    }
+     
+      private void populateTenantTable(House selectedHouse) {
+        try{
+        DefaultTableModel model = (DefaultTableModel) tenantsTable.getModel();
+
+        model.setRowCount(0);
+            for (Tenant tenant : selectedHouse.tenats.getTenants()) {
+                Object[] row = new Object[5];
+                row[0] = tenant.getFirstName();
+                row[1] = tenant.getLastName();
+                row[2] = tenant.getGender();
+                row[3] = tenant.getAge();
+                row[4] = tenant.getEmailId();
+                model.addRow(row);
+                
+            }
+        }catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
     }
     
     public void changecolor(JPanel hover, Color rand) {
@@ -145,17 +203,18 @@ public class SystemAdmin extends javax.swing.JFrame {
         manageNetworkTab = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        combobox1 = new UI.Components.Combobox();
+        addHouseComCombo = new UI.Components.Combobox();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         ListHouses = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        houseTable = new javax.swing.JTable();
         addTenantN = new UI.Components.Button();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tenantsTable = new javax.swing.JTable();
+        addTenantN1 = new UI.Components.Button();
         jPanel4 = new javax.swing.JPanel();
-        houseNumber = new UI.Components.MyTextFieldLogin();
         houseAddress = new UI.Components.MyTextFieldLogin();
+        houseNumber = new UI.Components.MyTextFieldLogin();
         addHouse = new UI.Components.Button();
         jPanel5 = new javax.swing.JPanel();
         tenantContact = new UI.Components.MyTextFieldLogin();
@@ -164,6 +223,8 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantAge = new UI.Components.MyTextFieldLogin();
         addTenant = new UI.Components.Button();
         genderCombo = new UI.Components.Combobox();
+        tenantDob = new UI.Components.MyTextFieldLogin();
+        button1 = new UI.Components.Button();
         createEnt = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         createEnterpriseName = new UI.Components.MyTextFieldLogin();
@@ -637,11 +698,16 @@ public class SystemAdmin extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BOSTON CITY SERVICE");
 
-        combobox1.setLabeText("Community");
+        addHouseComCombo.setLabeText("Community");
+        addHouseComCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addHouseComComboActionPerformed(evt);
+            }
+        });
 
         ListHouses.setBackground(new java.awt.Color(217, 241, 255));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        houseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -673,12 +739,12 @@ public class SystemAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+        houseTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable4MouseClicked(evt);
+                houseTableMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(houseTable);
 
         addTenantN.setBackground(new java.awt.Color(0, 91, 149));
         addTenantN.setForeground(new java.awt.Color(255, 255, 255));
@@ -698,28 +764,28 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tenantsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Contact", "Age", "Email"
+                "First Name", "Second Name", "Gender", "Age", "Email"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, true, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -730,22 +796,42 @@ public class SystemAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+        tenantsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable5MouseClicked(evt);
+                tenantsTableMouseClicked(evt);
             }
         });
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tenantsTable);
+
+        addTenantN1.setBackground(new java.awt.Color(0, 91, 149));
+        addTenantN1.setForeground(new java.awt.Color(255, 255, 255));
+        addTenantN1.setText("View Tenants");
+        addTenantN1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addTenantN1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addTenantN1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addTenantN1MouseExited(evt);
+            }
+        });
+        addTenantN1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addTenantN1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ListHousesLayout = new javax.swing.GroupLayout(ListHouses);
         ListHouses.setLayout(ListHousesLayout);
         ListHousesLayout.setHorizontalGroup(
             ListHousesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jScrollPane5)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListHousesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(327, Short.MAX_VALUE)
+                .addComponent(addTenantN1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         ListHousesLayout.setVerticalGroup(
@@ -753,14 +839,18 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addGroup(ListHousesLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ListHousesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addTenantN1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("List Houses", ListHouses);
 
         jPanel4.setBackground(new java.awt.Color(217, 241, 255));
+
+        houseAddress.setLabelText("House Address");
 
         houseNumber.setLabelText("Apartment Number");
         houseNumber.addActionListener(new java.awt.event.ActionListener() {
@@ -768,8 +858,6 @@ public class SystemAdmin extends javax.swing.JFrame {
                 houseNumberActionPerformed(evt);
             }
         });
-
-        houseAddress.setLabelText("House Address");
 
         addHouse.setBackground(new java.awt.Color(0, 91, 149));
         addHouse.setForeground(new java.awt.Color(255, 255, 255));
@@ -815,7 +903,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Add House", jPanel4);
@@ -861,6 +949,8 @@ public class SystemAdmin extends javax.swing.JFrame {
         genderCombo.setSelectedIndex(-1);
         genderCombo.setLabeText("Gender");
 
+        tenantDob.setLabelText("Date of birth");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -872,9 +962,10 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tenantContact, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(tenantEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(tenantDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -893,13 +984,22 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tenantDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
+
+        button1.setText("View ");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -912,8 +1012,12 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -921,9 +1025,11 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35)
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         manageNetworkTab.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -980,7 +1086,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(createEnterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(233, Short.MAX_VALUE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntLayout = new javax.swing.GroupLayout(createEnt);
@@ -1061,7 +1167,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(cEntEEname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntAdminTabLayout = new javax.swing.GroupLayout(createEntAdminTab);
@@ -1130,7 +1236,7 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1300,6 +1406,20 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tenantAgeActionPerformed
 
     private void addTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantActionPerformed
+       
+        int selectedRowIndex = houseTable.getSelectedRow();
+       
+        Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
+        Date date = new Date(); 
+        try{
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            date = format.parse(tenantDob.getText());
+            
+        } catch (ParseException e) {e.printStackTrace();}
+
+        selectedHouse.createAndAddTenant(tenantName.getLabelText(), tenantName.getLabelText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getLabelText()), tenantEmail.getLabelText(), String.valueOf(tenantContact.getLabelText()));
+        
         JOptionPane.showMessageDialog(this, "Tenant Added!");
     }//GEN-LAST:event_addTenantActionPerformed
 
@@ -1500,6 +1620,12 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_createEnterpriseButtonMouseExited
 
     private void addTenantNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantNActionPerformed
+        
+        int selectedRowIndex = houseTable.getSelectedRow();
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
+        } 
         jTabbedPane2.setSelectedIndex(2);
     }//GEN-LAST:event_addTenantNActionPerformed
 
@@ -1528,21 +1654,61 @@ public class SystemAdmin extends javax.swing.JFrame {
          changecolorB(addTenant, new Color(0,91,149));
     }//GEN-LAST:event_addTenantMouseExited
 
-    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+    private void houseTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_houseTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable4MouseClicked
+    }//GEN-LAST:event_houseTableMouseClicked
 
-    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+    private void tenantsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tenantsTableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable5MouseClicked
+    }//GEN-LAST:event_tenantsTableMouseClicked
 
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
+       
+        Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        selectedCommunity.createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText());
+        
         JOptionPane.showMessageDialog(this, "House Added!");
     }//GEN-LAST:event_addHouseActionPerformed
 
     private void cEntCreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cEntCreateButtonMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_cEntCreateButtonMouseClicked
+
+    private void addHouseComComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseComComboActionPerformed
+        // TODO add your handling code here:
+        
+       
+    }//GEN-LAST:event_addHouseComComboActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        if (selectedCommunity != null) {
+            populateHouseTable(selectedCommunity);
+        }
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void addTenantN1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTenantN1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addTenantN1MouseEntered
+
+    private void addTenantN1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addTenantN1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addTenantN1MouseExited
+
+    private void addTenantN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantN1ActionPerformed
+        // TODO add your handling code here:
+        Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        if (selectedCommunity != null) {
+        int selectedRowIndex = houseTable.getSelectedRow();
+        if (selectedRowIndex<0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
+        } 
+        House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
+        populateTenantTable(selectedHouse);
+        }
+    }//GEN-LAST:event_addTenantN1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1590,8 +1756,11 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel ListHouses;
     private javax.swing.JPanel MenuIcon;
     private UI.Components.Button addHouse;
+    private UI.Components.Combobox addHouseComCombo;
     private UI.Components.Button addTenant;
     private UI.Components.Button addTenantN;
+    private UI.Components.Button addTenantN1;
+    private UI.Components.Button button1;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1602,7 +1771,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyPasswordFieldLogin cEntPassword;
     private UI.Components.MyTextFieldLogin cEntUsername;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox1;
     private UI.Components.Combobox combobox4;
     private javax.swing.JPanel createEnt;
     private javax.swing.JPanel createEntAdminTab;
@@ -1615,6 +1783,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel hidemenu;
     private UI.Components.MyTextFieldLogin houseAddress;
     private UI.Components.MyTextFieldLogin houseNumber;
+    private javax.swing.JTable houseTable;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel11;
@@ -1628,8 +1797,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageCategoryIcon;
@@ -1655,8 +1822,10 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JTabbedPane sysAdminTab;
     private UI.Components.MyTextFieldLogin tenantAge;
     private UI.Components.MyTextFieldLogin tenantContact;
+    private UI.Components.MyTextFieldLogin tenantDob;
     private UI.Components.MyTextFieldLogin tenantEmail;
     private UI.Components.MyTextFieldLogin tenantName;
+    private javax.swing.JTable tenantsTable;
     private javax.swing.JPanel viewSystem;
     private javax.swing.JPanel viewSystemTab;
     // End of variables declaration//GEN-END:variables

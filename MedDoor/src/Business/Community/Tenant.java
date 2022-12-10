@@ -5,6 +5,7 @@
 package Business.Community;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
@@ -13,7 +14,7 @@ import java.util.Date;
 public class Tenant extends Person {
     private String tenantID;
     private String emailId;
-
+    
     public String getEmailId() {
         return emailId;
     }
@@ -39,9 +40,10 @@ public class Tenant extends Person {
         this.tenantID = tenantID;
     }
     
-    public Tenant(String tenantID, String fName, String lName, Date dob, String gender,Integer age,String email, String phone, House residence) {
+    public Tenant(String fName, String lName, Date dob, String gender,Integer age,String email, String phone, House residence) {
         super(fName, lName, dob, gender, age, residence);
-        this.tenantID = tenantID;
+        String uniqueID = UUID.randomUUID().toString();
+        this.tenantID = uniqueID;
 	this.emailId = email;
         this.phoneNumber = phone;
     }
