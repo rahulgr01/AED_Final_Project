@@ -16,10 +16,10 @@ import Business.UserAccount.UserAccount;
 public class ConfigureASystem {
     public static EcoSystem configure(){
         EcoSystem system = EcoSystem.getInstance(); 
-       // Employee admin = system.getEmployeeDirectory().createEmployee("sysadmin");
-        Employee pharmacyadmin = system.getEmployeeDirectory().createEmployee("pharmacyadmin");
-      //  UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", admin, new SystemAdminRole());
-        UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("padmin", "padmin", pharmacyadmin, new ParmacyAdminRole());
+        Employee admin = system.getEmployeeDirectory().createEmployee("sysadmin");
+       // Employee pharmacyadmin = system.getEmployeeDirectory().createEmployee("pharmacyadmin");
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", admin, new SystemAdminRole());
+       // UserAccount ua1 = system.getUserAccountDirectory().createUserAccount("padmin", "padmin", pharmacyadmin, new ParmacyAdminRole());
         
         return system;
     }

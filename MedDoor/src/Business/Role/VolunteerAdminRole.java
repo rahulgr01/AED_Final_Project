@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
+import UI.VolunteerAdmin.VolunteerAdmin;
 
 /**
  *
@@ -21,7 +22,7 @@ public class VolunteerAdminRole extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business).setVisible(true);
+         new VolunteerAdmin(account,organization, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){

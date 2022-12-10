@@ -21,7 +21,7 @@ public class SystemAdminRole extends Role {
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new SystemAdmin(account,organization, enterprise, business).setVisible(true);
+         new SystemAdmin(account, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){

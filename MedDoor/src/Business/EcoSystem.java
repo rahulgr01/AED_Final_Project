@@ -20,7 +20,9 @@ public class EcoSystem extends Organization {
     private ArrayList<Network> networkList;
     
     public static EcoSystem getInstance() {
+        System.out.print("ashikkakaka");
         if (business == null) {
+            System.out.print("ash");
             business = new EcoSystem();
         }
         return business;
@@ -28,7 +30,9 @@ public class EcoSystem extends Organization {
     private EcoSystem() {
         
         super(null);
-         networkList = new ArrayList<>();
+        networkList = new ArrayList<>();
+        Network network = createAndAddNetwork();
+        System.out.print(network);
     }
     
      public ArrayList<Network> getNetworkList() {
@@ -36,6 +40,7 @@ public class EcoSystem extends Organization {
     }
      public Network createAndAddNetwork() {
         Network network = new Network();
+        network.setName("Boston");
         networkList.add(network);
         return network;
     }
@@ -45,7 +50,7 @@ public class EcoSystem extends Organization {
         roleList.add(new ParmacyAdminRole());
         return roleList;
     }
-    public boolean isUserUnique(String username) {
+    public static boolean isUserUnique(String username) {
 
 //        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
 //            return false;

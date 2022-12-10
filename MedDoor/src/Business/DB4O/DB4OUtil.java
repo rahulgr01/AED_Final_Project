@@ -23,7 +23,7 @@ public class DB4OUtil {
     private static final String FILENAME = Paths.get("MedDoor.db4o").toAbsolutePath().toString();// path to the data store
     private static DB4OUtil dB4OUtil;
     
-    public synchronized static DB4OUtil getInstance(){
+        public synchronized static DB4OUtil getInstance(){
         if (dB4OUtil == null){
             dB4OUtil = new DB4OUtil();
         }
@@ -60,6 +60,7 @@ public class DB4OUtil {
         ObjectSet<EcoSystem> systems = conn.query( EcoSystem.class); // Change to the object you want to save
         EcoSystem system;
         if (systems.size() == 0){
+            System.out.print("sgghsgsahjha");
             system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
         }
         else{

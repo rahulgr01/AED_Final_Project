@@ -38,7 +38,6 @@ private Animator animatorLogin;
     
     public MainLoginPage() {
         initComponents();
-        System.out.println("Test");
         system=dB4OUtil.retrieveSystem();
         vcode.setText(String.valueOf(verifyCode));
          getContentPane().setBackground(new Color(245, 245, 245));
@@ -385,6 +384,7 @@ private Animator animatorLogin;
         }
   }
         }  
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
