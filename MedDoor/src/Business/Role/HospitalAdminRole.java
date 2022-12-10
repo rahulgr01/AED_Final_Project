@@ -10,6 +10,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import UI.HospitalAdmin.HospitalAdmin;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,7 +18,7 @@ import UI.HospitalAdmin.HospitalAdmin;
  */
 public class HospitalAdminRole extends Role {
     @Override
-    public void createWorkArea(UserAccount account, 
+    public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {

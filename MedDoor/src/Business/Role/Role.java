@@ -49,7 +49,7 @@ public abstract class Role {
             return value;
         }
     }
-    public abstract void createWorkArea(UserAccount account, 
+    public abstract void createWorkArea(JFrame parentFrame, UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business);

@@ -32,17 +32,21 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UserAccount userAccount;
     Enterprise enterprise;
     Network network;
-    public SystemAdmin(UserAccount account, 
+    JFrame parentFrame;
+    public SystemAdmin(JFrame parentFrame, UserAccount account, 
             Enterprise enterprise, 
             EcoSystem system) {
         initComponents();
         this.system = system; 
+        this.parentFrame = parentFrame;
         sysAdminTab.setSelectedIndex(0);
         network = system.getNetworkList().get(0);
+        System.out.println(network + "43");
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
         System.out.print("inside populate");
+        createEnterpriseType.removeAll();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             createEnterpriseType.addItem(type);
         }
@@ -1116,11 +1120,9 @@ public class SystemAdmin extends javax.swing.JFrame {
        clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            this.dispose();
-            MainLoginPage x = new MainLoginPage();
-        x.show(); //display View LoginPage Form
-        //dispose(); //Close SystemAdmin Form
-        x.setVisible(true);
+           this.setVisible(false);
+           parentFrame.setVisible(true);
+           
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
@@ -1200,7 +1202,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);
+         this.setVisible(false);
+           parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
     private void manageSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageSupplierMouseClicked
@@ -1247,7 +1250,7 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void cEntCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEntCreateButtonActionPerformed
         // TODO add your handling code here:
-         Enterprise enterprise = (Enterprise) cEntName.getSelectedItem();
+        Enterprise enterprise = (Enterprise) cEntName.getSelectedItem();
 
         String username = cEntUsername.getText();
         String password = cEntPassword.getText();
@@ -1258,6 +1261,7 @@ public class SystemAdmin extends javax.swing.JFrame {
             UserAccount account = null;
             if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Volunteer) {
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdminRole());
+                System.out.print(account);
             } 
             else if (enterprise.getEnterpriseType() == Enterprise.EnterpriseType.Diagnostics) {
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DiagnosticAdminRole());

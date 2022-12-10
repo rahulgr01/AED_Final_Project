@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class ParmacyAdminRole extends Role {
 
     @Override
-    public void createWorkArea(UserAccount account, 
+    public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {

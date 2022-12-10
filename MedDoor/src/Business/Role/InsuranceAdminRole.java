@@ -10,6 +10,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.InsuranceAdmin.InsuranceAdmin;
 import UI.PharmacyAdmin.PharmacyAdmin;
+import javax.swing.JFrame;
 
 
 /**
@@ -18,7 +19,7 @@ import UI.PharmacyAdmin.PharmacyAdmin;
  */
 public class InsuranceAdminRole extends Role {
      @Override
-    public void createWorkArea(UserAccount account, 
+    public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {

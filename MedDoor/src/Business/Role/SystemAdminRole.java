@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.SystemAdmin.SystemAdmin;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,11 +18,11 @@ import UI.SystemAdmin.SystemAdmin;
 public class SystemAdminRole extends Role {
 
     @Override
-    public void createWorkArea(UserAccount account, 
+    public void createWorkArea(JFrame parentFrame,UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new SystemAdmin(account, enterprise, business).setVisible(true);
+         new SystemAdmin(parentFrame, account, enterprise, business).setVisible(true);
     }
      @Override
     public String toString(){
