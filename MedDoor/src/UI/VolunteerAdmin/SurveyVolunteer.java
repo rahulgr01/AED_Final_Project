@@ -17,7 +17,9 @@ import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -59,14 +61,16 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             {
                for(House hous: ((SurveyVolunteerWorkRequest) wq).getAssignedHouses().getHouses()) {
                    Object[] row = new Object[8];
-            row[0] = ((HospitalWorkRequest) request).getPatient();
-            row[1] = ((HospitalWorkRequest) request).getPatient().getPatientName();
-            row[2] = ((HospitalWorkRequest) request).getPatient().getAge();
-            row[3] = ((HospitalWorkRequest) request).getPatient().getGender();
-            row[4] = ((HospitalWorkRequest) request).getPatient().getDateOfBirth();
-            row[5] = ((HospitalWorkRequest) request).getPatient().getIssue();
-            row[7] = request.getMessage();
-            row[6] = request;
+            row[0] = hous.getCommunity().getCommunityName();
+            row[1] = hous.getStreeAdredss();
+            row[2] = hous.getHouseNumer();
+            row[3] = hous.getCommunity().getZipCode();
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate = dateFormat.format(((SurveyVolunteerWorkRequest) wq).assignedDate);
+            row[4] = formattedDate;
+            row[5] = ((SurveyVolunteerWorkRequest) wq).getSender().getEmployee().getName();
+            row[6] = ((SurveyVolunteerWorkRequest) wq).getStatus();
+            row[7] = ((SurveyVolunteerWorkRequest) wq).getMessage();
                } 
             
             }
@@ -630,6 +634,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 button5MouseExited(evt);
             }
         });
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
 
         svWorkRTenantTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -732,6 +741,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 button1MouseExited(evt);
+            }
+        });
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
             }
         });
 
@@ -1008,6 +1022,19 @@ public void changecolorB(JButton hover, Color rand) {
                 throw new AssertionError();
         }
     }//GEN-LAST:event_svolunteerMouseClicked
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button5ActionPerformed
 
     /**
      * @param args the command line arguments
