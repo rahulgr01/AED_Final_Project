@@ -387,15 +387,11 @@ private Animator animatorLogin;
             return;
         }
         else{
-             JOptionPane.showMessageDialog(null, "Login Successfull!");
-//             try {
-//                   MailNew m=new MailNew("rahulgr3001@gmail.com","Login","Login Successful!!");
-//               } catch (MessagingException ex) {
-//                   Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
-//               }
-             txtUsername.setText("");
+            txtUsername.setText("");
              txtPass.setText("");
              verificationCode.setText("");
+             JOptionPane.showMessageDialog(null, "Login Successfull!");
+             
              verifyCode = new Random().nextInt(1022 + 1) + 1000;
              vcode.setText(String.valueOf(verifyCode));
             userAccount.getRole().createWorkArea(this, userAccount, inOrganization, inEnterprise, system);
