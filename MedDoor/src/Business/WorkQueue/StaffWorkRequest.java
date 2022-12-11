@@ -4,23 +4,25 @@
  */
 package Business.WorkQueue;
 
-import Business.Community.Tenant;
 import Business.Patient.Patient;
 
 /**
  *
  * @author Gursheen Kaur
  */
-public class HospitalWorkRequest  extends WorkRequest{
-    public Tenant patient;
-    
-    public Tenant getPatient() {
+
+
+public class StaffWorkRequest extends WorkRequest {
+    public Patient patient;
+ 
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(Tenant patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
+    
 
-   
+    
 }
