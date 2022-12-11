@@ -1139,17 +1139,16 @@ private void populateTable(){
        
         System.out.print(index);
         switch (index) {
+           
             case 0:
-                break;
-            case 1:
                populateTable();
                populateCombo();
                 break;
-            case 2:
+            case 1:
                populateOrganizationComboBox();
                populateOrganizationEmpComboBox();
                 break;
-            case 3:
+            case 2:
                
                 break;
             default:
