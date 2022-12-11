@@ -1,7 +1,7 @@
 
 package Business.Pharmacy;
 
-import Business.Role.PharmacyAdminRole;
+import Business.Community.Community;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 
@@ -9,58 +9,43 @@ import Business.UserAccount.UserAccount;
  *
  * @author Dell
  */
-public class Pharmacy extends UserAccount {
-    private String orderId;
-    private SystemAdminRole sysAdmin;
-    private PharmacyAdminRole dadmin;
+public class Pharmacy {
+   
     private String pharmacyName;
-    private MedicineInventory menu;
-    private CategoryInventory cmenu;
+    private Community community;
     private String address;
-//    private Community community;
     private String contact;
+    public MedicineInventory medicineList;
 
-    public SystemAdminRole getSysAdmin() {
-        return sysAdmin;
+    public MedicineInventory getMedicineList() {
+        return medicineList;
     }
 
-    public void setSysAdmin(SystemAdminRole sysAdmin) {
-        this.sysAdmin = sysAdmin;
+    public void setMedicineList(MedicineInventory medicineList) {
+        this.medicineList = medicineList;
     }
-
-    public PharmacyAdminRole getDadmin() {
-        return dadmin;
-    }
-
-    public void setDadmin(PharmacyAdminRole dadmin) {
-        this.dadmin = dadmin;
-    }
-
-    public CategoryInventory getCmenu() {
-        return cmenu;
-    }
-
-    public void setCmenu(CategoryInventory cmenu) {
-        this.cmenu = cmenu;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-//    public Community getCommunity() {
-//        return community;
-//    }
-//
-//    public void setCommunity(Community community) {
-//        this.community = community;
-//    }
     
+    public Community getCommunity() {
+        return community;
+    }
 
+    public void setCommunity(Community community) {
+        this.community = community;
+    }
+
+    public Pharmacy(String phName,Community community, String phAdd, String phCont) {
+      
+        this.pharmacyName=phName;
+        this.address=phAdd;
+        this.contact=phCont;
+        this.community = community;
+        this.medicineList = new MedicineInventory();
+    }
+
+    public Pharmacy() {
+    
+        this.medicineList = new MedicineInventory();
+    }
 
     public String getAddress() {
         return address;
@@ -79,14 +64,7 @@ public class Pharmacy extends UserAccount {
     }
  
 
-    public MedicineInventory getMenu() {
-        return menu;
-    }
-
-    public void setMenu(MedicineInventory menu) {
-        this.menu = menu;
-    }
-
+ 
     public String getPharmacyName() {
         return pharmacyName;
     }

@@ -12,7 +12,11 @@ import java.util.ArrayList;
 public class MedicineInventory {
     ArrayList<Medicine> medicineList = new ArrayList<Medicine>();
      
-
+      public Medicine createAndAddTenant(String name, String category, double price, int qty){
+         Medicine med = new Medicine(name, category, price, qty);
+         this.addItem(med);
+         return med;
+    }
     public ArrayList<Medicine> getMedicineList() {
         return medicineList;
     }
