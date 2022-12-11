@@ -23,12 +23,9 @@ public class HouseList {
 
     
      public House createAndAddHouse(String houseNumber, String houseAddress,Community community){
-         System.out.println("Inside 26");
          House newHouse = new House(houseNumber, houseAddress, community);
-          System.out.println("newHouse" + newHouse);
-         System.out.println("houselist"+ houseList);
-         this.addNewHouse(newHouse);
-         return newHouse;
+       House h=  this.addNewHouse(newHouse);
+         return h;//newHouse;
     }
     
     public void setHouses(ArrayList<House> house) {
