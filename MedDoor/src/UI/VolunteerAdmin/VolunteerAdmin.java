@@ -5,6 +5,7 @@ package UI.VolunteerAdmin;
 import Business.Community.Community;
 import Business.Community.House;
 import Business.Community.HouseList;
+import Business.Community.Tenant;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -12,12 +13,15 @@ import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Enterprise.VolunteerEnterprise;
 import Business.Network.Network;
+import Business.Organization.HomeCareVolunteerOrganization;
 import Business.Organization.Organization;
 import Business.Organization.SurveyVolunteerOrganization;
 import Business.Role.HomeCareVolunteerRole;
 import Business.Role.SurveyVolunteerRole;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.HomeCareVolunteerWorkRequest;
 import Business.WorkQueue.SurveyVolunteerWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
@@ -87,6 +91,19 @@ public class VolunteerAdmin extends javax.swing.JFrame {
       
     }
     
+    public void populateHomeCareVolunteers() {
+        hClistCombo.removeAllItems();
+        
+        for (Organization org : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
+            if (org.getName() == Organization.Type.HomeCareVolunteer.getValue()) {
+                for(UserAccount account : org.getUserAccountDirectory().getUserAccountList()) {
+                    hClistCombo.addItem(account.getEmployee());
+                }
+            }
+        }
+      
+    }
+    
     public void populateCommunities() {
         sVCommunity.removeAllItems();
         
@@ -105,6 +122,43 @@ public class VolunteerAdmin extends javax.swing.JFrame {
       
     }
     
+    
+    public void populateCommunitiesHC() {
+        sVCommCombo.removeAllItems();
+        
+        for (Community com : network.getCommunityDirectory().getCommunityList()){
+            sVCommCombo.addItem(account.getEmployee());
+        }
+      
+    }
+    
+    public void populateHousesHC() {
+        if (sVCommCombo.getSelectedIndex() > 0) {
+        sVHousCombo.removeAllItems();
+        Community com = (Community) sVCommCombo.getSelectedItem();
+        for (House house : com.getHouse().getHouses()){
+            sVHousCombo.addItem(house);
+        }
+        }
+      
+    }
+   
+    
+    public void populateTenantInfo(House house) {
+        
+        for(Tenant tenant: house.getTenats().getTenants()) {
+                  
+            Object[] row = new Object[8];
+            row[0] = tenant.getFirstName();
+            row[1] = tenant.getLastName();
+            row[2] = tenant.getAge();
+            row[3] = tenant.getGender();
+            row[4] = tenant.report.getSicknessType();
+            row[5] = tenant.report.isNeedHospitalization();
+               
+          }
+         
+    }
     
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
@@ -197,26 +251,15 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         button2 = new UI.Components.Button();
         jPanel24 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
-        button3 = new UI.Components.Button();
         sVCommCombo = new UI.Components.Combobox();
         sVHousCombo = new UI.Components.Combobox();
         jScrollPane7 = new javax.swing.JScrollPane();
         svWorkRTenantTable = new javax.swing.JTable();
         button1 = new UI.Components.Button();
+        hClistCombo = new UI.Components.Combobox();
+        button6 = new UI.Components.Button();
         jPanel2 = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
-        vAdminTask1 = new javax.swing.JTabbedPane();
-        jPanel27 = new javax.swing.JPanel();
-        hcVolunteerCombo1 = new UI.Components.Combobox();
-        hCCommunity1 = new UI.Components.Combobox();
-        hCHouse1 = new UI.Components.Combobox();
-        button4 = new UI.Components.Button();
-        chPatientCombo = new UI.Components.Combobox();
-        jPanel28 = new javax.swing.JPanel();
-        jPanel29 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        button5 = new UI.Components.Button();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -707,7 +750,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 942, Short.MAX_VALUE)
+            .addGap(0, 1208, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,7 +811,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(createVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(427, Short.MAX_VALUE))
+                .addContainerGap(693, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -846,7 +889,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(276, 276, 276)
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 416, Short.MAX_VALUE))
+                .addGap(0, 682, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -868,33 +911,33 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         jPanel25.setBackground(new java.awt.Color(217, 241, 255));
 
-        button3.setBackground(new java.awt.Color(0, 91, 149));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("Generate Hospital Work Request");
-        button3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
+        sVCommCombo.setLabeText("Community");
+        sVCommCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
+                sVCommComboActionPerformed(evt);
             }
         });
 
-        sVCommCombo.setLabeText("Community");
-
         sVHousCombo.setLabeText("Houses");
+        sVHousCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sVHousComboActionPerformed(evt);
+            }
+        });
 
         svWorkRTenantTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "FName", "Age", "Gender", "Date", "Sickness", "Need Hospitalization", "Status", "Assigned To"
+                "FName", "Age", "Gender", "Sickness", "Need Hospitalization"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -904,47 +947,63 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         jScrollPane7.setViewportView(svWorkRTenantTable);
 
         button1.setText("View Tenant Report");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
+        hClistCombo.setLabeText("Home Care Volunteers");
+
+        button6.setText("Assign Home Care");
+        button6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(246, 246, 246)
-                        .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(226, 387, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jScrollPane7)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(322, 322, 322)
+                .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198))
+            .addGroup(jPanel25Layout.createSequentialGroup()
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(190, 190, 190))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(317, 317, 317))))
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(377, 377, 377)
+                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel25Layout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addGap(34, 34, 34)
                 .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addGap(37, 37, 37)
+                .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
@@ -984,159 +1043,15 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         vAdminTab.addTab("Survey", manageTask);
 
-        vAdminTask1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vAdminTask1MouseClicked(evt);
-            }
-        });
-
-        jPanel27.setBackground(new java.awt.Color(217, 241, 255));
-
-        hcVolunteerCombo1.setLabeText("Survey Volunteers");
-
-        hCCommunity1.setLabeText("Community");
-        hCCommunity1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hCCommunity1ActionPerformed(evt);
-            }
-        });
-
-        hCHouse1.setLabeText("House");
-
-        button4.setBackground(new java.awt.Color(0, 91, 149));
-        button4.setForeground(new java.awt.Color(255, 255, 255));
-        button4.setText("Assign Task");
-        button4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        button4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button4ActionPerformed(evt);
-            }
-        });
-
-        chPatientCombo.setLabeText("Patient");
-
-        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
-        jPanel27.setLayout(jPanel27Layout);
-        jPanel27Layout.setHorizontalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel27Layout.createSequentialGroup()
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hCCommunity1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hcVolunteerCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hCHouse1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(chPatientCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 416, Short.MAX_VALUE))
-        );
-        jPanel27Layout.setVerticalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel27Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(hcVolunteerCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(hCCommunity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(hCHouse1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(chPatientCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
-        );
-
-        vAdminTask1.addTab("Assign Task", jPanel27);
-
-        jPanel29.setBackground(new java.awt.Color(217, 241, 255));
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Sender", "Date", "Status", "Medicine"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane6.setViewportView(jTable3);
-
-        button5.setBackground(new java.awt.Color(0, 91, 149));
-        button5.setForeground(new java.awt.Color(255, 255, 255));
-        button5.setText("Assign Task");
-        button5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        button5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button5ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
-        jPanel29.setLayout(jPanel29Layout);
-        jPanel29Layout.setHorizontalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                .addContainerGap(448, Short.MAX_VALUE)
-                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(304, 304, 304))
-        );
-        jPanel29Layout.setVerticalGroup(
-            jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel29Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        vAdminTask1.addTab("View Task", jPanel28);
-
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vAdminTask1)
+            .addGap(0, 1208, Short.MAX_VALUE)
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vAdminTask1)
+            .addGap(0, 747, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1385,9 +1300,8 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         
         try{
             SurveyVolunteerWorkRequest sV = new SurveyVolunteerWorkRequest();
-            HouseList houses = new HouseList();
-            houses.addNewHouse((House)sVHouse.getSelectedItem());
-            sV.setAssignedHouses(houses);
+            
+            sV.setAssignedHouse((House)sVHouse.getSelectedItem());
        
             DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             Date date = format.parse(sVDate.getText());
@@ -1415,30 +1329,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_button2ActionPerformed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button3ActionPerformed
-
     private void sVCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sVCommunityActionPerformed
         // TODO add your handling code here:
         populateHouses();
     }//GEN-LAST:event_sVCommunityActionPerformed
-
-    private void hCCommunity1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hCCommunity1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_hCCommunity1ActionPerformed
-
-    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button4ActionPerformed
-
-    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button5ActionPerformed
-
-    private void vAdminTask1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTask1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vAdminTask1MouseClicked
 
     private void manageMedicinelbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicinelbl2MouseClicked
         vAdminTab.setSelectedIndex(0);
@@ -1457,6 +1351,68 @@ public void changecolorB(JButton hover, Color rand) {
     private void createVolunteerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createVolunteerMouseExited
          changecolorB(createVolunteer, new Color(0,91,149));
     }//GEN-LAST:event_createVolunteerMouseExited
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+         Community selectedCommunity = (Community) sVCommCombo.getSelectedItem();
+        if (selectedCommunity != null) {
+            House selectedHouse = (House) sVHousCombo.getSelectedItem();
+            if (selectedHouse != null) {
+                 populateTenantInfo(selectedHouse);
+            } else {
+                 JOptionPane.showMessageDialog(this, "Please select a community and house view");
+                 return;
+            }
+            
+           
+        } else {
+             JOptionPane.showMessageDialog(this, "Please select a community and house view");
+              return;
+        }
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void sVCommComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sVCommComboActionPerformed
+        // TODO add your handling code here:
+       if (sVCommCombo.getSelectedIndex() > 0) {
+        populateHousesHC();
+       }
+    }//GEN-LAST:event_sVCommComboActionPerformed
+
+    private void sVHousComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sVHousComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sVHousComboActionPerformed
+
+    private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
+        // TODO add your handling code here:
+        try{
+            HomeCareVolunteerWorkRequest sV = new HomeCareVolunteerWorkRequest();
+            
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = format.parse(sVDate.getText());
+            sV.setRequestDate(date);
+            sV.setStatus("New");
+            Employee emp = (Employee)hClistCombo.getSelectedItem();
+            sV.setReceiver(getUser(emp.getId()));
+            sV.setSender(account);
+            
+       Organization org = null;
+       for (Organization orn : enterpriseD.getOrganizationDirectory().getOrganizationList())
+        {   
+            if (orn instanceof HomeCareVolunteerOrganization){
+                org = orn;
+                break;
+            }
+        }
+        if (org!=null){
+            org.getWorkQueue().getWorkRequestList().add(sV);
+            account.getWorkQueue().getWorkRequestList().add(sV);
+        }
+        
+            
+        } catch (ParseException e) {e.printStackTrace();}
+        
+    }//GEN-LAST:event_button6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1499,20 +1455,15 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel addVolunteer;
     private UI.Components.Button button1;
     private UI.Components.Button button2;
-    private UI.Components.Button button3;
-    private UI.Components.Button button4;
-    private UI.Components.Button button5;
+    private UI.Components.Button button6;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
-    private UI.Components.Combobox chPatientCombo;
     private javax.swing.JLabel close;
     private UI.Components.Button createVolunteer;
     private javax.swing.JPanel dashboard;
-    private UI.Components.Combobox hCCommunity1;
-    private UI.Components.Combobox hCHouse1;
-    private UI.Components.Combobox hcVolunteerCombo1;
+    private UI.Components.Combobox hClistCombo;
     private javax.swing.JPanel hcvTasks;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
@@ -1526,12 +1477,7 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
-    private javax.swing.JPanel jPanel29;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable3;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageMedicineIcon1;
@@ -1562,7 +1508,6 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JTable svWorkRTenantTable;
     private javax.swing.JTabbedPane vAdminTab;
     private javax.swing.JTabbedPane vAdminTask;
-    private javax.swing.JTabbedPane vAdminTask1;
     private javax.swing.JPanel vDashboard;
     private UI.Components.MyPasswordFieldLogin vOrgPW;
     private UI.Components.MyTextFieldLogin vOrgUN;

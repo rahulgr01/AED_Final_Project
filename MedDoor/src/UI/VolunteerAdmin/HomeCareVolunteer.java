@@ -109,10 +109,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         button4 = new UI.Components.Button();
         jLabel1 = new javax.swing.JLabel();
-        checkBox1 = new UI.Components.CheckBox();
-        checkBox2 = new UI.Components.CheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        combobox1 = new UI.Components.Combobox();
+        button5 = new UI.Components.Button();
         manageTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -557,62 +554,53 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("Create Work load for Hospital");
         button4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Assigned Patient Deatil:");
 
-        checkBox1.setBackground(new java.awt.Color(0, 91, 149));
-        checkBox1.setForeground(new java.awt.Color(255, 255, 255));
-        checkBox1.setText("New Patients");
-
-        checkBox2.setBackground(new java.awt.Color(0, 91, 149));
-        checkBox2.setForeground(new java.awt.Color(255, 255, 255));
-        checkBox2.setText("Old Patients");
-
-        jLabel2.setText("Assign Hospital: ");
+        button5.setBackground(new java.awt.Color(0, 91, 149));
+        button5.setForeground(new java.awt.Color(255, 255, 255));
+        button5.setText("Create Work load for Hospital");
+        button5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(checkBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(checkBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(247, 247, 247)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(94, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(checkBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(395, Short.MAX_VALUE))
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
@@ -818,6 +806,15 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         changecolor(side3, new Color(0,91,149));
     }//GEN-LAST:event_hcvTaskHMouseExited
 
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_button4ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -859,14 +856,12 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel addVolunteer;
     private UI.Components.Button button1;
     private UI.Components.Button button4;
+    private UI.Components.Button button5;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
-    private UI.Components.CheckBox checkBox1;
-    private UI.Components.CheckBox checkBox2;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox1;
     private javax.swing.JPanel dashboard;
     private javax.swing.JTabbedPane hcv;
     private javax.swing.JPanel hcvDashboard;
@@ -876,7 +871,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
