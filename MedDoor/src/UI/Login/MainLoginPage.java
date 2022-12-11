@@ -4,6 +4,7 @@ package UI.Login;
 import Business.DB4O.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.MailNew;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,11 +37,12 @@ private Animator animatorLogin;
     static boolean maximized = true;
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-    int verifyCode = new Random().nextInt(1022 + 1) + 1000;
+    int verifyCode;
     
     public MainLoginPage() {
         initComponents();
         system=dB4OUtil.retrieveSystem();
+        verifyCode = new Random().nextInt(1022 + 1) + 1000;
         vcode.setText(String.valueOf(verifyCode));
          getContentPane().setBackground(new Color(245, 245, 245));
            TimingTarget targetLogin = new TimingTargetAdapter() {
@@ -111,6 +114,7 @@ private Animator animatorLogin;
         cmdSignIn.setForeground(new java.awt.Color(255, 255, 255));
         cmdSignIn.setText("SIGN IN");
         cmdSignIn.setToolTipText("");
+        cmdSignIn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cmdSignIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdSignInActionPerformed(evt);
@@ -378,10 +382,22 @@ private Animator animatorLogin;
         }
         if(userAccount==null){
             JOptionPane.showMessageDialog(null, "Invalid credentials");
+            verifyCode = new Random().nextInt(1022 + 1) + 1000;
+        vcode.setText(String.valueOf(verifyCode));
             return;
         }
         else{
-             
+             JOptionPane.showMessageDialog(null, "Login Successfull!");
+//             try {
+//                   MailNew m=new MailNew("rahulgr3001@gmail.com","Login","Login Successful!!");
+//               } catch (MessagingException ex) {
+//                   Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
+//               }
+             txtUsername.setText("");
+             txtPass.setText("");
+             verificationCode.setText("");
+             verifyCode = new Random().nextInt(1022 + 1) + 1000;
+             vcode.setText(String.valueOf(verifyCode));
             userAccount.getRole().createWorkArea(this, userAccount, inOrganization, inEnterprise, system);
         }
   }
