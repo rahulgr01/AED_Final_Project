@@ -4,6 +4,7 @@ package UI.SystemAdmin;
 
 import Business.Community.Community;
 import Business.Community.House;
+import Business.Community.HouseList;
 import Business.Community.Tenant;
 import Business.EcoSystem;
 import Business.Employee.Employee;
@@ -1407,6 +1408,8 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void addTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantActionPerformed
        
+       
+   
         int selectedRowIndex = houseTable.getSelectedRow();
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
@@ -1418,7 +1421,8 @@ public class SystemAdmin extends javax.swing.JFrame {
             
         } catch (ParseException e) {e.printStackTrace();}
 
-        selectedHouse.createAndAddTenant(tenantName.getLabelText(), tenantName.getLabelText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getLabelText()), tenantEmail.getLabelText(), String.valueOf(tenantContact.getLabelText()));
+        selectedHouse.getTenats().createAndAddTenant(tenantName.getLabelText(), tenantName.getLabelText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getLabelText()), 
+                tenantEmail.getLabelText(), String.valueOf(tenantContact.getLabelText()),selectedHouse);
         
         JOptionPane.showMessageDialog(this, "Tenant Added!");
     }//GEN-LAST:event_addTenantActionPerformed
@@ -1665,7 +1669,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
-        selectedCommunity.createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText());
+    
+        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText(),selectedCommunity);
         
         JOptionPane.showMessageDialog(this, "House Added!");
     }//GEN-LAST:event_addHouseActionPerformed
@@ -1684,7 +1689,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
         if (selectedCommunity != null) {
-            populateHouseTable(selectedCommunity);
+            populateHouseTable(selectedCommunity);  
         }
     }//GEN-LAST:event_button1ActionPerformed
 

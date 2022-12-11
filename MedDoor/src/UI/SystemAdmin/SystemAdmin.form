@@ -803,7 +803,7 @@
                           <Component id="addHouseComCombo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Component id="button1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="48" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jTabbedPane2" min="-2" pref="411" max="-2" attributes="0"/>
                       </Group>
                   </Group>

@@ -39,6 +39,10 @@ public class Tenant extends Person {
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
+    public void Tenant(){
+String uniqueID = UUID.randomUUID().toString();
+        this.tenantID = uniqueID;
+    }
     
     public Tenant(String fName, String lName, Date dob, String gender,Integer age,String email, String phone, House residence) {
         super(fName, lName, dob, gender, age, residence);
@@ -47,7 +51,6 @@ public class Tenant extends Person {
 	this.emailId = email;
         this.phoneNumber = phone;
     }
-    public Tenant() {
-    }
+  
     
 }
