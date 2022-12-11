@@ -7,6 +7,7 @@ package Business.Community;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,12 @@ public class TenantDirectory {
 //          
 //          } catch (ParseException e) {e.printStackTrace();}
     }
+      public Tenant createAndAddTenant(String fName, String lName, Date dob, String gender,Integer age,String email, String phone,House house)
+        {
+         Tenant tenant = new Tenant(fName, lName, dob, gender, age, email,phone, house);
+         this.addNewTenant(tenant);
+         return tenant;
+    }
     
     public List<Tenant> getTenants() {
         return tenants;
@@ -43,11 +50,7 @@ public class TenantDirectory {
         return patient;
     }
     
-    public Tenant addTenant() {
-        Tenant newDoctor = new Tenant();
-        tenants.add(newDoctor);  
-        return newDoctor;
-    } 
+ 
     
     public void deleteTenant(int index) {
         tenants.remove(index);

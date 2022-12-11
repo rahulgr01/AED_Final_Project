@@ -3,3 +3,6 @@
 /MedDoor/build/
 /MedDoor/dist/
 /MedDoor/nbproject/private/
+MedDoor/javax.mail.jar
+MedDoor/miglayout-4.0.jar
+MedDoor/TimingFramework-0.55.jar
