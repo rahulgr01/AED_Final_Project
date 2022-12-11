@@ -14,10 +14,6 @@ public class Medicine {
     private double price;
     private int qty;
 
-    public Medicine(String medName, String medCat, String phar, String medPrice, String medQuant) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public String getCategory() {
         return category;
     }

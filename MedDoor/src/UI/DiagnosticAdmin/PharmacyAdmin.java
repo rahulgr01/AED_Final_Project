@@ -132,6 +132,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         pharmacyAdmin = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        button1 = new UI.Components.Button();
         pharmacy = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         medicine = new javax.swing.JPanel();
@@ -548,20 +551,53 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
+        pharmacyAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pharmacyAdminMouseClicked(evt);
+            }
+        });
+
         dashboard.setBackground(new java.awt.Color(255, 255, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Sender", "Date", "Status", "Message", "Pickup by"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        button1.setText("button1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(128, 128, 128))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(406, Short.MAX_VALUE))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -981,6 +1017,29 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateMedicineActionPerformed
 
+    private void pharmacyAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyAdminMouseClicked
+    int index = pharmacyAdmin.getSelectedIndex();
+       
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                populateEnterprise();
+                break;
+            case 2:
+//                populateEnterpriseName(network, cEntName);
+                break;
+                case 3:
+//                populateEnterpriseName(network, vSEnterprise);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_pharmacyAdminMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1020,6 +1079,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
     private UI.Components.Button addMedicine;
+    private UI.Components.Button button1;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1044,7 +1104,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
