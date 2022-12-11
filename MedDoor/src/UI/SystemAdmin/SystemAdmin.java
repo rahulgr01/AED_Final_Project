@@ -16,6 +16,7 @@ import Business.Role.HospitalAdminRole;
 import Business.Role.InsuranceAdminRole;
 import Business.Role.VolunteerAdminRole;
 import Business.UserAccount.UserAccount;
+import UI.Components.Combobox;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import com.model.Validation;
@@ -65,25 +66,48 @@ public class SystemAdmin extends javax.swing.JFrame {
     public void populateCommunity() {
        addHouseComCombo.removeAll();
        for (Community type : network.getCommunityDirectory().getCommunityList()) {
-           addHouseComCombo.addItem(type);
+            addHouseComCombo.addItem(type);
         } 
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
+        System.out.print("inside populate");
         createEnterpriseType.removeAll();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             createEnterpriseType.addItem(type);
         }
     }
     
-    private void populateEnterpriseName(Network network){
-        cEntName.removeAllItems();
+    private void populateEnterpriseName(Network network, Combobox comboBox){
+        comboBox.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            cEntName.addItem(enterprise);
+            comboBox.addItem(enterprise);
         }
         
     }
+    
+    private void populateHouseTable(Enterprise selectedEnterprise) {
+        try{
+        DefaultTableModel model = (DefaultTableModel) vSEntepriseT.getModel();
+
+        model.setRowCount(0);
+            for (Organization org : selectedEnterprise.getOrganizationDirectory().getOrganizationList()) {
+                for(UserAccount user : org.getUserAccountDirectory().getUserAccountList()){
+                Object[] row = new Object[3];
+                row[0] = org.getName();
+                row[1] = user.getEmployee().getName();
+                row[2] = user.getRole().toString();
+                model.addRow(row);
+                }
+            }
+        }catch(Exception e)
+        {
+             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+    }
+     
+    
     
      private void populateHouseTable(Community selectedCommunity) {
         try{
@@ -97,6 +121,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 row[2] = network;
                 row[3] = selectedCommunity.getZipCode();
                 model.addRow(row);
+                
             }
         }catch(Exception e)
         {
@@ -211,6 +236,10 @@ public class SystemAdmin extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tenantsTable = new javax.swing.JTable();
         addTenantN1 = new UI.Components.Button();
+        jPanel4 = new javax.swing.JPanel();
+        houseAddress = new UI.Components.MyTextFieldLogin();
+        houseNumber = new UI.Components.MyTextFieldLogin();
+        addHouse = new UI.Components.Button();
         jPanel5 = new javax.swing.JPanel();
         tenantContact = new UI.Components.MyTextFieldLogin();
         tenantEmail = new UI.Components.MyTextFieldLogin();
@@ -219,10 +248,6 @@ public class SystemAdmin extends javax.swing.JFrame {
         addTenant = new UI.Components.Button();
         genderCombo = new UI.Components.Combobox();
         tenantDob = new UI.Components.MyTextFieldLogin();
-        jPanel4 = new javax.swing.JPanel();
-        houseAddress = new UI.Components.MyTextFieldLogin();
-        houseNumber = new UI.Components.MyTextFieldLogin();
-        addHouse = new UI.Components.Button();
         button1 = new UI.Components.Button();
         createEnt = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -238,9 +263,11 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntPassword = new UI.Components.MyPasswordFieldLogin();
         viewSystemTab = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        combobox4 = new UI.Components.Combobox();
+        vSEnterprise = new UI.Components.Combobox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        vSEntepriseT = new javax.swing.JTable();
+        button2 = new UI.Components.Button();
+        button3 = new UI.Components.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -847,6 +874,66 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("List Houses", ListHouses);
 
+        jPanel4.setBackground(new java.awt.Color(217, 241, 255));
+
+        houseAddress.setLabelText("House Address");
+
+        houseNumber.setLabelText("Apartment Number");
+        houseNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                houseNumberActionPerformed(evt);
+            }
+        });
+
+        addHouse.setBackground(new java.awt.Color(0, 91, 149));
+        addHouse.setForeground(new java.awt.Color(255, 255, 255));
+        addHouse.setText("Add House");
+        addHouse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addHouse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addHouseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addHouseMouseExited(evt);
+            }
+        });
+        addHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addHouseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 129, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 129, Short.MAX_VALUE))
+        );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
+
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Add House", jPanel4);
+
         jPanel5.setBackground(new java.awt.Color(217, 241, 255));
 
         tenantContact.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -932,66 +1019,6 @@ public class SystemAdmin extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
-
-        jPanel4.setBackground(new java.awt.Color(217, 241, 255));
-
-        houseAddress.setLabelText("House Address");
-
-        houseNumber.setLabelText("Apartment Number");
-        houseNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNumberActionPerformed(evt);
-            }
-        });
-
-        addHouse.setBackground(new java.awt.Color(0, 91, 149));
-        addHouse.setForeground(new java.awt.Color(255, 255, 255));
-        addHouse.setText("Add House");
-        addHouse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addHouse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addHouseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addHouseMouseExited(evt);
-            }
-        });
-        addHouse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addHouseActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 129, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 129, Short.MAX_VALUE))
-        );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
-
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Add House", jPanel4);
 
         button1.setText("View ");
         button1.addActionListener(new java.awt.event.ActionListener() {
@@ -1085,7 +1112,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(createEnterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntLayout = new javax.swing.GroupLayout(createEnt);
@@ -1166,7 +1193,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(cEntEEname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntAdminTabLayout = new javax.swing.GroupLayout(createEntAdminTab);
@@ -1184,30 +1211,30 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(217, 241, 255));
 
-        combobox4.setLabeText("Enterprise");
+        vSEnterprise.setLabeText("Enterprise");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        vSEntepriseT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Organization", "Employee Name", "Role", "Community"
+                "Organization", "Employee Name", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1218,7 +1245,21 @@ public class SystemAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(vSEntepriseT);
+
+        button2.setText("View Data");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+
+        button3.setText("Update");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1226,16 +1267,27 @@ public class SystemAdmin extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1411,7 +1463,6 @@ public class SystemAdmin extends javax.swing.JFrame {
         int selectedRowIndex = houseTable.getSelectedRow();
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
-        HouseList h= selectedCommunity.getHouse();
         House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
         Date date = new Date(); 
         try{
@@ -1419,8 +1470,10 @@ public class SystemAdmin extends javax.swing.JFrame {
             date = format.parse(tenantDob.getText());
             
         } catch (ParseException e) {e.printStackTrace();}
-        selectedHouse.getTenats().createAndAddTenant(tenantName.getText(), tenantName.getText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getText()), 
-                tenantEmail.getText(), String.valueOf(tenantContact.getText()),selectedHouse);
+
+        selectedHouse.getTenats().createAndAddTenant(tenantName.getLabelText(), tenantName.getLabelText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getLabelText()), 
+                tenantEmail.getLabelText(), String.valueOf(tenantContact.getLabelText()),selectedHouse);
+        
         JOptionPane.showMessageDialog(this, "Tenant Added!");
     }//GEN-LAST:event_addTenantActionPerformed
 
@@ -1593,10 +1646,10 @@ public class SystemAdmin extends javax.swing.JFrame {
                 populateEnterprise();
                 break;
             case 2:
-                populateEnterpriseName(network);
+                populateEnterpriseName(network, cEntName);
                 break;
                 case 3:
-                
+                populateEnterpriseName(network, vSEnterprise);
                 break;
             default:
                 throw new AssertionError();
@@ -1666,9 +1719,9 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
-        System.out.println("selected comm sa" + selectedCommunity.getCommunityName());
-    House h=        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText(),selectedCommunity);
-        System.out.println("house----------------------------------- sa" + h.getStreeAdredss());
+    
+        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText(),selectedCommunity);
+        
         JOptionPane.showMessageDialog(this, "House Added!");
     }//GEN-LAST:event_addHouseActionPerformed
 
@@ -1711,6 +1764,18 @@ public class SystemAdmin extends javax.swing.JFrame {
         populateTenantTable(selectedHouse);
         }
     }//GEN-LAST:event_addTenantN1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+        
+         Enterprise enterprise = (Enterprise) vSEnterprise.getSelectedItem();
+         
+        
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1763,6 +1828,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.Button addTenantN;
     private UI.Components.Button addTenantN1;
     private UI.Components.Button button1;
+    private UI.Components.Button button2;
+    private UI.Components.Button button3;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1773,7 +1840,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyPasswordFieldLogin cEntPassword;
     private UI.Components.MyTextFieldLogin cEntUsername;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox4;
     private javax.swing.JPanel createEnt;
     private javax.swing.JPanel createEntAdminTab;
     private UI.Components.Button createEnterpriseButton;
@@ -1798,7 +1864,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageCategoryIcon;
@@ -1828,6 +1893,8 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.MyTextFieldLogin tenantEmail;
     private UI.Components.MyTextFieldLogin tenantName;
     private javax.swing.JTable tenantsTable;
+    private javax.swing.JTable vSEntepriseT;
+    private UI.Components.Combobox vSEnterprise;
     private javax.swing.JPanel viewSystem;
     private javax.swing.JPanel viewSystemTab;
     // End of variables declaration//GEN-END:variables
