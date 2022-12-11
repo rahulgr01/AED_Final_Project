@@ -68,11 +68,13 @@ public class House {
         this.houseNumer = houseNumer;
         this.streeAdredss = streetAdd;
         this.community = community;
+         this.tenats= new TenantDirectory();
     }
     
     public House() {
         String uniqueID = UUID.randomUUID().toString();
         this.houseId = uniqueID;
+         this.tenats= new TenantDirectory();
     }
     
 }

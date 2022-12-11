@@ -348,7 +348,7 @@ private Animator animatorLogin;
             //Step 2: Go inside each network and check each enterprise
             for(Network network:system.getNetworkList()){
                 //Step 2.a: check against each enterprise
-                System.out.print(network);
+                System.out.print("network" + network);
                 for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
                     userAccount=enterprise.getUserAccountDirectory().verifyUser(userName, password);
                     if(userAccount==null){
@@ -387,7 +387,6 @@ private Animator animatorLogin;
   }
         }  
         dB4OUtil.storeSystem(system);
-        System.out.println(system.getNetworkList() + "388");
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked

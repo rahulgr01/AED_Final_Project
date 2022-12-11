@@ -65,12 +65,11 @@ public class SystemAdmin extends javax.swing.JFrame {
     public void populateCommunity() {
        addHouseComCombo.removeAll();
        for (Community type : network.getCommunityDirectory().getCommunityList()) {
-            addHouseComCombo.addItem(type);
+           addHouseComCombo.addItem(type);
         } 
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
-        System.out.print("inside populate");
         createEnterpriseType.removeAll();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             createEnterpriseType.addItem(type);
@@ -98,7 +97,6 @@ public class SystemAdmin extends javax.swing.JFrame {
                 row[2] = network;
                 row[3] = selectedCommunity.getZipCode();
                 model.addRow(row);
-                
             }
         }catch(Exception e)
         {
@@ -213,10 +211,6 @@ public class SystemAdmin extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tenantsTable = new javax.swing.JTable();
         addTenantN1 = new UI.Components.Button();
-        jPanel4 = new javax.swing.JPanel();
-        houseAddress = new UI.Components.MyTextFieldLogin();
-        houseNumber = new UI.Components.MyTextFieldLogin();
-        addHouse = new UI.Components.Button();
         jPanel5 = new javax.swing.JPanel();
         tenantContact = new UI.Components.MyTextFieldLogin();
         tenantEmail = new UI.Components.MyTextFieldLogin();
@@ -225,6 +219,10 @@ public class SystemAdmin extends javax.swing.JFrame {
         addTenant = new UI.Components.Button();
         genderCombo = new UI.Components.Combobox();
         tenantDob = new UI.Components.MyTextFieldLogin();
+        jPanel4 = new javax.swing.JPanel();
+        houseAddress = new UI.Components.MyTextFieldLogin();
+        houseNumber = new UI.Components.MyTextFieldLogin();
+        addHouse = new UI.Components.Button();
         button1 = new UI.Components.Button();
         createEnt = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -849,66 +847,6 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("List Houses", ListHouses);
 
-        jPanel4.setBackground(new java.awt.Color(217, 241, 255));
-
-        houseAddress.setLabelText("House Address");
-
-        houseNumber.setLabelText("Apartment Number");
-        houseNumber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNumberActionPerformed(evt);
-            }
-        });
-
-        addHouse.setBackground(new java.awt.Color(0, 91, 149));
-        addHouse.setForeground(new java.awt.Color(255, 255, 255));
-        addHouse.setText("Add House");
-        addHouse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addHouse.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addHouseMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addHouseMouseExited(evt);
-            }
-        });
-        addHouse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addHouseActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 129, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 129, Short.MAX_VALUE))
-        );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
-
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Add House", jPanel4);
-
         jPanel5.setBackground(new java.awt.Color(217, 241, 255));
 
         tenantContact.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -995,6 +933,66 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
 
+        jPanel4.setBackground(new java.awt.Color(217, 241, 255));
+
+        houseAddress.setLabelText("House Address");
+
+        houseNumber.setLabelText("Apartment Number");
+        houseNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                houseNumberActionPerformed(evt);
+            }
+        });
+
+        addHouse.setBackground(new java.awt.Color(0, 91, 149));
+        addHouse.setForeground(new java.awt.Color(255, 255, 255));
+        addHouse.setText("Add House");
+        addHouse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addHouse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addHouseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addHouseMouseExited(evt);
+            }
+        });
+        addHouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addHouseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(0, 129, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 129, Short.MAX_VALUE))
+        );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
+
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Add House", jPanel4);
+
         button1.setText("View ");
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1029,7 +1027,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1087,7 +1085,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(createEnterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(287, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntLayout = new javax.swing.GroupLayout(createEnt);
@@ -1168,7 +1166,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(cEntEEname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntAdminTabLayout = new javax.swing.GroupLayout(createEntAdminTab);
@@ -1237,7 +1235,7 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1413,6 +1411,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         int selectedRowIndex = houseTable.getSelectedRow();
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        HouseList h= selectedCommunity.getHouse();
         House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
         Date date = new Date(); 
         try{
@@ -1420,10 +1419,8 @@ public class SystemAdmin extends javax.swing.JFrame {
             date = format.parse(tenantDob.getText());
             
         } catch (ParseException e) {e.printStackTrace();}
-
-        selectedHouse.getTenats().createAndAddTenant(tenantName.getLabelText(), tenantName.getLabelText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getLabelText()), 
-                tenantEmail.getLabelText(), String.valueOf(tenantContact.getLabelText()),selectedHouse);
-        
+        selectedHouse.getTenats().createAndAddTenant(tenantName.getText(), tenantName.getText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getText()), 
+                tenantEmail.getText(), String.valueOf(tenantContact.getText()),selectedHouse);
         JOptionPane.showMessageDialog(this, "Tenant Added!");
     }//GEN-LAST:event_addTenantActionPerformed
 
@@ -1669,9 +1666,9 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
-    
-        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText(),selectedCommunity);
-        
+        System.out.println("selected comm sa" + selectedCommunity.getCommunityName());
+    House h=        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getLabelText(), houseNumber.getLabelText(),selectedCommunity);
+        System.out.println("house----------------------------------- sa" + h.getStreeAdredss());
         JOptionPane.showMessageDialog(this, "House Added!");
     }//GEN-LAST:event_addHouseActionPerformed
 

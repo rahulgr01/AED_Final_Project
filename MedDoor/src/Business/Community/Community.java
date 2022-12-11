@@ -40,7 +40,6 @@ public class Community {
         this.zipCode = zipCode;
         this.city = city;
         this.houselist= new HouseList();
-         System.out.println("houselist 50"+ this.houselist);
     }
 
     public Integer getZipCode() {
