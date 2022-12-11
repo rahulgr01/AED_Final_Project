@@ -4,21 +4,23 @@
  */
 package Business.Employee;
 
+import java.util.UUID;
+
 /**
  *
  * @author ashikakalmady
  */
 public class Employee {
      private String name;
-    private int id;
-    private static int count = 1;
+    private String id;
 
     public Employee() {
-        id = count;
-        count++;
+        String uniqueID = UUID.randomUUID().toString();
+        this.id = uniqueID;
+       
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

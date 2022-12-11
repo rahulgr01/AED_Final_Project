@@ -22,6 +22,10 @@ public class OrganizationDirectory {
         return organizationList;
     }
     
+    public ArrayList<Organization> getOrganizationList(Type type) {
+        return organizationList;
+    }
+    
      public Organization createOrganization(Type type, String name){
         Organization organization = null;
         if (type.getValue().equals(Type.LabService.getValue())){

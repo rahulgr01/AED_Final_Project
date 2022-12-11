@@ -988,22 +988,19 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" max="32767" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="combobox5" min="-2" pref="297" max="-2" attributes="0"/>
-                                              <Component id="combobox4" min="-2" pref="297" max="-2" attributes="0"/>
-                                              <Component id="myTextFieldLogin8" alignment="0" min="-2" pref="297" max="-2" attributes="0"/>
+                                              <Component id="sVHouse" min="-2" pref="297" max="-2" attributes="0"/>
+                                              <Component id="sVCommunity" min="-2" pref="297" max="-2" attributes="0"/>
+                                              <Component id="sVDate" alignment="0" min="-2" pref="297" max="-2" attributes="0"/>
+                                              <Component id="sVolunteerCombo" alignment="0" min="-2" pref="297" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="276" max="-2" attributes="0"/>
                                           <Component id="button2" min="-2" pref="208" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -1014,62 +1011,49 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane4" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="combobox4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="combobox5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                  <Component id="sVolunteerCombo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="myTextFieldLogin8" min="-2" pref="48" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                  <Component id="sVCommunity" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="sVHouse" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="sVDate" min="-2" pref="48" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="button2" min="-2" pref="37" max="-2" attributes="0"/>
-                                  <EmptySpace pref="218" max="32767" attributes="0"/>
+                                  <EmptySpace pref="319" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-                          <AuxValues>
-                            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                          </AuxValues>
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                          <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable1">
-                              <Properties>
-                                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="4" rowCount="4">
-                                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
-                                  </Table>
-                                </Property>
-                              </Properties>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                        <Component class="UI.Components.Button" name="button2">
+                        <Component class="UI.Components.Combobox" name="sVolunteerCombo">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Assign Task"/>
+                            <Property name="labeText" type="java.lang.String" value="Survey Volunteers"/>
                           </Properties>
                         </Component>
-                        <Component class="UI.Components.Combobox" name="combobox4">
+                        <Component class="UI.Components.Combobox" name="sVCommunity">
                           <Properties>
                             <Property name="labeText" type="java.lang.String" value="Community"/>
                           </Properties>
                         </Component>
-                        <Component class="UI.Components.Combobox" name="combobox5">
+                        <Component class="UI.Components.Combobox" name="sVHouse">
                           <Properties>
                             <Property name="labeText" type="java.lang.String" value="House"/>
                           </Properties>
                         </Component>
-                        <Component class="UI.Components.MyTextFieldLogin" name="myTextFieldLogin8">
+                        <Component class="UI.Components.MyTextFieldLogin" name="sVDate">
                           <Properties>
                             <Property name="labelText" type="java.lang.String" value="Enter Date "/>
                           </Properties>
+                        </Component>
+                        <Component class="UI.Components.Button" name="button2">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Assign Task"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button2ActionPerformed"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

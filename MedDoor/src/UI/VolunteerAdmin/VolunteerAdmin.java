@@ -2,20 +2,29 @@
 package UI.VolunteerAdmin;
 
 
+import Business.Community.Community;
+import Business.Community.House;
+import Business.Community.HouseList;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.VolunteerEnterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.HomeCareVolunteerRole;
 import Business.Role.SurveyVolunteerRole;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.SurveyVolunteerWorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class VolunteerAdmin extends javax.swing.JFrame {
 
@@ -31,13 +41,19 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private JFrame userProcessContainer;
     JFrame parentFrame;
     VolunteerEnterprise vEnterPrise;
+    Organization organization;
+    UserAccount account;
+    Network network;
     public VolunteerAdmin(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business,JFrame parentFrame) {
           initComponents();
           vEnterPrise = (VolunteerEnterprise) enterprise;
+          this.organization = organization;
           this.parentFrame = parentFrame;
+          this.account = account;
+          network = business.getNetworkList().get(0);
           vAdminTab.setSelectedIndex(0);
           vAdminTask.setSelectedIndex(0);
     }
@@ -45,12 +61,44 @@ public class VolunteerAdmin extends javax.swing.JFrame {
  
     
     public void populateVolunteerEnterpriseOrganizations() {
-         vOrganizationsCombo.removeAllItems();
+        vOrganizationsCombo.removeAllItems();
         
         for (Organization org : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
             vOrganizationsCombo.addItem(org);
         }
     }
+    
+    public void populateSurveyVolunteers() {
+        sVolunteerCombo.removeAllItems();
+        
+        for (Organization org : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
+            if (org.getName() == Organization.Type.SurveyVolunteer.getValue()) {
+                for(UserAccount account : org.getUserAccountDirectory().getUserAccountList()) {
+                    sVolunteerCombo.addItem(account.getEmployee());
+                }
+            }
+        }
+      
+    }
+    
+    public void populateCommunities() {
+        sVCommunity.removeAllItems();
+        
+        for (Community com : network.getCommunityDirectory().getCommunityList()){
+            sVCommunity.addItem(account.getEmployee());
+        }
+      
+    }
+    
+    public void populateHouses() {
+        sVHouse.removeAllItems();
+        Community com = (Community) sVCommunity.getSelectedItem();
+        for (House house : com.getHouse().getHouses()){
+            sVHouse.addItem(house);
+        }
+      
+    }
+    
     
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
@@ -136,12 +184,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         vAdminTask = new javax.swing.JTabbedPane();
         jPanel23 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sVolunteerCombo = new UI.Components.Combobox();
+        sVCommunity = new UI.Components.Combobox();
+        sVHouse = new UI.Components.Combobox();
+        sVDate = new UI.Components.MyTextFieldLogin();
         button2 = new UI.Components.Button();
-        combobox4 = new UI.Components.Combobox();
-        combobox5 = new UI.Components.Combobox();
-        myTextFieldLogin8 = new UI.Components.MyTextFieldLogin();
         jPanel24 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -715,61 +762,53 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable1);
+        sVolunteerCombo.setLabeText("Survey Volunteers");
+
+        sVCommunity.setLabeText("Community");
+
+        sVHouse.setLabeText("House");
+
+        sVDate.setLabelText("Enter Date ");
 
         button2.setText("Assign Task");
-
-        combobox4.setLabeText("Community");
-
-        combobox5.setLabeText("House");
-
-        myTextFieldLogin8.setLabelText("Enter Date ");
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4))
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combobox5, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin8, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVDate, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
+                        .addGap(276, 276, 276)
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 299, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(combobox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(myTextFieldLogin8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(sVDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         vAdminTask.addTab("Survey Volunteer", jPanel23);
@@ -1016,6 +1055,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 populateVolunteerEnterpriseOrganizations();
                 break;
             case 2:
+                
                 break;
             
             default:
@@ -1070,6 +1110,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         System.out.print(index);
         switch (index) {
             case 0:
+                
                 break;
             case 1:
                // populateVolunteerEnterpriseOrganizations();
@@ -1079,6 +1120,36 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 throw new AssertionError();
         }
     }//GEN-LAST:event_vAdminTaskMouseClicked
+    
+    public UserAccount getUser(String empId) {
+        for(UserAccount user: organization.getUserAccountDirectory().getUserAccountList()) {
+            if(user.getEmployee().getId() == empId) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            SurveyVolunteerWorkRequest sV = new SurveyVolunteerWorkRequest();
+        HouseList houses = new HouseList();
+        houses.addNewHouse((House)sVHouse.getSelectedItem());
+        sV.setAssignedHouses(houses);
+       
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = format.parse(sVDate.getText());
+            sV.setAssignedDate(date);
+            sV.setStatus("new");
+             
+            
+        } catch (ParseException e) {e.printStackTrace();}
+        
+        
+    }//GEN-LAST:event_button2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1127,8 +1198,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox4;
-    private UI.Components.Combobox combobox5;
     private UI.Components.Combobox combobox6;
     private UI.Components.Combobox combobox7;
     private UI.Components.Combobox combobox8;
@@ -1143,9 +1212,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
@@ -1163,8 +1230,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin8;
     private javax.swing.JPanel pharmacyStaistics;
+    private UI.Components.Combobox sVCommunity;
+    private UI.Components.MyTextFieldLogin sVDate;
+    private UI.Components.Combobox sVHouse;
+    private UI.Components.Combobox sVolunteerCombo;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side5;
