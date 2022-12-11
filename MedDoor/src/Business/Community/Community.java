@@ -5,6 +5,7 @@
 package Business.Community;
 
 import Business.Network.Network;
+import Business.Pharmacy.PharmacyDirectory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +20,23 @@ public class Community {
     private Integer zipCode; 
     private Network city;
     public HouseList houselist;
+    public PharmacyDirectory pd;
+
+    public HouseList getHouselist() {
+        return houselist;
+    }
+
+    public void setHouselist(HouseList houselist) {
+        this.houselist = houselist;
+    }
+
+    public PharmacyDirectory getPd() {
+        return pd;
+    }
+
+    public void setPd(PharmacyDirectory pd) {
+        this.pd = pd;
+    }
 
     public HouseList getHouse() {
         return houselist;
@@ -40,6 +58,7 @@ public class Community {
         this.zipCode = zipCode;
         this.city = city;
         this.houselist= new HouseList();
+        this.pd=new PharmacyDirectory();
          System.out.println("houselist 50"+ this.houselist);
     }
 
