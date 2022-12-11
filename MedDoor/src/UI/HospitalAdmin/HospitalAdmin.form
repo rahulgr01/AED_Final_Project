@@ -801,21 +801,24 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="patientList" alignment="1" max="32767" attributes="0"/>
-                              <Component id="doctorList" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel6" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="staffCombo" min="-2" pref="297" max="-2" attributes="0"/>
+                                      <Component id="doctorCombo" min="-2" pref="297" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="385" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="staffList" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -825,7 +828,7 @@
                                   <Component id="updatePatient" min="-2" pref="185" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="465" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -836,70 +839,24 @@
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                           <Component id="patientList" min="-2" pref="187" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="staffList" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="doctorList" min="-2" pref="197" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel4" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="staffCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel6" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="doctorCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
                           <Component id="updatePatient" min="-2" pref="34" max="-2" attributes="0"/>
-                          <EmptySpace pref="192" max="32767" attributes="0"/>
+                          <EmptySpace pref="179" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="doctorList">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JTable" name="doctorTable">
-                      <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="12">
-                            <Column editable="true" title="Doctor  ID" type="java.lang.Object"/>
-                            <Column editable="true" title="Name" type="java.lang.Object"/>
-                            <Column editable="true" title="Speiciality" type="java.lang.Object"/>
-                            <Column editable="true" title="Expeience" type="java.lang.Object"/>
-                          </Table>
-                        </Property>
-                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                          <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                          </TableColumnModel>
-                        </Property>
-                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
                 <Container class="javax.swing.JScrollPane" name="patientList">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -990,48 +947,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JScrollPane" name="staffList">
-                  <AuxValues>
-                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-                  </AuxValues>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-                  <SubComponents>
-                    <Component class="javax.swing.JTable" name="staffTable">
-                      <Properties>
-                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="12">
-                            <Column editable="true" title="Staff ID" type="java.lang.Object"/>
-                            <Column editable="true" title="Name" type="java.lang.Object"/>
-                            <Column editable="true" title="Gender" type="java.lang.Object"/>
-                          </Table>
-                        </Property>
-                        <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                          <TableColumnModel selectionModel="0">
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                              <Title/>
-                              <Editor/>
-                              <Renderer/>
-                            </Column>
-                          </TableColumnModel>
-                        </Property>
-                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                          <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1076,6 +991,22 @@
                     <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updatePatientMouseEntered"/>
                     <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="updatePatientMouseExited"/>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updatePatientActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="UI.Components.Combobox" name="doctorCombo">
+                  <Properties>
+                    <Property name="labeText" type="java.lang.String" value="Select Doctor&#xa;"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorComboActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="UI.Components.Combobox" name="staffCombo">
+                  <Properties>
+                    <Property name="labeText" type="java.lang.String" value="Select Staff"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="staffComboActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -1532,17 +1463,17 @@
                                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                   <Component id="doctorGenderCombo" pref="228" max="32767" attributes="0"/>
                                                   <Component id="doctorSalary" alignment="1" max="32767" attributes="0"/>
-                                                  <Component id="doctorName" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="txtDoctorName" alignment="1" max="32767" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Component id="doctorSpeciality" min="-2" pref="205" max="-2" attributes="0"/>
-                                                  <Component id="doctorUsername" min="-2" pref="201" max="-2" attributes="0"/>
+                                                  <Component id="txtDoctorUsername" min="-2" pref="201" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="doctorExperience" min="-2" pref="198" max="-2" attributes="0"/>
-                                                  <Component id="doctorPassword" min="-2" pref="198" max="-2" attributes="0"/>
+                                                  <Component id="txtDoctorPassword" min="-2" pref="198" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -1566,9 +1497,9 @@
                               <Component id="doctorID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="doctorName" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="doctorPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="doctorUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDoctorName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDoctorPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDoctorUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -1593,12 +1524,12 @@
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="UI.Components.TextField" name="doctorName">
+                    <Component class="UI.Components.TextField" name="txtDoctorName">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Full Name"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorNameActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDoctorNameActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="UI.Components.TextField" name="doctorSalary">
@@ -1609,7 +1540,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorSalaryActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="UI.Components.TextField" name="doctorPassword">
+                    <Component class="UI.Components.TextField" name="txtDoctorPassword">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Password"/>
                       </Properties>
@@ -1735,15 +1666,10 @@
                         <Component class="javax.swing.JTable" name="crudDoctorTable">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="8" rowCount="18">
-                                <Column editable="false" title="Doctor ID" type="java.lang.Integer"/>
+                              <Table columnCount="3" rowCount="18">
                                 <Column editable="true" title="Name" type="java.lang.String"/>
                                 <Column editable="false" title="Username" type="java.lang.String"/>
                                 <Column editable="true" title="Password" type="java.lang.Object"/>
-                                <Column editable="true" title="Gender" type="java.lang.Object"/>
-                                <Column editable="true" title="Speciality" type="java.lang.Object"/>
-                                <Column editable="true" title="Experience" type="java.lang.Object"/>
-                                <Column editable="true" title="Salary" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1794,15 +1720,18 @@
                               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="crudDoctorTableMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="UI.Components.TextField" name="doctorUsername">
+                    <Component class="UI.Components.TextField" name="txtDoctorUsername">
                       <Properties>
                         <Property name="labelText" type="java.lang.String" value="Username"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorUsernameActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDoctorUsernameActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="UI.Components.Combobox" name="doctorGenderCombo">
@@ -1904,7 +1833,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPane2" pref="940" max="32767" attributes="0"/>
+                                      <Component id="crudStaffSP" pref="940" max="32767" attributes="0"/>
                                       <Component id="searchPanel1" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -1974,7 +1903,7 @@
                                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                   <Component id="searchPanel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" pref="276" max="-2" attributes="0"/>
+                                  <Component id="crudStaffSP" min="-2" pref="276" max="-2" attributes="0"/>
                                   <EmptySpace pref="241" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -2221,7 +2150,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                        <Container class="javax.swing.JScrollPane" name="crudStaffSP">
                           <AuxValues>
                             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                           </AuxValues>

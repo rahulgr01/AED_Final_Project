@@ -13,7 +13,7 @@ public abstract class Role {
     
     public enum RoleType{
         
-        Doctor("Docor"),
+        Doctor("Doctor"),
         Patient("Patient"),
 //        AmbulanceDriver("AmbulanceDriver"),
         Staff("Staff"),

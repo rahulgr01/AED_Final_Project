@@ -31,8 +31,8 @@ public class EnterpriseDirectory {
        Enterprise enterprise=null;
         if(type==Enterprise.EnterpriseType.Hospital){
             enterprise=new HospitalEnterprise(name);
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HospitalStaff, "Hospital Staff Org");
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Doctor, "Doctor Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HospitalStaff, "HospitalStaff Organization");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Doctor, "Doctor Organization");
             
             enterpriseList.add(enterprise);
         }

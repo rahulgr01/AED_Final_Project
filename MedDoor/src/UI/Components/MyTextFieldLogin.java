@@ -186,9 +186,9 @@ public class MyTextFieldLogin extends JTextField {
 
     @Override
     public void setText(String string) {
-        if (!getText().equals(string)) {
-            showing(string.equals(""));
-        }
-        super.setText(string);
+//        if (!getText().equals(string)) {
+//            showing(string.equals(""));
+//        }
+//        super.setText(string);
     }
 }
