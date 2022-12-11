@@ -58,7 +58,7 @@ public class DiagnosticAdmin extends javax.swing.JFrame {
          this.parentFrame = parentFrame;
          populateCommunity();
          dEnterprise = (DiagnosticsEnterprise) enterprise;
-           TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+        //   TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
 //           dtm = (DefaultTableModel) categoryTable.getModel();
 //          populateCategory();
     }
@@ -938,7 +938,7 @@ public void populateCommunity() {
         String phAdd=pharmacyAddress.getText();
         String phCom=phComCombo.getSelectedItem().toString();
         String phCont=pharmacyContact.getText();
-        Pharmacy ph = new Pharmacy(phName,phAdd,phCont);
+      //  Pharmacy ph = new Pharmacy(phName,phAdd,phCont);
 
         for(Organization org : dEnterprise.getOrganizationDirectory().getOrganizationList()) {
             if(org.getName() == Organization.Type.Pharmacy.getValue()) {
@@ -948,23 +948,23 @@ public void populateCommunity() {
             }
         }
     }//GEN-LAST:event_addPharmacybtnActionPerformed
- private void populateMedicineTable() {
-         Pharmacy pha=new Pharmacy();
-        MedicineInventory mi = pha.getMenu();
-        DefaultTableModel model = (DefaultTableModel) medicineTable.getModel();
-        model.setRowCount(0);
-        if(mi != null){
-        for (Medicine item : mi.getMedicineList()) {
-            Object[] row = new Object[5];
-            row[0] = item.getName();
-            row[1] = item.getCategory();
-            row[2]= item.getPrice();
-            row[3]= item.getQty();
-            row[4]=pha.getPharmacyName();
-            model.addRow(row);
-        }
-        }
-    }
+// private void populateMedicineTable() {
+//        Pharmacy pha=new Pharmacy();
+//        MedicineInventory mi = pha.getMenu();
+//        DefaultTableModel model = (DefaultTableModel) medicineTable.getModel();
+//        model.setRowCount(0);
+//        if(mi != null){
+//        for (Medicine item : mi.getMedicineList()) {
+//            Object[] row = new Object[5];
+//            row[0] = item.getName();
+//            row[1] = item.getCategory();
+//            row[2]= item.getPrice();
+//            row[3]= item.getQty();
+//            row[4]=pha.getPharmacyName();
+//            model.addRow(row);
+//        }
+//        }
+//    }
 
     public void changecolorB(JButton hover, Color rand) {
         hover.setBackground(rand);
