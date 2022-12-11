@@ -4,7 +4,10 @@
  */
 package Business.WorkQueue;
 
+import Business.Community.House;
 import Business.Community.HouseList;
+import Business.Community.Tenant;
+import Business.Voluntary.VitalSigns;
 import java.util.Date;
 
 /**
@@ -12,17 +15,35 @@ import java.util.Date;
  * @author ashikakalmady
  */
 public class SurveyVolunteerWorkRequest extends WorkRequest {
-    public HouseList assignedHouses;
+    public House assignedHouse;
     public Date assignedDate;
+    public VitalSigns vitalSign;
+    public Tenant tenant;
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
+    }
+
+    public House getAssignedHouse() {
+        return assignedHouse;
+    }
+
+    public void setAssignedHouse(House assignedHouse) {
+        this.assignedHouse = assignedHouse;
+    }
     
-    public HouseList getAssignedHouses() {
-        return assignedHouses;
+    public VitalSigns getVitalSign() {
+        return vitalSign;
     }
 
-    public void setAssignedHouses(HouseList assignedHouses) {
-        this.assignedHouses = assignedHouses;
+    public void setVitalSign(VitalSigns vitalSign) {
+        this.vitalSign = vitalSign;
     }
-
+    
     public Date getAssignedDate() {
         return assignedDate;
     }
