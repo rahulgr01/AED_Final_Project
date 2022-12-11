@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,8 +29,14 @@ public class HospitalAdmin extends javax.swing.JFrame {
     JFrame parentFrame;
     public HospitalAdmin() {
         initComponents();
-           TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(crudDoctorSP, TableCustom.TableType.DEFAULT);
            TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+             TableCustom.apply(doctorList, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(patientList, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(staffList, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(patientProfileSP, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(labSP, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(pharmacySP, TableCustom.TableType.DEFAULT);
     }
     //Method to change panel color on hover
  
@@ -77,7 +84,9 @@ public class HospitalAdmin extends javax.swing.JFrame {
             changeImage(button, "/com/vcare/icon/back_32px.png"); 
         }
     }
-    
+    public void changecolorB(JButton hover, Color rand) {
+        hover.setBackground(rand);
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,80 +124,76 @@ public class HospitalAdmin extends javax.swing.JFrame {
         side4 = new javax.swing.JPanel();
         manageMedicinelbl = new javax.swing.JLabel();
         manageMedicineIcon = new javax.swing.JLabel();
-        pharmacyAdmin = new javax.swing.JTabbedPane();
+        hospitalAdmin = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        Dummy = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        Dummy1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        Dummy2 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        doctorList = new javax.swing.JScrollPane();
+        doctorTable = new javax.swing.JTable();
+        patientList = new javax.swing.JScrollPane();
+        patientTable = new javax.swing.JTable();
+        staffList = new javax.swing.JScrollPane();
+        staffTable = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        pharmacy = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        updatePatient = new UI.Components.Button();
+        patientTab = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        Dummy3 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        pharmacySP = new javax.swing.JScrollPane();
+        pharmacyTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         combobox2 = new UI.Components.Combobox();
-        Dummy4 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        patientProfileSP = new javax.swing.JScrollPane();
+        patientProfile = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        Dummy5 = new javax.swing.JScrollPane();
-        jTable7 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        labSP = new javax.swing.JScrollPane();
+        labTable = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        category = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        searchPatient = new javax.swing.JTextField();
+        updatePatientBtn = new UI.Components.Button();
+        doctorTab = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        searchPanel = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel17 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        categoryID = new UI.Components.TextField();
-        categoryID1 = new UI.Components.TextField();
-        categoryName = new UI.Components.TextField();
-        categoryID2 = new UI.Components.TextField();
-        categoryID4 = new UI.Components.TextField();
-        combobox3 = new UI.Components.Combobox();
-        clearCategory = new UI.Components.Button();
-        deleteCategory = new UI.Components.Button();
-        deleteCategory1 = new UI.Components.Button();
-        deleteCategory2 = new UI.Components.Button();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        categoryTable = new javax.swing.JTable();
-        categoryID3 = new UI.Components.TextField();
-        jTextField1 = new javax.swing.JTextField();
-        combobox6 = new UI.Components.Combobox();
-        medicine = new javax.swing.JPanel();
+        doctorName = new UI.Components.TextField();
+        doctorSalary = new UI.Components.TextField();
+        doctorPassword = new UI.Components.TextField();
+        doctorExperience = new UI.Components.TextField();
+        doctorID = new UI.Components.TextField();
+        doctorSpeciality = new UI.Components.Combobox();
+        clearDoctor = new UI.Components.Button();
+        deleteDoctor = new UI.Components.Button();
+        addDoctor = new UI.Components.Button();
+        updateDoctor = new UI.Components.Button();
+        crudDoctorSP = new javax.swing.JScrollPane();
+        crudDoctorTable = new javax.swing.JTable();
+        doctorUsername = new UI.Components.TextField();
+        doctorGenderCombo = new UI.Components.Combobox();
+        staffTab = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        categoryID5 = new UI.Components.TextField();
-        categoryID6 = new UI.Components.TextField();
-        categoryID7 = new UI.Components.TextField();
-        categoryName1 = new UI.Components.TextField();
-        combobox4 = new UI.Components.Combobox();
-        categoryID8 = new UI.Components.TextField();
-        deleteCategory3 = new UI.Components.Button();
-        deleteCategory4 = new UI.Components.Button();
-        deleteCategory5 = new UI.Components.Button();
-        clearCategory1 = new UI.Components.Button();
+        staffID = new UI.Components.TextField();
+        staffName = new UI.Components.TextField();
+        staffUsername = new UI.Components.TextField();
+        staffPassword = new UI.Components.TextField();
+        staffGenderCombo = new UI.Components.Combobox();
+        staffSalary = new UI.Components.TextField();
+        addStaff = new UI.Components.Button();
+        deleteStaff = new UI.Components.Button();
+        updateStaff = new UI.Components.Button();
+        clearStaff = new UI.Components.Button();
         searchPanel1 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel20 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        searchStaff = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        categoryTable1 = new javax.swing.JTable();
+        crudStaffTable = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -413,7 +418,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
         statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("New Survey Cases");
+        statisticslbl.setText("Dashboard");
 
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
@@ -474,7 +479,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         managePharmacylbl.setText("Manage Patients");
 
         managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
+        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/health_checkup_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout managePharmacyLayout = new javax.swing.GroupLayout(managePharmacy);
         managePharmacy.setLayout(managePharmacyLayout);
@@ -532,7 +537,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         manageCategorylbl.setText("Doctor Organization");
 
         manageCategoryIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/category_40px.png"))); // NOI18N
+        manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/doctors_folder_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageCategoryLayout = new javax.swing.GroupLayout(manageCategory);
         manageCategory.setLayout(manageCategoryLayout);
@@ -590,7 +595,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         manageMedicinelbl.setText(" Staff Organization");
 
         manageMedicineIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
+        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/member_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageMedicineLayout = new javax.swing.GroupLayout(manageMedicine);
         manageMedicine.setLayout(manageMedicineLayout);
@@ -642,13 +647,21 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
-        dashboard.setBackground(new java.awt.Color(255, 255, 255));
+        dashboard.setBackground(new java.awt.Color(217, 241, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        doctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -658,10 +671,18 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Doctor  ID", "Name", "Speiciality", "Expeience"
             }
         ));
-        Dummy.setViewportView(jTable1);
+        doctorList.setViewportView(doctorTable);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        patientTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
@@ -669,10 +690,19 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Patient Name", "Age", "Gender", "Height", "Weight", "Pulse", "Blood Pressure", "Lab Test", "Volunteer", "Status", "Community"
             }
         ));
-        Dummy1.setViewportView(jTable2);
+        patientList.setViewportView(patientTable);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        staffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
@@ -681,7 +711,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Staff ID", "Name", "Gender"
             }
         ));
-        Dummy2.setViewportView(jTable4);
+        staffList.setViewportView(staffTable);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel4.setText("Assign A Staff");
@@ -689,11 +719,25 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel6.setText("Assign A Doctor");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton1.setText("Update Patient Profile");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel12.setText("Patient List");
+
+        updatePatient.setBackground(new java.awt.Color(0, 91, 149));
+        updatePatient.setBorder(null);
+        updatePatient.setForeground(new java.awt.Color(255, 255, 255));
+        updatePatient.setText("Update Patient Profile");
+        updatePatient.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatePatient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updatePatientMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updatePatientMouseExited(evt);
+            }
+        });
+        updatePatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updatePatientActionPerformed(evt);
             }
         });
 
@@ -704,11 +748,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Dummy, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(patientList)
+                    .addComponent(doctorList, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(Dummy2, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(staffList, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -716,42 +761,50 @@ public class HospitalAdmin extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Dummy1, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(365, 365, 365)
+                        .addComponent(updatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(465, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(Dummy1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(7, 7, 7)
+                .addComponent(patientList, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(28, 28, 28)
-                .addComponent(Dummy2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(staffList, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(Dummy, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addComponent(doctorList, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(updatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
-        dashboard.add(jPanel1, java.awt.BorderLayout.LINE_END);
+        dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Dashboard", dashboard);
+        hospitalAdmin.addTab("Dashboard", dashboard);
 
-        pharmacy.setBackground(new java.awt.Color(217, 241, 255));
-        pharmacy.setLayout(new java.awt.BorderLayout());
+        patientTab.setBackground(new java.awt.Color(217, 241, 255));
+        patientTab.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(217, 241, 255));
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        pharmacyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
@@ -759,12 +812,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Pharmacy ID", "Pharmacy Name", "Community"
             }
         ));
-        Dummy3.setViewportView(jTable5);
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel7.setText("Search Patient");
-
-        jTextField3.setText("Enter Patient ID");
+        pharmacySP.setViewportView(pharmacyTable);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel8.setText("Associated Pharmacy Details");
@@ -778,8 +826,16 @@ public class HospitalAdmin extends javax.swing.JFrame {
             }
         });
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        patientProfile.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null}
             },
@@ -787,7 +843,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Patient Name", "Age", "Gender", "Community", "Assigned Doctor", "Assigned Staff", " Volunteer", "Lab Tests", "Lab Records", "Status"
             }
         ));
-        Dummy4.setViewportView(jTable6);
+        patientProfileSP.setViewportView(patientProfile);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel9.setText("Patient Profile");
@@ -795,8 +851,17 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel10.setText("Associated Lab Details");
 
-        jTable7.setModel(new javax.swing.table.DefaultTableModel(
+        labTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
@@ -804,225 +869,237 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 "Lab ID", "Lab Name", "Community"
             }
         ));
-        Dummy5.setViewportView(jTable7);
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jButton3.setText("Update Patient Record");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        labSP.setViewportView(labTable);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel11.setText("Perform Action");
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/search_30px.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+            .addComponent(searchPatient)
+        );
+
+        updatePatientBtn.setBackground(new java.awt.Color(0, 91, 149));
+        updatePatientBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updatePatientBtn.setText("Update Patient Record");
+        updatePatientBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatePatientBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updatePatientBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updatePatientBtnMouseExited(evt);
+            }
+        });
+        updatePatientBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePatientBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(226, 226, 226)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel9)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(394, 394, 394)
-                .addComponent(jButton3)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10)
-                        .addComponent(Dummy5, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(Dummy3, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(23, 23, 23)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8))
+                                .addGap(770, 770, 770))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(388, 388, 388))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(patientProfileSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
+                                .addComponent(labSP, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addContainerGap()))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)
-                        .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(305, 305, 305))))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(29, Short.MAX_VALUE)
-                    .addComponent(Dummy4, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)))
+                        .addComponent(pharmacySP, javax.swing.GroupLayout.PREFERRED_SIZE, 965, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(346, 346, 346)
+                .addComponent(updatePatientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(patientProfileSP, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField3)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(59, 59, 59)
-                .addComponent(jLabel9)
-                .addGap(173, 173, 173)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addComponent(Dummy5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(labSP, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
-                .addGap(28, 28, 28)
-                .addComponent(Dummy3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(141, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(151, 151, 151)
-                    .addComponent(Dummy4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(666, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(pharmacySP, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(updatePatientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
-        pharmacy.add(jPanel2, java.awt.BorderLayout.LINE_START);
+        patientTab.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Patient", pharmacy);
+        hospitalAdmin.addTab("Patient", patientTab);
 
-        category.setBackground(new java.awt.Color(255, 255, 255));
-        category.setLayout(new java.awt.BorderLayout());
+        doctorTab.setBackground(new java.awt.Color(255, 255, 255));
+        doctorTab.setLayout(new java.awt.BorderLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel4.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel4.setBackground(new java.awt.Color(217, 241, 255));
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/print_30px.png"))); // NOI18N
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/search_30px.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel17Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 10, Short.MAX_VALUE))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
-        );
-
-        javax.swing.GroupLayout searchPanelLayout = new javax.swing.GroupLayout(searchPanel);
-        searchPanel.setLayout(searchPanelLayout);
-        searchPanelLayout.setHorizontalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanelLayout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        searchPanelLayout.setVerticalGroup(
-            searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchPanelLayout.createSequentialGroup()
-                .addGroup(searchPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        categoryID.setLabelText("Full Name");
-        categoryID.addActionListener(new java.awt.event.ActionListener() {
+        doctorName.setLabelText("Full Name");
+        doctorName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryIDActionPerformed(evt);
+                doctorNameActionPerformed(evt);
             }
         });
 
-        categoryID1.setLabelText("Salary");
-        categoryID1.addActionListener(new java.awt.event.ActionListener() {
+        doctorSalary.setLabelText("Salary");
+        doctorSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID1ActionPerformed(evt);
+                doctorSalaryActionPerformed(evt);
             }
         });
 
-        categoryName.setLabelText("Password");
+        doctorPassword.setLabelText("Password");
 
-        categoryID2.setLabelText("Experience");
-        categoryID2.addActionListener(new java.awt.event.ActionListener() {
+        doctorExperience.setLabelText("Experience");
+        doctorExperience.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID2ActionPerformed(evt);
+                doctorExperienceActionPerformed(evt);
             }
         });
 
-        categoryID4.setLabelText("Doctor ID");
-        categoryID4.addActionListener(new java.awt.event.ActionListener() {
+        doctorID.setLabelText("Doctor ID");
+        doctorID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID4ActionPerformed(evt);
+                doctorIDActionPerformed(evt);
             }
         });
 
-        combobox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cardiology", "Neurology", "Gynacologist", "Dermatology", "Physiotherapy", " " }));
-        combobox3.setSelectedIndex(-1);
-        combobox3.setLabeText("Speciality");
-        combobox3.addActionListener(new java.awt.event.ActionListener() {
+        doctorSpeciality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cardiology", "Neurology", "Gynacologist", "Dermatology", "Physiotherapy", " " }));
+        doctorSpeciality.setSelectedIndex(-1);
+        doctorSpeciality.setLabeText("Speciality");
+        doctorSpeciality.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox3ActionPerformed(evt);
+                doctorSpecialityActionPerformed(evt);
             }
         });
 
-        clearCategory.setText("CLEAR");
-
-        deleteCategory.setText("DELETE");
-
-        deleteCategory1.setText("ADD");
-        deleteCategory1.addActionListener(new java.awt.event.ActionListener() {
+        clearDoctor.setBackground(new java.awt.Color(0, 91, 149));
+        clearDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        clearDoctor.setText("CLEAR");
+        clearDoctor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearDoctor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearDoctorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearDoctorMouseExited(evt);
+            }
+        });
+        clearDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCategory1ActionPerformed(evt);
+                clearDoctorActionPerformed(evt);
             }
         });
 
-        deleteCategory2.setText("UPDATE");
-        deleteCategory2.addActionListener(new java.awt.event.ActionListener() {
+        deleteDoctor.setBackground(new java.awt.Color(0, 91, 149));
+        deleteDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        deleteDoctor.setText("DELETE");
+        deleteDoctor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteDoctor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteDoctorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteDoctorMouseExited(evt);
+            }
+        });
+        deleteDoctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCategory2ActionPerformed(evt);
+                deleteDoctorActionPerformed(evt);
             }
         });
 
-        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
+        addDoctor.setBackground(new java.awt.Color(0, 91, 149));
+        addDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        addDoctor.setText("ADD");
+        addDoctor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addDoctor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addDoctorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addDoctorMouseExited(evt);
+            }
+        });
+        addDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctorActionPerformed(evt);
+            }
+        });
+
+        updateDoctor.setBackground(new java.awt.Color(0, 91, 149));
+        updateDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        updateDoctor.setText("UPDATE");
+        updateDoctor.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updateDoctor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateDoctorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateDoctorMouseExited(evt);
+            }
+        });
+        updateDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateDoctorActionPerformed(evt);
+            }
+        });
+
+        crudDoctorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -1055,27 +1132,21 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(categoryTable);
+        crudDoctorSP.setViewportView(crudDoctorTable);
 
-        categoryID3.setLabelText("Username");
-        categoryID3.addActionListener(new java.awt.event.ActionListener() {
+        doctorUsername.setLabelText("Username");
+        doctorUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID3ActionPerformed(evt);
+                doctorUsernameActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        doctorGenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        doctorGenderCombo.setSelectedIndex(-1);
+        doctorGenderCombo.setLabeText("Gender");
+        doctorGenderCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        combobox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
-        combobox6.setSelectedIndex(-1);
-        combobox6.setLabeText("Gender");
-        combobox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox6ActionPerformed(evt);
+                doctorGenderComboActionPerformed(evt);
             }
         });
 
@@ -1083,88 +1154,65 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(190, 190, 190)
-                                .addComponent(deleteCategory1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(deleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(deleteCategory2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(combobox6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(categoryID, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(categoryID1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36)
-                                .addComponent(combobox3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(clearCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(categoryID2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(categoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)))
-                .addContainerGap(130, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(categoryID4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(24, 24, 24))))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addContainerGap(441, Short.MAX_VALUE)
-                    .addComponent(categoryID3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(367, 367, 367)))
+                        .addGap(151, 151, 151)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(addDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54)
+                                .addComponent(deleteDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(updateDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addComponent(clearDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(doctorGenderCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                    .addComponent(doctorSalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(doctorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(doctorSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(doctorExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crudDoctorSP, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doctorID, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(categoryID4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(27, 27, 27)
+                .addComponent(doctorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoryID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(combobox3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryID2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combobox6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(categoryID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135)
+                    .addComponent(doctorSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(doctorGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(doctorSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(searchPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(96, 96, 96)
-                    .addComponent(categoryID3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(575, Short.MAX_VALUE)))
+                    .addComponent(clearDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addComponent(crudDoctorSP, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -1172,85 +1220,139 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(190, 190, 190))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        category.add(jPanel3, java.awt.BorderLayout.CENTER);
+        doctorTab.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Doctor Organization", category);
+        hospitalAdmin.addTab("Doctor Organization", doctorTab);
 
-        medicine.setBackground(new java.awt.Color(255, 255, 255));
-        medicine.setLayout(new java.awt.BorderLayout());
+        staffTab.setBackground(new java.awt.Color(255, 255, 255));
+        staffTab.setLayout(new java.awt.BorderLayout());
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel8.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel8.setBackground(new java.awt.Color(217, 241, 255));
 
-        jPanel10.setBackground(new java.awt.Color(27, 152, 245));
+        jPanel10.setBackground(new java.awt.Color(217, 241, 255));
 
-        categoryID5.setLabelText("Staff ID");
-        categoryID5.addActionListener(new java.awt.event.ActionListener() {
+        staffID.setLabelText("Staff ID");
+        staffID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID5ActionPerformed(evt);
+                staffIDActionPerformed(evt);
             }
         });
 
-        categoryID6.setLabelText("Full Name");
-        categoryID6.addActionListener(new java.awt.event.ActionListener() {
+        staffName.setLabelText("Full Name");
+        staffName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID6ActionPerformed(evt);
+                staffNameActionPerformed(evt);
             }
         });
 
-        categoryID7.setLabelText("Username");
-        categoryID7.addActionListener(new java.awt.event.ActionListener() {
+        staffUsername.setLabelText("Username");
+        staffUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID7ActionPerformed(evt);
+                staffUsernameActionPerformed(evt);
             }
         });
 
-        categoryName1.setLabelText("Password");
+        staffPassword.setLabelText("Password");
 
-        combobox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
-        combobox4.setSelectedIndex(-1);
-        combobox4.setLabeText("Gender");
-        combobox4.addActionListener(new java.awt.event.ActionListener() {
+        staffGenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        staffGenderCombo.setSelectedIndex(-1);
+        staffGenderCombo.setLabeText("Gender");
+        staffGenderCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox4ActionPerformed(evt);
+                staffGenderComboActionPerformed(evt);
             }
         });
 
-        categoryID8.setLabelText("Salary");
-        categoryID8.addActionListener(new java.awt.event.ActionListener() {
+        staffSalary.setLabelText("Salary");
+        staffSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryID8ActionPerformed(evt);
+                staffSalaryActionPerformed(evt);
             }
         });
 
-        deleteCategory3.setText("ADD");
-        deleteCategory3.addActionListener(new java.awt.event.ActionListener() {
+        addStaff.setBackground(new java.awt.Color(0, 91, 149));
+        addStaff.setForeground(new java.awt.Color(255, 255, 255));
+        addStaff.setText("ADD");
+        addStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addStaffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addStaffMouseExited(evt);
+            }
+        });
+        addStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCategory3ActionPerformed(evt);
+                addStaffActionPerformed(evt);
             }
         });
 
-        deleteCategory4.setText("DELETE");
-
-        deleteCategory5.setText("UPDATE");
-        deleteCategory5.addActionListener(new java.awt.event.ActionListener() {
+        deleteStaff.setBackground(new java.awt.Color(0, 91, 149));
+        deleteStaff.setForeground(new java.awt.Color(255, 255, 255));
+        deleteStaff.setText("DELETE");
+        deleteStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteStaffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteStaffMouseExited(evt);
+            }
+        });
+        deleteStaff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCategory5ActionPerformed(evt);
+                deleteStaffActionPerformed(evt);
             }
         });
 
-        clearCategory1.setText("CLEAR");
+        updateStaff.setBackground(new java.awt.Color(0, 91, 149));
+        updateStaff.setForeground(new java.awt.Color(255, 255, 255));
+        updateStaff.setText("UPDATE");
+        updateStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updateStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                updateStaffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                updateStaffMouseExited(evt);
+            }
+        });
+        updateStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStaffActionPerformed(evt);
+            }
+        });
+
+        clearStaff.setBackground(new java.awt.Color(0, 91, 149));
+        clearStaff.setForeground(new java.awt.Color(255, 255, 255));
+        clearStaff.setText("CLEAR");
+        clearStaff.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        clearStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearStaffMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearStaffMouseExited(evt);
+            }
+        });
+        clearStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearStaffActionPerformed(evt);
+            }
+        });
+
+        searchPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/print_30px.png"))); // NOI18N
@@ -1276,7 +1378,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel16Layout.setVerticalGroup(
@@ -1305,7 +1407,9 @@ public class HospitalAdmin extends javax.swing.JFrame {
             searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchStaff)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         searchPanel1Layout.setVerticalGroup(
@@ -1313,12 +1417,18 @@ public class HospitalAdmin extends javax.swing.JFrame {
             .addGroup(searchPanel1Layout.createSequentialGroup()
                 .addGroup(searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchStaff))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        categoryTable1.setModel(new javax.swing.table.DefaultTableModel(
+        crudStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -1351,74 +1461,73 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(categoryTable1);
+        jScrollPane2.setViewportView(crudStaffTable);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(categoryID5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(categoryID6, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(categoryID8, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(categoryID7, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(categoryName1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))))
-                .addGap(171, 171, 171))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(deleteCategory3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(deleteCategory4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(deleteCategory5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(clearCategory1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
                     .addComponent(searchPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(staffID, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(staffName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staffGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(addStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(staffSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(staffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(staffPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addComponent(updateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(clearStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)))
+                .addGap(114, 114, 114))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(categoryID5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(35, 35, 35)
+                .addComponent(staffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoryID6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryID7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(staffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(combobox4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(categoryID8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(104, 104, 104)
+                    .addComponent(staffGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(staffSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearCategory1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteCategory5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                    .addComponent(clearStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90)
                 .addComponent(searchPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(241, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -1426,16 +1535,13 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(42, 42, 42))
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -1446,16 +1552,14 @@ public class HospitalAdmin extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(190, 190, 190))
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        medicine.add(jPanel7, java.awt.BorderLayout.CENTER);
+        staffTab.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        pharmacyAdmin.addTab("Staff   Organization", medicine);
+        hospitalAdmin.addTab("Staff Organization", staffTab);
 
-        getContentPane().add(pharmacyAdmin, java.awt.BorderLayout.CENTER);
+        getContentPane().add(hospitalAdmin, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -1522,7 +1626,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLogoutMouseExited
 
     private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
-         pharmacyAdmin.setSelectedIndex(0);
+         hospitalAdmin.setSelectedIndex(0);
          changecolor(pharmacyStaistics, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
     }//GEN-LAST:event_pharmacyStaisticsMouseClicked
@@ -1538,7 +1642,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_pharmacyStaisticsMouseExited
 
     private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
-        pharmacyAdmin.setSelectedIndex(1);
+        hospitalAdmin.setSelectedIndex(1);
         changecolor(managePharmacy, new Color(3,138,255));
         changecolor(side2, new Color(190, 224, 236));
     }//GEN-LAST:event_managePharmacyMouseClicked
@@ -1554,7 +1658,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_managePharmacyMouseExited
 
     private void manageCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseClicked
-       pharmacyAdmin.setSelectedIndex(2);
+       hospitalAdmin.setSelectedIndex(2);
         changecolor(manageCategory, new Color(3,138,255));
         changecolor(side3, new Color(190, 224, 236));
     }//GEN-LAST:event_manageCategoryMouseClicked
@@ -1570,7 +1674,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_manageCategoryMouseExited
 
     private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
-       pharmacyAdmin.setSelectedIndex(3);
+       hospitalAdmin.setSelectedIndex(3);
        changecolor(manageMedicine, new Color(3,138,255));
         changecolor(side4, new Color(190, 224, 236));
     }//GEN-LAST:event_manageMedicineMouseClicked
@@ -1598,101 +1702,196 @@ public class HospitalAdmin extends javax.swing.JFrame {
            parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void combobox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combobox2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void doctorSpecialityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorSpecialityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_doctorSpecialityActionPerformed
 
-    private void combobox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox3ActionPerformed
+    private void doctorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combobox3ActionPerformed
+    }//GEN-LAST:event_doctorIDActionPerformed
 
-    private void categoryID4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID4ActionPerformed
+    private void doctorExperienceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorExperienceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID4ActionPerformed
+    }//GEN-LAST:event_doctorExperienceActionPerformed
 
-    private void categoryID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID2ActionPerformed
+    private void doctorSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorSalaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID2ActionPerformed
+    }//GEN-LAST:event_doctorSalaryActionPerformed
 
-    private void categoryID1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID1ActionPerformed
+    private void doctorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID1ActionPerformed
+    }//GEN-LAST:event_doctorNameActionPerformed
 
-    private void categoryIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryIDActionPerformed
+    private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
+        JOptionPane.showMessageDialog(this, "Doctor Added Successfully!");
+    }//GEN-LAST:event_addDoctorActionPerformed
+
+    private void updateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoctorActionPerformed
+       JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
+    }//GEN-LAST:event_updateDoctorActionPerformed
+
+    private void doctorUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryIDActionPerformed
+    }//GEN-LAST:event_doctorUsernameActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void staffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_staffIDActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        MessageFormat header = new MessageFormat("MedDoor Pharmacy Category Report");
-        MessageFormat footer = new MessageFormat("Northeastern University");
-        try{
-            categoryTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null,"Cannot be print");
-        }
-    }//GEN-LAST:event_jLabel1MouseClicked
-
-    private void deleteCategory1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCategory1ActionPerformed
+    private void staffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteCategory1ActionPerformed
+    }//GEN-LAST:event_staffNameActionPerformed
 
-    private void deleteCategory2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCategory2ActionPerformed
+    private void staffUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_deleteCategory2ActionPerformed
+    }//GEN-LAST:event_staffUsernameActionPerformed
 
-    private void categoryID3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID3ActionPerformed
+    private void staffGenderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffGenderComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID3ActionPerformed
+    }//GEN-LAST:event_staffGenderComboActionPerformed
 
-    private void categoryID5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID5ActionPerformed
+    private void doctorGenderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorGenderComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID5ActionPerformed
+    }//GEN-LAST:event_doctorGenderComboActionPerformed
 
-    private void categoryID6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID6ActionPerformed
+    private void staffSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffSalaryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID6ActionPerformed
+    }//GEN-LAST:event_staffSalaryActionPerformed
 
-    private void categoryID7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID7ActionPerformed
+    private void addStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffActionPerformed
+        JOptionPane.showMessageDialog(this, "Staff Added");
+    }//GEN-LAST:event_addStaffActionPerformed
 
-    private void combobox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combobox4ActionPerformed
-
-    private void combobox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combobox6ActionPerformed
-
-    private void categoryID8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryID8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoryID8ActionPerformed
-
-    private void deleteCategory3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCategory3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteCategory3ActionPerformed
-
-    private void deleteCategory5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCategory5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_deleteCategory5ActionPerformed
+    private void updateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffActionPerformed
+        JOptionPane.showMessageDialog(this, "Staff Updated ");
+    }//GEN-LAST:event_updateStaffActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void updatePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientActionPerformed
+       JOptionPane.showMessageDialog(this, "Please Details Updated ");
+       
+    }//GEN-LAST:event_updatePatientActionPerformed
+
+    private void updatePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientMouseEntered
+      changecolorB(updatePatient, new Color(3,138,255));
+    }//GEN-LAST:event_updatePatientMouseEntered
+
+    private void updatePatientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientMouseExited
+       changecolorB(updatePatient, new Color(0,91,149));
+    }//GEN-LAST:event_updatePatientMouseExited
+
+    private void deleteStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStaffActionPerformed
+       JOptionPane.showMessageDialog(this, "Staff Deleted ");
+    }//GEN-LAST:event_deleteStaffActionPerformed
+
+    private void updatePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientBtnActionPerformed
+   JOptionPane.showMessageDialog(this, "Patient Details Updated");
+    }//GEN-LAST:event_updatePatientBtnActionPerformed
+
+    private void updatePatientBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseEntered
+        changecolorB(updatePatientBtn, new Color(3,138,255));
+    }//GEN-LAST:event_updatePatientBtnMouseEntered
+
+    private void updatePatientBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseExited
+         changecolorB(updatePatientBtn, new Color(0,91,149));
+    }//GEN-LAST:event_updatePatientBtnMouseExited
+
+    private void deleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorActionPerformed
+        JOptionPane.showMessageDialog(this, "Doctor Deleted Successfully!");
+    }//GEN-LAST:event_deleteDoctorActionPerformed
+private void clearDoctor() {
+doctorID.setText("");
+doctorName.setText("");
+doctorUsername.setText("");
+doctorPassword.setText("");
+doctorSalary.setText("");
+doctorExperience.setText("");
+}
+    private void clearDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearDoctorActionPerformed
+         clearDoctor() ;
+    }//GEN-LAST:event_clearDoctorActionPerformed
+
+    private void addDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseEntered
+       changecolorB(addDoctor, new Color(3,138,255));
+    }//GEN-LAST:event_addDoctorMouseEntered
+
+    private void addDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseExited
+        changecolorB(addDoctor, new Color(0,91,149));
+    }//GEN-LAST:event_addDoctorMouseExited
+
+    private void deleteDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseEntered
+       changecolorB(deleteDoctor, new Color(3,138,255));
+    }//GEN-LAST:event_deleteDoctorMouseEntered
+
+    private void deleteDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseExited
+           changecolorB(deleteDoctor, new Color(0,91,149));
+    }//GEN-LAST:event_deleteDoctorMouseExited
+
+    private void updateDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseEntered
+       changecolorB(updateDoctor, new Color(3,138,255));
+    }//GEN-LAST:event_updateDoctorMouseEntered
+
+    private void updateDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseExited
+        changecolorB(updateDoctor, new Color(0,91,149));
+    }//GEN-LAST:event_updateDoctorMouseExited
+
+    private void clearDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseExited
+        changecolorB(clearDoctor, new Color(0,91,149));
+    }//GEN-LAST:event_clearDoctorMouseExited
+
+    private void clearDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseEntered
+         changecolorB(clearDoctor, new Color(3,138,255));
+    }//GEN-LAST:event_clearDoctorMouseEntered
+private void clearStaff() {
+staffID.setText("");
+staffName.setText("");
+staffUsername.setText("");
+staffPassword.setText("");
+staffSalary.setText("");
+
+}
+    private void clearStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStaffActionPerformed
+        clearStaff();
+    }//GEN-LAST:event_clearStaffActionPerformed
+
+    private void addStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseEntered
+        changecolorB(addStaff, new Color(3,138,255));
+    }//GEN-LAST:event_addStaffMouseEntered
+
+    private void deleteStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseEntered
+        changecolorB(deleteStaff, new Color(3,138,255));
+    }//GEN-LAST:event_deleteStaffMouseEntered
+
+    private void updateStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseEntered
+        changecolorB(updateStaff, new Color(3,138,255));
+    }//GEN-LAST:event_updateStaffMouseEntered
+
+    private void clearStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseEntered
+        changecolorB(clearStaff, new Color(3,138,255));
+    }//GEN-LAST:event_clearStaffMouseEntered
+
+    private void addStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseExited
+         changecolorB(addStaff, new Color(0,91,149));
+    }//GEN-LAST:event_addStaffMouseExited
+
+    private void deleteStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseExited
+        changecolorB(deleteStaff, new Color(0,91,149));
+    }//GEN-LAST:event_deleteStaffMouseExited
+
+    private void updateStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseExited
+         changecolorB(updateStaff, new Color(0,91,149));
+    }//GEN-LAST:event_updateStaffMouseExited
+
+    private void clearStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseExited
+        changecolorB(clearStaff, new Color(0,91,149));
+    }//GEN-LAST:event_clearStaffMouseExited
 
     /**
      * @param args the command line arguments
@@ -1737,85 +1936,63 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane Dummy;
-    private javax.swing.JScrollPane Dummy1;
-    private javax.swing.JScrollPane Dummy2;
-    private javax.swing.JScrollPane Dummy3;
-    private javax.swing.JScrollPane Dummy4;
-    private javax.swing.JScrollPane Dummy5;
     private javax.swing.JPanel MenuIcon;
+    private UI.Components.Button addDoctor;
+    private UI.Components.Button addStaff;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
-    private javax.swing.JPanel category;
-    private UI.Components.TextField categoryID;
-    private UI.Components.TextField categoryID1;
-    private UI.Components.TextField categoryID2;
-    private UI.Components.TextField categoryID3;
-    private UI.Components.TextField categoryID4;
-    private UI.Components.TextField categoryID5;
-    private UI.Components.TextField categoryID6;
-    private UI.Components.TextField categoryID7;
-    private UI.Components.TextField categoryID8;
-    private UI.Components.TextField categoryName;
-    private UI.Components.TextField categoryName1;
-    private javax.swing.JTable categoryTable;
-    private javax.swing.JTable categoryTable1;
-    private UI.Components.Button clearCategory;
-    private UI.Components.Button clearCategory1;
+    private UI.Components.Button clearDoctor;
+    private UI.Components.Button clearStaff;
     private javax.swing.JLabel close;
     private UI.Components.Combobox combobox2;
-    private UI.Components.Combobox combobox3;
-    private UI.Components.Combobox combobox4;
-    private UI.Components.Combobox combobox6;
+    private javax.swing.JScrollPane crudDoctorSP;
+    private javax.swing.JTable crudDoctorTable;
+    private javax.swing.JTable crudStaffTable;
     private javax.swing.JPanel dashboard;
-    private UI.Components.Button deleteCategory;
-    private UI.Components.Button deleteCategory1;
-    private UI.Components.Button deleteCategory2;
-    private UI.Components.Button deleteCategory3;
-    private UI.Components.Button deleteCategory4;
-    private UI.Components.Button deleteCategory5;
+    private UI.Components.Button deleteDoctor;
+    private UI.Components.Button deleteStaff;
+    private UI.Components.TextField doctorExperience;
+    private UI.Components.Combobox doctorGenderCombo;
+    private UI.Components.TextField doctorID;
+    private javax.swing.JScrollPane doctorList;
+    private UI.Components.TextField doctorName;
+    private UI.Components.TextField doctorPassword;
+    private UI.Components.TextField doctorSalary;
+    private UI.Components.Combobox doctorSpeciality;
+    private javax.swing.JPanel doctorTab;
+    private javax.swing.JTable doctorTable;
+    private UI.Components.TextField doctorUsername;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
+    private javax.swing.JTabbedPane hospitalAdmin;
     private javax.swing.JPanel iconmaxclose;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
-    private javax.swing.JTable jTable7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JScrollPane labSP;
+    private javax.swing.JTable labTable;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel manageCategory;
@@ -1828,21 +2005,39 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel managePharmacyIcon;
     private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JLabel max;
-    private javax.swing.JPanel medicine;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
-    private javax.swing.JPanel pharmacy;
-    private javax.swing.JTabbedPane pharmacyAdmin;
+    private javax.swing.JScrollPane patientList;
+    private javax.swing.JTable patientProfile;
+    private javax.swing.JScrollPane patientProfileSP;
+    private javax.swing.JPanel patientTab;
+    private javax.swing.JTable patientTable;
+    private javax.swing.JScrollPane pharmacySP;
     private javax.swing.JPanel pharmacyStaistics;
-    private javax.swing.JPanel searchPanel;
+    private javax.swing.JTable pharmacyTable;
     private javax.swing.JPanel searchPanel1;
+    private javax.swing.JTextField searchPatient;
+    private javax.swing.JTextField searchStaff;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side2;
     private javax.swing.JPanel side3;
     private javax.swing.JPanel side4;
+    private UI.Components.Combobox staffGenderCombo;
+    private UI.Components.TextField staffID;
+    private javax.swing.JScrollPane staffList;
+    private UI.Components.TextField staffName;
+    private UI.Components.TextField staffPassword;
+    private UI.Components.TextField staffSalary;
+    private javax.swing.JPanel staffTab;
+    private javax.swing.JTable staffTable;
+    private UI.Components.TextField staffUsername;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
+    private UI.Components.Button updateDoctor;
+    private UI.Components.Button updatePatient;
+    private UI.Components.Button updatePatientBtn;
+    private UI.Components.Button updateStaff;
     // End of variables declaration//GEN-END:variables
 }

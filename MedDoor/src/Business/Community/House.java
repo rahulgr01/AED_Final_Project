@@ -26,12 +26,7 @@ public class House {
         this.tenats = tenats;
     }
     
-    public Tenant createAndAddTenant(String fName, String lName, Date dob, String gender,Integer age,String email, String phone)
-        {
-         Tenant tenant = new Tenant(fName, lName, dob, gender, age, email,phone, this);
-         tenats.addNewTenant(tenant);
-         return tenant;
-    }
+  
     
     public String getStreeAdredss() {
         return streeAdredss;
@@ -58,10 +53,7 @@ public class House {
         this.community = community;
     }
     
-    public House(String houseNumer, String streeAdredss) {
-        this.houseNumer = houseNumer;
-        this.streeAdredss = streeAdredss;
-    }
+   
     public String getHouseId() {
         return houseId;
     }

@@ -28,13 +28,10 @@ public class Community {
         this.houselist = house;
     }
     
-    public House createAndAddHouse(String houseNumber, String houseAddress){
-         House newHouse = new House(houseNumber, houseAddress, this);
-         houselist.addNewHouse(newHouse);
-         return newHouse;
+   
+    public Community() {
+        this.houselist= new HouseList();
     }
-    
-    public Community() {}
     
     public Community(String communityName, Integer zipCode, Network city) {
         String uniqueID = UUID.randomUUID().toString();
@@ -42,6 +39,8 @@ public class Community {
         this.communityName = communityName;
         this.zipCode = zipCode;
         this.city = city;
+        this.houselist= new HouseList();
+         System.out.println("houselist 50"+ this.houselist);
     }
 
     public Integer getZipCode() {
