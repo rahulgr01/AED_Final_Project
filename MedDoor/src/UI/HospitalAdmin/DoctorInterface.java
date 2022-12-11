@@ -42,7 +42,7 @@ public class DoctorInterface extends javax.swing.JFrame {
         this.enterprise=enterprise;
          this.parentFrame = parentFrame;
          fieldValidation = new Validation();
-           TableCustom.apply(patientRequests, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(patientList, TableCustom.TableType.DEFAULT);
            TableCustom.apply(patientProfile, TableCustom.TableType.DEFAULT);
            TableCustom.apply(labReport, TableCustom.TableType.DEFAULT);
           
@@ -122,9 +122,9 @@ public class DoctorInterface extends javax.swing.JFrame {
         doctorTab = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        patientRequests = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
         examineReport = new UI.Components.Button();
+        patientList = new javax.swing.JScrollPane();
+        patientTable = new javax.swing.JTable();
         patient = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -481,42 +481,6 @@ public class DoctorInterface extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(217, 241, 255));
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Patient ID", "Patient Name", "Age", "Gender", "Assigned Staff", "Lab Records", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        patientRequests.setViewportView(jTable6);
-
         examineReport.setBackground(new java.awt.Color(0, 91, 149));
         examineReport.setForeground(new java.awt.Color(255, 255, 255));
         examineReport.setText("Examine Patient");
@@ -535,27 +499,46 @@ public class DoctorInterface extends javax.swing.JFrame {
             }
         });
 
+        patientTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Patient Name", "Volunteer(Sender)", "Receiver", "Height", "Weight", "Pulse", "Blood Pressure", "Status"
+            }
+        ));
+        patientList.setViewportView(patientTable);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(patientRequests)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(426, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(examineReport, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(412, 412, 412))
+                .addGap(392, 392, 392))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(patientList, javax.swing.GroupLayout.PREFERRED_SIZE, 973, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(patientRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(patientList, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
                 .addComponent(examineReport, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(453, Short.MAX_VALUE))
+                .addGap(214, 214, 214))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -1008,7 +991,6 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable6;
     private javax.swing.JScrollPane labReport;
     private javax.swing.JTable lapReportTable;
     private javax.swing.JPanel lineSetting;
@@ -1024,9 +1006,10 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel menuhide1;
     private UI.Components.TextField noOfDays;
     private javax.swing.JPanel patient;
+    private javax.swing.JScrollPane patientList;
     private javax.swing.JScrollPane patientProfile;
     private javax.swing.JTable patientProfileTable;
-    private javax.swing.JScrollPane patientRequests;
+    private javax.swing.JTable patientTable;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side2;
