@@ -10,12 +10,22 @@ import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.UUID;
 
 /**
  *
  * @author ashikakalmady
  */
 public abstract class Organization {
+    private String organizationId;
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
+    }
     private String name;
     private WorkQueue workQueue;
     private UserAccountDirectory userAccountDirectory;
@@ -53,6 +63,8 @@ public abstract class Organization {
         workQueue = new WorkQueue();
         employeeDirectory = new EmployeeDirectory();
         userAccountDirectory = new UserAccountDirectory();
+        String uuId = UUID.randomUUID().toString();
+        this.organizationId = uuId;
 //        organizationID = counter;
 //        ++counter;
       }

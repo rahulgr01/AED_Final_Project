@@ -4,6 +4,8 @@
  */
 package Business.Community;
 
+import Business.Voluntary.SurveyReport;
+import Business.Voluntary.VitalSigns;
 import java.util.Date;
 import java.util.UUID;
 
@@ -14,6 +16,24 @@ import java.util.UUID;
 public class Tenant extends Person {
     private String tenantID;
     private String emailId;
+    public VitalSigns vitalSign;
+    public SurveyReport report;
+
+    public SurveyReport getReport() {
+        return report;
+    }
+
+    public void setReport(SurveyReport report) {
+        this.report = report;
+    }
+            
+    public VitalSigns getVitalSign() {
+        return vitalSign;
+    }
+
+    public void setVitalSign(VitalSigns vitalSign) {
+        this.vitalSign = vitalSign;
+    }
     
     public String getEmailId() {
         return emailId;
@@ -50,6 +70,8 @@ String uniqueID = UUID.randomUUID().toString();
         this.tenantID = uniqueID;
 	this.emailId = email;
         this.phoneNumber = phone;
+        this.vitalSign = new VitalSigns();
+        this.report = new SurveyReport();
     }
   
     

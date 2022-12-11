@@ -4,10 +4,31 @@
  */
 package Business.WorkQueue;
 
+import Business.Community.House;
+import Business.Community.Tenant;
+
 /**
  *
  * @author ashikakalmady
  */
-public class HomeCareVolunteerWorkRequest {
+public class HomeCareVolunteerWorkRequest extends WorkRequest {
+    public House assignedHouse;
+    public Tenant patient;
+
+    public House getAssignedHouse() {
+        return assignedHouse;
+    }
+
+    public void setAssignedHouse(House assignedHouse) {
+        this.assignedHouse = assignedHouse;
+    }
+
+    public Tenant getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Tenant patient) {
+        this.patient = patient;
+    }
     
 }

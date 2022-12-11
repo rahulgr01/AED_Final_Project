@@ -4,10 +4,20 @@
  */
 package Business.WorkQueue;
 
+import Business.Pharmacy.MedicineInventory;
+
 /**
  *
  * @author ashikakalmady
  */
 public class MedicineWorkRequest extends WorkRequest{
-    
+     public MedicineInventory medicines;
+
+    public MedicineInventory getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(MedicineInventory medicines) {
+        this.medicines = medicines;
+    }
 }
