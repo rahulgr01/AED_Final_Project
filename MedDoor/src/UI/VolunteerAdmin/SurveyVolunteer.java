@@ -2,10 +2,16 @@
 package UI.VolunteerAdmin;
 
 
+import Business.Community.House;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.VolunteerEnterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.SurveyVolunteerOrganization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.SurveyVolunteerWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
@@ -27,20 +33,47 @@ public class SurveyVolunteer extends javax.swing.JFrame {
     static boolean maximized = true;
     private JFrame userProcessContainer;
      EcoSystem business;
-    Organization organization;
+    SurveyVolunteerOrganization organization;
     UserAccount account;
-    Enterprise enterprise;
+    VolunteerEnterprise vEnterPrise;
     JFrame parentFrame;
+    Network network;
     public SurveyVolunteer(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business, JFrame parentFrame) {
             initComponents();
-              this.parentFrame = parentFrame;
+            vEnterPrise = (VolunteerEnterprise) enterprise;
+          this.organization = (SurveyVolunteerOrganization) organization;
+          this.parentFrame = parentFrame;
+          this.account = account;
+          network = business.getNetworkList().get(0);
+          this.parentFrame = parentFrame;
          
     }
     //Method to change panel color on hover
  
+    public void populateSurveyList() {
+        for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof SurveyVolunteerWorkRequest)
+            {
+               for(House hous: ((SurveyVolunteerWorkRequest) wq).getAssignedHouses().getHouses()) {
+                   Object[] row = new Object[8];
+            row[0] = ((HospitalWorkRequest) request).getPatient();
+            row[1] = ((HospitalWorkRequest) request).getPatient().getPatientName();
+            row[2] = ((HospitalWorkRequest) request).getPatient().getAge();
+            row[3] = ((HospitalWorkRequest) request).getPatient().getGender();
+            row[4] = ((HospitalWorkRequest) request).getPatient().getDateOfBirth();
+            row[5] = ((HospitalWorkRequest) request).getPatient().getIssue();
+            row[7] = request.getMessage();
+            row[6] = request;
+               } 
+            
+            }
+            
+        }
+    }
+    
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -113,24 +146,27 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         viewSurveyTask = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        svWorkRTable = new javax.swing.JTable();
         button4 = new UI.Components.Button();
+        button5 = new UI.Components.Button();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        svWorkRTenantTable = new javax.swing.JTable();
         updateSurveyTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
-        combobox9 = new UI.Components.Combobox();
-        myTextFieldLogin6 = new UI.Components.MyTextFieldLogin();
-        myTextFieldLogin9 = new UI.Components.MyTextFieldLogin();
-        myTextFieldLogin10 = new UI.Components.MyTextFieldLogin();
+        sVHouseCombo = new UI.Components.Combobox();
+        weight = new UI.Components.MyTextFieldLogin();
+        BP = new UI.Components.MyTextFieldLogin();
+        PR = new UI.Components.MyTextFieldLogin();
         myTextFieldLogin11 = new UI.Components.MyTextFieldLogin();
-        myTextFieldLogin12 = new UI.Components.MyTextFieldLogin();
-        myTextFieldLogin13 = new UI.Components.MyTextFieldLogin();
-        combobox10 = new UI.Components.Combobox();
+        height = new UI.Components.MyTextFieldLogin();
+        HR = new UI.Components.MyTextFieldLogin();
+        needHosCombo = new UI.Components.Combobox();
         jLabel4 = new javax.swing.JLabel();
-        combobox11 = new UI.Components.Combobox();
+        diseaseList = new UI.Components.Combobox();
         jLabel6 = new javax.swing.JLabel();
         button1 = new UI.Components.Button();
-        combobox12 = new UI.Components.Combobox();
-        combobox1 = new UI.Components.Combobox();
+        sVTenantCombo = new UI.Components.Combobox();
+        sVCommCombo = new UI.Components.Combobox();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -525,6 +561,12 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
 
+        svolunteer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                svolunteerMouseClicked(evt);
+            }
+        });
+
         dashboard.setBackground(new java.awt.Color(255, 255, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
 
@@ -538,7 +580,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -547,18 +589,21 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         jPanel16.setBackground(new java.awt.Color(217, 241, 255));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        svWorkRTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Community", "House street address", "House Apt No", "Zip Code", "Date of task", "Sender", "Status", "Message"
             }
         ));
-        jScrollPane6.setViewportView(jTable3);
+        jScrollPane6.setViewportView(svWorkRTable);
+        if (svWorkRTable.getColumnModel().getColumnCount() > 0) {
+            svWorkRTable.getColumnModel().getColumn(1).setHeaderValue("LName");
+        }
 
         button4.setBackground(new java.awt.Color(0, 91, 149));
         button4.setForeground(new java.awt.Color(255, 255, 255));
@@ -573,27 +618,68 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             }
         });
 
+        button5.setBackground(new java.awt.Color(0, 91, 149));
+        button5.setForeground(new java.awt.Color(255, 255, 255));
+        button5.setText("Tenants Info");
+        button5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button5MouseExited(evt);
+            }
+        });
+
+        svWorkRTenantTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "FName", "Age", "Gender", "BP", "HeartRate", "Temperature", "Height", "Weight", "Sickness", "Need Hospitalization"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(svWorkRTenantTable);
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+            .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(331, Short.MAX_VALUE)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(330, 330, 330))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(258, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout viewSurveyTaskLayout = new javax.swing.GroupLayout(viewSurveyTask);
@@ -611,25 +697,25 @@ public class SurveyVolunteer extends javax.swing.JFrame {
 
         jPanel22.setBackground(new java.awt.Color(217, 241, 255));
 
-        combobox9.setLabeText("Task");
+        sVHouseCombo.setLabeText("Task");
 
-        myTextFieldLogin6.setLabelText("Weight");
+        weight.setLabelText("Weight");
 
-        myTextFieldLogin9.setLabelText("Body temperature");
+        BP.setLabelText("Body temperature");
 
-        myTextFieldLogin10.setLabelText("Pulse rate");
+        PR.setLabelText("Pulse rate");
 
         myTextFieldLogin11.setLabelText("Blood group");
 
-        myTextFieldLogin12.setLabelText("Height");
+        height.setLabelText("Height");
 
-        myTextFieldLogin13.setLabelText("Heart Rate");
+        HR.setLabelText("Heart Rate");
 
-        combobox10.setLabeText("");
+        needHosCombo.setLabeText("");
 
         jLabel4.setText("Need To Hospitalise:");
 
-        combobox11.setLabeText("Select disease");
+        diseaseList.setLabeText("Select disease");
 
         jLabel6.setText("Tenant health status for past 2 week");
 
@@ -649,11 +735,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             }
         });
 
-        combobox12.setLabeText("Tenant");
+        sVTenantCombo.setLabeText("Tenant");
 
-        combobox1.addActionListener(new java.awt.event.ActionListener() {
+        sVCommCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox1ActionPerformed(evt);
+                sVCommComboActionPerformed(evt);
             }
         });
 
@@ -664,16 +750,16 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(combobox12, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                    .addComponent(combobox9, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                    .addComponent(combobox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sVTenantCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(sVHouseCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(sVCommCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myTextFieldLogin12, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(weight, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(height, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BP, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel22Layout.createSequentialGroup()
@@ -681,14 +767,14 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(myTextFieldLogin13, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin10, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HR, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PR, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(myTextFieldLogin11, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                            .addComponent(combobox11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(combobox10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(diseaseList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(needHosCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(53, 53, 53))))
         );
@@ -696,34 +782,34 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(combobox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(combobox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sVHouseCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(combobox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sVTenantCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(myTextFieldLogin12, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin10, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(height, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PR, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(myTextFieldLogin6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(myTextFieldLogin13, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(weight, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HR, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 30, Short.MAX_VALUE))
                     .addGroup(jPanel22Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(combobox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(diseaseList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)))
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(myTextFieldLogin9, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BP, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(myTextFieldLogin11, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(combobox10, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(needHosCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(261, 261, 261))
@@ -869,9 +955,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         changecolor(side5, new Color(0,91,149));
     }//GEN-LAST:event_svolunteerViewTaskMouseExited
 
-    private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
+    private void sVCommComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sVCommComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combobox1ActionPerformed
+    }//GEN-LAST:event_sVCommComboActionPerformed
 public void changecolorB(JButton hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -894,6 +980,34 @@ public void changecolorB(JButton hover, Color rand) {
     private void button4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseExited
         changecolorB(button4, new Color(0,91,149));
     }//GEN-LAST:event_button4MouseExited
+
+    private void button5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button5MouseEntered
+
+    private void button5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button5MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button5MouseExited
+
+    private void svolunteerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svolunteerMouseClicked
+        // TODO add your handling code here:
+        int index = svolunteer.getSelectedIndex();
+       
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_svolunteerMouseClicked
 
     /**
      * @param args the command line arguments
@@ -932,21 +1046,22 @@ public void changecolorB(JButton hover, Color rand) {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private UI.Components.MyTextFieldLogin BP;
+    private UI.Components.MyTextFieldLogin HR;
     private javax.swing.JPanel MenuIcon;
+    private UI.Components.MyTextFieldLogin PR;
     private UI.Components.Button button1;
     private UI.Components.Button button4;
+    private UI.Components.Button button5;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox1;
-    private UI.Components.Combobox combobox10;
-    private UI.Components.Combobox combobox11;
-    private UI.Components.Combobox combobox12;
-    private UI.Components.Combobox combobox9;
     private javax.swing.JPanel dashboard;
+    private UI.Components.Combobox diseaseList;
     private javax.swing.JPanel header;
+    private UI.Components.MyTextFieldLogin height;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel4;
@@ -956,7 +1071,7 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageMedicineIcon2;
@@ -967,23 +1082,25 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin10;
     private UI.Components.MyTextFieldLogin myTextFieldLogin11;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin12;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin13;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin6;
-    private UI.Components.MyTextFieldLogin myTextFieldLogin9;
+    private UI.Components.Combobox needHosCombo;
+    private UI.Components.Combobox sVCommCombo;
+    private UI.Components.Combobox sVHouseCombo;
+    private UI.Components.Combobox sVTenantCombo;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side5;
     private javax.swing.JPanel side7;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
+    private javax.swing.JTable svWorkRTable;
+    private javax.swing.JTable svWorkRTenantTable;
     private javax.swing.JTabbedPane svolunteer;
     private javax.swing.JPanel svolunteerDashboard;
     private javax.swing.JPanel svolunteerTaskUpdate;
     private javax.swing.JPanel svolunteerViewTask;
     private javax.swing.JPanel updateSurveyTask;
     private javax.swing.JPanel viewSurveyTask;
+    private UI.Components.MyTextFieldLogin weight;
     // End of variables declaration//GEN-END:variables
 }

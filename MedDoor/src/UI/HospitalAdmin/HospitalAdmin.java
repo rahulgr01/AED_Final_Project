@@ -1,10 +1,13 @@
-
 package UI.HospitalAdmin;
 
-
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Network.Network;
+import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
+import Business.Role.DoctorRole;
 import Business.UserAccount.UserAccount;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
@@ -27,31 +30,41 @@ public class HospitalAdmin extends javax.swing.JFrame {
     static boolean maximized = true;
     private JFrame userProcessContainer;
     JFrame parentFrame;
-    public HospitalAdmin() {
+    HospitalEnterprise hEnterPrise;
+    Organization organization;
+    UserAccount account;
+    Network network;
+
+    public HospitalAdmin(UserAccount account,
+            Organization organization,
+            Enterprise enterprise,
+            EcoSystem business, JFrame parentFrame) {
         initComponents();
-           TableCustom.apply(crudDoctorSP, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
-             TableCustom.apply(doctorList, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(patientList, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(staffList, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(patientProfileSP, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(labSP, TableCustom.TableType.DEFAULT);
-           TableCustom.apply(pharmacySP, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(crudDoctorSP, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(doctorList, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(patientList, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(staffList, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(patientProfileSP, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(labSP, TableCustom.TableType.DEFAULT);
+        TableCustom.apply(pharmacySP, TableCustom.TableType.DEFAULT);
+        hEnterPrise = (HospitalEnterprise) enterprise;
+        this.organization = organization;
+        this.parentFrame = parentFrame;
+        this.account = account;
+        network = business.getNetworkList().get(0);
+        hospitalAdmin.setSelectedIndex(0);
     }
     //Method to change panel color on hover
- 
-    public HospitalAdmin(UserAccount account, 
-            Organization organization, 
-            Enterprise enterprise, 
-            EcoSystem business,JFrame parentFrame) {
-        initComponents();
-          this.parentFrame = parentFrame;
-//        this.userProcessContainer=userProcessContainer;
-    }
 
-   
-
-  
+//    public HospitalAdmin(UserAccount account, 
+//            Organization organization, 
+//            Enterprise enterprise, 
+//            EcoSystem business,JFrame parentFrame) {
+//        initComponents();
+//          this.parentFrame = parentFrame;
+////        this.userProcessContainer=userProcessContainer;
+//    }
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -59,12 +72,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
     //Method to change Background color of the panel 
     public void clickmenu(JPanel h1, JPanel h2, int numberbool) {
         if (numberbool == 1) {
-            h1.setBackground(new Color(42,58,73));
-            h2.setBackground(new Color(4,16,20));
+            h1.setBackground(new Color(42, 58, 73));
+            h2.setBackground(new Color(4, 16, 20));
 
         } else {
-            h1.setBackground(new Color(4,16,20));
-            h2.setBackground(new Color(42,58,73));
+            h1.setBackground(new Color(4, 16, 20));
+            h2.setBackground(new Color(42, 58, 73));
         }
     }
     //Method to change icon 
@@ -78,15 +91,17 @@ public class HospitalAdmin extends javax.swing.JFrame {
     public void hideshow(JPanel menushowhide, boolean dashboard, JLabel button) {
         if (dashboard == true) {
             menushowhide.setPreferredSize(new Dimension(50, menushowhide.getHeight()));
-            changeImage(button, "/com/vcare/icon/menu_32px.png"); 
+            changeImage(button, "/com/vcare/icon/menu_32px.png");
         } else {
             menushowhide.setPreferredSize(new Dimension(270, menushowhide.getHeight()));
-            changeImage(button, "/com/vcare/icon/back_32px.png"); 
+            changeImage(button, "/com/vcare/icon/back_32px.png");
         }
     }
+
     public void changecolorB(JButton hover, Color rand) {
         hover.setBackground(rand);
-}
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -646,6 +661,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
         menu.add(menuhide, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
+
+        hospitalAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                hospitalAdminMouseClicked(evt);
+            }
+        });
 
         dashboard.setBackground(new java.awt.Color(217, 241, 255));
         dashboard.setLayout(new java.awt.BorderLayout());
@@ -1578,11 +1599,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_maxMouseClicked
 
     private void maxMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseEntered
-        changecolor(buttonMax, new Color(3,138,255));
+        changecolor(buttonMax, new Color(3, 138, 255));
     }//GEN-LAST:event_maxMouseEntered
 
     private void maxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseExited
-        changecolor(buttonMax, new Color(27,152,245));
+        changecolor(buttonMax, new Color(27, 152, 245));
     }//GEN-LAST:event_maxMouseExited
 
     private void buttonhidemenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseClicked
@@ -1600,106 +1621,106 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonhidemenuMouseClicked
 
     private void buttonhidemenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseEntered
-        changecolor(linehidemenu, new Color(190,224,236));
-         
+        changecolor(linehidemenu, new Color(190, 224, 236));
+
     }//GEN-LAST:event_buttonhidemenuMouseEntered
 
     private void buttonhidemenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenuMouseExited
-        changecolor(linehidemenu, new Color(4,16,20));
+        changecolor(linehidemenu, new Color(4, 16, 20));
     }//GEN-LAST:event_buttonhidemenuMouseExited
 
     private void buttonLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseClicked
-       clickmenu(setting, hidemenu, 1);
+        clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-          this.setVisible(false);
-           parentFrame.setVisible(true);
+            this.setVisible(false);
+            parentFrame.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
     private void buttonLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseEntered
-        changecolor(lineSetting, new Color(190,224,236));
+        changecolor(lineSetting, new Color(190, 224, 236));
     }//GEN-LAST:event_buttonLogoutMouseEntered
 
     private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
-        changecolor(lineSetting, new Color(4,16,20));
+        changecolor(lineSetting, new Color(4, 16, 20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
     private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
-         hospitalAdmin.setSelectedIndex(0);
-         changecolor(pharmacyStaistics, new Color(3,138,255));
+        hospitalAdmin.setSelectedIndex(0);
+        changecolor(pharmacyStaistics, new Color(3, 138, 255));
         changecolor(side1, new Color(190, 224, 236));
     }//GEN-LAST:event_pharmacyStaisticsMouseClicked
 
     private void pharmacyStaisticsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseEntered
-        changecolor(pharmacyStaistics, new Color(3,138,255));
+        changecolor(pharmacyStaistics, new Color(3, 138, 255));
         changecolor(side1, new Color(190, 224, 236));
     }//GEN-LAST:event_pharmacyStaisticsMouseEntered
 
     private void pharmacyStaisticsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseExited
-        changecolor(pharmacyStaistics, new Color(0,91,149));
-        changecolor(side1, new Color(0,91,149));
+        changecolor(pharmacyStaistics, new Color(0, 91, 149));
+        changecolor(side1, new Color(0, 91, 149));
     }//GEN-LAST:event_pharmacyStaisticsMouseExited
 
     private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
         hospitalAdmin.setSelectedIndex(1);
-        changecolor(managePharmacy, new Color(3,138,255));
+        changecolor(managePharmacy, new Color(3, 138, 255));
         changecolor(side2, new Color(190, 224, 236));
     }//GEN-LAST:event_managePharmacyMouseClicked
 
     private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
-        changecolor(managePharmacy, new Color(3,138,255));
+        changecolor(managePharmacy, new Color(3, 138, 255));
         changecolor(side2, new Color(190, 224, 236));
     }//GEN-LAST:event_managePharmacyMouseEntered
 
     private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
-       changecolor(managePharmacy, new Color(0,91,149));
-        changecolor(side2, new Color(0,91,149));
+        changecolor(managePharmacy, new Color(0, 91, 149));
+        changecolor(side2, new Color(0, 91, 149));
     }//GEN-LAST:event_managePharmacyMouseExited
 
     private void manageCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseClicked
-       hospitalAdmin.setSelectedIndex(2);
-        changecolor(manageCategory, new Color(3,138,255));
+        hospitalAdmin.setSelectedIndex(2);
+        changecolor(manageCategory, new Color(3, 138, 255));
         changecolor(side3, new Color(190, 224, 236));
     }//GEN-LAST:event_manageCategoryMouseClicked
 
     private void manageCategoryMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseEntered
-      changecolor(manageCategory, new Color(3,138,255));
+        changecolor(manageCategory, new Color(3, 138, 255));
         changecolor(side3, new Color(190, 224, 236));
     }//GEN-LAST:event_manageCategoryMouseEntered
 
     private void manageCategoryMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseExited
-       changecolor(manageCategory, new Color(0,91,149));
-        changecolor(side3, new Color(0,91,149));
+        changecolor(manageCategory, new Color(0, 91, 149));
+        changecolor(side3, new Color(0, 91, 149));
     }//GEN-LAST:event_manageCategoryMouseExited
 
     private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
-       hospitalAdmin.setSelectedIndex(3);
-       changecolor(manageMedicine, new Color(3,138,255));
+        hospitalAdmin.setSelectedIndex(3);
+        changecolor(manageMedicine, new Color(3, 138, 255));
         changecolor(side4, new Color(190, 224, 236));
     }//GEN-LAST:event_manageMedicineMouseClicked
 
     private void manageMedicineMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseEntered
-      changecolor(manageMedicine, new Color(3,138,255));
+        changecolor(manageMedicine, new Color(3, 138, 255));
         changecolor(side4, new Color(190, 224, 236));
     }//GEN-LAST:event_manageMedicineMouseEntered
 
     private void manageMedicineMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseExited
-        changecolor(manageMedicine, new Color(0,91,149));
-        changecolor(side4, new Color(0,91,149));
+        changecolor(manageMedicine, new Color(0, 91, 149));
+        changecolor(side4, new Color(0, 91, 149));
     }//GEN-LAST:event_manageMedicineMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
-        changecolor(buttonClose, new Color(27,152,245));
+        changecolor(buttonClose, new Color(27, 152, 245));
     }//GEN-LAST:event_closeMouseExited
 
     private void closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseEntered
-        changecolor(buttonClose, new Color(3,138,255));
+        changecolor(buttonClose, new Color(3, 138, 255));
     }//GEN-LAST:event_closeMouseEntered
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
         this.setVisible(false);
-           parentFrame.setVisible(true);
+        parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
     private void combobox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox2ActionPerformed
@@ -1727,11 +1748,35 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_doctorNameActionPerformed
 
     private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
+
+        String username = doctorUsername.getText();
+//        char[] passwordCharArray = doctorPassword.getPassword();
+
+
+        String password = doctorPassword.getText();//String.valueOf(passwordCharArray);
+        String name = doctorName.getText();
+
+        Organization orgType = null;
+        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+            if (org.getName() == Organization.Type.Doctor.getValue()) {
+                orgType = org;
+//                for(UserAccount account : org.getUserAccountDirectory().getUserAccountList()) {
+//                    sVolunteerCombo.addItem(account.getEmployee());
+//                }
+            }
+        }
+        Employee employee = orgType.getEmployeeDirectory().createEmployee(name);
+        if (EcoSystem.isUserUnique(username)) {
+
+            orgType.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorRole());
+
+        }
+
         JOptionPane.showMessageDialog(this, "Doctor Added Successfully!");
     }//GEN-LAST:event_addDoctorActionPerformed
 
     private void updateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoctorActionPerformed
-       JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
+        JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
     }//GEN-LAST:event_updateDoctorActionPerformed
 
     private void doctorUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorUsernameActionPerformed
@@ -1775,123 +1820,144 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void updatePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientActionPerformed
-       JOptionPane.showMessageDialog(this, "Please Details Updated ");
-       
+        JOptionPane.showMessageDialog(this, "Please Details Updated ");
+
     }//GEN-LAST:event_updatePatientActionPerformed
 
     private void updatePatientMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientMouseEntered
-      changecolorB(updatePatient, new Color(3,138,255));
+        changecolorB(updatePatient, new Color(3, 138, 255));
     }//GEN-LAST:event_updatePatientMouseEntered
 
     private void updatePatientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientMouseExited
-       changecolorB(updatePatient, new Color(0,91,149));
+        changecolorB(updatePatient, new Color(0, 91, 149));
     }//GEN-LAST:event_updatePatientMouseExited
 
     private void deleteStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStaffActionPerformed
-       JOptionPane.showMessageDialog(this, "Staff Deleted ");
+        JOptionPane.showMessageDialog(this, "Staff Deleted ");
     }//GEN-LAST:event_deleteStaffActionPerformed
 
     private void updatePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientBtnActionPerformed
-   JOptionPane.showMessageDialog(this, "Patient Details Updated");
+        JOptionPane.showMessageDialog(this, "Patient Details Updated");
     }//GEN-LAST:event_updatePatientBtnActionPerformed
 
     private void updatePatientBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseEntered
-        changecolorB(updatePatientBtn, new Color(3,138,255));
+        changecolorB(updatePatientBtn, new Color(3, 138, 255));
     }//GEN-LAST:event_updatePatientBtnMouseEntered
 
     private void updatePatientBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseExited
-         changecolorB(updatePatientBtn, new Color(0,91,149));
+        changecolorB(updatePatientBtn, new Color(0, 91, 149));
     }//GEN-LAST:event_updatePatientBtnMouseExited
 
     private void deleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorActionPerformed
         JOptionPane.showMessageDialog(this, "Doctor Deleted Successfully!");
     }//GEN-LAST:event_deleteDoctorActionPerformed
-private void clearDoctor() {
-doctorID.setText("");
-doctorName.setText("");
-doctorUsername.setText("");
-doctorPassword.setText("");
-doctorSalary.setText("");
-doctorExperience.setText("");
-}
+    private void clearDoctor() {
+        doctorID.setText("");
+        doctorName.setText("");
+        doctorUsername.setText("");
+        doctorPassword.setText("");
+        doctorSalary.setText("");
+        doctorExperience.setText("");
+    }
     private void clearDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearDoctorActionPerformed
-         clearDoctor() ;
+        clearDoctor();
     }//GEN-LAST:event_clearDoctorActionPerformed
 
     private void addDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseEntered
-       changecolorB(addDoctor, new Color(3,138,255));
+        changecolorB(addDoctor, new Color(3, 138, 255));
     }//GEN-LAST:event_addDoctorMouseEntered
 
     private void addDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseExited
-        changecolorB(addDoctor, new Color(0,91,149));
+        changecolorB(addDoctor, new Color(0, 91, 149));
     }//GEN-LAST:event_addDoctorMouseExited
 
     private void deleteDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseEntered
-       changecolorB(deleteDoctor, new Color(3,138,255));
+        changecolorB(deleteDoctor, new Color(3, 138, 255));
     }//GEN-LAST:event_deleteDoctorMouseEntered
 
     private void deleteDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseExited
-           changecolorB(deleteDoctor, new Color(0,91,149));
+        changecolorB(deleteDoctor, new Color(0, 91, 149));
     }//GEN-LAST:event_deleteDoctorMouseExited
 
     private void updateDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseEntered
-       changecolorB(updateDoctor, new Color(3,138,255));
+        changecolorB(updateDoctor, new Color(3, 138, 255));
     }//GEN-LAST:event_updateDoctorMouseEntered
 
     private void updateDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseExited
-        changecolorB(updateDoctor, new Color(0,91,149));
+        changecolorB(updateDoctor, new Color(0, 91, 149));
     }//GEN-LAST:event_updateDoctorMouseExited
 
     private void clearDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseExited
-        changecolorB(clearDoctor, new Color(0,91,149));
+        changecolorB(clearDoctor, new Color(0, 91, 149));
     }//GEN-LAST:event_clearDoctorMouseExited
 
     private void clearDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseEntered
-         changecolorB(clearDoctor, new Color(3,138,255));
+        changecolorB(clearDoctor, new Color(3, 138, 255));
     }//GEN-LAST:event_clearDoctorMouseEntered
-private void clearStaff() {
-staffID.setText("");
-staffName.setText("");
-staffUsername.setText("");
-staffPassword.setText("");
-staffSalary.setText("");
+    private void clearStaff() {
+        staffID.setText("");
+        staffName.setText("");
+        staffUsername.setText("");
+        staffPassword.setText("");
+        staffSalary.setText("");
 
-}
+    }
     private void clearStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStaffActionPerformed
         clearStaff();
     }//GEN-LAST:event_clearStaffActionPerformed
 
     private void addStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseEntered
-        changecolorB(addStaff, new Color(3,138,255));
+        changecolorB(addStaff, new Color(3, 138, 255));
     }//GEN-LAST:event_addStaffMouseEntered
 
     private void deleteStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseEntered
-        changecolorB(deleteStaff, new Color(3,138,255));
+        changecolorB(deleteStaff, new Color(3, 138, 255));
     }//GEN-LAST:event_deleteStaffMouseEntered
 
     private void updateStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseEntered
-        changecolorB(updateStaff, new Color(3,138,255));
+        changecolorB(updateStaff, new Color(3, 138, 255));
     }//GEN-LAST:event_updateStaffMouseEntered
 
     private void clearStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseEntered
-        changecolorB(clearStaff, new Color(3,138,255));
+        changecolorB(clearStaff, new Color(3, 138, 255));
     }//GEN-LAST:event_clearStaffMouseEntered
 
     private void addStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseExited
-         changecolorB(addStaff, new Color(0,91,149));
+        changecolorB(addStaff, new Color(0, 91, 149));
     }//GEN-LAST:event_addStaffMouseExited
 
     private void deleteStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseExited
-        changecolorB(deleteStaff, new Color(0,91,149));
+        changecolorB(deleteStaff, new Color(0, 91, 149));
     }//GEN-LAST:event_deleteStaffMouseExited
 
     private void updateStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseExited
-         changecolorB(updateStaff, new Color(0,91,149));
+        changecolorB(updateStaff, new Color(0, 91, 149));
     }//GEN-LAST:event_updateStaffMouseExited
 
     private void clearStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseExited
-        changecolorB(clearStaff, new Color(0,91,149));
+        changecolorB(clearStaff, new Color(0, 91, 149));
     }//GEN-LAST:event_clearStaffMouseExited
+
+    private void hospitalAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hospitalAdminMouseClicked
+        // TODO add your handling code here:
+        int index = hospitalAdmin.getSelectedIndex();
+
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_hospitalAdminMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1928,11 +1994,11 @@ staffSalary.setText("");
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HospitalAdmin().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new HospitalAdmin().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
