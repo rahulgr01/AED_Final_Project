@@ -78,6 +78,31 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         }
     }
     
+    public void populateTenantInfo() {
+        for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof SurveyVolunteerWorkRequest)
+            {
+               for(House hous: ((SurveyVolunteerWorkRequest) wq).getAssignedHouses().getHouses()) {
+                   Object[] row = new Object[8];
+            row[0] = hous.getCommunity().getCommunityName();
+            row[1] = hous.getStreeAdredss();
+            row[2] = hous.getHouseNumer();
+            row[3] = hous.getCommunity().getZipCode();
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate = dateFormat.format(((SurveyVolunteerWorkRequest) wq).assignedDate);
+            row[4] = formattedDate;
+            row[5] = ((SurveyVolunteerWorkRequest) wq).getSender().getEmployee().getName();
+            row[6] = ((SurveyVolunteerWorkRequest) wq).getStatus();
+            row[7] = ((SurveyVolunteerWorkRequest) wq).getMessage();
+               } 
+            
+            }
+            
+        }
+    }
+    
+    
+    
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }

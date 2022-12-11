@@ -10,26 +10,11 @@ package Business.Pharmacy;
  */
 public class Medicine {
     private String name;
-    private String category;
     private double price;
     private int qty;
-
-    public Medicine(String medName, String medCat, String phar, String medPrice, String medQuant) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    
    
     public Medicine(String name, String category, double price, int qty) {
         this.name = name;
-        this.category=category;
         this.price = price;
         this.qty = qty;
         

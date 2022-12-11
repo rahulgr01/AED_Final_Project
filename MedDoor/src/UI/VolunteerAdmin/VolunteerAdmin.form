@@ -1130,62 +1130,110 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                                                      <Component id="combobox6" min="-2" pref="297" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="337" max="-2" attributes="0"/>
-                                                      <Component id="button3" min="-2" pref="135" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="0" pref="388" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jScrollPane7" pref="930" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane5" alignment="1" max="32767" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="sVHousCombo" min="-2" pref="303" max="-2" attributes="0"/>
+                                                  <Component id="sVCommCombo" min="-2" pref="303" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="226" pref="387" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="button1" min="-2" pref="139" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="button3" min="-2" pref="284" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="317" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane5" min="-2" pref="197" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                      <Component id="combobox6" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="button3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      <EmptySpace pref="382" max="32767" attributes="0"/>
+                                      <Component id="sVCommCombo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="sVHousCombo" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="button1" min="-2" pref="39" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane7" min="-2" pref="188" max="-2" attributes="0"/>
+                                      <EmptySpace pref="186" max="32767" attributes="0"/>
+                                      <Component id="button3" min="-2" pref="48" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                            <Component class="UI.Components.Button" name="button3">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="95" green="5b" red="0" type="rgb"/>
+                                </Property>
+                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Generate Hospital Work Request"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="SansSerif" size="14" style="1"/>
+                                </Property>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button3ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="UI.Components.Combobox" name="sVCommCombo">
+                              <Properties>
+                                <Property name="labeText" type="java.lang.String" value="Community"/>
+                              </Properties>
+                            </Component>
+                            <Component class="UI.Components.Combobox" name="sVHousCombo">
+                              <Properties>
+                                <Property name="labeText" type="java.lang.String" value="Houses"/>
+                              </Properties>
+                            </Component>
+                            <Container class="javax.swing.JScrollPane" name="jScrollPane7">
                               <AuxValues>
                                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                               </AuxValues>
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                               <SubComponents>
-                                <Component class="javax.swing.JTable" name="jTable2">
+                                <Component class="javax.swing.JTable" name="svWorkRTenantTable">
                                   <Properties>
                                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                      <Table columnCount="7" rowCount="4">
-                                        <Column editable="true" title="Community" type="java.lang.Object"/>
-                                        <Column editable="true" title="House Address" type="java.lang.Object"/>
-                                        <Column editable="true" title="House Number" type="java.lang.Object"/>
-                                        <Column editable="true" title="ZipCode" type="java.lang.Object"/>
-                                        <Column editable="true" title="Sender" type="java.lang.Object"/>
+                                      <Table columnCount="8" rowCount="4">
+                                        <Column editable="true" title="FName" type="java.lang.Object"/>
+                                        <Column editable="true" title="Age" type="java.lang.Object"/>
+                                        <Column editable="true" title="Gender" type="java.lang.Object"/>
                                         <Column editable="true" title="Date" type="java.lang.Object"/>
+                                        <Column editable="true" title="Sickness" type="java.lang.Object"/>
+                                        <Column editable="true" title="Need Hospitalization" type="java.lang.Boolean"/>
                                         <Column editable="true" title="Status" type="java.lang.Object"/>
+                                        <Column editable="true" title="Assigned To" type="java.lang.Object"/>
                                       </Table>
                                     </Property>
                                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                                       <TableColumnModel selectionModel="0">
+                                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                                          <Title/>
+                                          <Editor/>
+                                          <Renderer/>
+                                        </Column>
                                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                                           <Title/>
                                           <Editor/>
@@ -1230,27 +1278,10 @@
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Component class="UI.Components.Combobox" name="combobox6">
+                            <Component class="UI.Components.Button" name="button1">
                               <Properties>
-                                <Property name="labeText" type="java.lang.String" value="Community"/>
+                                <Property name="text" type="java.lang.String" value="View Tenant Report"/>
                               </Properties>
-                            </Component>
-                            <Component class="UI.Components.Button" name="button3">
-                              <Properties>
-                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="95" green="5b" red="0" type="rgb"/>
-                                </Property>
-                                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Assign Task"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="SansSerif" size="14" style="1"/>
-                                </Property>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button3ActionPerformed"/>
-                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>

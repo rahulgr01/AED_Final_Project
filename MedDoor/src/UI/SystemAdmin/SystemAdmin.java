@@ -1458,8 +1458,6 @@ public class SystemAdmin extends javax.swing.JFrame {
 
     private void addTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantActionPerformed
        
-       
-   
         int selectedRowIndex = houseTable.getSelectedRow();
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
