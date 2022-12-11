@@ -145,8 +145,12 @@ public class VolunteerAdmin extends javax.swing.JFrame {
    
     
     public void populateTenantInfo(House house) {
-        
-        for(Tenant tenant: house.getTenats().getTenants()) {
+        for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof SurveyVolunteerWorkRequest)
+            {
+                
+           House hous = ((SurveyVolunteerWorkRequest) wq).getAssignedHouse();
+        for(Tenant tenant: hous.getTenats().getTenants()) {
                   
             Object[] row = new Object[8];
             row[0] = tenant.getFirstName();
@@ -157,7 +161,8 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             row[5] = tenant.report.isNeedHospitalization();
                
           }
-         
+            }
+        }
     }
     
     public void changecolor(JPanel hover, Color rand) {
@@ -1387,7 +1392,15 @@ public void changecolorB(JButton hover, Color rand) {
         // TODO add your handling code here:
         try{
             HomeCareVolunteerWorkRequest sV = new HomeCareVolunteerWorkRequest();
+            int selectedRow = svWorkRTenantTable.getSelectedRow();
+
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
             
+            return;
+        }
+        Tenant tenat = (Tenant)svWorkRTenantTable.getValueAt(selectedRow, 0);
+        sV.setPatient(tenat);
             DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             Date date = format.parse(sVDate.getText());
             sV.setRequestDate(date);

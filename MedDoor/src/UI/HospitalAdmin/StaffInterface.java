@@ -91,7 +91,7 @@ public class StaffInterface extends javax.swing.JFrame {
             if(request instanceof StaffWorkRequest){
                  Object[] row = new Object[4];
                     row[0] = ((HospitalWorkRequest) request).getPatient();
-            row[1] = ((HospitalWorkRequest) request).getPatient().getPatientName();
+           // row[1] = ((HospitalWorkRequest) request).getPatient().getPatientName();
             row[1] = request.getSender().getEmployee().getName();
             row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
             row[3] = request.getStatus();

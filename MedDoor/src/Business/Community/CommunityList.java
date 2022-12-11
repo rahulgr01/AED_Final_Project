@@ -9,6 +9,7 @@ import Business.Enterprise.HospitalEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -33,8 +34,33 @@ public class CommunityList {
     }
     
     public void tempCommList(Network city) { 
-        addNewCommunity(new Community("Allston-Suffolk", 20134, city));
-        addNewCommunity(new Community("Allston-Brighton", 20135, city));
+        Community com = new Community("Allston-Suffolk", 20134, city);
+        House house = new House("123", "682 parker", com);
+        Tenant tenant = new Tenant("ash", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house);
+        house.tenats.addNewTenant(tenant);
+        tenant = new Tenant("ash2", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house);
+        house.tenats.addNewTenant(tenant);
+        tenant = new Tenant("ash3", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house);
+        house.tenats.addNewTenant(tenant);
+        tenant = new Tenant("ash4", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house);
+        house.tenats.addNewTenant(tenant);
+         
+        com.houselist.addNewHouse(house);
+        addNewCommunity(com);
+        
+        
+        Community com2 = new Community("Allston-Brighton", 20135, city);
+        House house2 = new House("126", "68 parker", com2);
+        Tenant tenant2 = new Tenant("ash", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house2);
+        house.tenats.addNewTenant(tenant2);
+        tenant2 = new Tenant("ash2", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house2);
+        house.tenats.addNewTenant(tenant2);
+        tenant2 = new Tenant("ash3", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house2);
+        house.tenats.addNewTenant(tenant2);
+        tenant2 = new Tenant("ash4", "test", new Date(), "female", 21, "ashika@gmail.com", "478233838", house2);
+        house2.tenats.addNewTenant(tenant2);
+        com2.houselist.addNewHouse(house2);
+        addNewCommunity(com2);
     }   
     
     
