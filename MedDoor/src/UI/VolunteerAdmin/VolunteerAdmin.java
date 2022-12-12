@@ -32,6 +32,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -53,6 +54,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     UserAccount account;
     Network network;
     Enterprise enterpriseD;
+    int xx, xy;
     public VolunteerAdmin(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
@@ -66,6 +68,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
           network = business.getNetworkList().get(0);
           vAdminTab.setSelectedIndex(0);
           vAdminTask.setSelectedIndex(0);
+          populateCommunities();
+          populateCommunitiesHC();
+          populateHouses();
+          populateHousesHC();
+          populateVolunteerEnterpriseOrganizations();
+//          populateSurveyVolunteers();
+//          populateHomeCareVolunteers();
     }
     //Method to change panel color on hover
  
@@ -134,10 +143,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     }
     
     public void populateHousesHC() {
-        if (sVCommCombo.getSelectedIndex() > 0) {
+        if (sVCommCombo.getSelectedIndex() >= 0) {
         sVHousCombo.removeAllItems();
         Community com = (Community) sVCommCombo.getSelectedItem();
-        for (House house : com.getHouse().getHouses()){
+        for (House house : com.houselist.getHouses()){
             sVHousCombo.addItem(house);
         }
         }
@@ -145,25 +154,49 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     }
    
     
-    public void populateTenantInfo(House house) {
-        for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+   public void populateTenantInfo(House house) {
+        try{
+           Organization org = null;
+             for (Organization orn : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
+           if (orn instanceof SurveyVolunteerOrganization){
+                org = orn;
+                break;
+            }
+             }
+        if (org != null) {
+            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
             if(wq instanceof SurveyVolunteerWorkRequest)
             {
-                
-           House hous = ((SurveyVolunteerWorkRequest) wq).getAssignedHouse();
-        for(Tenant tenant: hous.getTenats().getTenants()) {
+               DefaultTableModel model = (DefaultTableModel) svWorkRTenantTable.getModel();
+
+
+
+            model.setRowCount(0);
+             House hous = ((SurveyVolunteerWorkRequest) wq).getAssignedHouse();
+             for(Tenant tenant: hous.getTenats().getTenants()) {
                   
-            Object[] row = new Object[8];
+            Object[] row = new Object[6];
             row[0] = tenant.getFirstName();
-            row[1] = tenant.getLastName();
-            row[2] = tenant.getAge();
-            row[3] = tenant.getGender();
-            row[4] = tenant.report.getSicknessType();
-            row[5] = tenant.report.isNeedHospitalization();
-               
+            
+            row[1] = tenant.getAge();
+            row[2] = tenant.getGender();
+            row[3] = tenant.report.getSicknessType();
+            Boolean row5;
+                 if (((Boolean)tenant.report.isNeedHospitalization()).booleanValue() == false) {
+                 row5 = Boolean.FALSE;
+             } else {
+                     row5 = Boolean.TRUE;
+                 }
+            row[4] = row5;
+                model.addRow(row);
           }
             }
         }
+        }
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+        
     }
     
     public void changecolor(JPanel hover, Color rand) {
@@ -220,25 +253,15 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        vDashboard = new javax.swing.JPanel();
-        side1 = new javax.swing.JPanel();
-        statisticslbl = new javax.swing.JLabel();
-        statisticsimg = new javax.swing.JLabel();
-        manageVolunteers = new javax.swing.JPanel();
-        side6 = new javax.swing.JPanel();
-        manageMedicinelbl1 = new javax.swing.JLabel();
-        manageMedicineIcon1 = new javax.swing.JLabel();
-        vSurvey = new javax.swing.JPanel();
-        side7 = new javax.swing.JPanel();
-        manageMedicinelbl2 = new javax.swing.JLabel();
-        manageMedicineIcon2 = new javax.swing.JLabel();
-        hcvTasks = new javax.swing.JPanel();
-        side5 = new javax.swing.JPanel();
-        manageSupplierlbl = new javax.swing.JLabel();
-        manageSupplierIcon = new javax.swing.JLabel();
+        addvolunteer = new javax.swing.JPanel();
+        side2 = new javax.swing.JPanel();
+        managePharmacylbl = new javax.swing.JLabel();
+        managePharmacyIcon = new javax.swing.JLabel();
+        surveyvolunteer = new javax.swing.JPanel();
+        side3 = new javax.swing.JPanel();
+        manageCategorylbl = new javax.swing.JLabel();
+        manageCategoryIcon = new javax.swing.JLabel();
         vAdminTab = new javax.swing.JTabbedPane();
-        dashboard = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
         addVolunteer = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         vOrganizationsCombo = new UI.Components.Combobox();
@@ -253,8 +276,8 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         sVolunteerCombo = new UI.Components.Combobox();
         sVCommunity = new UI.Components.Combobox();
         sVHouse = new UI.Components.Combobox();
-        sVDate = new UI.Components.MyTextFieldLogin();
         button2 = new UI.Components.Button();
+        sVDate2 = new com.toedter.calendar.JDateChooser();
         jPanel24 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
         sVCommCombo = new UI.Components.Combobox();
@@ -264,8 +287,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         button1 = new UI.Components.Button();
         hClistCombo = new UI.Components.Combobox();
         button6 = new UI.Components.Button();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel26 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -283,6 +304,16 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -459,275 +490,136 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        vDashboard.setBackground(new java.awt.Color(0, 91, 149));
-        vDashboard.setPreferredSize(new java.awt.Dimension(220, 50));
-        vDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+        addvolunteer.setBackground(new java.awt.Color(0, 91, 149));
+        addvolunteer.setPreferredSize(new java.awt.Dimension(220, 50));
+        addvolunteer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vDashboardMouseClicked(evt);
+                addvolunteerMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                vDashboardMouseEntered(evt);
+                addvolunteerMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                vDashboardMouseExited(evt);
+                addvolunteerMouseExited(evt);
             }
         });
 
-        side1.setBackground(new java.awt.Color(0, 91, 149));
-        side1.setPreferredSize(new java.awt.Dimension(5, 50));
+        side2.setBackground(new java.awt.Color(0, 91, 149));
+        side2.setPreferredSize(new java.awt.Dimension(5, 50));
 
-        javax.swing.GroupLayout side1Layout = new javax.swing.GroupLayout(side1);
-        side1.setLayout(side1Layout);
-        side1Layout.setHorizontalGroup(
-            side1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
+        side2.setLayout(side2Layout);
+        side2Layout.setHorizontalGroup(
+            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 5, Short.MAX_VALUE)
         );
-        side1Layout.setVerticalGroup(
-            side1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        side2Layout.setVerticalGroup(
+            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
-        statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Volunteer Dashboard");
+        managePharmacylbl.setBackground(new java.awt.Color(51, 51, 51));
+        managePharmacylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        managePharmacylbl.setForeground(new java.awt.Color(255, 255, 255));
+        managePharmacylbl.setText("Add Volunteer");
 
-        statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
+        managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/adaptive_degradation_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout vDashboardLayout = new javax.swing.GroupLayout(vDashboard);
-        vDashboard.setLayout(vDashboardLayout);
-        vDashboardLayout.setHorizontalGroup(
-            vDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vDashboardLayout.createSequentialGroup()
-                .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout addvolunteerLayout = new javax.swing.GroupLayout(addvolunteer);
+        addvolunteer.setLayout(addvolunteerLayout);
+        addvolunteerLayout.setHorizontalGroup(
+            addvolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addvolunteerLayout.createSequentialGroup()
+                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(managePharmacyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(managePharmacylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        vDashboardLayout.setVerticalGroup(
-            vDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vDashboardLayout.createSequentialGroup()
+        addvolunteerLayout.setVerticalGroup(
+            addvolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addvolunteerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(managePharmacylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(statisticsimg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(managePharmacyIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageVolunteers.setBackground(new java.awt.Color(0, 91, 149));
-        manageVolunteers.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageVolunteers.addMouseListener(new java.awt.event.MouseAdapter() {
+        surveyvolunteer.setBackground(new java.awt.Color(0, 91, 149));
+        surveyvolunteer.setPreferredSize(new java.awt.Dimension(220, 50));
+        surveyvolunteer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseClicked(evt);
+                surveyvolunteerMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseEntered(evt);
+                surveyvolunteerMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageVolunteersMouseExited(evt);
+                surveyvolunteerMouseExited(evt);
             }
         });
 
-        side6.setBackground(new java.awt.Color(0, 91, 149));
-        side6.setPreferredSize(new java.awt.Dimension(5, 50));
+        side3.setBackground(new java.awt.Color(0, 91, 149));
+        side3.setPreferredSize(new java.awt.Dimension(5, 50));
 
-        javax.swing.GroupLayout side6Layout = new javax.swing.GroupLayout(side6);
-        side6.setLayout(side6Layout);
-        side6Layout.setHorizontalGroup(
-            side6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout side3Layout = new javax.swing.GroupLayout(side3);
+        side3.setLayout(side3Layout);
+        side3Layout.setHorizontalGroup(
+            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 5, Short.MAX_VALUE)
         );
-        side6Layout.setVerticalGroup(
-            side6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        side3Layout.setVerticalGroup(
+            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        manageMedicinelbl1.setBackground(new java.awt.Color(51, 51, 51));
-        manageMedicinelbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageMedicinelbl1.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl1.setText("Manage Volunteers");
+        manageCategorylbl.setBackground(new java.awt.Color(51, 51, 51));
+        manageCategorylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manageCategorylbl.setForeground(new java.awt.Color(255, 255, 255));
+        manageCategorylbl.setText("Survey Volunteer");
 
-        manageMedicineIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
+        manageCategoryIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        manageCategoryIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/system_administrator_male_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageVolunteersLayout = new javax.swing.GroupLayout(manageVolunteers);
-        manageVolunteers.setLayout(manageVolunteersLayout);
-        manageVolunteersLayout.setHorizontalGroup(
-            manageVolunteersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageVolunteersLayout.createSequentialGroup()
-                .addComponent(side6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout surveyvolunteerLayout = new javax.swing.GroupLayout(surveyvolunteer);
+        surveyvolunteer.setLayout(surveyvolunteerLayout);
+        surveyvolunteerLayout.setHorizontalGroup(
+            surveyvolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(surveyvolunteerLayout.createSequentialGroup()
+                .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageMedicineIcon1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(manageMedicinelbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        manageVolunteersLayout.setVerticalGroup(
-            manageVolunteersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageVolunteersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageMedicinelbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(manageMedicineIcon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        vSurvey.setBackground(new java.awt.Color(0, 91, 149));
-        vSurvey.setPreferredSize(new java.awt.Dimension(220, 50));
-        vSurvey.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vSurveyMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                vSurveyMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                vSurveyMouseExited(evt);
-            }
-        });
-
-        side7.setBackground(new java.awt.Color(0, 91, 149));
-        side7.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side7Layout = new javax.swing.GroupLayout(side7);
-        side7.setLayout(side7Layout);
-        side7Layout.setHorizontalGroup(
-            side7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side7Layout.setVerticalGroup(
-            side7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        manageMedicinelbl2.setBackground(new java.awt.Color(51, 51, 51));
-        manageMedicinelbl2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageMedicinelbl2.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl2.setText("Volunteer Survey");
-        manageMedicinelbl2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageMedicinelbl2MouseClicked(evt);
-            }
-        });
-
-        manageMedicineIcon2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout vSurveyLayout = new javax.swing.GroupLayout(vSurvey);
-        vSurvey.setLayout(vSurveyLayout);
-        vSurveyLayout.setHorizontalGroup(
-            vSurveyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vSurveyLayout.createSequentialGroup()
-                .addComponent(side7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(manageCategoryIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-        vSurveyLayout.setVerticalGroup(
-            vSurveyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vSurveyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageMedicinelbl2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(manageMedicineIcon2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        hcvTasks.setBackground(new java.awt.Color(0, 91, 149));
-        hcvTasks.setPreferredSize(new java.awt.Dimension(220, 50));
-        hcvTasks.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hcvTasksMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                hcvTasksMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                hcvTasksMouseExited(evt);
-            }
-        });
-
-        side5.setBackground(new java.awt.Color(0, 91, 149));
-        side5.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side5Layout = new javax.swing.GroupLayout(side5);
-        side5.setLayout(side5Layout);
-        side5Layout.setHorizontalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side5Layout.setVerticalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        manageSupplierlbl.setBackground(new java.awt.Color(51, 51, 51));
-        manageSupplierlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageSupplierlbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageSupplierlbl.setText("Manage Supplier");
-
-        manageSupplierIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/supplier_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout hcvTasksLayout = new javax.swing.GroupLayout(hcvTasks);
-        hcvTasks.setLayout(hcvTasksLayout);
-        hcvTasksLayout.setHorizontalGroup(
-            hcvTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hcvTasksLayout.createSequentialGroup()
-                .addComponent(side5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageSupplierIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(manageCategorylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        hcvTasksLayout.setVerticalGroup(
-            hcvTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hcvTasksLayout.createSequentialGroup()
+        surveyvolunteerLayout.setVerticalGroup(
+            surveyvolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, surveyvolunteerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(manageCategorylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(manageSupplierIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(manageCategoryIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(side3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout menuhide1Layout = new javax.swing.GroupLayout(menuhide1);
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(hcvTasks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(manageVolunteers, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)))
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(vSurvey, javax.swing.GroupLayout.PREFERRED_SIZE, 208, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addComponent(addvolunteer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(surveyvolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(vDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132)
-                .addComponent(hcvTasks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addGap(54, 54, 54)
-                    .addComponent(manageVolunteers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(665, Short.MAX_VALUE)))
-            .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(menuhide1Layout.createSequentialGroup()
-                    .addGap(115, 115, 115)
-                    .addComponent(vSurvey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(604, Short.MAX_VALUE)))
+                .addComponent(addvolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(surveyvolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 702, Short.MAX_VALUE))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -742,31 +634,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
         });
 
-        dashboard.setBackground(new java.awt.Color(255, 255, 255));
-        dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                dashboardMouseClicked(evt);
-            }
-        });
-        dashboard.setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
-        );
-
-        dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        vAdminTab.addTab("Dashboard", dashboard);
-
         jPanel16.setBackground(new java.awt.Color(217, 241, 255));
 
         vOrganizationsCombo.setLabeText("Organization");
@@ -777,11 +644,26 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         });
 
         vOrgUN.setLabelText("Username");
+        vOrgUN.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vOrgUNFocusGained(evt);
+            }
+        });
 
         vOrgUName.setLabelText("Name");
+        vOrgUName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vOrgUNameFocusGained(evt);
+            }
+        });
         vOrgUName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vOrgUNameActionPerformed(evt);
+            }
+        });
+        vOrgUName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                vOrgUNameKeyTyped(evt);
             }
         });
 
@@ -804,6 +686,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         });
 
         vOrgPW.setLabelText("Password");
+        vOrgPW.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vOrgPWFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -814,30 +701,30 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(vOrgPW, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(vOrgUN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
                             .addComponent(vOrgUName, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
+                        .addGap(276, 276, 276)
                         .addComponent(createVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(38, 38, 38)
                 .addComponent(vOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(vOrgUN, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(vOrgUN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(vOrgPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(vOrgUName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addComponent(vOrgUName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(createVolunteer, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addContainerGap(378, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
@@ -872,8 +759,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         sVHouse.setLabeText("House");
 
-        sVDate.setLabelText("Enter Date ");
-
         button2.setBackground(new java.awt.Color(0, 91, 149));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("Assign Task");
@@ -884,36 +769,40 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
         });
 
+        sVDate2.setDateFormatString("MM/dd/yyyy");
+
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addContainerGap(274, Short.MAX_VALUE)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sVDate, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(303, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sVDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(190, 190, 190))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(238, 238, 238))))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addGap(96, 96, 96)
                 .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(sVDate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(sVDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         vAdminTask.addTab("Survey Volunteer", jPanel23);
@@ -936,17 +825,17 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         svWorkRTenantTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "FName", "Age", "Gender", "Sickness", "Need Hospitalization"
+                "FName", "Age", "Gender", "Sickness", "Need Hospitalization", "Status from survey", "Status from Home Care"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -955,7 +844,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         });
         jScrollPane7.setViewportView(svWorkRTenantTable);
 
+        button1.setBackground(new java.awt.Color(0, 91, 149));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("View Tenant Report");
+        button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
@@ -964,7 +856,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         hClistCombo.setLabeText("Home Care Volunteers");
 
+        button6.setBackground(new java.awt.Color(0, 91, 149));
+        button6.setForeground(new java.awt.Color(255, 255, 255));
         button6.setText("Assign Home Care");
+        button6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button6ActionPerformed(evt);
@@ -978,50 +873,49 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
                         .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel25Layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(202, 202, 202)
+                                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel25Layout.createSequentialGroup()
+                                        .addGap(69, 69, 69)
+                                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel25Layout.createSequentialGroup()
+                                .addGap(203, 203, 203)
+                                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel25Layout.createSequentialGroup()
+                                        .addGap(77, 77, 77)
+                                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 250, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(sVCommCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
                 .addComponent(sVHousCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(39, 39, 39)
                 .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(158, 158, 158))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
         );
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel24Layout.createSequentialGroup()
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1053,30 +947,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         );
 
         vAdminTab.addTab("Survey", manageTask);
-
-        javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
-        jPanel26.setLayout(jPanel26Layout);
-        jPanel26Layout.setHorizontalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
-        );
-        jPanel26Layout.setVerticalGroup(
-            jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 736, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        vAdminTab.addTab("Home Care", jPanel2);
 
         getContentPane().add(vAdminTab, java.awt.BorderLayout.CENTER);
 
@@ -1144,22 +1014,6 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void vDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vDashboardMouseClicked
-         vAdminTab.setSelectedIndex(0);
-         changecolor(vDashboard, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_vDashboardMouseClicked
-
-    private void vDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vDashboardMouseEntered
-        changecolor(vDashboard, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_vDashboardMouseEntered
-
-    private void vDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vDashboardMouseExited
-        changecolor(vDashboard, new Color(0,91,149));
-        changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_vDashboardMouseExited
-
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
     }//GEN-LAST:event_closeMouseExited
@@ -1173,55 +1027,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
            parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void hcvTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTasksMouseClicked
-         vAdminTab.setSelectedIndex(3);
-          changecolor(hcvTasks, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_hcvTasksMouseClicked
-
-    private void hcvTasksMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTasksMouseEntered
-        changecolor(hcvTasks, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_hcvTasksMouseEntered
-
-    private void hcvTasksMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTasksMouseExited
-        changecolor(hcvTasks, new Color(0,91,149));
-        changecolor(side5, new Color(0,91,149));
-    }//GEN-LAST:event_hcvTasksMouseExited
-
-    private void manageVolunteersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseClicked
-        vAdminTab.setSelectedIndex(1);
-          changecolor(hcvTasks, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageVolunteersMouseClicked
-
-    private void manageVolunteersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteersMouseEntered
-
-    private void manageVolunteersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageVolunteersMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_manageVolunteersMouseExited
-
-    private void vSurveyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSurveyMouseClicked
-          vAdminTab.setSelectedIndex(2);
-          changecolor(hcvTasks, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_vSurveyMouseClicked
-
-    private void vSurveyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSurveyMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vSurveyMouseEntered
-
-    private void vSurveyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vSurveyMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vSurveyMouseExited
-
     private void vAdminTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTabMouseClicked
         // TODO add your handling code here:
         int index = vAdminTab.getSelectedIndex();
        
-        System.out.print(index);
+         System.out.println("Index---"+ index);
         switch (index) {
             case 0:
                 break;
@@ -1229,9 +1039,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 populateVolunteerEnterpriseOrganizations();
                 break;
             case 2:
-                populateCommunities();
+                 populateSurveyVolunteers();
+                 populateHomeCareVolunteers();
                 break;
-            
+            case 3:
+                break;
             default:
                 throw new AssertionError();
         }
@@ -1240,21 +1052,73 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     private void vOrgUNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vOrgUNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_vOrgUNameActionPerformed
-
-    private void createVolunteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVolunteerActionPerformed
-        // TODO add your handling code here:
-        
-//         int flag = 0;
-//        String fields[] = {"cEntUsername", "cEntPassword", "cEntEEname"};
-//        for (int i = 0; i < fields.length; i++) {
-//            if (hasError(fields[i])) {
-//                flag++;
+//boolean hasError(String fieldName) {
+//        if (fieldName == "vOrgUN") {
+//            String username = vOrgUN.getText();
+//            if (username.trim().isEmpty()) {
+//                vOrgUN.setHelperText("Please Enter Username");
+//                return true;
+//            } else if (!fieldValidation.isStringOnlyAlphabet(username)) {
+//                
+//               vOrgUN.setHelperText("Please Enter Valid Username");
+//                return true;
+//            } else if (!fieldValidation.isValidLength(username, 5, 30)) {
+//               vOrgUN.setHelperText("UserName must be betwen 5 and 30 characters");
+//              
+//                return true;
+//            } else {
+//                cEntUsername.setHelperText("");
+//                return false;
 //            }
-//        }
-//        if (flag > 0) {
-//            return;
-//        }
-        Organization org = (Organization) vOrganizationsCombo.getSelectedItem();
+//        } 
+//        else if (fieldName == "cEntPassword") {
+//            String u = cEntPassword.getText();
+//            if (u.trim().isEmpty()) {
+//                cEntPassword.setHelperText("Please Enter Password");
+//                return true;
+//            } else if (!fieldValidation.isValidLength(u, 5, 30)) {
+//               cEntPassword.setHelperText("Password must be betwen 5 and 30 characters");
+//              
+//                return true;
+//            } else {
+//                cEntPassword.setHelperText("");
+//                return false;
+//            }
+//        } 
+//        else if (fieldName == "cEntEEname") {
+//            String u = cEntEEname.getText();
+//            if (u.trim().isEmpty()) {
+//                cEntEEname.setHelperText("Please Enter Enterprise Name");
+//                return true;
+//            } else if (!fieldValidation.isStringOnlyAlphabet(u)) {
+//                
+//               cEntEEname.setHelperText("Please Enter Valid Enterprise Name");
+//                return true;
+//            } else {
+//                cEntEEname.setHelperText("");
+//                return false;
+//            }
+//        } 
+//        return false;
+//  }
+    private void createVolunteerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createVolunteerActionPerformed
+         if (vOrgUName.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter Employee Fullname");
+           
+         }
+         else  if(vOrgPW.getText().length()>25||vOrgPW.getText().length()<5) {
+             JOptionPane.showMessageDialog(null,"Please enter Valid Password");
+           
+         }
+         else if (vOrgPW.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Do not enter an empty password!!!");
+             
+         } else if(vOrgUN.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter UserName");
+            
+         }
+         else{
+Organization org = (Organization) vOrganizationsCombo.getSelectedItem();
 int index = vOrganizationsCombo.getSelectedIndex();
         String username = vOrgUN.getText();
         char[] passwordCharArray = vOrgPW.getPassword();
@@ -1262,38 +1126,54 @@ int index = vOrganizationsCombo.getSelectedIndex();
         String password = String.valueOf(passwordCharArray);
         String name = vOrgUName.getText();
 
+         Organization o=vEnterPrise.getOrganizationDirectory().getOrganizationList().get(index);
+          if (EcoSystem.isUserUnique(username)) {
+          
+         Employee employee = o.getEmployeeDirectory().createEmployee(name);
+         if(o.getName() == Organization.Type.HomeCareVolunteer.getValue()){
+           
+             
+             o.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
+         JOptionPane.showMessageDialog(this, " HC Volunteer Added Successfully!");
+         }  
+         else{
+              o.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
+        JOptionPane.showMessageDialog(this, " SC Volunteer Added Successfully!");
+         } 
+         
+         
+         vOrgUName.setText(null);
+          vOrgPW.setText(null);
+           vOrgUN.setText(null);
+         
+          
+          }
+          else{
+              
+               JOptionPane.showMessageDialog(this, "Give a unique username!");
+          }
+       }
+         
         
-        for (Organization organ : vEnterPrise.getOrganizationDirectory().getOrganizationList()) {
-            
-        if (EcoSystem.isUserUnique(username)) {
-            Employee employee = organ.getEmployeeDirectory().createEmployee(name);
-            if (index == 0) 
-            {
-               
-               UserAccount createUserAccount =  organ.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
-                System.out.println(createUserAccount);
-                break;
-            } else {
-                UserAccount createUserAccount = organ.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
-                break;
-            }
-            
-        }
-        } 
     }//GEN-LAST:event_createVolunteerActionPerformed
 
     private void vAdminTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTaskMouseClicked
         // TODO add your handling code here:
         int index = vAdminTask.getSelectedIndex();
        
-        System.out.print(index);
+        System.out.print("index==" + index);
         switch (index) {
             case 0:
+                System.out.println("inside case");
                 populateSurveyVolunteers();
-                populateCommunities();
+               populateCommunities();
+                populateHomeCareVolunteers();
                 break;
             case 1:
                // populateVolunteerEnterpriseOrganizations();
+                populateSurveyVolunteers();
+               populateCommunities();
+               populateHomeCareVolunteers();
                 break;
            
             default:
@@ -1301,46 +1181,43 @@ int index = vOrganizationsCombo.getSelectedIndex();
         }
     }//GEN-LAST:event_vAdminTaskMouseClicked
     
-    public UserAccount getUser(String empId) {
-        for(UserAccount user: organization.getUserAccountDirectory().getUserAccountList()) {
+    public UserAccount getUser(String empId, Organization org) {
+
+        for(UserAccount user: org.getUserAccountDirectory().getUserAccountList()) {
             if(user.getEmployee().getId() == empId) {
                 return user;
             }
         }
-        return null;
+        return null ;
     }
     
     
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        // TODO add your handling code here:
-        
-        try{
-            SurveyVolunteerWorkRequest sV = new SurveyVolunteerWorkRequest();
-            
-            sV.setAssignedHouse((House)sVHouse.getSelectedItem());
-       
-            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            Date date = format.parse(sVDate.getText());
-            sV.setAssignedDate(date);
-            sV.setStatus("new");
-            Employee emp = (Employee)sVolunteerCombo.getSelectedItem();
-            sV.setReceiver(getUser(emp.getId()));
-            System.out.print(sV);
-            
-       Organization org = null;
-       for (Organization orn : enterpriseD.getOrganizationDirectory().getOrganizationList())
+        //getting survey volunteer organization
+        Organization org = null;
+        for (Organization orn : vEnterPrise.getOrganizationDirectory().getOrganizationList())
         {   if (orn instanceof SurveyVolunteerOrganization){
-                org = orn;
-                break;
-            }
+            org = orn;
+            break;
         }
+        }
+        SurveyVolunteerWorkRequest sV = new SurveyVolunteerWorkRequest();
+        sV.setAssignedHouse((House)sVHouse.getSelectedItem());
+        //            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+       
+        Date date = sVDate2.getDate();
+        sV.setAssignedDate(date);
+        sV.setStatus("new");
+        System.out.println("Sv detaisls -- " + sV.getAssignedHouse() + sV.getAssignedDate()) ;
+        Employee emp = (Employee)sVolunteerCombo.getSelectedItem();
+        sV.setReceiver(getUser(emp.getId(), org));
+        sV.setSender(account);
         if (org!=null){
             org.getWorkQueue().getWorkRequestList().add(sV);
             account.getWorkQueue().getWorkRequestList().add(sV);
-        }
-        
+            JOptionPane.showMessageDialog(this, "Work request created successfully!");
             
-        } catch (ParseException e) {e.printStackTrace();}
+        }
         
         
     }//GEN-LAST:event_button2ActionPerformed
@@ -1349,14 +1226,6 @@ int index = vOrganizationsCombo.getSelectedIndex();
         // TODO add your handling code here:
         populateHouses();
     }//GEN-LAST:event_sVCommunityActionPerformed
-
-    private void manageMedicinelbl2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicinelbl2MouseClicked
-        vAdminTab.setSelectedIndex(0);
-    }//GEN-LAST:event_manageMedicinelbl2MouseClicked
-
-    private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_dashboardMouseClicked
 public void changecolorB(JButton hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -1390,8 +1259,8 @@ public void changecolorB(JButton hover, Color rand) {
 
     private void sVCommComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sVCommComboActionPerformed
         // TODO add your handling code here:
-       if (sVCommCombo.getSelectedIndex() > 0) {
-        populateHousesHC();
+       if (sVCommCombo.getSelectedIndex() >= 0) {
+           populateHousesHC();
        }
     }//GEN-LAST:event_sVCommComboActionPerformed
 
@@ -1410,31 +1279,48 @@ public void changecolorB(JButton hover, Color rand) {
             
             return;
         }
-        Tenant tenat = (Tenant)svWorkRTenantTable.getValueAt(selectedRow, 0);
-        sV.setPatient(tenat);
-            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            Date date = format.parse(sVDate.getText());
-            sV.setRequestDate(date);
-            sV.setStatus("New");
-            Employee emp = (Employee)hClistCombo.getSelectedItem();
-            sV.setReceiver(getUser(emp.getId()));
-            sV.setSender(account);
-            
+
        Organization org = null;
-       for (Organization orn : enterpriseD.getOrganizationDirectory().getOrganizationList())
+       for (Organization orn : vEnterPrise.getOrganizationDirectory().getOrganizationList())
         {   
             if (orn instanceof HomeCareVolunteerOrganization){
                 org = orn;
                 break;
             }
         }
+       
+       
+       
+        Organization orgSV = null;
+             for (Organization orn : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
+           if (orn instanceof SurveyVolunteerOrganization){
+                orgSV = orn;
+                break;
+            }
+             }
+        if (orgSV != null) {
+           
+           
+        Tenant tenat = ((SurveyVolunteerWorkRequest)(orgSV.getWorkQueue().getWorkRequestList().
+              get(selectedRow))).getTenant();
+        sV.setPatient(tenat);
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+         
+            sV.setRequestDate(new Date());
+            sV.setStatus("New");
+            Employee emp = (Employee)hClistCombo.getSelectedItem();
+            sV.setReceiver(getUser(emp.getId(),org));
+            sV.setSender(account);
+            
+
         if (org!=null){
             org.getWorkQueue().getWorkRequestList().add(sV);
             account.getWorkQueue().getWorkRequestList().add(sV);
+             JOptionPane.showMessageDialog(this, "Work Request created successfully");
         }
-        
+        }
             
-        } catch (ParseException e) {e.printStackTrace();}
+        } catch (Exception e) {e.printStackTrace();}
         
     }//GEN-LAST:event_button6ActionPerformed
 
@@ -1442,45 +1328,76 @@ public void changecolorB(JButton hover, Color rand) {
         // TODO add your handling code here:
     }//GEN-LAST:event_vOrganizationsComboActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(PharmacyAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new PharmacyAdmin().setVisible(true);
-//            }
-//        });
-//    }
+    private void addvolunteerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvolunteerMouseClicked
+        vAdminTab.setSelectedIndex(0);
+        changecolor(addvolunteer, new Color(3,138,255));
+        changecolor(side2, new Color(190, 224, 236));
+    }//GEN-LAST:event_addvolunteerMouseClicked
+
+    private void addvolunteerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvolunteerMouseEntered
+        changecolor(addvolunteer, new Color(3,138,255));
+        changecolor(side2, new Color(190, 224, 236));
+    }//GEN-LAST:event_addvolunteerMouseEntered
+
+    private void addvolunteerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addvolunteerMouseExited
+        changecolor(addvolunteer, new Color(0,91,149));
+        changecolor(side2, new Color(0,91,149));
+    }//GEN-LAST:event_addvolunteerMouseExited
+
+    private void surveyvolunteerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_surveyvolunteerMouseClicked
+        vAdminTab.setSelectedIndex(1);
+        changecolor(surveyvolunteer, new Color(3,138,255));
+        changecolor(side3, new Color(190, 224, 236));
+
+    }//GEN-LAST:event_surveyvolunteerMouseClicked
+
+    private void surveyvolunteerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_surveyvolunteerMouseEntered
+        changecolor(surveyvolunteer, new Color(3,138,255));
+        changecolor(side3, new Color(190, 224, 236));
+    }//GEN-LAST:event_surveyvolunteerMouseEntered
+
+    private void surveyvolunteerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_surveyvolunteerMouseExited
+        changecolor(surveyvolunteer, new Color(0,91,149));
+        changecolor(side3, new Color(0,91,149));
+    }//GEN-LAST:event_surveyvolunteerMouseExited
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+         int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void vOrgUNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_vOrgUNameKeyTyped
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+            vOrgUName.setEditable(true);
+        } else {
+            vOrgUName.setEditable(false);
+        }
+    }//GEN-LAST:event_vOrgUNameKeyTyped
+
+    private void vOrgUNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vOrgUNFocusGained
+        vOrgUN.setHelperText(null);
+    }//GEN-LAST:event_vOrgUNFocusGained
+
+    private void vOrgPWFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vOrgPWFocusGained
+        vOrgPW.setHelperText(null);
+    }//GEN-LAST:event_vOrgPWFocusGained
+
+    private void vOrgUNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vOrgUNameFocusGained
+       vOrgUName.setHelperText(null);
+    }//GEN-LAST:event_vOrgUNameFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
     private javax.swing.JPanel addVolunteer;
+    private javax.swing.JPanel addvolunteer;
     private UI.Components.Button button1;
     private UI.Components.Button button2;
     private UI.Components.Button button6;
@@ -1490,57 +1407,44 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
     private UI.Components.Button createVolunteer;
-    private javax.swing.JPanel dashboard;
     private UI.Components.Combobox hClistCombo;
-    private javax.swing.JPanel hcvTasks;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
-    private javax.swing.JLabel manageMedicineIcon1;
-    private javax.swing.JLabel manageMedicineIcon2;
-    private javax.swing.JLabel manageMedicinelbl1;
-    private javax.swing.JLabel manageMedicinelbl2;
-    private javax.swing.JLabel manageSupplierIcon;
-    private javax.swing.JLabel manageSupplierlbl;
+    private javax.swing.JLabel manageCategoryIcon;
+    private javax.swing.JLabel manageCategorylbl;
+    private javax.swing.JLabel managePharmacyIcon;
+    private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JPanel manageTask;
-    private javax.swing.JPanel manageVolunteers;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
     private UI.Components.Combobox sVCommCombo;
     private UI.Components.Combobox sVCommunity;
-    private UI.Components.MyTextFieldLogin sVDate;
+    private com.toedter.calendar.JDateChooser sVDate2;
     private UI.Components.Combobox sVHousCombo;
     private UI.Components.Combobox sVHouse;
     private UI.Components.Combobox sVolunteerCombo;
     private javax.swing.JPanel setting;
-    private javax.swing.JPanel side1;
-    private javax.swing.JPanel side5;
-    private javax.swing.JPanel side6;
-    private javax.swing.JPanel side7;
-    private javax.swing.JLabel statisticsimg;
-    private javax.swing.JLabel statisticslbl;
+    private javax.swing.JPanel side2;
+    private javax.swing.JPanel side3;
+    private javax.swing.JPanel surveyvolunteer;
     private javax.swing.JTable svWorkRTenantTable;
     private javax.swing.JTabbedPane vAdminTab;
     private javax.swing.JTabbedPane vAdminTask;
-    private javax.swing.JPanel vDashboard;
     private UI.Components.MyPasswordFieldLogin vOrgPW;
     private UI.Components.MyTextFieldLogin vOrgUN;
     private UI.Components.MyTextFieldLogin vOrgUName;
     private UI.Components.Combobox vOrganizationsCombo;
-    private javax.swing.JPanel vSurvey;
     // End of variables declaration//GEN-END:variables
 }

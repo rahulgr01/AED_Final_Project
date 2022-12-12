@@ -2,20 +2,34 @@
 package UI.VolunteerAdmin;
 
 
+import Business.Community.Tenant;
 import Business.EcoSystem;
+import Business.Enterprise.DiagnosticsEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
+import Business.Enterprise.InsuranceEnterprise;
 import Business.Network.Network;
+import Business.Organization.ClaimsOrganization;
+import Business.Organization.HomeCareVolunteerOrganization;
 import Business.Organization.Organization;
+import Business.Organization.SurveyVolunteerOrganization;
 import Business.UserAccount.UserAccount;
+import Business.Voluntary.SurveyReport;
+import Business.WorkQueue.ClaimsWorkRequest;
+import Business.WorkQueue.HomeCareVolunteerWorkRequest;
 import Business.WorkQueue.HospitalWorkRequest;
+import Business.WorkQueue.SurveyVolunteerWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 public class HomeCareVolunteer extends javax.swing.JFrame {
 
@@ -31,16 +46,161 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private JFrame userProcessContainer;
     UserAccount account;
     Network network;
+    int xx, xy;
+    JFrame parentFrame;
+     HomeCareVolunteerOrganization organization;
     public HomeCareVolunteer(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
-            EcoSystem business) {
+            EcoSystem business,JFrame parentFrame) {
         initComponents();
          this.account = account;
+         this.organization =(HomeCareVolunteerOrganization) organization;
          network = business.getNetworkList().get(0);
+         this.parentFrame = parentFrame;
+         populateSurveyList();
+         populateHospitalList();
+         
+    }
+    
+    
+    public void populateHospitalList() {
+        try {
+             Enterprise org = null;
+        for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+              System.out.println("hosp"+ enter.getName());
+            if (enter instanceof HospitalEnterprise){
+                org = enter;
+                break;
+            }
+        }
+        if (org!=null){
+            System.out.println("hosp"+ org.getWorkQueue().getWorkRequestList());
+                   
+        }
+       
+            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof HospitalWorkRequest)
+            {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+
+
+            model.setRowCount(0);
+                   Object[] row = new Object[5];
+            row[0] = ((HospitalWorkRequest) wq).getPatient().getFirstName();
+           
+            row[4] = ((HospitalWorkRequest) wq).getReceiver().getEmployee().getName();
+            row[3] = ((HospitalWorkRequest) wq).getMedicinesPrice();
+            row[1] = ((HospitalWorkRequest) wq).getStatus();
+            row[2] = ((HospitalWorkRequest) wq).getMessage();
+//            row[7] = ((HomeCareVolunteerWorkRequest) wq).getMessage();
+              model.addRow(row);
+               }
+            
+        }
+        }catch(Exception e) {
+            System.out.println("Error===" + e);
+            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+        
+        
+    }
+    
+     public void populateClaimList() {
+        try {
+             Organization org = null;
+        for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+              System.out.println("hosp"+ enter.getName());
+            if (enter instanceof InsuranceEnterprise){
+                for (Organization claimorg : enter.getOrganizationDirectory().getOrganizationList()) {
+                    if(claimorg instanceof ClaimsOrganization) {
+                        org = claimorg;
+                        break;
+                    }
+                }
+            }
+        }
+        if (org!=null){
+            System.out.println("hosp"+ org.getWorkQueue().getWorkRequestList());
+                   
+        }
+       
+            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof ClaimsWorkRequest)
+            {
+                
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+            model.setRowCount(0);
+                   Object[] row = new Object[4];
+            row[0] = ((ClaimsWorkRequest) wq).getPatient().getFirstName();
+           
+            
+            row[3] = ((ClaimsWorkRequest) wq).getAmtapproved();
+            row[1] = ((ClaimsWorkRequest) wq).getStatus();
+            row[2] = ((ClaimsWorkRequest) wq).getMessage();
+//            row[7] = ((HomeCareVolunteerWorkRequest) wq).getMessage();
+              model.addRow(row);
+               }
+            
+        }
+        }catch(Exception e) {
+            System.out.println("Error===" + e);
+            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+        
+        
     }
     //Method to change panel color on hover
- 
+ public void populateSurveyList() {
+        try {
+             Enterprise org = null;
+        for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+              System.out.println("hosp"+ enter.getName());
+            if (enter instanceof HospitalEnterprise){
+                org = enter;
+                break;
+            }
+        }
+        if (org!=null){
+            System.out.println("hosp"+ org.getWorkQueue().getWorkRequestList());
+                   
+        }
+       
+            
+            
+            
+            for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof HomeCareVolunteerWorkRequest)
+            {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+
+
+
+            model.setRowCount(0);
+               Tenant patient = ((HomeCareVolunteerWorkRequest) wq).getPatient();
+                   Object[] row = new Object[4];
+            row[0] = patient.getFirstName();
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate = dateFormat.format(((HomeCareVolunteerWorkRequest) wq).getRequestDate());
+            row[3] = formattedDate;
+            row[2] = ((HomeCareVolunteerWorkRequest) wq).getSender().getEmployee().getName();
+            row[1] = ((HomeCareVolunteerWorkRequest) wq).getStatus();
+//            row[7] = ((HomeCareVolunteerWorkRequest) wq).getMessage();
+              model.addRow(row);
+               }
+            
+        }
+        }catch(Exception e) {
+            System.out.println("Error===" + e);
+            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+        }
+        
+        
+    }
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
     }
@@ -95,10 +255,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        hcvDashboard = new javax.swing.JPanel();
-        side1 = new javax.swing.JPanel();
-        statisticslbl = new javax.swing.JLabel();
-        statisticsimg = new javax.swing.JLabel();
         hcvTaskA = new javax.swing.JPanel();
         side2 = new javax.swing.JPanel();
         statisticslbl1 = new javax.swing.JLabel();
@@ -108,19 +264,21 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         statisticslbl2 = new javax.swing.JLabel();
         statisticsimg2 = new javax.swing.JLabel();
         hcv = new javax.swing.JTabbedPane();
-        dashboard = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
         addVolunteer = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         button4 = new UI.Components.Button();
         jLabel1 = new javax.swing.JLabel();
+        button5 = new UI.Components.Button();
         manageTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         button1 = new UI.Components.Button();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        button3 = new UI.Components.Button();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -138,6 +296,16 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -314,64 +482,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        hcvDashboard.setBackground(new java.awt.Color(0, 91, 149));
-        hcvDashboard.setPreferredSize(new java.awt.Dimension(220, 50));
-        hcvDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                hcvDashboardMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                hcvDashboardMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                hcvDashboardMouseExited(evt);
-            }
-        });
-
-        side1.setBackground(new java.awt.Color(0, 91, 149));
-        side1.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side1Layout = new javax.swing.GroupLayout(side1);
-        side1.setLayout(side1Layout);
-        side1Layout.setHorizontalGroup(
-            side1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side1Layout.setVerticalGroup(
-            side1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
-        statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Volunteer Dashboard");
-
-        statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout hcvDashboardLayout = new javax.swing.GroupLayout(hcvDashboard);
-        hcvDashboard.setLayout(hcvDashboardLayout);
-        hcvDashboardLayout.setHorizontalGroup(
-            hcvDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(hcvDashboardLayout.createSequentialGroup()
-                .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        hcvDashboardLayout.setVerticalGroup(
-            hcvDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hcvDashboardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(statisticsimg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         hcvTaskA.setBackground(new java.awt.Color(0, 91, 149));
         hcvTaskA.setPreferredSize(new java.awt.Dimension(220, 50));
         hcvTaskA.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,9 +605,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             .addGroup(menuhide1Layout.createSequentialGroup()
                 .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(menuhide1Layout.createSequentialGroup()
-                        .addGroup(menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hcvDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(hcvTaskH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(hcvTaskH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuhide1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -507,12 +615,10 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(hcvDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addComponent(hcvTaskH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(hcvTaskA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(0, 702, Short.MAX_VALUE))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -520,26 +626,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         menu.add(menuhide, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(menu, java.awt.BorderLayout.LINE_START);
-
-        dashboard.setBackground(new java.awt.Color(255, 255, 255));
-        dashboard.setLayout(new java.awt.BorderLayout());
-
-        jPanel1.setBackground(new java.awt.Color(217, 241, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 827, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 769, Short.MAX_VALUE)
-        );
-
-        dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        hcv.addTab("Dashboard", dashboard);
 
         jPanel17.setBackground(new java.awt.Color(217, 241, 255));
 
@@ -568,6 +654,16 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         jLabel1.setText("Assigned Patient Deatil:");
 
+        button5.setBackground(new java.awt.Color(0, 91, 149));
+        button5.setForeground(new java.awt.Color(255, 255, 255));
+        button5.setText("Update Hospital Request");
+        button5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
@@ -580,9 +676,11 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel17Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(94, Short.MAX_VALUE))
+                        .addGap(88, 88, 88)
+                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,17 +690,17 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(479, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
         addVolunteer.setLayout(addVolunteerLayout);
         addVolunteerLayout.setHorizontalGroup(
             addVolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addVolunteerLayout.createSequentialGroup()
-                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         addVolunteerLayout.setVerticalGroup(
             addVolunteerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -617,44 +715,83 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Patient Name", "Status", "Message", "Total Amount", "Hospital"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Claim Status");
+        }
+
+        button1.setBackground(new java.awt.Color(0, 91, 149));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
+        button1.setText("Update the record");
+        button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Patient Name", "Status", "Message", "Total Amount"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTable2);
 
-        button1.setBackground(new java.awt.Color(0, 91, 149));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Update the record");
-        button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button3.setBackground(new java.awt.Color(0, 91, 149));
+        button3.setForeground(new java.awt.Color(255, 255, 255));
+        button3.setText("Refresh");
+        button3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel22Layout.createSequentialGroup()
-                        .addGap(297, 297, 297)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel22Layout.createSequentialGroup()
+                            .addGap(39, 39, 39)
+                            .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel22Layout.createSequentialGroup()
+                            .addGap(47, 47, 47)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(417, Short.MAX_VALUE))
+                .addGap(116, 116, 116)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout manageTaskLayout = new javax.swing.GroupLayout(manageTask);
@@ -723,11 +860,8 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
        clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            this.dispose();
-            MainLoginPage x = new MainLoginPage();
-        x.show(); //display View LoginPage Form
-        //dispose(); //Close SystemAdmin Form
-        x.setVisible(true);
+            this.setVisible(false);
+           parentFrame.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 
@@ -738,22 +872,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
-
-    private void hcvDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseClicked
-         hcv.setSelectedIndex(0);
-         changecolor(hcvDashboard, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_hcvDashboardMouseClicked
-
-    private void hcvDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseEntered
-        changecolor(hcvDashboard, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_hcvDashboardMouseEntered
-
-    private void hcvDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvDashboardMouseExited
-        changecolor(hcvDashboard, new Color(0,91,149));
-        changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_hcvDashboardMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
@@ -768,7 +886,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void hcvTaskAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hcvTaskAMouseClicked
-          hcv.setSelectedIndex(1);
+          hcv.setSelectedIndex(0);
          changecolor(hcvTaskA, new Color(3,138,255));
         changecolor(side2, new Color(190, 224, 236));
     }//GEN-LAST:event_hcvTaskAMouseClicked
@@ -806,10 +924,18 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Please select a row!!");
             return;
         }
-        HospitalWorkRequest hosWR = (HospitalWorkRequest)jTable3.getValueAt(selectedRow, 0);
+           
+         organization.getWorkQueue().getWorkRequestList().get(selectedRow).setStatus("Sent to Hospital");
+         populateSurveyList();
+    
+        Tenant tenat = ((HomeCareVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().
+              get(selectedRow))).getPatient();
+         HospitalWorkRequest hosWR = new HospitalWorkRequest();
+        hosWR.setPatient(tenat);
+        hosWR.setRequestDate(new Date());
         hosWR.setStatus("New");
         hosWR.setSender(account);
-        hosWR.setReceiver(account);
+        
         Enterprise org = null;
         for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
             
@@ -821,9 +947,122 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         if (org!=null){
             org.getWorkQueue().getWorkRequestList().add(hosWR);
             account.getWorkQueue().getWorkRequestList().add(hosWR);
-        }        
+            hosWR.setReceiver(org.getUserAccountDirectory().getUserAccountList().get(0));
+        } 
+        
         JOptionPane.showMessageDialog(null,"Work request created!!");
     }//GEN-LAST:event_button4ActionPerformed
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+         try {
+
+              int selectedrow = jTable1.getSelectedRow();
+        if (selectedrow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
+            return;
+        }
+        
+        
+         Enterprise ent = null;
+        for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+              System.out.println("hosp"+ enter.getName());
+            if (enter instanceof HospitalEnterprise){
+                ent = enter;
+                break;
+            }
+        }
+        if (ent!=null){
+            System.out.println("hosp"+ ent.getWorkQueue().getWorkRequestList());
+                   
+        }
+       
+          int bill = ((HospitalWorkRequest)(ent.getWorkQueue().getWorkRequestList().get(selectedrow))).getMedicinesPrice();
+           Tenant tenat = ((HospitalWorkRequest)(ent.getWorkQueue().getWorkRequestList().get(selectedrow))).getPatient();
+        
+                ClaimsWorkRequest docRequest = new ClaimsWorkRequest();
+                
+                docRequest.setPatient(tenat);
+                docRequest.setMessage("Claim request");
+                docRequest.setSender(account);
+                docRequest.setRequestDate(new Date());
+                docRequest.setStatus("New Request");
+            docRequest.setBillamount(bill);
+            docRequest.setPolicyID(tenat.getReport().getPolicyID());
+           
+                Organization org = null;
+
+                for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+
+                    if (enter instanceof InsuranceEnterprise) {
+                        for (Organization orn : enter.getOrganizationDirectory().getOrganizationList()) {
+                            if (orn instanceof ClaimsOrganization) {
+                                org = orn;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (org != null) {
+                    org.getWorkQueue().getWorkRequestList().add(docRequest);
+                    account.getWorkQueue().getWorkRequestList().add(docRequest);
+                    JOptionPane.showMessageDialog(this, "Work request created successfully!");
+                    populateHospitalList();
+                    populateClaimList();
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please check the details ");
+                return;
+            }
+
+        
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+        populateClaimList();
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        // TODO add your handling code here:
+           try {
+
+              int selectedrow = jTable3.getSelectedRow();
+        if (selectedrow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
+            return;
+        }
+        ((HomeCareVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setStatus("Patient has been tested and claim generated");
+       ((HomeCareVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setMessage("Patient is cured");
+      
+       
+       SurveyReport sR =  ((HomeCareVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).getPatient().getReport();
+       sR.setHomeCareStatus("Patient has been tested and claim generated");
+       ((HomeCareVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).getPatient().setReport(sR);
+       JOptionPane.showMessageDialog(this, "Work request updated successfully!");
+           
+           } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Please check the details ");
+                return;
+            }
+
+        populateSurveyList();
+        
+    }//GEN-LAST:event_button5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -865,28 +1104,29 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel MenuIcon;
     private javax.swing.JPanel addVolunteer;
     private UI.Components.Button button1;
+    private UI.Components.Button button3;
     private UI.Components.Button button4;
+    private UI.Components.Button button5;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
     private javax.swing.JLabel close;
-    private javax.swing.JPanel dashboard;
     private javax.swing.JTabbedPane hcv;
-    private javax.swing.JPanel hcvDashboard;
     private javax.swing.JPanel hcvTaskA;
     private javax.swing.JPanel hcvTaskH;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
@@ -896,13 +1136,10 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
     private javax.swing.JPanel setting;
-    private javax.swing.JPanel side1;
     private javax.swing.JPanel side2;
     private javax.swing.JPanel side3;
-    private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticsimg1;
     private javax.swing.JLabel statisticsimg2;
-    private javax.swing.JLabel statisticslbl;
     private javax.swing.JLabel statisticslbl1;
     private javax.swing.JLabel statisticslbl2;
     // End of variables declaration//GEN-END:variables
