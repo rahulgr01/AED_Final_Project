@@ -10,9 +10,10 @@ import Business.Community.Tenant;
  *
  * @author Gursheen Kaur
  */
-public class LabWorkRequest extends WorkRequest {
+public class DoctorWorkRequest extends WorkRequest  {
     
-    public Tenant patient;
+    
+   public Tenant patient;
 
     public Tenant getPatient() {
         return patient;
@@ -20,6 +21,8 @@ public class LabWorkRequest extends WorkRequest {
 
     public void setPatient(Tenant patient) {
         this.patient = patient;
-    }    
-    
+    }
+   
+   
+   
 }

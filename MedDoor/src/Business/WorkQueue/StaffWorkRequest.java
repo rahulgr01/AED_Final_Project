@@ -4,7 +4,9 @@
  */
 package Business.WorkQueue;
 
+import Business.Community.Tenant;
 import Business.Patient.Patient;
+import java.util.Date;
 
 /**
  *
@@ -13,14 +15,24 @@ import Business.Patient.Patient;
 
 
 public class StaffWorkRequest extends WorkRequest {
-    public Patient patient;
+   public Tenant patient;
+   public String doctorAssigned;
  
-    public Patient getPatient() {
+    
+    public Tenant getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(Tenant patient) {
         this.patient = patient;
+    }
+
+    public String getDoctorAssigned() {
+        return doctorAssigned;
+    }
+
+    public void setDoctorAssigned(String doctorAssigned) {
+        this.doctorAssigned = doctorAssigned;
     }
     
 

@@ -1,5 +1,7 @@
 package UI.HospitalAdmin;
 
+import Business.Community.House;
+import Business.Community.Tenant;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -11,6 +13,8 @@ import Business.Organization.Organization;
 import Business.Role.DoctorRole;
 import Business.Role.StaffRole;
 import Business.UserAccount.UserAccount;
+import Business.Voluntary.SurveyReport;
+import Business.Voluntary.VitalSigns;
 import Business.WorkQueue.HospitalWorkRequest;
 import Business.WorkQueue.StaffWorkRequest;
 import Business.WorkQueue.WorkQueue;
@@ -20,7 +24,12 @@ import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,8 +51,8 @@ public class HospitalAdmin extends javax.swing.JFrame {
     Organization organization;
     UserAccount account;
     Network network;
-    Organization docOrg;
-    Organization staffOrg;
+
+    ArrayList<Tenant> tenantList;
 
     public HospitalAdmin(UserAccount account,
             Organization organization,
@@ -54,9 +63,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
 //        TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
         TableCustom.apply(patientList, TableCustom.TableType.DEFAULT);
         TableCustom.apply(crudStaffSP, TableCustom.TableType.DEFAULT);
-        TableCustom.apply(patientProfileSP, TableCustom.TableType.DEFAULT);
-        TableCustom.apply(labSP, TableCustom.TableType.DEFAULT);
-        TableCustom.apply(pharmacySP, TableCustom.TableType.DEFAULT);
         hEnterPrise = (HospitalEnterprise) enterprise;
         this.organization = organization;
         this.parentFrame = parentFrame;
@@ -65,18 +71,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         hospitalAdmin.setSelectedIndex(0);
 //        initializeOrganizations();
         populateRequestTable();
-    }
-
-    public void initializeOrganizations() {
-        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
-
-            if (org.getName() == Organization.Type.Doctor.getValue()) {
-                docOrg = org;
-            }
-            if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
-                staffOrg = org;
-            }
-        }
     }
 
     public void populateRequestTable() {
@@ -88,35 +82,28 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 hEnterPrise.setWorkQueue(new WorkQueue());
             }
 
-            Object[] row = new Object[8];
-//                    row[0] = ((HospitalWorkRequest) request).getPatient();
-            row[0] = "Rohan";//((HospitalWorkRequest) request).getPatient().getPatientName();
-            row[1] = "Volunteer";//request.getSender().getEmployee().getName();
-            row[2] = null;//equest.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = "34";//((HospitalWorkRequest) request).getPatient().getHeight();
-            row[6] = "44";//((HospitalWorkRequest) request).getPatient().getWeight();
-            row[4] = "44";//((HospitalWorkRequest) request).getPatient().getPulse();
-            row[5] = "444";
-            model.addRow(row);
             for (WorkRequest request : hEnterPrise.getWorkQueue().getWorkRequestList()) {
                 if (request instanceof HospitalWorkRequest) {
-//                    Object[] row = new Object[8];
-////                    row[0] = ((HospitalWorkRequest) request).getPatient();
-//                    row[0] = "Rohan";//((HospitalWorkRequest) request).getPatient().getPatientName();
-//                    row[1] = "Volunteer";request.getSender().getEmployee().getName();
-//                    row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-//                    row[3] = "34";((HospitalWorkRequest) request).getPatient().getHeight();
-//                    row[6] = "44";((HospitalWorkRequest) request).getPatient().getWeight();
-//                    row[4] = "44";((HospitalWorkRequest) request).getPatient().getPulse();
-//                    row[5] = "444";((HospitalWorkRequest) request).getPatient().getBp();
-//
-//                    row[7] = request.getStatus();
-//                    model.addRow(row);
+                    Tenant tenant = ((HospitalWorkRequest) request).getPatient();
+                    this.tenantList.add(tenant);
+                    Object[] row = new Object[8];
+                    row[0] = tenant.getFirstName();
+                    row[1] = tenant.getVitalSign().getHeight();
+                    row[2] = tenant.getVitalSign().getWeight();
+                    row[3] = tenant.getVitalSign().getRespiratoryRate();
+                    row[4] = tenant.getVitalSign().getHeartRate();
+                    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    String formattedDate = dateFormat.format(((HospitalWorkRequest) request).assignedDate);
+                    row[5] = formattedDate;
+                    row[6] = ((HospitalWorkRequest) request).getStatus();
+                    row[7] = ((HospitalWorkRequest) request).getSender().getEmployee().getName();
+                    model.addRow(row);
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
         }
+
     }
     //Method to change panel color on hover
 
@@ -138,9 +125,9 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 if (org.getName() == Organization.Type.Doctor.getValue()) {
                     for (UserAccount user : org.getUserAccountDirectory().getUserAccountList()) {
                         Object[] row = new Object[3];
-                        row[0] = org.getName();
-                        row[1] = user.getEmployee().getName();
-                        row[2] = user.getRole().toString();
+                        row[0] = user.getEmployee().getName();
+                        row[1] = user.getUsername();
+                        row[2] = user.getPassword();
                         model.addRow(row);
                     }
                 }
@@ -159,9 +146,9 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
                     for (UserAccount user : org.getUserAccountDirectory().getUserAccountList()) {
                         Object[] row = new Object[3];
-                        row[0] = org.getName();
-                        row[1] = user.getEmployee().getName();
-                        row[2] = user.getRole().toString();
+                        row[0] = user.getEmployee().getName();
+                        row[1] = user.getUsername();
+                        row[2] = user.getPassword();
                         model.addRow(row);
                     }
                 }
@@ -261,10 +248,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        managePharmacy = new javax.swing.JPanel();
-        side2 = new javax.swing.JPanel();
-        managePharmacylbl = new javax.swing.JLabel();
-        managePharmacyIcon = new javax.swing.JLabel();
         manageCategory = new javax.swing.JPanel();
         side3 = new javax.swing.JPanel();
         manageCategorylbl = new javax.swing.JLabel();
@@ -285,32 +268,11 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaMsg = new javax.swing.JTextArea();
-        patientTab = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        pharmacySP = new javax.swing.JScrollPane();
-        pharmacyTable = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        combobox2 = new UI.Components.Combobox();
-        patientProfileSP = new javax.swing.JScrollPane();
-        patientProfile = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        labSP = new javax.swing.JScrollPane();
-        labTable = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        searchPatient = new javax.swing.JTextField();
-        updatePatientBtn = new UI.Components.Button();
         doctorTab = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txtDoctorName = new UI.Components.TextField();
-        doctorSalary = new UI.Components.TextField();
         txtDoctorPassword = new UI.Components.TextField();
-        doctorExperience = new UI.Components.TextField();
-        doctorID = new UI.Components.TextField();
-        doctorSpeciality = new UI.Components.Combobox();
         clearDoctor = new UI.Components.Button();
         deleteDoctor = new UI.Components.Button();
         addDoctor = new UI.Components.Button();
@@ -318,17 +280,13 @@ public class HospitalAdmin extends javax.swing.JFrame {
         crudDoctorSP = new javax.swing.JScrollPane();
         crudDoctorTable = new javax.swing.JTable();
         txtDoctorUsername = new UI.Components.TextField();
-        doctorGenderCombo = new UI.Components.Combobox();
         staffTab = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
-        staffID = new UI.Components.TextField();
         staffName = new UI.Components.TextField();
         staffUsername = new UI.Components.TextField();
         staffPassword = new UI.Components.TextField();
-        staffGenderCombo = new UI.Components.Combobox();
-        staffSalary = new UI.Components.TextField();
         addStaff = new UI.Components.Button();
         deleteStaff = new UI.Components.Button();
         updateStaff = new UI.Components.Button();
@@ -593,64 +551,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        managePharmacy.setBackground(new java.awt.Color(0, 91, 149));
-        managePharmacy.setPreferredSize(new java.awt.Dimension(220, 50));
-        managePharmacy.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseExited(evt);
-            }
-        });
-
-        side2.setBackground(new java.awt.Color(0, 91, 149));
-        side2.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
-        side2.setLayout(side2Layout);
-        side2Layout.setHorizontalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side2Layout.setVerticalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        managePharmacylbl.setBackground(new java.awt.Color(51, 51, 51));
-        managePharmacylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        managePharmacylbl.setForeground(new java.awt.Color(255, 255, 255));
-        managePharmacylbl.setText("Manage Patients");
-
-        managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/health_checkup_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout managePharmacyLayout = new javax.swing.GroupLayout(managePharmacy);
-        managePharmacy.setLayout(managePharmacyLayout);
-        managePharmacyLayout.setHorizontalGroup(
-            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(managePharmacyLayout.createSequentialGroup()
-                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(managePharmacyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(managePharmacylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        managePharmacyLayout.setVerticalGroup(
-            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managePharmacyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(managePharmacylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(managePharmacyIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         manageCategory.setBackground(new java.awt.Color(0, 91, 149));
         manageCategory.setPreferredSize(new java.awt.Dimension(220, 50));
         manageCategory.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -753,18 +653,15 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 .addComponent(side4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageMedicineIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageMedicinelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         manageMedicineLayout.setVerticalGroup(
             manageMedicineLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageMedicineLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageMedicinelbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(manageMedicineIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(side4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(manageMedicinelbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout menuhide1Layout = new javax.swing.GroupLayout(menuhide1);
@@ -772,7 +669,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -781,12 +677,10 @@ public class HospitalAdmin extends javax.swing.JFrame {
             .addGroup(menuhide1Layout.createSequentialGroup()
                 .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addComponent(manageCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(757, 757, 757))
+                .addGap(0, 0, 0))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -820,7 +714,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Patient Name", "Volunteer(Sender)", "Receiver", "Height", "Weight", "Pulse", "Blood Pressure", "Status"
+                "Patient Name", "Height", "Weight", "Respiratory Rate", "Pulse Rate", "Assigned Date", "Sender", "Status"
             }
         ));
         patientList.setViewportView(patientTable);
@@ -910,194 +804,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(114, 114, 114)))
                 .addComponent(updatePatientBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         hospitalAdmin.addTab("Dashboard", dashboard);
-
-        patientTab.setBackground(new java.awt.Color(217, 241, 255));
-        patientTab.setLayout(new java.awt.BorderLayout());
-
-        jPanel2.setBackground(new java.awt.Color(217, 241, 255));
-
-        pharmacyTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Pharmacy ID", "Pharmacy Name", "Community"
-            }
-        ));
-        pharmacySP.setViewportView(pharmacyTable);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel8.setText("Associated Pharmacy Details");
-
-        combobox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Status", "Send Sample To Lab", "Report Sent By Lab", "Send Report To Doctor", "Prescription Added", "Send Prescription", " " }));
-        combobox2.setSelectedIndex(-1);
-        combobox2.setLabeText("Select Status");
-        combobox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobox2ActionPerformed(evt);
-            }
-        });
-
-        patientProfile.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Patient Name", "Age", "Gender", "Community", "Assigned Doctor", "Assigned Staff", " Volunteer", "Lab Tests", "Lab Records", "Status"
-            }
-        ));
-        patientProfileSP.setViewportView(patientProfile);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel9.setText("Patient Profile");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel10.setText("Associated Lab Details");
-
-        labTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Lab ID", "Lab Name", "Community"
-            }
-        ));
-        labSP.setViewportView(labTable);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        jLabel11.setText("Perform Action");
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/search_30px.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(searchPatient)
-        );
-
-        updatePatientBtn.setBackground(new java.awt.Color(0, 91, 149));
-        updatePatientBtn.setForeground(new java.awt.Color(255, 255, 255));
-        updatePatientBtn.setText("Update Patient Record");
-        updatePatientBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        updatePatientBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                updatePatientBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                updatePatientBtnMouseExited(evt);
-            }
-        });
-        updatePatientBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatePatientBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel8))
-                                .addGap(770, 770, 770))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(388, 388, 388))
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(patientProfileSP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
-                                .addComponent(labSP, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addContainerGap()))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(pharmacySP, javax.swing.GroupLayout.PREFERRED_SIZE, 965, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(346, 346, 346)
-                .addComponent(updatePatientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(patientProfileSP, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combobox2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jLabel10)
-                .addGap(18, 18, 18)
-                .addComponent(labSP, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(pharmacySP, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(updatePatientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
-        );
-
-        patientTab.add(jPanel2, java.awt.BorderLayout.CENTER);
-
-        hospitalAdmin.addTab("Patient", patientTab);
 
         doctorTab.setBackground(new java.awt.Color(255, 255, 255));
         doctorTab.setLayout(new java.awt.BorderLayout());
@@ -1113,37 +825,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
             }
         });
 
-        doctorSalary.setLabelText("Salary");
-        doctorSalary.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorSalaryActionPerformed(evt);
-            }
-        });
-
         txtDoctorPassword.setLabelText("Password");
-
-        doctorExperience.setLabelText("Experience");
-        doctorExperience.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorExperienceActionPerformed(evt);
-            }
-        });
-
-        doctorID.setLabelText("Doctor ID");
-        doctorID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorIDActionPerformed(evt);
-            }
-        });
-
-        doctorSpeciality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cardiology", "Neurology", "Gynacologist", "Dermatology", "Physiotherapy", " " }));
-        doctorSpeciality.setSelectedIndex(-1);
-        doctorSpeciality.setLabeText("Speciality");
-        doctorSpeciality.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorSpecialityActionPerformed(evt);
-            }
-        });
 
         clearDoctor.setBackground(new java.awt.Color(0, 91, 149));
         clearDoctor.setForeground(new java.awt.Color(255, 255, 255));
@@ -1239,7 +921,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Name", "Username", "Password"
+                "Doctor Name", "Username", "Password"
             }
         ) {
             Class[] types = new Class [] {
@@ -1271,15 +953,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
             }
         });
 
-        doctorGenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
-        doctorGenderCombo.setSelectedIndex(-1);
-        doctorGenderCombo.setLabeText("Gender");
-        doctorGenderCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doctorGenderComboActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -1298,43 +971,25 @@ public class HospitalAdmin extends javax.swing.JFrame {
                                 .addGap(45, 45, 45)
                                 .addComponent(clearDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(doctorGenderCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                    .addComponent(doctorSalary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtDoctorName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(36, 36, 36)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(doctorSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDoctorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtDoctorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(61, 61, 61)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(doctorExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDoctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtDoctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crudDoctorSP, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(doctorID, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(crudDoctorSP, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(doctorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(96, 96, 96)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDoctorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDoctorUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doctorSpeciality, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorExperience, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doctorGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(doctorSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(222, 222, 222)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clearDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1371,13 +1026,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(217, 241, 255));
 
-        staffID.setLabelText("Staff ID");
-        staffID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffIDActionPerformed(evt);
-            }
-        });
-
         staffName.setLabelText("Full Name");
         staffName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1393,22 +1041,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         });
 
         staffPassword.setLabelText("Password");
-
-        staffGenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
-        staffGenderCombo.setSelectedIndex(-1);
-        staffGenderCombo.setLabeText("Gender");
-        staffGenderCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffGenderComboActionPerformed(evt);
-            }
-        });
-
-        staffSalary.setLabelText("Salary");
-        staffSalary.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffSalaryActionPerformed(evt);
-            }
-        });
 
         addStaff.setBackground(new java.awt.Color(0, 91, 149));
         addStaff.setForeground(new java.awt.Color(255, 255, 255));
@@ -1557,33 +1189,33 @@ public class HospitalAdmin extends javax.swing.JFrame {
 
         crudStaffTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Staff ID", "Name", "Username", "Password", "Gender", "Salary"
+                "Name", "Username", "Password"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, true, true
+                true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1611,30 +1243,23 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     .addComponent(crudStaffSP, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
                     .addComponent(searchPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(staffID, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(staffName, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(addStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(staffSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(staffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
+                        .addComponent(staffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
                         .addComponent(staffPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                         .addComponent(updateStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81)
                         .addComponent(clearStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1644,18 +1269,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(staffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(104, 104, 104)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(staffUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(staffPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(staffGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(staffSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
+                .addGap(152, 152, 152)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clearStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1665,7 +1284,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 .addComponent(searchPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(crudStaffSP, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -1779,22 +1398,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         changecolor(side1, new Color(0, 91, 149));
     }//GEN-LAST:event_pharmacyStaisticsMouseExited
 
-    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
-        hospitalAdmin.setSelectedIndex(1);
-        changecolor(managePharmacy, new Color(3, 138, 255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_managePharmacyMouseClicked
-
-    private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
-        changecolor(managePharmacy, new Color(3, 138, 255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_managePharmacyMouseEntered
-
-    private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
-        changecolor(managePharmacy, new Color(0, 91, 149));
-        changecolor(side2, new Color(0, 91, 149));
-    }//GEN-LAST:event_managePharmacyMouseExited
-
     private void manageCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCategoryMouseClicked
         hospitalAdmin.setSelectedIndex(2);
         changecolor(manageCategory, new Color(3, 138, 255));
@@ -1840,60 +1443,118 @@ public class HospitalAdmin extends javax.swing.JFrame {
         parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
 
-    private void combobox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox2ActionPerformed
+    private void hospitalAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hospitalAdminMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_combobox2ActionPerformed
+        int index = hospitalAdmin.getSelectedIndex();
 
-    private void doctorSpecialityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorSpecialityActionPerformed
+        switch (index) {
+            case 0:
+                //                populateDoctor();
+                populateStaff();
+                break;
+            case 1:
+                //                populateDoctor();
+                break;
+            case 2:
+                //                populateEnterpriseName(network, cEntName);
+                populateDoctorTable();
+                break;
+            case 3:
+                //                populateEnterpriseName(network, vSEnterprise);
+                populateStaffTable();
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_hospitalAdminMouseClicked
+
+    private void updatePatientBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientBtn1ActionPerformed
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorSpecialityActionPerformed
+        int selectedrow = patientTable.getSelectedRow();
+        if (selectedrow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row");
 
-    private void doctorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorIDActionPerformed
+        }
+        try {
+
+            String message = textAreaMsg.getText();
+
+            if (message.equals("") || message.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter something to send.");
+                return;
+            }
+
+            StaffWorkRequest staffRequest = new StaffWorkRequest();
+
+            staffRequest.setPatient((Tenant) this.tenantList.get(selectedrow));
+
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = new Date();
+            staffRequest.setStatus("Patient Assigned");
+            Employee emp = (Employee) staffCombo.getSelectedItem();
+            staffRequest.setReceiver(getUser(emp.getId()));
+
+            Organization org = null;
+            for (Organization orn : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+                if (orn instanceof HospitalStaffOrganization) {
+                    org = orn;
+                    break;
+                }
+            }
+
+            if (org != null) {
+                org.getWorkQueue().getWorkRequestList().add(staffRequest);
+                account.getWorkQueue().getWorkRequestList().add(staffRequest);
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_updatePatientBtn1ActionPerformed
+
+    private void updatePatientBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtn1MouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorIDActionPerformed
+    }//GEN-LAST:event_updatePatientBtn1MouseExited
 
-    private void doctorExperienceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorExperienceActionPerformed
+    private void updatePatientBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtn1MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorExperienceActionPerformed
+    }//GEN-LAST:event_updatePatientBtn1MouseEntered
 
-    private void doctorSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorSalaryActionPerformed
+    private void staffComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_doctorSalaryActionPerformed
+    }//GEN-LAST:event_staffComboActionPerformed
 
-    private void txtDoctorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorNameActionPerformed
+    private void txtDoctorUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDoctorNameActionPerformed
+    }//GEN-LAST:event_txtDoctorUsernameActionPerformed
 
-    private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
+    private void crudDoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crudDoctorTableMouseClicked
+        // TODO add your handling code here:
 
-        String username = txtDoctorUsername.getText();
-//        char[] passwordCharArray = doctorPassword.getPassword();
-
-        String password = txtDoctorPassword.getText();//String.valueOf(passwordCharArray);
-        String name = txtDoctorName.getText();
-
+        int selectedRowIndex = crudDoctorTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) crudDoctorTable.getModel();
+        //          UserAccount user = (UserAccount)model.getValueAt(selectedRowInde);
+        //UserAccount user = docOrg.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
         for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
             if (org.getName() == Organization.Type.Doctor.getValue()) {
-                Employee employee = org.getEmployeeDirectory().createEmployee(name);
-                if (EcoSystem.isUserUnique(username)) {
-
-                    org.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorRole());
-
-                }
-
-                JOptionPane.showMessageDialog(this, "Doctor Added Successfully!");
-                clearDoctor();
-                this.populateDoctorTable();
+                UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
+                txtDoctorName.setText(user.getEmployee().getName());
+                txtDoctorUsername.setText(user.getUsername());
+                txtDoctorPassword.setText(user.getPassword());
             }
         }
 
-    }//GEN-LAST:event_addDoctorActionPerformed
+    }//GEN-LAST:event_crudDoctorTableMouseClicked
 
     private void updateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoctorActionPerformed
 
         int selectedRowIndex = crudDoctorTable.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
+            JOptionPane.showMessageDialog(this, "Please select a row to update!");
             return;
         }
 
@@ -1907,74 +1568,147 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 if (EcoSystem.isUserUnique(username)) {
 
                     employee.setName(name);
+                    UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
+                    user.setEmployee(employee);
+                    user.setPassword(password);
+                    user.setUsername(username);
+                    clearDoctor();
+                    this.populateDoctorTable();
+                    JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
+                   
 
+                } else {
+                    clearDoctor();
+                    this.populateDoctorTable();
+                    JOptionPane.showMessageDialog(this, "Please enter the unique username!");
+                    
                 }
 
-                UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
-                user.setEmployee(employee);
-                user.setPassword(password);
-                user.setUsername(username);
-                JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
-                clearDoctor();
-                this.populateDoctorTable();
             }
         }
-
     }//GEN-LAST:event_updateDoctorActionPerformed
 
-    private void txtDoctorUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDoctorUsernameActionPerformed
+    private void updateDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseExited
+        changecolorB(updateDoctor, new Color(0, 91, 149));
+    }//GEN-LAST:event_updateDoctorMouseExited
 
-    private void staffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffIDActionPerformed
+    private void updateDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseEntered
+        changecolorB(updateDoctor, new Color(3, 138, 255));
+    }//GEN-LAST:event_updateDoctorMouseEntered
 
-    private void staffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffNameActionPerformed
+    private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
 
-    private void staffUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffUsernameActionPerformed
+        String username = txtDoctorUsername.getText();
+        //        char[] passwordCharArray = doctorPassword.getPassword();
 
-    private void staffGenderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffGenderComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffGenderComboActionPerformed
-
-    private void doctorGenderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorGenderComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doctorGenderComboActionPerformed
-
-    private void staffSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffSalaryActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffSalaryActionPerformed
-
-    private void addStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffActionPerformed
-
-        String username = staffUsername.getText();
-//        char[] passwordCharArray = doctorPassword.getPassword();
-
-        String password = staffPassword.getText();//String.valueOf(passwordCharArray);
-        String name = staffName.getText();
+        String password = txtDoctorPassword.getText();//String.valueOf(passwordCharArray);
+        String name = txtDoctorName.getText();
 
         for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
-            if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
+            if (org.getName() == Organization.Type.Doctor.getValue()) {
                 Employee employee = org.getEmployeeDirectory().createEmployee(name);
                 if (EcoSystem.isUserUnique(username)) {
 
-                    org.getUserAccountDirectory().createUserAccount(username, password, employee, new StaffRole());
+                    org.getUserAccountDirectory().createUserAccount(username, password, employee, new DoctorRole());
+                    JOptionPane.showMessageDialog(this, "Doctor Added Successfully!");
+                    clearDoctor();
+                    this.populateDoctorTable();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Please try again!");
+                    clearDoctor();
 
                 }
 
-                JOptionPane.showMessageDialog(this, "Staff Added Successfully!");
-                clearStaff();
-                this.populateStaffTable();
+            }
+        }
+    }//GEN-LAST:event_addDoctorActionPerformed
+
+    private void addDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseExited
+        changecolorB(addDoctor, new Color(0, 91, 149));
+    }//GEN-LAST:event_addDoctorMouseExited
+
+    private void addDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseEntered
+        changecolorB(addDoctor, new Color(3, 138, 255));
+    }//GEN-LAST:event_addDoctorMouseEntered
+
+    private void deleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorActionPerformed
+        int selectedRowIndex = crudDoctorTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) crudDoctorTable.getModel();
+        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+            if (org.getName() == Organization.Type.Doctor.getValue()) {
+                org.getUserAccountDirectory().getUserAccountList().remove(selectedRowIndex);
+
             }
         }
 
+        JOptionPane.showMessageDialog(this, "Doctor Deleted Successfully!");
+        clearDoctor();
+        this.populateDoctorTable();
+    }//GEN-LAST:event_deleteDoctorActionPerformed
 
-    }//GEN-LAST:event_addStaffActionPerformed
+    private void deleteDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseExited
+        changecolorB(deleteDoctor, new Color(0, 91, 149));
+    }//GEN-LAST:event_deleteDoctorMouseExited
+
+    private void deleteDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseEntered
+        changecolorB(deleteDoctor, new Color(3, 138, 255));
+    }//GEN-LAST:event_deleteDoctorMouseEntered
+
+    private void clearDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearDoctorActionPerformed
+        clearDoctor();
+    }//GEN-LAST:event_clearDoctorActionPerformed
+
+    private void clearDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseExited
+        changecolorB(clearDoctor, new Color(0, 91, 149));
+    }//GEN-LAST:event_clearDoctorMouseExited
+
+    private void clearDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseEntered
+        changecolorB(clearDoctor, new Color(3, 138, 255));
+    }//GEN-LAST:event_clearDoctorMouseEntered
+
+    private void txtDoctorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDoctorNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDoctorNameActionPerformed
+
+    private void crudStaffTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crudStaffTableMouseClicked
+        // TODO add your handling code here:
+
+        int selectedRowIndex = crudStaffTable.getSelectedRow();
+        if (selectedRowIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) crudStaffTable.getModel();
+        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+            if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
+                UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
+                txtDoctorName.setText(user.getEmployee().getName());
+                txtDoctorUsername.setText(user.getUsername());
+                txtDoctorPassword.setText(user.getPassword());
+            }
+        }
+    }//GEN-LAST:event_crudStaffTableMouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void clearStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStaffActionPerformed
+        clearStaff();
+    }//GEN-LAST:event_clearStaffActionPerformed
+
+    private void clearStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseExited
+        changecolorB(clearStaff, new Color(0, 91, 149));
+    }//GEN-LAST:event_clearStaffMouseExited
+
+    private void clearStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseEntered
+        changecolorB(clearStaff, new Color(3, 138, 255));
+    }//GEN-LAST:event_clearStaffMouseEntered
 
     private void updateStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffActionPerformed
 
@@ -1995,23 +1729,33 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 if (EcoSystem.isUserUnique(username)) {
 
                     employee.setName(name);
+                    UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
+                    user.setEmployee(employee);
+                    user.setPassword(password);
+                    user.setUsername(username);
+                    clearDoctor();
+                    this.populateDoctorTable();
+                    JOptionPane.showMessageDialog(this, "Staff Updated Successfully!");
+                    
 
+                } else {
+                    clearDoctor();
+                    this.populateDoctorTable();
+                    JOptionPane.showMessageDialog(this, "Please enter the unique username!");
+                    
                 }
 
-                UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
-                user.setEmployee(employee);
-                user.setPassword(password);
-                user.setUsername(username);
-                JOptionPane.showMessageDialog(this, "Staff Added Successfully!");
-                clearStaff();
-                this.populateStaffTable();
             }
         }
     }//GEN-LAST:event_updateStaffActionPerformed
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel3MouseClicked
+    private void updateStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseExited
+        changecolorB(updateStaff, new Color(0, 91, 149));
+    }//GEN-LAST:event_updateStaffMouseExited
+
+    private void updateStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseEntered
+        changecolorB(updateStaff, new Color(3, 138, 255));
+    }//GEN-LAST:event_updateStaffMouseEntered
 
     private void deleteStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteStaffActionPerformed
 
@@ -2031,236 +1775,86 @@ public class HospitalAdmin extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Staff Added Successfully!");
         clearStaff();
         this.populateStaffTable();
-
     }//GEN-LAST:event_deleteStaffActionPerformed
-
-    private void updatePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientBtnActionPerformed
-        JOptionPane.showMessageDialog(this, "Patient Details Updated");
-    }//GEN-LAST:event_updatePatientBtnActionPerformed
-
-    private void updatePatientBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseEntered
-        changecolorB(updatePatientBtn, new Color(3, 138, 255));
-    }//GEN-LAST:event_updatePatientBtnMouseEntered
-
-    private void updatePatientBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtnMouseExited
-        changecolorB(updatePatientBtn, new Color(0, 91, 149));
-    }//GEN-LAST:event_updatePatientBtnMouseExited
-
-    private void deleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorActionPerformed
-        int selectedRowIndex = crudDoctorTable.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel) crudDoctorTable.getModel();
-        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
-            if (org.getName() == Organization.Type.Doctor.getValue()) {
-                org.getUserAccountDirectory().getUserAccountList().remove(selectedRowIndex);
-
-            }
-        }
-
-        JOptionPane.showMessageDialog(this, "Doctor Deleted Successfully!");
-        clearDoctor();
-        this.populateDoctorTable();
-
-    }//GEN-LAST:event_deleteDoctorActionPerformed
-    private void clearDoctor() {
-        doctorID.setText("");
-        txtDoctorName.setText("");
-        txtDoctorUsername.setText("");
-        txtDoctorPassword.setText("");
-        doctorSalary.setText("");
-        doctorExperience.setText("");
-    }
-    private void clearDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearDoctorActionPerformed
-        clearDoctor();
-    }//GEN-LAST:event_clearDoctorActionPerformed
-
-    private void addDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseEntered
-        changecolorB(addDoctor, new Color(3, 138, 255));
-    }//GEN-LAST:event_addDoctorMouseEntered
-
-    private void addDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDoctorMouseExited
-        changecolorB(addDoctor, new Color(0, 91, 149));
-    }//GEN-LAST:event_addDoctorMouseExited
-
-    private void deleteDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseEntered
-        changecolorB(deleteDoctor, new Color(3, 138, 255));
-    }//GEN-LAST:event_deleteDoctorMouseEntered
-
-    private void deleteDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteDoctorMouseExited
-        changecolorB(deleteDoctor, new Color(0, 91, 149));
-    }//GEN-LAST:event_deleteDoctorMouseExited
-
-    private void updateDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseEntered
-        changecolorB(updateDoctor, new Color(3, 138, 255));
-    }//GEN-LAST:event_updateDoctorMouseEntered
-
-    private void updateDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateDoctorMouseExited
-        changecolorB(updateDoctor, new Color(0, 91, 149));
-    }//GEN-LAST:event_updateDoctorMouseExited
-
-    private void clearDoctorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseExited
-        changecolorB(clearDoctor, new Color(0, 91, 149));
-    }//GEN-LAST:event_clearDoctorMouseExited
-
-    private void clearDoctorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearDoctorMouseEntered
-        changecolorB(clearDoctor, new Color(3, 138, 255));
-    }//GEN-LAST:event_clearDoctorMouseEntered
-    private void clearStaff() {
-        staffID.setText("");
-        staffName.setText("");
-        staffUsername.setText("");
-        staffPassword.setText("");
-        staffSalary.setText("");
-
-    }
-    private void clearStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearStaffActionPerformed
-        clearStaff();
-    }//GEN-LAST:event_clearStaffActionPerformed
-
-    private void addStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseEntered
-        changecolorB(addStaff, new Color(3, 138, 255));
-    }//GEN-LAST:event_addStaffMouseEntered
-
-    private void deleteStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseEntered
-        changecolorB(deleteStaff, new Color(3, 138, 255));
-    }//GEN-LAST:event_deleteStaffMouseEntered
-
-    private void updateStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseEntered
-        changecolorB(updateStaff, new Color(3, 138, 255));
-    }//GEN-LAST:event_updateStaffMouseEntered
-
-    private void clearStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseEntered
-        changecolorB(clearStaff, new Color(3, 138, 255));
-    }//GEN-LAST:event_clearStaffMouseEntered
-
-    private void addStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseExited
-        changecolorB(addStaff, new Color(0, 91, 149));
-    }//GEN-LAST:event_addStaffMouseExited
 
     private void deleteStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseExited
         changecolorB(deleteStaff, new Color(0, 91, 149));
     }//GEN-LAST:event_deleteStaffMouseExited
 
-    private void updateStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateStaffMouseExited
-        changecolorB(updateStaff, new Color(0, 91, 149));
-    }//GEN-LAST:event_updateStaffMouseExited
+    private void deleteStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteStaffMouseEntered
+        changecolorB(deleteStaff, new Color(3, 138, 255));
+    }//GEN-LAST:event_deleteStaffMouseEntered
 
-    private void clearStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearStaffMouseExited
-        changecolorB(clearStaff, new Color(0, 91, 149));
-    }//GEN-LAST:event_clearStaffMouseExited
+    private void addStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffActionPerformed
 
-    private void hospitalAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hospitalAdminMouseClicked
-        // TODO add your handling code here:
-        int index = hospitalAdmin.getSelectedIndex();
+        String username = staffUsername.getText();
+        //        char[] passwordCharArray = doctorPassword.getPassword();
 
-        switch (index) {
-            case 0:
-//                populateDoctor();
-                populateStaff();
-                break;
-            case 1:
-//                populateDoctor();
-                break;
-            case 2:
-//                populateEnterpriseName(network, cEntName);
-                populateDoctorTable();
-                break;
-            case 3:
-//                populateEnterpriseName(network, vSEnterprise);
-                populateStaffTable();
-                break;
-            default:
-                throw new AssertionError();
-        }
-    }//GEN-LAST:event_hospitalAdminMouseClicked
+        String password = staffPassword.getText();//String.valueOf(passwordCharArray);
+        String name = staffName.getText();
 
-    private void crudDoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crudDoctorTableMouseClicked
-        // TODO add your handling code here:
+        for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+            if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
+                Employee employee = org.getEmployeeDirectory().createEmployee(name);
+                if (EcoSystem.isUserUnique(username)) {
 
-        int selectedRowIndex = crudDoctorTable.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to view");
-            return;
-        }
-        DefaultTableModel model = (DefaultTableModel) crudDoctorTable.getModel();
-//          UserAccount user = (UserAccount)model.getValueAt(selectedRowInde);
-        UserAccount user = docOrg.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
-        txtDoctorName.setText(user.getEmployee().getName());
-        txtDoctorUsername.setText(user.getUsername());
-        txtDoctorPassword.setText(user.getPassword());
-    }//GEN-LAST:event_crudDoctorTableMouseClicked
+                    org.getUserAccountDirectory().createUserAccount(username, password, employee, new StaffRole());
+                    JOptionPane.showMessageDialog(this, "Staff Added Successfully!");
+                    clearStaff();
+                    this.populateStaffTable();
 
-    private void staffComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_staffComboActionPerformed
+                } else {
 
-    private void updatePatientBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtn1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updatePatientBtn1MouseEntered
+                    JOptionPane.showMessageDialog(this, "Please enter unique username!");
+                    clearStaff();
+                    return;
+                }
 
-    private void updatePatientBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePatientBtn1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updatePatientBtn1MouseExited
-
-    private void updatePatientBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePatientBtn1ActionPerformed
-
-        // TODO add your handling code here:
-        int selectedrow = patientTable.getSelectedRow();
-        if (selectedrow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row");
-
-        }
-        try {
-
-            String message = textAreaMsg.getText();
-
-            if (message.equals("") || message.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter something to send.");
-                return;
             }
-
-            System.out.println("printinf" + (StaffWorkRequest) patientTable.getValueAt(selectedrow, 0));
-            StaffWorkRequest request = (StaffWorkRequest) patientTable.getValueAt(selectedrow, 7);
-            request.setMessage(message);
-            UserAccount userAccount = (UserAccount) staffCombo.getSelectedItem();
-
-            request.setSender(userAccount);
-            request.setStatus("Assigned To Staff");
-
-            staffOrg.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
-
-            JOptionPane.showMessageDialog(null, "Request message sent");
-        } catch (Exception e) {
-            System.out.println("Error" + e);
-            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
         }
+    }//GEN-LAST:event_addStaffActionPerformed
 
+    private void addStaffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseExited
+        changecolorB(addStaff, new Color(0, 91, 149));
+    }//GEN-LAST:event_addStaffMouseExited
 
-    }//GEN-LAST:event_updatePatientBtn1ActionPerformed
+    private void addStaffMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseEntered
+        changecolorB(addStaff, new Color(3, 138, 255));
+    }//GEN-LAST:event_addStaffMouseEntered
 
     private void addStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStaffMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_addStaffMouseClicked
 
-    private void crudStaffTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crudStaffTableMouseClicked
+    private void staffUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffUsernameActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_staffUsernameActionPerformed
 
-        int selectedRowIndex = crudStaffTable.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to view");
-            return;
+    private void staffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_staffNameActionPerformed
+    private void clearDoctor() {
+        txtDoctorName.setText("");
+        txtDoctorUsername.setText("");
+        txtDoctorPassword.setText("");
+    }
+
+    private void clearStaff() {
+
+        staffName.setText("");
+        staffUsername.setText("");
+        staffPassword.setText("");
+
+    }
+
+    public UserAccount getUser(String empId) {
+        for (UserAccount user : organization.getUserAccountDirectory().getUserAccountList()) {
+            if (user.getEmployee().getId() == empId) {
+                return user;
+            }
         }
-        DefaultTableModel model = (DefaultTableModel) crudStaffTable.getModel();
-//          UserAccount user = (UserAccount)model.getValueAt(selectedRowInde);
-        UserAccount user = staffOrg.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
-        staffName.setText(user.getEmployee().getName());
-        staffUsername.setText(user.getUsername());
-        staffPassword.setText(user.getPassword());
-    }//GEN-LAST:event_crudStaffTableMouseClicked
+        return null;
+    }
 
     /**
      * @param args the command line arguments
@@ -2315,7 +1909,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private UI.Components.Button clearDoctor;
     private UI.Components.Button clearStaff;
     private javax.swing.JLabel close;
-    private UI.Components.Combobox combobox2;
     private javax.swing.JScrollPane crudDoctorSP;
     private javax.swing.JTable crudDoctorTable;
     private javax.swing.JScrollPane crudStaffSP;
@@ -2323,41 +1916,27 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel dashboard;
     private UI.Components.Button deleteDoctor;
     private UI.Components.Button deleteStaff;
-    private UI.Components.TextField doctorExperience;
-    private UI.Components.Combobox doctorGenderCombo;
-    private UI.Components.TextField doctorID;
-    private UI.Components.TextField doctorSalary;
-    private UI.Components.Combobox doctorSpeciality;
     private javax.swing.JPanel doctorTab;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JTabbedPane hospitalAdmin;
     private javax.swing.JPanel iconmaxclose;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane labSP;
-    private javax.swing.JTable labTable;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel manageCategory;
@@ -2366,35 +1945,22 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel manageMedicine;
     private javax.swing.JLabel manageMedicineIcon;
     private javax.swing.JLabel manageMedicinelbl;
-    private javax.swing.JPanel managePharmacy;
-    private javax.swing.JLabel managePharmacyIcon;
-    private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
     private javax.swing.JScrollPane patientList;
-    private javax.swing.JTable patientProfile;
-    private javax.swing.JScrollPane patientProfileSP;
-    private javax.swing.JPanel patientTab;
     private javax.swing.JTable patientTable;
-    private javax.swing.JScrollPane pharmacySP;
     private javax.swing.JPanel pharmacyStaistics;
-    private javax.swing.JTable pharmacyTable;
     private javax.swing.JPanel searchPanel1;
-    private javax.swing.JTextField searchPatient;
     private javax.swing.JTextField searchStaff;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
-    private javax.swing.JPanel side2;
     private javax.swing.JPanel side3;
     private javax.swing.JPanel side4;
     private UI.Components.Combobox staffCombo;
-    private UI.Components.Combobox staffGenderCombo;
-    private UI.Components.TextField staffID;
     private UI.Components.TextField staffName;
     private UI.Components.TextField staffPassword;
-    private UI.Components.TextField staffSalary;
     private javax.swing.JPanel staffTab;
     private UI.Components.TextField staffUsername;
     private javax.swing.JLabel statisticsimg;
@@ -2404,7 +1970,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private UI.Components.TextField txtDoctorPassword;
     private UI.Components.TextField txtDoctorUsername;
     private UI.Components.Button updateDoctor;
-    private UI.Components.Button updatePatientBtn;
     private UI.Components.Button updatePatientBtn1;
     private UI.Components.Button updateStaff;
     // End of variables declaration//GEN-END:variables
