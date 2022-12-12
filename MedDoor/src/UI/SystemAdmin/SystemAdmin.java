@@ -20,6 +20,7 @@ import UI.Components.Combobox;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import com.model.Validation;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -35,6 +36,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class SystemAdmin extends javax.swing.JFrame {
 
@@ -61,19 +72,23 @@ public class SystemAdmin extends javax.swing.JFrame {
         TableCustom.apply(jScrollPane4, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jScrollPane5, TableCustom.TableType.DEFAULT);
         populateCommunity();
+        button1.setVisible(true);
         
     }
     
     public void populateCommunity() {
-       addHouseComCombo.removeAll();
+        
+       addHouseComCombo.removeAllItems();
+       chartCommunity.removeAllItems();
        for (Community type : network.getCommunityDirectory().getCommunityList()) {
             addHouseComCombo.addItem(type);
+            chartCommunity.addItem(type);
         } 
     }
     //Method to change panel color on hover
     public void populateEnterprise() {
         System.out.print("inside populate");
-        createEnterpriseType.removeAll();
+        createEnterpriseType.removeAllItems();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             createEnterpriseType.addItem(type);
         }
@@ -84,29 +99,28 @@ public class SystemAdmin extends javax.swing.JFrame {
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
             comboBox.addItem(enterprise);
-        }
-        
+        } 
     }
     
-    private void populateHouseTable(Enterprise selectedEnterprise) {
-        try{
-        DefaultTableModel model = (DefaultTableModel) vSEntepriseT.getModel();
-
-        model.setRowCount(0);
-            for (Organization org : selectedEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                for(UserAccount user : org.getUserAccountDirectory().getUserAccountList()){
-                Object[] row = new Object[3];
-                row[0] = org.getName();
-                row[1] = user.getEmployee().getName();
-                row[2] = user.getRole().toString();
-                model.addRow(row);
-                }
-            }
-        }catch(Exception e)
-        {
-             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
-        }
-    }
+//    private void populateHouseTable(Enterprise selectedEnterprise) {
+//        try{
+//        DefaultTableModel model = (DefaultTableModel) vSEntepriseT.getModel();
+//
+//        model.setRowCount(0);
+//            for (Organization org : selectedEnterprise.getOrganizationDirectory().getOrganizationList()) {
+//                for(UserAccount user : org.getUserAccountDirectory().getUserAccountList()){
+//                Object[] row = new Object[3];
+//                row[0] = org.getName();
+//                row[1] = user.getEmployee().getName();
+//                row[2] = user.getRole().toString();
+//                model.addRow(row);
+//                }
+//            }
+//        }catch(Exception e)
+//        {
+//             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
+//        }
+//    }
      
     
     
@@ -268,7 +282,13 @@ public class SystemAdmin extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         vSEntepriseT = new javax.swing.JTable();
         button2 = new UI.Components.Button();
+        jPanel1 = new javax.swing.JPanel();
+        barchartComm = new javax.swing.JPanel();
+        barchartComm1 = new javax.swing.JPanel();
+        barchartComm2 = new javax.swing.JPanel();
         button3 = new UI.Components.Button();
+        chartCommunity = new UI.Components.Combobox();
+        barChartHosp = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -742,6 +762,12 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
+        });
+
         ListHouses.setBackground(new java.awt.Color(217, 241, 255));
 
         houseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -862,7 +888,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         ListHouses.setLayout(ListHousesLayout);
         ListHousesLayout.setHorizontalGroup(
             ListHousesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
             .addComponent(jScrollPane5)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListHousesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -880,7 +906,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addTenantN1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("List Houses", ListHouses);
@@ -929,16 +955,15 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addGap(272, 272, 272)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(280, 280, 280))))
+                        .addGap(81, 81, 81)))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
@@ -946,13 +971,13 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(72, 72, 72))
         );
 
         jTabbedPane2.addTab("Add House", jPanel4);
@@ -964,6 +989,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantContact.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tenantContactFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tenantContactFocusLost(evt);
             }
         });
         tenantContact.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -978,6 +1006,9 @@ public class SystemAdmin extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tenantEmailFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tenantEmailFocusLost(evt);
+            }
         });
 
         tenantName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -985,6 +1016,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tenantNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tenantNameFocusLost(evt);
             }
         });
         tenantName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -998,6 +1032,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantAge.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tenantAgeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tenantAgeFocusLost(evt);
             }
         });
         tenantAge.addActionListener(new java.awt.event.ActionListener() {
@@ -1034,6 +1071,11 @@ public class SystemAdmin extends javax.swing.JFrame {
         genderCombo.setLabeText("Gender");
 
         tenantDob2.setDateFormatString("MM/dd/yyyy");
+        tenantDob2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tenantDob2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1045,17 +1087,17 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(tenantName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tenantAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                         .addComponent(tenantEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(tenantDob2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(110, 110, 110))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(274, 274, 274)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(340, 340, 340))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1069,13 +1111,13 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
+                        .addGap(39, 39, 39)
                         .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tenantDob2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                    .addComponent(tenantDob2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
@@ -1096,16 +1138,15 @@ public class SystemAdmin extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane2)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(312, 312, 312)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(addHouseComCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(338, 338, 338)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1118,10 +1159,11 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
-        manageNetworkTab.add(jPanel2, java.awt.BorderLayout.CENTER);
+        manageNetworkTab.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         sysAdminTab.addTab("Manage Network", manageNetworkTab);
 
@@ -1169,7 +1211,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(216, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1261,7 +1303,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                         .addComponent(cEntPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cEntUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cEntName, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1298,30 +1340,30 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         vSEntepriseT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Organization", "Employee Name", "Role"
+                "Organization", "UserName", "Employee Name", "Role"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1344,29 +1386,18 @@ public class SystemAdmin extends javax.swing.JFrame {
             }
         });
 
-        button3.setBackground(new java.awt.Color(0, 91, 149));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("Update");
-        button3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(238, 238, 238)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(92, 92, 92)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -1374,11 +1405,9 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(125, 125, 125))
         );
@@ -1395,6 +1424,62 @@ public class SystemAdmin extends javax.swing.JFrame {
         );
 
         sysAdminTab.addTab("View System", viewSystemTab);
+
+        barchartComm.setLayout(new java.awt.CardLayout());
+
+        barchartComm1.setLayout(new java.awt.CardLayout());
+        barchartComm.add(barchartComm1, "card2");
+
+        barchartComm2.setLayout(new java.awt.CardLayout());
+        barchartComm.add(barchartComm2, "card3");
+
+        button3.setText("Load Chart");
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+
+        chartCommunity.setLabeText("Community");
+        chartCommunity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chartCommunityActionPerformed(evt);
+            }
+        });
+
+        barChartHosp.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(chartCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143)
+                .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(barchartComm, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(barChartHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chartCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(95, 95, 95)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(barchartComm, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(barChartHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(140, Short.MAX_VALUE))
+        );
+
+        sysAdminTab.addTab("Report", jPanel1);
 
         getContentPane().add(sysAdminTab, java.awt.BorderLayout.CENTER);
 
@@ -1585,13 +1670,19 @@ public class SystemAdmin extends javax.swing.JFrame {
         return;
         }
         
+         Date date = new Date(); 
+//        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        date = tenantDob2.getDate();
+        if(date.after(new Date())){
+         JOptionPane.showMessageDialog(null, "Future Date is not allowed");
+        return;   
+        }
+        
         
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
         House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
-        Date date = new Date(); 
-//        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-        date = tenantDob2.getDate();
+       
 
         selectedHouse.getTenats().createAndAddTenant(tenantName.getText(), tenantName.getText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getText()), 
                 tenantEmail.getText(), String.valueOf(tenantContact.getText()),selectedHouse);
@@ -1602,6 +1693,8 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantContact.setText(null);
         tenantEmail.setText(null);
         genderCombo.setSelectedItem(-1);
+        jTabbedPane2.setSelectedIndex(0);
+        button1.setVisible(true);
           }
        
     }//GEN-LAST:event_addTenantActionPerformed
@@ -1615,9 +1708,9 @@ public class SystemAdmin extends javax.swing.JFrame {
         {
              createEnterpriseName.setHelperText("Please enter Entersprise Name");
         }
-         else if(createEnterpriseName.getText().length()<5 || createEnterpriseName.getText().length()>20 )
+         else if(createEnterpriseName.getText().length()<5 || createEnterpriseName.getText().length()>40 )
         {
-             createEnterpriseName.setHelperText("Enterprise Name too short or long!");
+             createEnterpriseName.setHelperText("Enterprise Name should be between 5 to 40 characters long!");
         }else
          {
         
@@ -1632,6 +1725,13 @@ public class SystemAdmin extends javax.swing.JFrame {
         
         String name = createEnterpriseName.getText();
         System.out.println(name);
+           for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+
+                    if (enterprise.getName().equals(name)) {
+                         JOptionPane.showMessageDialog(this, "Enterprise Exists");
+                         return;
+                    }
+                }
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
         JOptionPane.showMessageDialog(this, "Enterprise Added");
         
@@ -1644,11 +1744,11 @@ public class SystemAdmin extends javax.swing.JFrame {
         return false;
         }
      if (cEntPassword.getText().isEmpty()) {
-         cEntPassword.setHelperText("Please Enter Username");
+         cEntPassword.setHelperText("Please Enter password");
         return false;
         }
      if (cEntEEname.getText().isEmpty()) {
-         cEntEEname.setHelperText("Please Enter Username");
+         cEntEEname.setHelperText("Please Enter emplyoee name");
         return false;
         }
      if (!cEntUsername.getText().isEmpty()) {
@@ -1745,22 +1845,27 @@ public class SystemAdmin extends javax.swing.JFrame {
             switch (enterprise.getEnterpriseType()) {
             case Volunteer:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new VolunteerAdminRole());
-                System.out.print(account);
+                JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
                 break;
             case Diagnostics:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new DiagnosticAdminRole());
+                JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
                 break;
             case Hospital:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new HospitalAdminRole());
+                JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
                 break;
             case Insurance:
                 account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new InsuranceAdminRole());
+                JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
                 break;
             default:
                 break;
         }
+        } else {
+            JOptionPane.showMessageDialog(this, "User already exist");
         }
-         JOptionPane.showMessageDialog(this, "Enterprise Admin Added");
+         
         clearEnterprise();
     }//GEN-LAST:event_cEntCreateButtonActionPerformed
 
@@ -1770,6 +1875,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         System.out.print(index);
         switch (index) {
             case 0:
+                
                 break;
             case 1:
                 populateEnterprise();
@@ -1777,8 +1883,11 @@ public class SystemAdmin extends javax.swing.JFrame {
             case 2:
                 populateEnterpriseName(network, cEntName);
                 break;
-                case 3:
+            case 3:
                 populateEnterpriseName(network, vSEnterprise);
+                break;
+            case 4:
+               
                 break;
             default:
                 throw new AssertionError();
@@ -1862,7 +1971,8 @@ public class SystemAdmin extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "House Added!");
         houseAddress.setText(null);
         houseNumber.setText(null);
-        
+        jTabbedPane2.setSelectedIndex(0);
+        button1.setVisible(true);
          }
     }//GEN-LAST:event_addHouseActionPerformed
 
@@ -1895,6 +2005,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void addTenantN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantN1ActionPerformed
         // TODO add your handling code here:
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
+        
         if (selectedCommunity != null) {
         int selectedRowIndex = houseTable.getSelectedRow();
         if (selectedRowIndex<0) {
@@ -1909,14 +2020,26 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
         
-         Enterprise enterprise = (Enterprise) vSEnterprise.getSelectedItem();
-         
-        
-    }//GEN-LAST:event_button2ActionPerformed
+        Enterprise enterprise = (Enterprise) vSEnterprise.getSelectedItem();
+          if (enterprise != null) {
+       
+        DefaultTableModel model = (DefaultTableModel) vSEntepriseT.getModel();
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button3ActionPerformed
+        model.setRowCount(0);
+        Object[] row = new Object[4];
+         for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+             row[0] = org.getName();
+                for(UserAccount user : org.getUserAccountDirectory().getUserAccountList()){
+               
+                row[1] = user.getUsername();
+                row[2] = user.getEmployee().getName();
+                row[3] = user.getRole().toString();
+               
+                }
+                 model.addRow(row);
+            }
+          }
+    }//GEN-LAST:event_button2ActionPerformed
 
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
        xx = evt.getX();
@@ -1990,6 +2113,230 @@ public class SystemAdmin extends javax.swing.JFrame {
        cEntEEname.setHelperText(null);
     }//GEN-LAST:event_cEntEEnameFocusGained
 
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        // TODO add your handling code here:
+        int index = jTabbedPane2.getSelectedIndex();
+        System.out.print(index);
+        switch (index) {
+            case 0:
+                button1.setVisible(true);
+                break;
+            case 1:
+                button1.setVisible(false);
+                break;
+            case 2:
+                button1.setVisible(false);
+                break;
+            default:
+                throw new AssertionError();
+        }
+        
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void tenantNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantNameFocusLost
+        // TODO add your handling code here:
+         String empName = tenantName.getText();
+            if (empName.trim().isEmpty()) {
+                tenantName.setHelperText("Please enter the name");
+                
+               
+            } else if (!fieldValidation.isStringOnlyAlphabet(empName)) {
+                tenantName.setHelperText("Please enter a valid name");
+                
+            } else if (!fieldValidation.isValidLength(empName, 5, 30)) {
+   
+                tenantName.setHelperText("Name must be betwen 5 and 30 characters");
+                
+            } 
+    }//GEN-LAST:event_tenantNameFocusLost
+
+    private void tenantContactFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantContactFocusLost
+        // TODO add your handling code here:
+         String empCellPhone = tenantContact.getText();
+            if (empCellPhone.trim().isEmpty()) {
+               
+                tenantContact.setHelperText("Please enter the Phone number");
+                
+            } else if (!fieldValidation.isNumeric(empCellPhone)) {
+                
+                tenantContact.setHelperText("Phone number should contain digits only");
+                
+            } else if (!fieldValidation.isValidLength(empCellPhone, 10, 10)) {
+               
+                tenantContact.setHelperText("Phone number should be of 10 digits");
+                
+            } 
+    }//GEN-LAST:event_tenantContactFocusLost
+
+    private void tenantEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantEmailFocusLost
+        // TODO add your handling code here:
+        String empEmail = tenantEmail.getText();
+        if (empEmail.isEmpty()) {
+            tenantEmail.setHelperText("Please enter the Email");
+        
+       
+        } else if (!fieldValidation.isEmailValid(empEmail)) {
+        tenantEmail.setHelperText("Please enter the valid Email");
+       
+        } 
+    }//GEN-LAST:event_tenantEmailFocusLost
+
+    private void tenantDob2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tenantDob2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tenantDob2MouseClicked
+
+    private void tenantAgeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantAgeFocusLost
+        // TODO add your handling code here:
+         String empAge = tenantAge.getText();
+        if (empAge.trim().isEmpty()) {
+                tenantAge.setHelperText("Please enter the Age");
+            } else if (!fieldValidation.isNumeric(empAge)) {
+                tenantAge.setHelperText("Age should contain digits only");
+            } else if (!fieldValidation.isValidAge(empAge)) {
+                tenantAge.setHelperText("Please enter a valid age");
+            } 
+    }//GEN-LAST:event_tenantAgeFocusLost
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        // TODO add your handling code here:
+        
+        Community selectedCommunity = (Community) chartCommunity.getSelectedItem();
+        if (selectedCommunity != null) {
+            int numberOfTenantCovid=0;
+            int numberOfTenantFlue=0;
+            int numberOfTenantCold=0;
+            int numberOfTenantNone=0;
+            
+            int needHospitalization=0;
+            int notRequired=0;
+            
+            for (House house : selectedCommunity.houselist.getHouses()) {
+              
+               for (Tenant tenant : house.getTenats().getTenants()) {
+                   
+                   switch (tenant.getReport().getSicknessType()) {
+                       case "covid":
+                           numberOfTenantCovid = numberOfTenantCovid + 1;
+                           break;
+                       case "common flue":
+                           numberOfTenantFlue = numberOfTenantFlue + 1;
+                           break;
+                       case "cold":
+                           numberOfTenantCold = numberOfTenantCold + 1;
+                           break;
+                       case "none":
+                           numberOfTenantNone = numberOfTenantNone + 1;
+                           break;
+                       case "":
+                           numberOfTenantNone = numberOfTenantNone + 1;
+                           break;
+                       default:
+                           System.out.println("no data");
+                           break;
+                   }
+                   
+                   if (tenant.getReport().isNeedHospitalization()) {
+                       needHospitalization = needHospitalization + 1;
+                   } else {
+                       notRequired = notRequired + 1;
+                   }
+                
+              } 
+            }
+           
+
+//        DefaultPieDataset dataset = new DefaultPieDataset();
+//        dataset.setValue("Covid", Integer.valueOf(numberOfTenantCovid));
+//        dataset.setValue("Common Flue", Integer.valueOf(numberOfTenantFlue));
+//        dataset.setValue("Cold",  Integer.valueOf(numberOfTenantCold));
+//        dataset.setValue("None",  Integer.valueOf(numberOfTenantNone));
+        DefaultCategoryDataset dataset3 = new DefaultCategoryDataset();
+dataset3.setValue(numberOfTenantCovid, "Diesease", "Covid");
+dataset3.setValue(numberOfTenantFlue, "Diesease", "Common Flue");
+dataset3.setValue(numberOfTenantCold, "Diesease", "Cold");
+dataset3.setValue(numberOfTenantNone, "Diesease", "None");
+
+        
+        JFreeChart chart = ChartFactory.createBarChart("Community Tenant data", "Diesease","Count", dataset3, PlotOrientation.VERTICAL,false,true,false);
+
+        
+        CategoryPlot categoryPlot = chart.getCategoryPlot();
+        //categoryPlot.setRangeGridlinePaint(Color.BLUE);
+        categoryPlot.setBackgroundPaint(Color.WHITE);
+        BarRenderer renderer = (BarRenderer) categoryPlot.getRenderer();
+        Color clr3 = new Color(204,0,51);
+        renderer.setSeriesPaint(0, clr3);
+
+        
+        
+        
+        
+//         JFreeChart chart = ChartFactory.createBarChart(title, categoryAxisLabel, valueAxisLabel, dataset)
+//                 createPieChart3D ("Your title", dataset, true, true, true);
+//        JFreeChart chart = ChartFactory.createPieChart(      
+//         "Community Data",   
+//         dataset,          
+//         true,
+//         true, 
+//         false);
+//        
+//       PiePlot piePlot =(PiePlot) chart.getPlot();
+//      
+//       //changing pie chart blocks colors
+//       piePlot.setSectionPaint("Covid", new Color(255,255,102));
+//        piePlot.setSectionPaint("Common Flue", new Color(102,255,102));
+//        piePlot.setSectionPaint("Cold", new Color(255,102,153));
+//        piePlot.setSectionPaint("None", new Color(0,204,204));
+//      
+//       
+//        piePlot.setBackgroundPaint(Color.white);
+//        
+        //create chartPanel to display chart(graph)
+        ChartPanel barChartPanel = new ChartPanel(chart);
+        barchartComm.removeAll();
+        barchartComm.add(barChartPanel, BorderLayout.CENTER);
+        barchartComm.validate();
+        
+        
+        
+        
+        DefaultPieDataset dataset2 = new DefaultPieDataset();
+        dataset2.setValue("Hospitalized", Integer.valueOf(needHospitalization));
+        dataset2.setValue("Non Hospitalized", Integer.valueOf(notRequired));
+        
+        
+//         JFreeChart chart = ChartFactory.createBarChart(title, categoryAxisLabel, valueAxisLabel, dataset)
+//                 createPieChart3D ("Your title", dataset, true, true, true);
+        JFreeChart chart2 = ChartFactory.createPieChart(      
+         "Community HomeCare Data",   
+         dataset2,          
+         true,
+         true, 
+         false);
+        
+       PiePlot piePlot2 =(PiePlot) chart2.getPlot();
+      
+       //changing pie chart blocks colors
+       piePlot2.setSectionPaint("CovHospitalizedid", new Color(255,255,102));
+        piePlot2.setSectionPaint("Non Hospitalized", new Color(102,255,102));
+        
+      
+       
+        piePlot2.setBackgroundPaint(Color.white);
+        
+        //create chartPanel to display chart(graph)
+        ChartPanel barChartPanel2 = new ChartPanel(chart2);
+        barChartHosp.removeAll();
+        barChartHosp.add(barChartPanel2, BorderLayout.CENTER);
+        barChartHosp.validate();
+       
+        }
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void chartCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chartCommunityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chartCommunityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ListHouses;
@@ -1999,6 +2346,10 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.Button addTenant;
     private UI.Components.Button addTenantN;
     private UI.Components.Button addTenantN1;
+    private javax.swing.JPanel barChartHosp;
+    private javax.swing.JPanel barchartComm;
+    private javax.swing.JPanel barchartComm1;
+    private javax.swing.JPanel barchartComm2;
     private UI.Components.Button button1;
     private UI.Components.Button button2;
     private UI.Components.Button button3;
@@ -2011,6 +2362,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private UI.Components.Combobox cEntName;
     private UI.Components.MyPasswordFieldLogin cEntPassword;
     private UI.Components.MyTextFieldLogin cEntUsername;
+    private UI.Components.Combobox chartCommunity;
     private javax.swing.JLabel close;
     private javax.swing.JPanel createEnt;
     private javax.swing.JPanel createEntAdminTab;
@@ -2026,6 +2378,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JTable houseTable;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

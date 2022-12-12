@@ -164,18 +164,16 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
              }
         if (org != null) {
+            DefaultTableModel model = (DefaultTableModel) svWorkRTenantTable.getModel();
+            model.setRowCount(0);
             for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
             if(wq instanceof SurveyVolunteerWorkRequest)
             {
-               DefaultTableModel model = (DefaultTableModel) svWorkRTenantTable.getModel();
-
-
-
-            model.setRowCount(0);
+               
              House hous = ((SurveyVolunteerWorkRequest) wq).getAssignedHouse();
              for(Tenant tenant: hous.getTenats().getTenants()) {
                   
-            Object[] row = new Object[6];
+            Object[] row = new Object[7];
             row[0] = tenant.getFirstName();
             
             row[1] = tenant.getAge();
@@ -188,7 +186,10 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                      row5 = Boolean.TRUE;
                  }
             row[4] = row5;
-                model.addRow(row);
+              
+            row[5]=    tenant.getReport().getSurveyStatus();
+                     row[6]=    tenant.getReport().getHomeCareStatus();
+                       model.addRow(row);
           }
             }
         }
@@ -278,6 +279,9 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         sVHouse = new UI.Components.Combobox();
         button2 = new UI.Components.Button();
         sVDate2 = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textAreaMsg = new javax.swing.JTextArea();
         jPanel24 = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
         sVCommCombo = new UI.Components.Combobox();
@@ -287,6 +291,9 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         button1 = new UI.Components.Button();
         hClistCombo = new UI.Components.Combobox();
         button6 = new UI.Components.Button();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textAreaMsghc = new javax.swing.JTextArea();
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -771,6 +778,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 
         sVDate2.setDateFormatString("MM/dd/yyyy");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel8.setText("Message");
+
+        textAreaMsg.setColumns(20);
+        textAreaMsg.setRows(5);
+        jScrollPane2.setViewportView(textAreaMsg);
+
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -779,15 +793,17 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 .addContainerGap(274, Short.MAX_VALUE)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sVCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sVolunteerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sVDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sVHouse, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(sVCommunity, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(sVolunteerCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(sVDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2))
                         .addGap(190, 190, 190))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(238, 238, 238))))
+                        .addGap(234, 234, 234))))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -800,9 +816,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 .addComponent(sVHouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(sVDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
                 .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         vAdminTask.addTab("Survey Volunteer", jPanel23);
@@ -866,6 +886,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        jLabel9.setText("Message");
+
+        textAreaMsghc.setColumns(20);
+        textAreaMsghc.setRows(5);
+        jScrollPane3.setViewportView(textAreaMsghc);
+
         javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
         jPanel25.setLayout(jPanel25Layout);
         jPanel25Layout.setHorizontalGroup(
@@ -884,14 +911,17 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel25Layout.createSequentialGroup()
                                 .addGap(203, 203, 203)
-                                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel25Layout.createSequentialGroup()
-                                        .addGap(77, 77, 77)
-                                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hClistCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3))))
                         .addGap(0, 250, Short.MAX_VALUE))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(jPanel25Layout.createSequentialGroup()
+                .addGap(279, 279, 279)
+                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,9 +936,13 @@ public class VolunteerAdmin extends javax.swing.JFrame {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(hClistCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 154, 154))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
@@ -1135,10 +1169,12 @@ int index = vOrganizationsCombo.getSelectedIndex();
              
              o.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
          JOptionPane.showMessageDialog(this, " HC Volunteer Added Successfully!");
+         populateHomeCareVolunteers();
          }  
          else{
               o.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
         JOptionPane.showMessageDialog(this, " SC Volunteer Added Successfully!");
+        populateSurveyVolunteers();
          } 
          
          
@@ -1201,6 +1237,12 @@ int index = vOrganizationsCombo.getSelectedIndex();
             break;
         }
         }
+           String message = textAreaMsg.getText();
+
+                if (message.equals("") || message.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
+                    return;
+                }
         SurveyVolunteerWorkRequest sV = new SurveyVolunteerWorkRequest();
         sV.setAssignedHouse((House)sVHouse.getSelectedItem());
         //            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
@@ -1208,6 +1250,7 @@ int index = vOrganizationsCombo.getSelectedIndex();
         Date date = sVDate2.getDate();
         sV.setAssignedDate(date);
         sV.setStatus("new");
+        sV.setMessage(message);
         System.out.println("Sv detaisls -- " + sV.getAssignedHouse() + sV.getAssignedDate()) ;
         Employee emp = (Employee)sVolunteerCombo.getSelectedItem();
         sV.setReceiver(getUser(emp.getId(), org));
@@ -1215,6 +1258,7 @@ int index = vOrganizationsCombo.getSelectedIndex();
         if (org!=null){
             org.getWorkQueue().getWorkRequestList().add(sV);
             account.getWorkQueue().getWorkRequestList().add(sV);
+            
             JOptionPane.showMessageDialog(this, "Work request created successfully!");
             
         }
@@ -1239,7 +1283,7 @@ public void changecolorB(JButton hover, Color rand) {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-         Community selectedCommunity = (Community) sVCommCombo.getSelectedItem();
+        Community selectedCommunity = (Community) sVCommCombo.getSelectedItem();
         if (selectedCommunity != null) {
             House selectedHouse = (House) sVHousCombo.getSelectedItem();
             if (selectedHouse != null) {
@@ -1279,6 +1323,12 @@ public void changecolorB(JButton hover, Color rand) {
             
             return;
         }
+         String message = textAreaMsghc.getText();
+
+                if (message.equals("") || message.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
+                    return;
+                }
 
        Organization org = null;
        for (Organization orn : vEnterPrise.getOrganizationDirectory().getOrganizationList())
@@ -1311,6 +1361,7 @@ public void changecolorB(JButton hover, Color rand) {
             Employee emp = (Employee)hClistCombo.getSelectedItem();
             sV.setReceiver(getUser(emp.getId(),org));
             sV.setSender(account);
+            sV.setMessage(message);
             
 
         if (org!=null){
@@ -1411,12 +1462,16 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
@@ -1440,6 +1495,8 @@ public void changecolorB(JButton hover, Color rand) {
     private javax.swing.JPanel side3;
     private javax.swing.JPanel surveyvolunteer;
     private javax.swing.JTable svWorkRTenantTable;
+    private javax.swing.JTextArea textAreaMsg;
+    private javax.swing.JTextArea textAreaMsghc;
     private javax.swing.JTabbedPane vAdminTab;
     private javax.swing.JTabbedPane vAdminTask;
     private UI.Components.MyPasswordFieldLogin vOrgPW;

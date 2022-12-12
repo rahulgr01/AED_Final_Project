@@ -32,9 +32,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class LabAssistant extends javax.swing.JFrame {
 
@@ -49,7 +51,7 @@ public class LabAssistant extends javax.swing.JFrame {
     JFrame parentFrame;
     int xx, xy;
     Network network;
-
+   int selectedRow = -1;
     public LabAssistant(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, JFrame parentFrame) {
         initComponents();
 //        initListners();
@@ -59,7 +61,7 @@ public class LabAssistant extends javax.swing.JFrame {
         this.enterprise = (DiagnosticsEnterprise) enterprise;
         this.parentFrame = parentFrame;
         network = business.getNetworkList().get(0);
-TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+//TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
 
 populateTable();
     }
@@ -184,6 +186,13 @@ populateTable();
         button4 = new UI.Components.Button();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        searchPanel1 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         pharmacy = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
@@ -632,6 +641,79 @@ populateTable();
         });
         jScrollPane2.setViewportView(jTable3);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/print_30px.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel17Layout.createSequentialGroup()
+                .addComponent(jTextField3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jTextField3)
+        );
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/search_30px.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5)
+        );
+
+        javax.swing.GroupLayout searchPanel1Layout = new javax.swing.GroupLayout(searchPanel1);
+        searchPanel1.setLayout(searchPanel1Layout);
+        searchPanel1Layout.setHorizontalGroup(
+            searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        searchPanel1Layout.setVerticalGroup(
+            searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(searchPanel1Layout.createSequentialGroup()
+                .addGroup(searchPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -645,20 +727,23 @@ populateTable();
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
                         .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addComponent(searchPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(54, 54, 54)
+                .addComponent(searchPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -669,6 +754,12 @@ populateTable();
         pharmacy.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(217, 241, 255));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Sugar :");
@@ -862,8 +953,7 @@ populateTable();
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable3.getSelectedRow();
-
+      
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row!!");
             return;
@@ -878,7 +968,7 @@ populateTable();
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable3.getSelectedRow();
+        selectedRow = jTable3.getSelectedRow();
 
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
@@ -965,25 +1055,42 @@ populateTable();
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable3.getSelectedRow();
-
         if (selectedRow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row!!");
             return;
-        } else {
+        } 
+        
+        else if (jTextField1.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter the sugar of patient");
+             return;
+         }
+        else if (jTextField2.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter the creatinine of patient");
+             return;
+         }
+        else if (jTextField2.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter the creatinine of patient");
+             return;
+         }
+        
+        else if(jLabel3.getText().equals("Report Path")){
+             JOptionPane.showMessageDialog(null,"Please enter the creatinine of patient");
+             return;
+        }
+        
+        else {
 
             ((LabWorkRequest) organization.getWorkQueue().getWorkRequestList().get(selectedRow)).setStatus("Complete");
             ((LabWorkRequest) organization.getWorkQueue().getWorkRequestList().get(selectedRow)).setSugar(jTextField1.getText());
             ((LabWorkRequest) organization.getWorkQueue().getWorkRequestList().get(selectedRow)).setCreatinine(jTextField2.getText());
             ((LabWorkRequest) organization.getWorkQueue().getWorkRequestList().get(selectedRow)).setLabReport(jLabel3.getText());
-            pharmacyAdmin.setSelectedIndex(1);
-
+           
             for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
 
                 if (enter instanceof HospitalEnterprise) {
                     for (Organization org : enter.getOrganizationDirectory().getOrganizationList()) {
                         if (org instanceof HospitalStaffOrganization) {
-
+                           if( org.getWorkQueue().getWorkRequestList().size() > 0) {
                             ((StaffWorkRequest) org.getWorkQueue().getWorkRequestList().get(selectedRow)).setLabStatus("Report Generated");
                             organization.getWorkQueue().getWorkRequestList().get(selectedRow).setStatus("Report sent to hospital");
                             ((StaffWorkRequest) org.getWorkQueue().getWorkRequestList().get(selectedRow)).setLabStatus("Report Generated");
@@ -993,10 +1100,13 @@ populateTable();
                            
                             populateTable();
                         }
+                        }
                     }
 
                 }
             }
+             pharmacyAdmin.setSelectedIndex(1);
+
             JOptionPane.showMessageDialog(null, "Completed");
 
         }        //
@@ -1021,6 +1131,29 @@ populateTable();
     private void button4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_button4KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_button4KeyPressed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        MessageFormat header = new MessageFormat("MedDoor Lab Assistant Work Requests");
+        MessageFormat footer = new MessageFormat("Northeastern University");
+        try{
+            jTable3.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,"Cannot be print");
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        dtm = (DefaultTableModel) jTable3.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(dtm);
+        jTable3.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(jTextField3.getText().trim()));
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -1077,13 +1210,19 @@ populateTable();
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JLabel manageMedicineIcon;
@@ -1096,6 +1235,7 @@ populateTable();
     private javax.swing.JPanel pharmacy;
     private javax.swing.JTabbedPane pharmacyAdmin;
     private javax.swing.JPanel pharmacyDashboard;
+    private javax.swing.JPanel searchPanel1;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side4;

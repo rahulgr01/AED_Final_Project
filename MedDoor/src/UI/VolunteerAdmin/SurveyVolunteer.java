@@ -18,6 +18,12 @@ import Business.WorkQueue.SurveyVolunteerWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+import com.teamdev.jxbrowser.view.swing.BrowserView;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -33,6 +39,21 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+//import com.teamdev.jxbrowser.browser.Browser;
+//import com.teamdev.jxbrowser.engine.Engine;
+//import com.teamdev.jxbrowser.engine.EngineOptions;
+//import static com.teamdev.jxbrowser.engine.RenderingMode.HARDWARE_ACCELERATED;
+//import com.teamdev.jxbrowser.view.swing.BrowserView;
+import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class SurveyVolunteer extends javax.swing.JFrame {
 
@@ -66,16 +87,19 @@ public class SurveyVolunteer extends javax.swing.JFrame {
     //Method to change panel color on hover
  
     public void populateSurveyList() {
+        
+        
         try {
-            for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
-            if(wq instanceof SurveyVolunteerWorkRequest)
-            {
-                
-                DefaultTableModel model = (DefaultTableModel) svWorkRTable.getModel();
+             DefaultTableModel model = (DefaultTableModel) svWorkRTable.getModel();
 
 
 
             model.setRowCount(0);
+            for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof SurveyVolunteerWorkRequest)
+            {
+                
+               
                House hous = ((SurveyVolunteerWorkRequest) wq).getAssignedHouse();
                    Object[] row = new Object[8];
             row[0] = hous.getCommunity().getCommunityName();
@@ -180,6 +204,8 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         svWorkRTable = new javax.swing.JTable();
         button5 = new UI.Components.Button();
         button6 = new UI.Components.Button();
+        button7 = new UI.Components.Button();
+        gMap = new javax.swing.JPanel();
         updateSurveyTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         weight = new UI.Components.MyTextFieldLogin();
@@ -530,7 +556,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addComponent(svolunteerViewTask, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(svolunteerTaskUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 446, Short.MAX_VALUE))
+                .addGap(0, 504, Short.MAX_VALUE))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -565,7 +591,15 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             new String [] {
                 "Community", "House street address", "House Apt No", "Zip Code", "Date of task", "Sender", "Status", "Message"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         svWorkRTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 svWorkRTableMouseClicked(evt);
@@ -609,20 +643,47 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             }
         });
 
+        button7.setBackground(new java.awt.Color(0, 91, 149));
+        button7.setForeground(new java.awt.Color(255, 255, 255));
+        button7.setText("Locate on map");
+        button7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        button7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button7MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button7MouseExited(evt);
+            }
+        });
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
+
+        gMap.setLayout(new java.awt.CardLayout());
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gMap, javax.swing.GroupLayout.PREFERRED_SIZE, 744, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,8 +693,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(245, Short.MAX_VALUE))
+                    .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(gMap, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout viewSurveyTaskLayout = new javax.swing.GroupLayout(viewSurveyTask);
@@ -681,6 +745,11 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                 PRFocusGained(evt);
             }
         });
+        PR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PRActionPerformed(evt);
+            }
+        });
         PR.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 PRKeyTyped(evt);
@@ -691,6 +760,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
         height.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 heightFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                heightFocusLost(evt);
             }
         });
         height.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -761,6 +833,9 @@ public class SurveyVolunteer extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 HR1FocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                HR1FocusLost(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
@@ -784,8 +859,8 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                             .addComponent(HR1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                    .addComponent(diseaseList, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, Short.MAX_VALUE)
+                    .addComponent(diseaseList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(needHosCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(53, 53, 53))
@@ -829,7 +904,7 @@ public class SurveyVolunteer extends javax.swing.JFrame {
                             .addComponent(HR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(21, 21, 21)
                 .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout updateSurveyTaskLayout = new javax.swing.GroupLayout(updateSurveyTask);
@@ -1007,7 +1082,7 @@ public void changecolorB(JButton hover, Color rand) {
             
          }
         else if(BP.getText().equals("")) {
-            BP.setHelperText("Please Enter Blood Pressure");
+            BP.setHelperText("Please Enter Body Temperature");
            
          }
         else if(PR.getText().equals("")) {
@@ -1028,10 +1103,10 @@ public void changecolorB(JButton hover, Color rand) {
         Tenant tenant = (Tenant)sVTenantCombo.getSelectedItem();
         VitalSigns vS = new VitalSigns();
         vS.setTemperature(Double.parseDouble(PR.getText()));
-        vS.setHeartRate( Integer.parseInt(HR.getText()));
-        vS.setBP(Integer.parseInt(BP.getText()));
-        vS.setHeight(Integer.parseInt(height.getText()));
-        vS.setWeight(Integer.parseInt(weight.getText()));
+        vS.setHeartRate(Double.parseDouble(HR.getText()));
+        vS.setBP(Double.parseDouble(BP.getText()));
+        vS.setHeight(Double.parseDouble(height.getText()));
+        vS.setWeight(Double.parseDouble(weight.getText()));
         tenant.setVitalSign(vS);
           
         SurveyReport rep = new SurveyReport();
@@ -1056,11 +1131,13 @@ public void changecolorB(JButton hover, Color rand) {
                 break;
         }
         rep.setSicknessType(disease);
+      
+       
         tenant.setReport(rep);
         
          organization.getWorkQueue().getWorkRequestList().get(selectedRow).setStatus("Completed");
           ((SurveyVolunteerWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setTenant(tenant);
-    
+        
           JOptionPane.showMessageDialog(this, "Work request completed successfully!");
           populateSurveyList();
      
@@ -1095,7 +1172,7 @@ public void changecolorB(JButton hover, Color rand) {
               get(selectedRow))).getAssignedHouse().getStreeAdredss());
       houseName.disable();
       populateTenantInfo();
-        svolunteer.setSelectedIndex(2);
+        svolunteer.setSelectedIndex(1);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_button5ActionPerformed
@@ -1134,37 +1211,54 @@ public void changecolorB(JButton hover, Color rand) {
     }//GEN-LAST:event_svWorkRTableMouseClicked
 
     private void heightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_heightKeyTyped
-if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }       
+       
+    if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+       evt.consume();
+     } 
+   if(evt.getKeyChar()=='.'&&height.getText().contains(".")){
+      evt.consume();
+       }       
     }//GEN-LAST:event_heightKeyTyped
 
     private void PRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PRKeyTyped
-       if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
+      if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+       evt.consume();
+     } 
+   if(evt.getKeyChar()=='.'&&PR.getText().contains(".")){
+      evt.consume();
+       }    
     }//GEN-LAST:event_PRKeyTyped
 
     private void weightKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_weightKeyTyped
-       if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
+       if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+       evt.consume();
+     } 
+   if(evt.getKeyChar()=='.'&&weight.getText().contains(".")){
+      evt.consume();
+       }    
     }//GEN-LAST:event_weightKeyTyped
 
     private void HRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HRKeyTyped
-      if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
+      if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+       evt.consume();
+     } 
+   if(evt.getKeyChar()=='.'&&HR.getText().contains(".")){
+      evt.consume();
+       }    
     }//GEN-LAST:event_HRKeyTyped
 
     private void BPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BPKeyTyped
-      if (!Character.isDigit(evt.getKeyChar())) {
-            evt.consume();
-        }
+      if(!Character.isDigit(evt.getKeyChar())&&evt.getKeyChar()!='.'){
+       evt.consume();
+     } 
+   if(evt.getKeyChar()=='.'&&BP.getText().contains(".")){
+      evt.consume();
+       }    
     }//GEN-LAST:event_BPKeyTyped
 
     private void heightFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_heightFocusGained
        height.setHelperText(null);
+       
     }//GEN-LAST:event_heightFocusGained
 
     private void weightFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_weightFocusGained
@@ -1187,6 +1281,81 @@ if (!Character.isDigit(evt.getKeyChar())) {
         HR1.setHelperText(null);
     }//GEN-LAST:event_HR1FocusGained
 
+    private void button7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button7MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button7MouseEntered
+
+    private void button7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button7MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button7MouseExited
+
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        // TODO add your handling code here:
+        selectedRow = svWorkRTable.getSelectedRow();
+
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
+            
+            return;
+        }
+      String houseAddress =  ((SurveyVolunteerWorkRequest)organization.getWorkQueue().getWorkRequestList().get(selectedRow)).getAssignedHouse().getStreeAdredss();
+      String city =  ((SurveyVolunteerWorkRequest)organization.getWorkQueue().getWorkRequestList().get(selectedRow)).getAssignedHouse().getCommunity().getCity().getName();
+      String place = houseAddress + "," + city;
+  // GoogleMapsLocation googlemapslocation = new GoogleMapsLocation();
+      String url = "https://www.google.com/maps/place/"+place;
+        EngineOptions options
+                = EngineOptions.newBuilder(HARDWARE_ACCELERATED).licenseKey("6P83ACG40AIKICMWRW5NOBHR677DQZHKYG5BKQ88HXPKIDT9BUG9UCFSSGV9M92SWVXI").build();
+        Engine engine = Engine.newInstance(options);
+        Browser browser = engine.newBrowser();
+        
+        BrowserView view = BrowserView.newInstance(browser);
+        browser.navigation().loadUrl(url);
+        gMap.add(view, place);
+//DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//dataset.setValue(80, "Marks", "Value 1");
+//dataset.setValue(70, "Marks", "Value 2");
+//dataset.setValue(75, "Marks", "Value 3");
+//dataset.setValue(85, "Marks", "Value 4");
+//dataset.setValue(90, "Marks", "Value 5");
+//
+//
+//JFreeChart chart = ChartFactory.createBarChart("Student’s Score", "Student’s Name","Marks", dataset, PlotOrientation.VERTICAL,false,true,false);
+//
+//CategoryPlot p = chart.getCategoryPlot();
+//
+//p.setRangeGridlinePaint(Color.black);
+//
+//ChartFrame frame = new ChartFrame("Bar Chart Report",chart);
+//
+//frame.setVisible(true);
+//
+//frame.setSize(650,550);
+
+
+//create dataset
+        
+       // gMap.removeAll();
+      //  gMap.add(barpChartPanel, BorderLayout.CENTER);
+     //   gMap.validate();
+        
+    }//GEN-LAST:event_button7ActionPerformed
+
+    private void heightFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_heightFocusLost
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_heightFocusLost
+
+    private void PRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PRActionPerformed
+
+    private void HR1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_HR1FocusLost
+        // TODO add your handling code here:
+        if (HR1.getText().length() < 5) {
+            HR1.setHelperText("Please enter valid 5 digit policy ID");
+        }
+    }//GEN-LAST:event_HR1FocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private UI.Components.MyTextFieldLogin BP;
@@ -1197,6 +1366,7 @@ if (!Character.isDigit(evt.getKeyChar())) {
     private UI.Components.Button button1;
     private UI.Components.Button button5;
     private UI.Components.Button button6;
+    private UI.Components.Button button7;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1204,6 +1374,7 @@ if (!Character.isDigit(evt.getKeyChar())) {
     private javax.swing.JLabel close;
     private javax.swing.JLabel communityName;
     private UI.Components.Combobox diseaseList;
+    private javax.swing.JPanel gMap;
     private javax.swing.JPanel header;
     private UI.Components.MyTextFieldLogin height;
     private javax.swing.JPanel hidemenu;

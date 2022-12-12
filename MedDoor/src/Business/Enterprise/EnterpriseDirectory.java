@@ -34,32 +34,33 @@ public class EnterpriseDirectory {
        Enterprise enterprise=null;
         if(type==Enterprise.EnterpriseType.Hospital){
             enterprise=new HospitalEnterprise(name);
+           //   enterprise.getUserAccountDirectory().createUserAccount("hadminn", "hadminn", enterprise.getEmployeeDirectory().createEmployee("hadminn"), new HospitalAdminRole());
+          
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HospitalStaff, "HospitalStaff Organization");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Doctor, "Doctor Organization");
-             enterprise.getUserAccountDirectory().createUserAccount("hadminn", "hadminn", enterprise.getEmployeeDirectory().createEmployee("hadminn"), new HospitalAdminRole());
-            enterpriseList.add(enterprise);
+             enterpriseList.add(enterprise);
                        
         }
         if(type==Enterprise.EnterpriseType.Insurance){
             enterprise=new InsuranceEnterprise(name);
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Policy, "Policy Organization");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Claims, "Claims Organization");
             
             enterpriseList.add(enterprise);
         }
         if(type==Enterprise.EnterpriseType.Volunteer){
             enterprise=new VolunteerEnterprise(name);
+        //     enterprise.getUserAccountDirectory().createUserAccount("vadmin", "vadmin", enterprise.getEmployeeDirectory().createEmployee("vadmin"), new VolunteerAdminRole());
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HomeCareVolunteer, "HomeCareVolunteer Organization");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.SurveyVolunteer, "SurveyVolunteer Organization");
-            enterprise.getUserAccountDirectory().createUserAccount("vadmin", "vadmin", enterprise.getEmployeeDirectory().createEmployee("vadmin"), new VolunteerAdminRole());
             enterpriseList.add(enterprise);
             
         }if(type==Enterprise.EnterpriseType.Diagnostics){
             enterprise=new DiagnosticsEnterprise(name);
+         //      enterprise.getUserAccountDirectory().createUserAccount("dadmin", "dadmin", enterprise.getEmployeeDirectory().createEmployee("dadmin"), new DiagnosticAdminRole());
+          
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Pharmacy, "Pharmacy Org");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabService, "LabService Organization");
-              enterprise.getUserAccountDirectory().createUserAccount("dadmin", "dadmin", enterprise.getEmployeeDirectory().createEmployee("dadmin"), new DiagnosticAdminRole());
-          
+           
             enterpriseList.add(enterprise);
         }
      

@@ -37,8 +37,7 @@ public class OrganizationDirectory {
         if (type.getValue().equals(Type.LabService.getValue())){
             organization = new LabServiceOrganization();
             organization.setName(name);
-             organization.getUserAccountDirectory().createUserAccount("ladmin","ladmin",organization.getEmployeeDirectory().createEmployee("ladmin"),new LabAssistantRole());
-           
+           //  organization.getUserAccountDirectory().createUserAccount("ladmin","ladmin",organization.getEmployeeDirectory().createEmployee("ladmin"),new LabAssistantRole());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(Type.Admin.getValue())){
@@ -50,8 +49,7 @@ public class OrganizationDirectory {
         else if (type.getValue().equals(Type.Pharmacy.getValue())){
             organization = new PharmacyOrganization();
             organization.setName(name);
-             organization.getUserAccountDirectory().createUserAccount("padmin","padmin",organization.getEmployeeDirectory().createEmployee("padmin"),new PharmacistRole());
-           
+           //  organization.getUserAccountDirectory().createUserAccount("padmin","padmin",organization.getEmployeeDirectory().createEmployee("padmin"),new PharmacistRole());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(Type.Doctor.getValue())){
@@ -66,13 +64,13 @@ public class OrganizationDirectory {
         }
         else if (type.getValue().equals(Type.SurveyVolunteer.getValue())){
             organization = new SurveyVolunteerOrganization();
-            organization.getUserAccountDirectory().createUserAccount("sadmin","sadmin",organization.getEmployeeDirectory().createEmployee("sadmin"),new SurveyVolunteerRole());
+          //  organization.getUserAccountDirectory().createUserAccount("sadmin","sadmin",organization.getEmployeeDirectory().createEmployee("sadmin"),new SurveyVolunteerRole());
             organization.setName(name);
             organizationList.add(organization);
         }
           else if (type.getValue().equals(Type.HomeCareVolunteer.getValue())){
             organization = new HomeCareVolunteerOrganization();
-             organization.getUserAccountDirectory().createUserAccount("hadmin","hadmin",organization.getEmployeeDirectory().createEmployee("hadmin"),new HomeCareVolunteerRole());
+           //  organization.getUserAccountDirectory().createUserAccount("hadmin","hadmin",organization.getEmployeeDirectory().createEmployee("hadmin"),new HomeCareVolunteerRole());
             organization.setName(name);
             organizationList.add(organization);
         }
@@ -83,8 +81,7 @@ public class OrganizationDirectory {
         }
          else if (type.getValue().equals(Type.Claims.getValue())){
             organization = new ClaimsOrganization();
-             organization.getUserAccountDirectory().createUserAccount("cadmin","cadmin",organization.getEmployeeDirectory().createEmployee("chadmin"),new ClaimHandler());
-          
+         //    organization.getUserAccountDirectory().createUserAccount("cadmin","cadmin",organization.getEmployeeDirectory().createEmployee("chadmin"),new ClaimHandler());
             organization.setName(name);
             organizationList.add(organization);
         }

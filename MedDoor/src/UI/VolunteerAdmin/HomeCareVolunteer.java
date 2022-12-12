@@ -78,16 +78,16 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             System.out.println("hosp"+ org.getWorkQueue().getWorkRequestList());
                    
         }
-       
-            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
-            if(wq instanceof HospitalWorkRequest)
-            {
-                
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+       DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
 
 
             model.setRowCount(0);
+            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof HospitalWorkRequest)
+            {
+                
+                
                    Object[] row = new Object[5];
             row[0] = ((HospitalWorkRequest) wq).getPatient().getFirstName();
            
@@ -126,14 +126,14 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
             System.out.println("hosp"+ org.getWorkQueue().getWorkRequestList());
                    
         }
-       
+       DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+            model.setRowCount(0);
             for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
             if(wq instanceof ClaimsWorkRequest)
             {
                 
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-
-            model.setRowCount(0);
+            
                    Object[] row = new Object[4];
             row[0] = ((ClaimsWorkRequest) wq).getPatient().getFirstName();
            
@@ -171,16 +171,16 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
        
             
             
-            
-            for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
-            if(wq instanceof HomeCareVolunteerWorkRequest)
-            {
-                
-                DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
 
 
 
             model.setRowCount(0);
+            for(WorkRequest wq: organization.getWorkQueue().getWorkRequestList()) {
+            if(wq instanceof HomeCareVolunteerWorkRequest)
+            {
+                
+                
                Tenant patient = ((HomeCareVolunteerWorkRequest) wq).getPatient();
                    Object[] row = new Object[4];
             row[0] = patient.getFirstName();
@@ -731,7 +731,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         button1.setBackground(new java.awt.Color(0, 91, 149));
         button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Update the record");
+        button1.setText("Claim The Insurance");
         button1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.DiagnosticsEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
+import Business.MailNew;
 import Business.Network.Network;
 import Business.Organization.HospitalStaffOrganization;
 import Business.Organization.Organization;
@@ -23,6 +24,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -977,6 +981,7 @@ public class Pharmacist extends javax.swing.JFrame {
           organization.getWorkQueue().getWorkRequestList().get(selectedRow).setMessage(medicinesTextArea.getText());
             pharmacyAdmin.setSelectedIndex(0);
             int amounts=Integer.parseInt(medicinePrice);
+           ( (PharmacyWorkRequest)organization.getWorkQueue().getWorkRequestList().get(selectedRow)).setMedicinesPrice(amounts);
               for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
 
                 if (enter instanceof HospitalEnterprise) {
@@ -991,8 +996,13 @@ public class Pharmacist extends javax.swing.JFrame {
 
                 }
             }
-            JOptionPane.showMessageDialog(null,"Completed");
-populateTable();
+            JOptionPane.showMessageDialog(null,"Completed and Mail has been sent");
+            try {
+                   MailNew m=new MailNew("rahulgr3001@gmail.com","MedDoor:Medicines Ready to Pick Up ","Medicines Available for Patient and ready to pick up");
+               } catch (MessagingException ex) {
+                   Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            populateTable();
         }        // TODO add your handling code here:
         
     }//GEN-LAST:event_button7ActionPerformed

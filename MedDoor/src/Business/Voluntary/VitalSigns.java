@@ -9,19 +9,19 @@ package Business.Voluntary;
  * @author ashikakalmady
  */
 public class VitalSigns {
-   private int respiratoryRate;
-   private int heartRate;
+   private double respiratoryRate;
+   private double heartRate;
    private double temperature;
    private double BP;
-   private float weight;
-   private float height;
+   private double weight;
+   private double height;
    
    
    public VitalSigns() {
        
    }
    
-   public VitalSigns(int respiratoryRate, int heartRate, double temperature, double BP, float weight, float height) {
+   public VitalSigns(double respiratoryRate, double heartRate, double temperature, double BP, double weight, double height) {
        this.respiratoryRate = respiratoryRate;
        this.heartRate = heartRate;
        this.weight = weight;
@@ -30,7 +30,7 @@ public class VitalSigns {
        this.temperature = temperature;
    }
    
-   public int getRespiratoryRate() {
+   public double getRespiratoryRate() {
         return respiratoryRate;
     }
 
@@ -42,31 +42,31 @@ public class VitalSigns {
         this.temperature = temperature;
     }
 
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public float getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public void setRespiratoryRate(int respiratoryRate) {
+    public void setRespiratoryRate(double respiratoryRate) {
         this.respiratoryRate = respiratoryRate;
     }
 
-    public int getHeartRate() {
+    public double getHeartRate() {
         return heartRate;
     }
 
-    public void setHeartRate(int heartRate) {
+    public void setHeartRate(double heartRate) {
         this.heartRate = heartRate;
     }
 
