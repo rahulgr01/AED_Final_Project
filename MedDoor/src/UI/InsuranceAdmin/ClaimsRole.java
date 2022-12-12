@@ -17,7 +17,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -40,14 +42,11 @@ public class ClaimsRole extends javax.swing.JFrame {
     UserAccount account;
     Enterprise enterprise;
     JFrame parentFrame;
-     ClaimsWorkRequest request;
+   
     String forward;
     String status;
-    
-    
-    
-    
-    
+    int xx, xy;
+        
     public ClaimsRole(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
         initComponents();
          this.business = business;
@@ -55,9 +54,7 @@ public class ClaimsRole extends javax.swing.JFrame {
         this.organization=organization;
         this.enterprise=enterprise;
          this.parentFrame = parentFrame;
-//         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
-//          TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
-//           TableCustom.apply(jScrollPane3, TableCustom.TableType.DEFAULT);
+           TableCustom.apply(jScrollPane4, TableCustom.TableType.DEFAULT);
       populateClaims();
     }
     //Method to change panel color on hover
@@ -153,6 +150,16 @@ public class ClaimsRole extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -473,27 +480,27 @@ public class ClaimsRole extends javax.swing.JFrame {
 
         claimsworkRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Sender", "Receiver", "Status"
+                "Name", "Sender", "Status", "Message", "Date "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -603,9 +610,16 @@ public class ClaimsRole extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(217, 241, 255));
 
+        patientName.setEditable(false);
         patientName.setLabelText("Patient Name");
 
+        amtrequested.setEditable(false);
         amtrequested.setLabelText("Amount Requested");
+        amtrequested.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                amtrequestedKeyTyped(evt);
+            }
+        });
 
         textAreaScroll1.setLabelText("Message");
 
@@ -657,27 +671,28 @@ public class ClaimsRole extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGap(0, 5, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(approvebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rejectbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(11, Short.MAX_VALUE))
+                        .addContainerGap(16, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(calculateAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(107, Short.MAX_VALUE))))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(calculateAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addComponent(calculateAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(approvebtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rejectbtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        amtapproved.setEditable(false);
         amtapproved.setLabelText("Amount Approved");
 
         jLabel1.setText("Percentage to Approve");
@@ -769,7 +784,7 @@ public class ClaimsRole extends javax.swing.JFrame {
                             .addComponent(refreshbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(submitClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -785,8 +800,8 @@ public class ClaimsRole extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         claims.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -929,37 +944,37 @@ public void populateClaims(){
         
         model.setRowCount(0);
         
-        for(WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender();
-            if(((ClaimsWorkRequest)request).getClaimbeneficiary()==null){
-                 row[2] = null;
-            }else{
-                 row[2] = ((ClaimsWorkRequest)request).getClaimbeneficiary();
-            }
-           
-            row[3] = ((ClaimsWorkRequest)request).getClaimstatus();
-            //send organisation
+        for(WorkRequest wq : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+             row[1] = ((ClaimsWorkRequest) wq).getSender().getEmployee().getName();
+            row[0] = ((ClaimsWorkRequest) wq).getPatient().getFirstName();
             
+            
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate = dateFormat.format((wq.getRequestDate()));
+//            row[2] = formattedDate;
+            row[4] = formattedDate;
+            row[2]= wq.getStatus();
+            row[3] = wq.getMessage();
             model.addRow(row);
         }
     }
     private void assignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignActionPerformed
        int selectedRow = claimsworkRequestJTable.getSelectedRow();
-        
+
         if (selectedRow < 0){
-            JOptionPane.showMessageDialog(null, "Please select a row!!");
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
             return;
-        }
-        
-        request = (ClaimsWorkRequest)claimsworkRequestJTable.getValueAt(selectedRow, 0);
-        
+        }else {
+            
+           ClaimsWorkRequest request = ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow)));
+      
         
         if(request.getClaimbeneficiary()==null){
+            ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setClaimbeneficiary(account);
+             ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setReceiver(account);
+           ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setStatus("Processing");
             
-            request.setClaimbeneficiary(account);
-            request.setClaimstatus("Processing");
             JOptionPane.showMessageDialog(null, "Assigned");
             
             populateClaims();
@@ -972,37 +987,27 @@ public void populateClaims(){
             JOptionPane.showMessageDialog(null, "Patient Already assigned to a Claim Manager!!");
             return;
         }
+        }
        
     }//GEN-LAST:event_assignActionPerformed
 
     private void processActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processActionPerformed
-        int selectedRow = claimsworkRequestJTable.getSelectedRow();
-        
+         int selectedRow = claimsworkRequestJTable.getSelectedRow();
+
         if (selectedRow < 0){
-            JOptionPane.showMessageDialog(null, "Please select a row!!");
-            return;
-        }
-        
-        ClaimsWorkRequest request = (ClaimsWorkRequest)claimsworkRequestJTable.getValueAt(selectedRow, 0);
-     
-        
-        if(request.getClaimbeneficiary()== null){
-            JOptionPane.showMessageDialog(null, "Please assign the claim request first!!");
-            return;
-        }else if(request.getClaimstatus().equals("Congratulations!! Your Claim has been Approved") || request.getClaimstatus().equals("Sorry..Your Claim is Rejected")){
-            JOptionPane.showMessageDialog(null, "Claim is already reported!! Cant do changes");
-            return;
-        }
-        else if(request.getClaimbeneficiary()!=account){
-            JOptionPane.showMessageDialog(null, "Not Authorized to process this claim request");
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
             return;
         }else {
-
-              JOptionPane.showMessageDialog(null, "Processing");
-        claimsRequest.setSelectedIndex(1);
-       
-              
+            
+           String medicine = ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).getPatient().getFirstName();
+          patientName.setText(medicine);
+           int amount = ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).getBillamount();
+          amtrequested.setText(String.valueOf(amount));
+          organization.getWorkQueue().getWorkRequestList().get(selectedRow).setStatus("Processing");
+            claimsRequest.setSelectedIndex(1);
+            JOptionPane.showMessageDialog(null,"Processing");
         }
+      
     }//GEN-LAST:event_processActionPerformed
 
     private void calculateAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateAmountActionPerformed
@@ -1029,6 +1034,15 @@ public void populateClaims(){
     }//GEN-LAST:event_calculateAmountActionPerformed
 
     private void submitClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitClaimActionPerformed
+       int selectedRow = claimsworkRequestJTable.getSelectedRow();
+
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
+            return;
+        }else {
+            
+        ClaimsWorkRequest request = ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow)));
+      
         if(approvebtn.isSelected() && rejectbtn.isSelected() ){
               JOptionPane.showMessageDialog(null, "Please select either Accept or Reject");
               return;
@@ -1054,33 +1068,37 @@ public void populateClaims(){
        
             this.status="Claim Approved";
             request.setClaimstatus("Claim Approved");
+            ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setMessage("Claim Approved");
             forward = "not required";
+            try {
+                   MailNew m=new MailNew("rahulgr3001@gmail.com","MedDoor:Claim Approved","Congratulations!! Your Claim has been approved and amount will be disbursed.");
+               } catch (MessagingException ex) {
+                   Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
+             }
 
         } else if (rejectbtn.isSelected()) {
           
             this.status= "Claim Rejected";
+            ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setMessage("Claim Rejected");
             request.setClaimstatus("Claim Rejected");
             forward = "required";
+            try {
+                   MailNew m=new MailNew("rahulgr3001@gmail.com","MedDoor:Claim Rejected","Sorry!! Your Claim has been rejected and please contact your hospital.");
+               } catch (MessagingException ex) {
+                   Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
+             }
             
         }
-        Organization org = null;
-        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
-            if (organization instanceof HomeCareVolunteerOrganization){
-                org = organization;
-                break;
-            }
-        }
-        if (org!=null){
-            org.getWorkQueue().getWorkRequestList().add(request);
-            //userAccount.getWorkQueue().getWorkRequestList().add(request);
-        }
+         ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setMessage(this.status);
+       ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setMessage("Completed");
+       ((ClaimsWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedRow))).setAmtapproved(Float.parseFloat(amtapproved.getText()));
         JOptionPane.showMessageDialog(null,"Forwarded Home Care Volunteer Successfully!!!!");
  try {
                    MailNew m=new MailNew("rahulgr3001@gmail.com","MedDoor:Claim Approved","Congratulations!! Your Claim has been approved and amount will be disbursed.");
                } catch (MessagingException ex) {
                    Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
              }
-        
+        }
         
     }//GEN-LAST:event_submitClaimActionPerformed
     public void changecolorB(JButton hover, Color rand) {
@@ -1133,6 +1151,23 @@ public void populateClaims(){
     private void refreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseExited
         changecolorB(refresh, new Color(0,91,149));
     }//GEN-LAST:event_refreshMouseExited
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+      int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void amtrequestedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amtrequestedKeyTyped
+       if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_amtrequestedKeyTyped
 
     /**
      * @param args the command line arguments

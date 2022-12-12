@@ -5,6 +5,9 @@
 package Business.Enterprise;
 
 import Business.Organization.Organization;
+import Business.Role.DiagnosticAdminRole;
+import Business.Role.HospitalAdminRole;
+import Business.Role.VolunteerAdminRole;
 import java.util.ArrayList;
 
 /**
@@ -33,8 +36,9 @@ public class EnterpriseDirectory {
             enterprise=new HospitalEnterprise(name);
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HospitalStaff, "HospitalStaff Organization");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Doctor, "Doctor Organization");
-            
+             enterprise.getUserAccountDirectory().createUserAccount("hadminn", "hadminn", enterprise.getEmployeeDirectory().createEmployee("hadminn"), new HospitalAdminRole());
             enterpriseList.add(enterprise);
+                       
         }
         if(type==Enterprise.EnterpriseType.Insurance){
             enterprise=new InsuranceEnterprise(name);
@@ -47,13 +51,15 @@ public class EnterpriseDirectory {
             enterprise=new VolunteerEnterprise(name);
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HomeCareVolunteer, "HomeCareVolunteer Organization");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.SurveyVolunteer, "SurveyVolunteer Organization");
-            
+            enterprise.getUserAccountDirectory().createUserAccount("vadmin", "vadmin", enterprise.getEmployeeDirectory().createEmployee("vadmin"), new VolunteerAdminRole());
             enterpriseList.add(enterprise);
+            
         }if(type==Enterprise.EnterpriseType.Diagnostics){
             enterprise=new DiagnosticsEnterprise(name);
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Pharmacy, "Pharmacy Org");
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabService, "LabService Organization");
-            
+              enterprise.getUserAccountDirectory().createUserAccount("dadmin", "dadmin", enterprise.getEmployeeDirectory().createEmployee("dadmin"), new DiagnosticAdminRole());
+          
             enterpriseList.add(enterprise);
         }
      

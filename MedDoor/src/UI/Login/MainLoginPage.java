@@ -38,6 +38,7 @@ private Animator animatorLogin;
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     int verifyCode;
+    int xx, xy;
     
     public MainLoginPage() {
         initComponents();
@@ -60,11 +61,11 @@ private Animator animatorLogin;
                   
          
     public void clearLogin() {
-        txtUsername.setText("");
-        txtPass.setText("");
-        txtUsername.setHelperText("");
-        txtPass.setHelperText("");
-        verificationCode.setHelperText("");
+        txtUsername.setText(null);
+        txtPass.setText(null);
+        txtUsername.setHelperText(null);
+        txtPass.setHelperText(null);
+        verificationCode.setHelperText(null);
     } 
     //Method to change panel color on hover
 
@@ -101,14 +102,36 @@ private Animator animatorLogin;
 
         panelLogin.setOpaque(false);
 
-        signuppanel.setBackground(new java.awt.Color(245, 245, 245));
+        signuppanel.setBackground(new java.awt.Color(255, 255, 255));
+        signuppanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                signuppanelMouseDragged(evt);
+            }
+        });
+        signuppanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                signuppanelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                signuppanelMouseReleased(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/database_administrator_100px.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/meddoor.jpg"))); // NOI18N
 
-        txtPass.setBackground(new java.awt.Color(245, 245, 245));
         txtPass.setLabelText("Password");
         txtPass.setLineColor(new java.awt.Color(27, 152, 245));
+        txtPass.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPassFocusGained(evt);
+            }
+        });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassKeyTyped(evt);
+            }
+        });
 
         cmdSignIn.setBackground(new java.awt.Color(27, 152, 245));
         cmdSignIn.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,18 +144,37 @@ private Animator animatorLogin;
             }
         });
 
-        txtUsername.setBackground(new java.awt.Color(245, 245, 245));
         txtUsername.setLabelText("Username");
         txtUsername.setLineColor(new java.awt.Color(27, 152, 245));
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusGained(evt);
+            }
+        });
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyTyped(evt);
+            }
+        });
 
-        jPanel2.setBackground(new java.awt.Color(245, 245, 245));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        verificationCode.setBackground(new java.awt.Color(245, 245, 245));
         verificationCode.setLabelText("Verify Code");
         verificationCode.setLineColor(new java.awt.Color(27, 152, 245));
+        verificationCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                verificationCodeFocusGained(evt);
+            }
+        });
+        verificationCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificationCodeKeyTyped(evt);
+            }
+        });
 
-        vcode.setFont(new java.awt.Font("Curlz MT", 3, 26)); // NOI18N
-        vcode.setForeground(new java.awt.Color(0, 0, 255));
+        vcode.setBackground(new java.awt.Color(255, 255, 255));
+        vcode.setFont(new java.awt.Font("SansSerif", 1, 26)); // NOI18N
+        vcode.setForeground(new java.awt.Color(27, 152, 245));
         vcode.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -161,15 +203,12 @@ private Animator animatorLogin;
             .addGroup(signuppanelLayout.createSequentialGroup()
                 .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(signuppanelLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel1))
-                    .addGroup(signuppanelLayout.createSequentialGroup()
                         .addGap(52, 52, 52)
-                        .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(signuppanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(signuppanelLayout.createSequentialGroup()
                         .addGap(161, 161, 161)
                         .addComponent(cmdSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -192,6 +231,16 @@ private Animator animatorLogin;
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -282,7 +331,7 @@ private Animator animatorLogin;
         panelLoginLayout.setHorizontalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLoginLayout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addContainerGap(221, Short.MAX_VALUE)
                 .addComponent(signuppanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(224, 224, 224))
             .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -315,7 +364,7 @@ private Animator animatorLogin;
 
 @SuppressWarnings("empty-statement")
     private void cmdSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSignInActionPerformed
-       
+         
         if (txtUsername.getText().isEmpty()) {
            txtUsername.setHelperText("Please enter your Username");
         }
@@ -323,18 +372,19 @@ private Animator animatorLogin;
             
             txtPass.setHelperText("Please enter your password");
         }
-//        if (String.valueOf(txtPass.getPassword()).length()<8) {
-//            txtPass.setHelperText("Password is too Short");
-//            
-//        }
+
          if (String.valueOf(txtPass.getPassword()).length()>14) {
             txtPass.setHelperText("Password is too Long");
             
         }
-        if (verificationCode.getText().isEmpty()) {
+        if (verificationCode.getText().length()>= 5 || verificationCode.getText().length()<= 3 ) {
             
-             verificationCode.setHelperText("Please enter Verification Code");
+             verificationCode.setHelperText("Please enter 4 Digit Verification Code");
         } 
+        else if(verificationCode.getText().isEmpty())
+        {
+            verificationCode.setHelperText("Please enter Verification Code");
+        }
       else 
         {
      
@@ -358,7 +408,15 @@ private Animator animatorLogin;
                     if(userAccount==null){
                        //Step 3:check against each organization for each enterprise
                        for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+//                           System.out.println("org-" + organization.getName());
+//                           
+//                           System.out.println("userAccount-"+ organization.getUserAccountDirectory().getUserAccountList().get(0).getUsername() +
+//                                   organization.getUserAccountDirectory().getUserAccountList().get(0).getPassword());
+                          
+                       
                            userAccount=organization.getUserAccountDirectory().verifyUser(userName, password);
+                           
+                          
                            if(userAccount!=null){
                                inEnterprise=enterprise;
                                inOrganization=organization;
@@ -387,19 +445,19 @@ private Animator animatorLogin;
             return;
         }
         else{
-            txtUsername.setText("");
-             txtPass.setText("");
-             verificationCode.setText("");
+            txtUsername.setText(null);
+             txtPass.setText(null);
+             verificationCode.setText(null);
              JOptionPane.showMessageDialog(null, "Login Successfull!");
-             
+             clearLogin();
              verifyCode = new Random().nextInt(1022 + 1) + 1000;
              vcode.setText(String.valueOf(verifyCode));
+             
             userAccount.getRole().createWorkArea(this, userAccount, inOrganization, inEnterprise, system);
         }
   }
         }  
         dB4OUtil.storeSystem(system);
-        System.out.println(system.getNetworkList() + "388");
     }//GEN-LAST:event_cmdSignInActionPerformed
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
@@ -434,6 +492,71 @@ dispose();
     private void maxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseExited
         changecolor(buttonMax, new Color(27,152,245));
     }//GEN-LAST:event_maxMouseExited
+
+    private void signuppanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuppanelMouseReleased
+        
+    }//GEN-LAST:event_signuppanelMouseReleased
+
+    private void signuppanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuppanelMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_signuppanelMousePressed
+
+    private void signuppanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signuppanelMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_signuppanelMouseDragged
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+      int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
+           txtUsername.setHelperText(null);
+
+    }//GEN-LAST:event_txtUsernameFocusGained
+
+    private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
+      char c = evt.getKeyChar();
+        if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+            txtUsername.setEditable(true);
+        } else {
+            txtUsername.setEditable(false);
+        }
+//     if (!txtUsername.getHelperText().isEmpty()) {
+//            txtUsername.setHelperText(null);
+//            txtPass.setHelperText(null);
+//            verificationCode.setHelperText(null);
+//      }
+//     }
+    }//GEN-LAST:event_txtUsernameKeyTyped
+
+    private void verificationCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificationCodeKeyTyped
+         if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_verificationCodeKeyTyped
+
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+
+           txtPass.setHelperText(null);
+    }//GEN-LAST:event_txtPassKeyTyped
+
+    private void txtPassFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPassFocusGained
+        txtPass.setHelperText(null);
+    }//GEN-LAST:event_txtPassFocusGained
+
+    private void verificationCodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_verificationCodeFocusGained
+       verificationCode.setHelperText(null);
+    }//GEN-LAST:event_verificationCodeFocusGained
 
   
     public static void main(String args[]) {

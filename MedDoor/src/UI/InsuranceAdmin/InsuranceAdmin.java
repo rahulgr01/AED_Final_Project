@@ -36,6 +36,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
     UserAccount account;
     Enterprise enterprise;
     JFrame parentFrame;
+      int xx, xy;
     public InsuranceAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
         initComponents();
          this.business = business;
@@ -100,27 +101,26 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         max = new javax.swing.JLabel();
         menu = new javax.swing.JPanel();
         menuhide = new javax.swing.JPanel();
+        MenuIcon1 = new javax.swing.JPanel();
+        linehidemenu1 = new javax.swing.JPanel();
+        hidemenu1 = new javax.swing.JPanel();
+        buttonhidemenu1 = new javax.swing.JLabel();
+        lineSetting1 = new javax.swing.JPanel();
+        setting1 = new javax.swing.JPanel();
+        buttonLogout1 = new javax.swing.JLabel();
         menuhide1 = new javax.swing.JPanel();
-        insuranceDashboard = new javax.swing.JPanel();
+        manageOrganization = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        manageOrganization = new javax.swing.JPanel();
+        manageEmployee = new javax.swing.JPanel();
         side2 = new javax.swing.JPanel();
         manageCompanylbl = new javax.swing.JLabel();
         manageCompanyIcon = new javax.swing.JLabel();
-        manageHolders = new javax.swing.JPanel();
-        side3 = new javax.swing.JPanel();
-        manageHolderlbl = new javax.swing.JLabel();
-        manageHolderIcon = new javax.swing.JLabel();
-        managePolicies = new javax.swing.JPanel();
+        manageUserAccount = new javax.swing.JPanel();
         side4 = new javax.swing.JPanel();
-        managePolicieslbl = new javax.swing.JLabel();
-        managePoliciesIcon = new javax.swing.JLabel();
-        manageClaims = new javax.swing.JPanel();
-        side5 = new javax.swing.JPanel();
-        manageSupplierlbl = new javax.swing.JLabel();
-        manageSupplierIcon = new javax.swing.JLabel();
+        manageCompanylbl1 = new javax.swing.JLabel();
+        manageCompanyIcon1 = new javax.swing.JLabel();
         insuranceAdmin = new javax.swing.JTabbedPane();
         organizationTab = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
@@ -231,6 +231,16 @@ public class InsuranceAdmin extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -325,19 +335,99 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         menuhide.setBackground(new java.awt.Color(51, 51, 51));
         menuhide.setLayout(new java.awt.BorderLayout());
 
-        menuhide1.setBackground(new java.awt.Color(0, 91, 149));
+        MenuIcon1.setBackground(new java.awt.Color(4, 16, 20));
+        MenuIcon1.setPreferredSize(new java.awt.Dimension(50, 450));
+        MenuIcon1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        insuranceDashboard.setBackground(new java.awt.Color(0, 91, 149));
-        insuranceDashboard.setPreferredSize(new java.awt.Dimension(220, 50));
-        insuranceDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+        linehidemenu1.setBackground(new java.awt.Color(0, 0, 0));
+        linehidemenu1.setPreferredSize(new java.awt.Dimension(50, 5));
+
+        javax.swing.GroupLayout linehidemenu1Layout = new javax.swing.GroupLayout(linehidemenu1);
+        linehidemenu1.setLayout(linehidemenu1Layout);
+        linehidemenu1Layout.setHorizontalGroup(
+            linehidemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        linehidemenu1Layout.setVerticalGroup(
+            linehidemenu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        MenuIcon1.add(linehidemenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 5));
+
+        hidemenu1.setBackground(new java.awt.Color(4, 16, 20));
+        hidemenu1.setPreferredSize(new java.awt.Dimension(50, 50));
+        hidemenu1.setLayout(new java.awt.BorderLayout());
+
+        buttonhidemenu1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        buttonhidemenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/back_32px.png"))); // NOI18N
+        buttonhidemenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                insuranceDashboardMouseClicked(evt);
+                buttonhidemenu1MouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                insuranceDashboardMouseEntered(evt);
+                buttonhidemenu1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                insuranceDashboardMouseExited(evt);
+                buttonhidemenu1MouseExited(evt);
+            }
+        });
+        hidemenu1.add(buttonhidemenu1, java.awt.BorderLayout.CENTER);
+
+        MenuIcon1.add(hidemenu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 5, 50, 50));
+
+        lineSetting1.setBackground(new java.awt.Color(0, 0, 0));
+        lineSetting1.setPreferredSize(new java.awt.Dimension(50, 5));
+
+        javax.swing.GroupLayout lineSetting1Layout = new javax.swing.GroupLayout(lineSetting1);
+        lineSetting1.setLayout(lineSetting1Layout);
+        lineSetting1Layout.setHorizontalGroup(
+            lineSetting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        lineSetting1Layout.setVerticalGroup(
+            lineSetting1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 5, Short.MAX_VALUE)
+        );
+
+        MenuIcon1.add(lineSetting1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 55, 50, 5));
+
+        setting1.setBackground(new java.awt.Color(4, 16, 20));
+        setting1.setPreferredSize(new java.awt.Dimension(50, 50));
+        setting1.setLayout(new java.awt.BorderLayout());
+
+        buttonLogout1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        buttonLogout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/logout_30px.png"))); // NOI18N
+        buttonLogout1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonLogout1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonLogout1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonLogout1MouseExited(evt);
+            }
+        });
+        setting1.add(buttonLogout1, java.awt.BorderLayout.CENTER);
+
+        MenuIcon1.add(setting1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 50, 50));
+
+        menuhide.add(MenuIcon1, java.awt.BorderLayout.LINE_START);
+
+        menuhide1.setBackground(new java.awt.Color(0, 91, 149));
+
+        manageOrganization.setBackground(new java.awt.Color(0, 91, 149));
+        manageOrganization.setPreferredSize(new java.awt.Dimension(220, 50));
+        manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageOrganizationMouseExited(evt);
             }
         });
 
@@ -358,16 +448,16 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
         statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Insurance Dashboard");
+        statisticslbl.setText("Manage Organization");
 
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout insuranceDashboardLayout = new javax.swing.GroupLayout(insuranceDashboard);
-        insuranceDashboard.setLayout(insuranceDashboardLayout);
-        insuranceDashboardLayout.setHorizontalGroup(
-            insuranceDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(insuranceDashboardLayout.createSequentialGroup()
+        javax.swing.GroupLayout manageOrganizationLayout = new javax.swing.GroupLayout(manageOrganization);
+        manageOrganization.setLayout(manageOrganizationLayout);
+        manageOrganizationLayout.setHorizontalGroup(
+            manageOrganizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageOrganizationLayout.createSequentialGroup()
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,9 +465,9 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        insuranceDashboardLayout.setVerticalGroup(
-            insuranceDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, insuranceDashboardLayout.createSequentialGroup()
+        manageOrganizationLayout.setVerticalGroup(
+            manageOrganizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageOrganizationLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -385,17 +475,17 @@ public class InsuranceAdmin extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageOrganization.setBackground(new java.awt.Color(0, 91, 149));
-        manageOrganization.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageOrganization.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageEmployee.setBackground(new java.awt.Color(0, 91, 149));
+        manageEmployee.setPreferredSize(new java.awt.Dimension(220, 50));
+        manageEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageOrganizationMouseClicked(evt);
+                manageEmployeeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageOrganizationMouseEntered(evt);
+                manageEmployeeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageOrganizationMouseExited(evt);
+                manageEmployeeMouseExited(evt);
             }
         });
 
@@ -416,16 +506,16 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         manageCompanylbl.setBackground(new java.awt.Color(51, 51, 51));
         manageCompanylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageCompanylbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageCompanylbl.setText("Manage Organization");
+        manageCompanylbl.setText("Manage Employee");
 
         manageCompanyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         manageCompanyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/organization_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout manageOrganizationLayout = new javax.swing.GroupLayout(manageOrganization);
-        manageOrganization.setLayout(manageOrganizationLayout);
-        manageOrganizationLayout.setHorizontalGroup(
-            manageOrganizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageOrganizationLayout.createSequentialGroup()
+        javax.swing.GroupLayout manageEmployeeLayout = new javax.swing.GroupLayout(manageEmployee);
+        manageEmployee.setLayout(manageEmployeeLayout);
+        manageEmployeeLayout.setHorizontalGroup(
+            manageEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageEmployeeLayout.createSequentialGroup()
                 .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(manageCompanyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -433,9 +523,9 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addComponent(manageCompanylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        manageOrganizationLayout.setVerticalGroup(
-            manageOrganizationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageOrganizationLayout.createSequentialGroup()
+        manageEmployeeLayout.setVerticalGroup(
+            manageEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageEmployeeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(manageCompanylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -443,75 +533,17 @@ public class InsuranceAdmin extends javax.swing.JFrame {
             .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        manageHolders.setBackground(new java.awt.Color(0, 91, 149));
-        manageHolders.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageHolders.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageUserAccount.setBackground(new java.awt.Color(0, 91, 149));
+        manageUserAccount.setPreferredSize(new java.awt.Dimension(220, 50));
+        manageUserAccount.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageHoldersMouseClicked(evt);
+                manageUserAccountMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageHoldersMouseEntered(evt);
+                manageUserAccountMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageHoldersMouseExited(evt);
-            }
-        });
-
-        side3.setBackground(new java.awt.Color(0, 91, 149));
-        side3.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side3Layout = new javax.swing.GroupLayout(side3);
-        side3.setLayout(side3Layout);
-        side3Layout.setHorizontalGroup(
-            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side3Layout.setVerticalGroup(
-            side3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        manageHolderlbl.setBackground(new java.awt.Color(51, 51, 51));
-        manageHolderlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageHolderlbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageHolderlbl.setText("Manage Employee");
-
-        manageHolderIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageHolderIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/stock_share_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout manageHoldersLayout = new javax.swing.GroupLayout(manageHolders);
-        manageHolders.setLayout(manageHoldersLayout);
-        manageHoldersLayout.setHorizontalGroup(
-            manageHoldersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageHoldersLayout.createSequentialGroup()
-                .addComponent(side3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageHolderIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageHolderlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        manageHoldersLayout.setVerticalGroup(
-            manageHoldersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageHoldersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageHolderlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(manageHolderIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        managePolicies.setBackground(new java.awt.Color(0, 91, 149));
-        managePolicies.setPreferredSize(new java.awt.Dimension(220, 50));
-        managePolicies.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                managePoliciesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                managePoliciesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                managePoliciesMouseExited(evt);
+                manageUserAccountMouseExited(evt);
             }
         });
 
@@ -529,116 +561,53 @@ public class InsuranceAdmin extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        managePolicieslbl.setBackground(new java.awt.Color(51, 51, 51));
-        managePolicieslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        managePolicieslbl.setForeground(new java.awt.Color(255, 255, 255));
-        managePolicieslbl.setText("Manage Policies");
+        manageCompanylbl1.setBackground(new java.awt.Color(51, 51, 51));
+        manageCompanylbl1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        manageCompanylbl1.setForeground(new java.awt.Color(255, 255, 255));
+        manageCompanylbl1.setText("Manage UserAccount");
 
-        managePoliciesIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePoliciesIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/privacy_policy_40px.png"))); // NOI18N
+        manageCompanyIcon1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        manageCompanyIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/organization_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout managePoliciesLayout = new javax.swing.GroupLayout(managePolicies);
-        managePolicies.setLayout(managePoliciesLayout);
-        managePoliciesLayout.setHorizontalGroup(
-            managePoliciesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(managePoliciesLayout.createSequentialGroup()
+        javax.swing.GroupLayout manageUserAccountLayout = new javax.swing.GroupLayout(manageUserAccount);
+        manageUserAccount.setLayout(manageUserAccountLayout);
+        manageUserAccountLayout.setHorizontalGroup(
+            manageUserAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(manageUserAccountLayout.createSequentialGroup()
                 .addComponent(side4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(managePoliciesIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(manageCompanyIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(managePolicieslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(manageCompanylbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        managePoliciesLayout.setVerticalGroup(
-            managePoliciesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managePoliciesLayout.createSequentialGroup()
+        manageUserAccountLayout.setVerticalGroup(
+            manageUserAccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageUserAccountLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(managePolicieslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(manageCompanylbl1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(managePoliciesIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(manageCompanyIcon1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(side4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        manageClaims.setBackground(new java.awt.Color(0, 91, 149));
-        manageClaims.setPreferredSize(new java.awt.Dimension(220, 50));
-        manageClaims.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                manageClaimsMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                manageClaimsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                manageClaimsMouseExited(evt);
-            }
-        });
-
-        side5.setBackground(new java.awt.Color(0, 91, 149));
-        side5.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side5Layout = new javax.swing.GroupLayout(side5);
-        side5.setLayout(side5Layout);
-        side5Layout.setHorizontalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side5Layout.setVerticalGroup(
-            side5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        manageSupplierlbl.setBackground(new java.awt.Color(51, 51, 51));
-        manageSupplierlbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageSupplierlbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageSupplierlbl.setText("Manage Claims");
-
-        manageSupplierIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageSupplierIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/requirement_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout manageClaimsLayout = new javax.swing.GroupLayout(manageClaims);
-        manageClaims.setLayout(manageClaimsLayout);
-        manageClaimsLayout.setHorizontalGroup(
-            manageClaimsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(manageClaimsLayout.createSequentialGroup()
-                .addComponent(side5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageSupplierIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        manageClaimsLayout.setVerticalGroup(
-            manageClaimsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, manageClaimsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(manageSupplierlbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(manageSupplierIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout menuhide1Layout = new javax.swing.GroupLayout(menuhide1);
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(insuranceDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(manageHolders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(managePolicies, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(manageClaims, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(manageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(manageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(insuranceDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addComponent(manageOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(manageHolders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(manageEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(managePolicies, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(manageClaims, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(manageUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -660,6 +629,14 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         organizationJTable.setFont(new java.awt.Font("Perpetua Titling MT", 1, 13)); // NOI18N
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -728,7 +705,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addComponent(oName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(addOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         organizationTab.add(jPanel18, java.awt.BorderLayout.CENTER);
@@ -743,6 +720,12 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         oJTable.setFont(new java.awt.Font("Perpetua Titling MT", 1, 13)); // NOI18N
         oJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null},
                 {null, null},
                 {null, null},
@@ -789,22 +772,21 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel26Layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addComponent(oCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(oEmpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(oEmployeeCombo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(createEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(196, 196, 196))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addComponent(oCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel26Layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(oEmpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oEmployeeCombo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -812,14 +794,14 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(oCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(oEmployeeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(oEmpName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(createEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         employeeTab.add(jPanel26, java.awt.BorderLayout.CENTER);
@@ -833,7 +815,18 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         userJTable.setFont(new java.awt.Font("Perpetua Titling MT", 1, 13)); // NOI18N
         userJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "User Name", "Role"
@@ -887,22 +880,20 @@ public class InsuranceAdmin extends javax.swing.JFrame {
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel27Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(112, 112, 112))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel27Layout.createSequentialGroup()
-                        .addComponent(oOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(userPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(oEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                                .addComponent(uuserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(oRole, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE))))
+                .addComponent(oOrganization, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(createUser, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(userPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(oEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(uuserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(oRole, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel27Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
         jPanel27Layout.setVerticalGroup(
             jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,7 +911,7 @@ public class InsuranceAdmin extends javax.swing.JFrame {
                 .addComponent(userPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(createUser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         userAccountTab.add(jPanel27, java.awt.BorderLayout.CENTER);
@@ -992,62 +983,6 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void insuranceDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insuranceDashboardMouseClicked
-       insuranceAdmin.setSelectedIndex(0);
-    }//GEN-LAST:event_insuranceDashboardMouseClicked
-
-    private void insuranceDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insuranceDashboardMouseEntered
-        changecolor(insuranceDashboard, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_insuranceDashboardMouseEntered
-
-    private void insuranceDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insuranceDashboardMouseExited
-        changecolor(insuranceDashboard, new Color(0,91,149));
-        changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_insuranceDashboardMouseExited
-
-    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
-        insuranceAdmin.setSelectedIndex(1);
-    }//GEN-LAST:event_manageOrganizationMouseClicked
-
-    private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
-        changecolor(manageOrganization, new Color(3,138,255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageOrganizationMouseEntered
-
-    private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
-       changecolor(manageOrganization, new Color(0,91,149));
-        changecolor(side2, new Color(0,91,149));
-    }//GEN-LAST:event_manageOrganizationMouseExited
-
-    private void manageHoldersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageHoldersMouseClicked
-        insuranceAdmin.setSelectedIndex(2);
-    }//GEN-LAST:event_manageHoldersMouseClicked
-
-    private void manageHoldersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageHoldersMouseEntered
-      changecolor(manageHolders, new Color(3,138,255));
-        changecolor(side3, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageHoldersMouseEntered
-
-    private void manageHoldersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageHoldersMouseExited
-       changecolor(manageHolders, new Color(0,91,149));
-        changecolor(side3, new Color(0,91,149));
-    }//GEN-LAST:event_manageHoldersMouseExited
-
-    private void managePoliciesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePoliciesMouseClicked
-      insuranceAdmin.setSelectedIndex(3);
-    }//GEN-LAST:event_managePoliciesMouseClicked
-
-    private void managePoliciesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePoliciesMouseEntered
-      changecolor(managePolicies, new Color(3,138,255));
-        changecolor(side4, new Color(190, 224, 236));
-    }//GEN-LAST:event_managePoliciesMouseEntered
-
-    private void managePoliciesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePoliciesMouseExited
-        changecolor(managePolicies, new Color(0,91,149));
-        changecolor(side4, new Color(0,91,149));
-    }//GEN-LAST:event_managePoliciesMouseExited
-
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
     }//GEN-LAST:event_closeMouseExited
@@ -1060,20 +995,6 @@ public class InsuranceAdmin extends javax.swing.JFrame {
         this.setVisible(false);
            parentFrame.setVisible(true);
     }//GEN-LAST:event_closeMouseClicked
-
-    private void manageClaimsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageClaimsMouseClicked
-        insuranceAdmin.setSelectedIndex(4);
-    }//GEN-LAST:event_manageClaimsMouseClicked
-
-    private void manageClaimsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageClaimsMouseEntered
-        changecolor(managePolicies, new Color(3,138,255));
-        changecolor(side5, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageClaimsMouseEntered
-
-    private void manageClaimsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageClaimsMouseExited
-        changecolor(managePolicies, new Color(0,91,149));
-        changecolor(side5, new Color(0,91,149));
-    }//GEN-LAST:event_manageClaimsMouseExited
 private void populateTable(){
         DefaultTableModel model = (DefaultTableModel) organizationJTable.getModel();
         
@@ -1240,6 +1161,98 @@ public void popOrganizationComboBox() {
          }
     }//GEN-LAST:event_createUserActionPerformed
 
+    private void buttonhidemenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenu1MouseClicked
+        clickmenu(hidemenu, setting, 1);
+        if (a == true) {
+            hideshow(menu, a, buttonhidemenu);
+            SwingUtilities.updateComponentTreeUI(this);
+            a = false;
+        } else {
+            hideshow(menu, a, buttonhidemenu);
+            SwingUtilities.updateComponentTreeUI(this);
+            a = true;
+        }
+    }//GEN-LAST:event_buttonhidemenu1MouseClicked
+
+    private void buttonhidemenu1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenu1MouseEntered
+        changecolor(linehidemenu, new Color(190,224,236));
+
+    }//GEN-LAST:event_buttonhidemenu1MouseEntered
+
+    private void buttonhidemenu1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonhidemenu1MouseExited
+        changecolor(linehidemenu, new Color(4,16,20));
+    }//GEN-LAST:event_buttonhidemenu1MouseExited
+
+    private void buttonLogout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogout1MouseClicked
+        clickmenu(setting, hidemenu, 1);
+        int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            this.setVisible(false);
+            parentFrame.setVisible(true);
+        }
+    }//GEN-LAST:event_buttonLogout1MouseClicked
+
+    private void buttonLogout1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogout1MouseEntered
+        changecolor(lineSetting, new Color(190,224,236));
+    }//GEN-LAST:event_buttonLogout1MouseEntered
+
+    private void buttonLogout1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogout1MouseExited
+        changecolor(lineSetting, new Color(4,16,20));
+    }//GEN-LAST:event_buttonLogout1MouseExited
+
+    private void manageOrganizationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseClicked
+        insuranceAdmin.setSelectedIndex(0);
+    }//GEN-LAST:event_manageOrganizationMouseClicked
+
+    private void manageOrganizationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseEntered
+        changecolor(manageOrganization, new Color(3,138,255));
+        changecolor(side1, new Color(190, 224, 236));
+    }//GEN-LAST:event_manageOrganizationMouseEntered
+
+    private void manageOrganizationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageOrganizationMouseExited
+        changecolor(manageOrganization, new Color(0,91,149));
+        changecolor(side1, new Color(0,91,149));
+    }//GEN-LAST:event_manageOrganizationMouseExited
+
+    private void manageEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageEmployeeMouseClicked
+        insuranceAdmin.setSelectedIndex(1);
+    }//GEN-LAST:event_manageEmployeeMouseClicked
+
+    private void manageEmployeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageEmployeeMouseEntered
+        changecolor(manageEmployee, new Color(3,138,255));
+        changecolor(side2, new Color(190, 224, 236));
+    }//GEN-LAST:event_manageEmployeeMouseEntered
+
+    private void manageEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageEmployeeMouseExited
+        changecolor(manageEmployee, new Color(0,91,149));
+        changecolor(side2, new Color(0,91,149));
+    }//GEN-LAST:event_manageEmployeeMouseExited
+
+    private void manageUserAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserAccountMouseClicked
+           insuranceAdmin.setSelectedIndex(2);
+    }//GEN-LAST:event_manageUserAccountMouseClicked
+
+    private void manageUserAccountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserAccountMouseEntered
+       changecolor(manageUserAccount, new Color(3,138,255));
+        changecolor(side4, new Color(190, 224, 236));
+    }//GEN-LAST:event_manageUserAccountMouseEntered
+
+    private void manageUserAccountMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUserAccountMouseExited
+         changecolor(manageUserAccount, new Color(0,91,149));
+        changecolor(side4, new Color(0,91,149));
+    }//GEN-LAST:event_manageUserAccountMouseExited
+
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+          xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+       int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
     /**
      * @param args the command line arguments
      */
@@ -1284,20 +1297,23 @@ public void popOrganizationComboBox() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
+    private javax.swing.JPanel MenuIcon1;
     private UI.Components.Button addOrganization;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
+    private javax.swing.JLabel buttonLogout1;
     private javax.swing.JPanel buttonMax;
     private javax.swing.JLabel buttonhidemenu;
+    private javax.swing.JLabel buttonhidemenu1;
     private javax.swing.JLabel close;
     private UI.Components.Button createEmployee;
     private UI.Components.Button createUser;
     private javax.swing.JPanel employeeTab;
     private javax.swing.JPanel header;
     private javax.swing.JPanel hidemenu;
+    private javax.swing.JPanel hidemenu1;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JTabbedPane insuranceAdmin;
-    private javax.swing.JPanel insuranceDashboard;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -1305,19 +1321,16 @@ public void popOrganizationComboBox() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel lineSetting;
+    private javax.swing.JPanel lineSetting1;
     private javax.swing.JPanel linehidemenu;
-    private javax.swing.JPanel manageClaims;
+    private javax.swing.JPanel linehidemenu1;
     private javax.swing.JLabel manageCompanyIcon;
+    private javax.swing.JLabel manageCompanyIcon1;
     private javax.swing.JLabel manageCompanylbl;
-    private javax.swing.JLabel manageHolderIcon;
-    private javax.swing.JLabel manageHolderlbl;
-    private javax.swing.JPanel manageHolders;
+    private javax.swing.JLabel manageCompanylbl1;
+    private javax.swing.JPanel manageEmployee;
     private javax.swing.JPanel manageOrganization;
-    private javax.swing.JPanel managePolicies;
-    private javax.swing.JLabel managePoliciesIcon;
-    private javax.swing.JLabel managePolicieslbl;
-    private javax.swing.JLabel manageSupplierIcon;
-    private javax.swing.JLabel manageSupplierlbl;
+    private javax.swing.JPanel manageUserAccount;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
@@ -1334,11 +1347,10 @@ public void popOrganizationComboBox() {
     private javax.swing.JTable organizationJTable;
     private javax.swing.JPanel organizationTab;
     private javax.swing.JPanel setting;
+    private javax.swing.JPanel setting1;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side2;
-    private javax.swing.JPanel side3;
     private javax.swing.JPanel side4;
-    private javax.swing.JPanel side5;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
     private javax.swing.JPanel userAccountTab;

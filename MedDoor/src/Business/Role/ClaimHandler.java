@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.InsuranceAdmin.ClaimsRole;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -21,7 +22,7 @@ public class ClaimHandler extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
+         new ClaimsRole(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

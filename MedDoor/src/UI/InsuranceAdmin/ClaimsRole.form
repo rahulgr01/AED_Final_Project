@@ -33,6 +33,10 @@
           <Dimension value="[800, 50]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="headerMouseDragged"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="headerMousePressed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="First"/>
@@ -637,15 +641,21 @@
                     <Component class="javax.swing.JTable" name="claimsworkRequestJTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="4" rowCount="11">
+                          <Table columnCount="5" rowCount="11">
                             <Column editable="false" title="Name" type="java.lang.String"/>
                             <Column editable="false" title="Sender" type="java.lang.String"/>
-                            <Column editable="false" title="Receiver" type="java.lang.String"/>
                             <Column editable="false" title="Status" type="java.lang.String"/>
+                            <Column editable="false" title="Message" type="java.lang.String"/>
+                            <Column editable="true" title="Date " type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                           <TableColumnModel selectionModel="0">
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor/>
+                              <Renderer/>
+                            </Column>
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor/>
@@ -778,8 +788,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="jPanel13" min="-2" pref="396" max="-2" attributes="0"/>
-                          <EmptySpace pref="94" max="32767" attributes="0"/>
+                          <Component id="jPanel13" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="59" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -854,7 +864,7 @@
                                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="17" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -862,13 +872,18 @@
                   <SubComponents>
                     <Component class="UI.Components.TextField" name="patientName">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="labelText" type="java.lang.String" value="Patient Name"/>
                       </Properties>
                     </Component>
                     <Component class="UI.Components.TextField" name="amtrequested">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="labelText" type="java.lang.String" value="Amount Requested"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="amtrequestedKeyTyped"/>
+                      </Events>
                     </Component>
                     <Container class="UI.Components.TextAreaScroll" name="textAreaScroll1">
                       <Properties>
@@ -899,15 +914,15 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="0" pref="5" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="approvebtn" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="rejectbtn" min="-2" pref="79" max="-2" attributes="0"/>
-                                          <EmptySpace pref="11" max="32767" attributes="0"/>
+                                          <EmptySpace pref="16" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="calculateAmount" min="-2" pref="95" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace pref="107" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -917,8 +932,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="calculateAmount" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="calculateAmount" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="approvebtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="rejectbtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -976,6 +991,7 @@
                     </Component>
                     <Component class="UI.Components.TextField" name="amtapproved">
                       <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="labelText" type="java.lang.String" value="Amount Approved"/>
                       </Properties>
                     </Component>

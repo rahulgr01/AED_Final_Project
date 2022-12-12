@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.DiagnosticAdmin.DiagnosticAdmin;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -21,7 +22,7 @@ public class DiagnosticAdminRole extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
+         new DiagnosticAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

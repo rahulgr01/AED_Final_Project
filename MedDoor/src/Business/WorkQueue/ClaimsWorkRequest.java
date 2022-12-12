@@ -4,6 +4,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Community.Tenant;
 import Business.UserAccount.UserAccount;
 import java.math.BigInteger;
 import java.util.UUID;
@@ -23,6 +24,23 @@ public class ClaimsWorkRequest extends WorkRequest {
 //    private String emailid ;
     private UserAccount claimbeneficiary;
     private String claimstatus;
+    private Tenant patient;
+
+    public float getAmtapproved() {
+        return amtapproved;
+    }
+
+    public void setAmtapproved(float amtapproved) {
+        this.amtapproved = amtapproved;
+    }
+
+    public Tenant getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Tenant patient) {
+        this.patient = patient;
+    }
 
     public int getBillamount() {
         return billamount;

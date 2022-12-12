@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.InsuranceAdmin.InsuranceAdmin;
+import UI.InsuranceAdmin.InsurancesAdmin;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -23,7 +24,7 @@ public class InsuranceAdminRole extends Role {
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new InsuranceAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
+         new InsurancesAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

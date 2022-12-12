@@ -8,7 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
-import UI.LabAdmin.LabAssistant;
+import UI.DiagnosticAdmin.LabAssistant;
 import UI.PharmacyAdmin.PharmacyAdmin;
 import javax.swing.JFrame;
 
@@ -22,7 +22,7 @@ public class LabAssistantRole extends Role{
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
+         new LabAssistant(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

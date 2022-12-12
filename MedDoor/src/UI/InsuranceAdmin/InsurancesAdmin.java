@@ -1,22 +1,27 @@
 
-package UI.DiagnosticAdmin;
+package UI.InsuranceAdmin;
 
+import UI.DiagnosticAdmin.*;
 import Business.Community.Community;
 import Business.Pharmacy.Pharmacy;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.DiagnosticsEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.InsuranceEnterprise;
 import Business.Network.Network;
+import Business.Organization.ClaimsOrganization;
 import Business.Organization.LabServiceOrganization;
 import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
 import Business.Pharmacy.Medicine;
 import Business.Pharmacy.MedicineInventory;
 import Business.Pharmacy.PharmacyDirectory;
+import Business.Role.ClaimHandler;
 import Business.Role.LabAssistantRole;
 import Business.Role.Pharmacist;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ClaimsWorkRequest;
 import Business.WorkQueue.LabWorkRequest;
 import Business.WorkQueue.PharmacyWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -40,12 +45,12 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-public class DiagnosticAdmin extends javax.swing.JFrame {
+public class InsurancesAdmin extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
     private DefaultTableModel dtm;
-    DiagnosticsEnterprise dEnterprise;
+    InsuranceEnterprise dEnterprise;
     Pharmacy ph;
     Medicine med;
     EcoSystem business;
@@ -54,7 +59,7 @@ public class DiagnosticAdmin extends javax.swing.JFrame {
     UserAccount account;
     JFrame parentFrame;
     int xx,xy;
-    public DiagnosticAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
+    public InsurancesAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
         initComponents();
 //        initListners();
 
@@ -62,27 +67,23 @@ public class DiagnosticAdmin extends javax.swing.JFrame {
         this.account = account;
         this.organization=organization;
          this.parentFrame = parentFrame;
-         populateCommunity();
-         dEnterprise = (DiagnosticsEnterprise) enterprise;
-        TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
+         dEnterprise = (InsuranceEnterprise) enterprise;
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
-populateLabRequest();
-populateSurveyList();
+            populateSurveyList();
     }
     
     
      public void populateSurveyList() {
         try {
             for(Organization org: dEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                if (org instanceof PharmacyOrganization) {
+                if (org instanceof ClaimsOrganization) {
             for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
-            if(wq instanceof PharmacyWorkRequest)
+            if(wq instanceof ClaimsWorkRequest)
             {
-                
                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                model.setRowCount(0);
               
-                   Object[] row = new Object[5];
+             Object[] row = new Object[5];
             row[0] = ((PharmacyWorkRequest) wq).getSender().getEmployee().getName();
             row[1] = ((PharmacyWorkRequest) wq).getReceiver().getEmployee().getName();
             
@@ -105,41 +106,7 @@ populateSurveyList();
         
         
     }
-      public void populateLabRequest() {
-        try {
-            for(Organization org: dEnterprise.getOrganizationDirectory().getOrganizationList()) {
-                if (org instanceof LabServiceOrganization) {
-            for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
-            if(wq instanceof LabWorkRequest)
-            {
-                
-               DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-               model.setRowCount(0);
-                System.out.println("wq-" + ((LabWorkRequest) wq).getLabTest());
-                   Object[] row = new Object[5];
-            row[0] = ((LabWorkRequest) wq).getSender().getEmployee().getName();
-            row[1] = ((LabWorkRequest) wq).getPatient().getFirstName();
-            
-            
-//            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//            String formattedDate = dateFormat.format((wq.getRequestDate()));
-//            row[2] = formattedDate;
-            row[2] =   ((LabWorkRequest) wq).getLabTest();
-            row[3]= wq.getStatus();
-            row[4] = wq.getMessage();
-              model.addRow(row);
-               }
-            
-        }
-        }
-            }
-        }catch(Exception e) {
-            System.out.println("Error===" + e);
-            JOptionPane.showMessageDialog(null, "system is down please contact system admin");
-        }
-        
-        
-    }
+    
     //Method to change panel color on hover
     public void changecolor(JPanel hover, Color rand) {
         hover.setBackground(rand);
@@ -209,11 +176,11 @@ populateSurveyList();
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        diagnosticdashboard = new javax.swing.JPanel();
+        pharmacyStaistics = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        addemployee = new javax.swing.JPanel();
+        managePharmacy = new javax.swing.JPanel();
         side2 = new javax.swing.JPanel();
         managePharmacylbl = new javax.swing.JLabel();
         managePharmacyIcon = new javax.swing.JLabel();
@@ -224,10 +191,7 @@ populateSurveyList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         addEmployee = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         dOrganizationsCombo = new UI.Components.Combobox();
@@ -438,17 +402,17 @@ populateSurveyList();
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        diagnosticdashboard.setBackground(new java.awt.Color(0, 91, 149));
-        diagnosticdashboard.setPreferredSize(new java.awt.Dimension(220, 50));
-        diagnosticdashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+        pharmacyStaistics.setBackground(new java.awt.Color(0, 91, 149));
+        pharmacyStaistics.setPreferredSize(new java.awt.Dimension(220, 50));
+        pharmacyStaistics.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                diagnosticdashboardMouseClicked(evt);
+                pharmacyStaisticsMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                diagnosticdashboardMouseEntered(evt);
+                pharmacyStaisticsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                diagnosticdashboardMouseExited(evt);
+                pharmacyStaisticsMouseExited(evt);
             }
         });
 
@@ -469,16 +433,16 @@ populateSurveyList();
         statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
         statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Diagnostic Dashboard");
+        statisticslbl.setText("Pharmacy Statistics");
 
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout diagnosticdashboardLayout = new javax.swing.GroupLayout(diagnosticdashboard);
-        diagnosticdashboard.setLayout(diagnosticdashboardLayout);
-        diagnosticdashboardLayout.setHorizontalGroup(
-            diagnosticdashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(diagnosticdashboardLayout.createSequentialGroup()
+        javax.swing.GroupLayout pharmacyStaisticsLayout = new javax.swing.GroupLayout(pharmacyStaistics);
+        pharmacyStaistics.setLayout(pharmacyStaisticsLayout);
+        pharmacyStaisticsLayout.setHorizontalGroup(
+            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pharmacyStaisticsLayout.createSequentialGroup()
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,9 +450,9 @@ populateSurveyList();
                 .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        diagnosticdashboardLayout.setVerticalGroup(
-            diagnosticdashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, diagnosticdashboardLayout.createSequentialGroup()
+        pharmacyStaisticsLayout.setVerticalGroup(
+            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyStaisticsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -496,17 +460,17 @@ populateSurveyList();
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        addemployee.setBackground(new java.awt.Color(0, 91, 149));
-        addemployee.setPreferredSize(new java.awt.Dimension(220, 50));
-        addemployee.addMouseListener(new java.awt.event.MouseAdapter() {
+        managePharmacy.setBackground(new java.awt.Color(0, 91, 149));
+        managePharmacy.setPreferredSize(new java.awt.Dimension(220, 50));
+        managePharmacy.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addemployeeMouseClicked(evt);
+                managePharmacyMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addemployeeMouseEntered(evt);
+                managePharmacyMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                addemployeeMouseExited(evt);
+                managePharmacyMouseExited(evt);
             }
         });
 
@@ -532,11 +496,11 @@ populateSurveyList();
         managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/management_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout addemployeeLayout = new javax.swing.GroupLayout(addemployee);
-        addemployee.setLayout(addemployeeLayout);
-        addemployeeLayout.setHorizontalGroup(
-            addemployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addemployeeLayout.createSequentialGroup()
+        javax.swing.GroupLayout managePharmacyLayout = new javax.swing.GroupLayout(managePharmacy);
+        managePharmacy.setLayout(managePharmacyLayout);
+        managePharmacyLayout.setHorizontalGroup(
+            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(managePharmacyLayout.createSequentialGroup()
                 .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(managePharmacyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -544,9 +508,9 @@ populateSurveyList();
                 .addComponent(managePharmacylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        addemployeeLayout.setVerticalGroup(
-            addemployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addemployeeLayout.createSequentialGroup()
+        managePharmacyLayout.setVerticalGroup(
+            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managePharmacyLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(managePharmacylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -601,16 +565,16 @@ populateSurveyList();
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(diagnosticdashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(addemployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(diagnosticdashboard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(addemployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(526, 526, 526))
@@ -642,6 +606,8 @@ populateSurveyList();
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -650,38 +616,7 @@ populateSurveyList();
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Sender", "Patient", "Lab Test", "Status", "Message"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Pharmacist Requests: ");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Lab Requests :");
+        jLabel1.setText("Claims Requests: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -690,24 +625,18 @@ populateSurveyList();
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(463, Short.MAX_VALUE))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -724,11 +653,6 @@ populateSurveyList();
         employeeName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeNameActionPerformed(evt);
-            }
-        });
-        employeeName.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                employeeNameKeyTyped(evt);
             }
         });
 
@@ -756,8 +680,8 @@ populateSurveyList();
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(166, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -768,22 +692,22 @@ populateSurveyList();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(createEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGap(147, 147, 147))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(85, 85, 85)
                 .addComponent(dOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(employeeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(employeePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(createEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addEmployeeLayout = new javax.swing.GroupLayout(addEmployee);
@@ -807,9 +731,9 @@ populateSurveyList();
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            DiagnosticAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            InsurancesAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            DiagnosticAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            InsurancesAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -865,37 +789,37 @@ populateSurveyList();
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
 
-    private void diagnosticdashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_diagnosticdashboardMouseClicked
+    private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
          diagnosticAdmin.setSelectedIndex(0);
-         changecolor(diagnosticdashboard, new Color(3,138,255));
+         changecolor(pharmacyStaistics, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_diagnosticdashboardMouseClicked
+    }//GEN-LAST:event_pharmacyStaisticsMouseClicked
 
-    private void diagnosticdashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_diagnosticdashboardMouseEntered
-        changecolor(diagnosticdashboard, new Color(3,138,255));
+    private void pharmacyStaisticsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseEntered
+        changecolor(pharmacyStaistics, new Color(3,138,255));
         changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_diagnosticdashboardMouseEntered
+    }//GEN-LAST:event_pharmacyStaisticsMouseEntered
 
-    private void diagnosticdashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_diagnosticdashboardMouseExited
-        changecolor(diagnosticdashboard, new Color(0,91,149));
+    private void pharmacyStaisticsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseExited
+        changecolor(pharmacyStaistics, new Color(0,91,149));
         changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_diagnosticdashboardMouseExited
+    }//GEN-LAST:event_pharmacyStaisticsMouseExited
 
-    private void addemployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addemployeeMouseClicked
+    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
         diagnosticAdmin.setSelectedIndex(1);
-        changecolor(addemployee, new Color(3,138,255));
+        changecolor(managePharmacy, new Color(3,138,255));
         changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_addemployeeMouseClicked
+    }//GEN-LAST:event_managePharmacyMouseClicked
 
-    private void addemployeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addemployeeMouseEntered
-        changecolor(addemployee, new Color(3,138,255));
+    private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
+        changecolor(managePharmacy, new Color(3,138,255));
         changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_addemployeeMouseEntered
+    }//GEN-LAST:event_managePharmacyMouseEntered
 
-    private void addemployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addemployeeMouseExited
-       changecolor(addemployee, new Color(0,91,149));
+    private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
+       changecolor(managePharmacy, new Color(0,91,149));
         changecolor(side2, new Color(0,91,149));
-    }//GEN-LAST:event_addemployeeMouseExited
+    }//GEN-LAST:event_managePharmacyMouseExited
 
     private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
        diagnosticAdmin.setSelectedIndex(3);
@@ -931,22 +855,7 @@ populateSurveyList();
     }//GEN-LAST:event_employeeNameActionPerformed
 
     private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
-  if (employeeName.getText().equals("")){
-             JOptionPane.showMessageDialog(null,"Please enter Employee Fullname");
-             return;
-         }
-         else  if(employeePassword.getText().length()>25||employeePassword.getText().length()<5) {
-             JOptionPane.showMessageDialog(null,"Please enter Valid Password");
-             return;
-         }
-         else if (employeePassword.getText().equals("")){
-             JOptionPane.showMessageDialog(null,"Do not enter an empty password!!!");
-             return;
-         } else if(employeeUsername.getText().equals("")) {
-             JOptionPane.showMessageDialog(null,"Please enter  UserName");
-             return;
-         }
-         else{
+ 
     int index = dOrganizationsCombo.getSelectedIndex();
 
         String username = employeeUsername.getText();
@@ -957,20 +866,13 @@ populateSurveyList();
         Organization org=dEnterprise.getOrganizationDirectory().getOrganizationList().get(index);
         Employee employee = org.getEmployeeDirectory().createEmployee(name);
         if (EcoSystem.isUserUnique(username)) {
-            if(org.getName() == Organization.Type.Pharmacy.getValue())
+            if(org instanceof ClaimsOrganization)
             {
-                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new Pharmacist());
+                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new ClaimHandler());
 
-            } else  {
-                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new LabAssistantRole());
+            } 
             
         }
-        }
-        employeeName.setText(null);
-        employeePassword.setText(null);
-        employeeUsername.setText(null);
-        dOrganizationsCombo.setSelectedIndex(-1);
-         }
 
     }//GEN-LAST:event_createEmployeeActionPerformed
  public void populateEmployeeEnterpriseOrganizations() {
@@ -1050,15 +952,6 @@ public void populateCommunity() {
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_headerMouseDragged
 
-    private void employeeNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_employeeNameKeyTyped
-       char c = evt.getKeyChar();
-        if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
-            employeeName.setEditable(true);
-        } else {
-            employeeName.setEditable(false);
-        }
-    }//GEN-LAST:event_employeeNameKeyTyped
-
     /**
      * @param args the command line arguments
      */
@@ -1098,7 +991,6 @@ public void populateCommunity() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MenuIcon;
     private javax.swing.JPanel addEmployee;
-    private javax.swing.JPanel addemployee;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
@@ -1108,7 +1000,6 @@ public void populateCommunity() {
     private UI.Components.Combobox dOrganizationsCombo;
     private javax.swing.JPanel dashboard;
     private javax.swing.JTabbedPane diagnosticAdmin;
-    private javax.swing.JPanel diagnosticdashboard;
     private UI.Components.MyTextFieldLogin employeeName;
     private UI.Components.MyPasswordFieldLogin employeePassword;
     private UI.Components.MyTextFieldLogin employeeUsername;
@@ -1116,23 +1007,22 @@ public void populateCommunity() {
     private javax.swing.JPanel hidemenu;
     private javax.swing.JPanel iconmaxclose;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
     private javax.swing.JPanel manageMedicine;
+    private javax.swing.JPanel managePharmacy;
     private javax.swing.JLabel managePharmacyIcon;
     private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
     private javax.swing.JPanel menuhide1;
+    private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
     private javax.swing.JPanel side2;

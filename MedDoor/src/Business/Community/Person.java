@@ -87,6 +87,10 @@ import java.util.Date;
     public void setResidence(House residence) {
         this.residence = residence;
     }
+     @Override
+    public String toString() {
+        return  firstName;
+    }
 
 }
 

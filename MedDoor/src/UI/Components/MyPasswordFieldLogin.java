@@ -186,11 +186,11 @@ public class MyPasswordFieldLogin extends JPasswordField {
         }
     }
 
-    @Override
-    public void setText(String string) {
+//    @Override
+//    public void setText(String string) {
 //        if (!getText().equals(string)) {
 //            showing(string.equals(""));
 //        }
 //        super.setText(string);
-    }
+//    }
 }

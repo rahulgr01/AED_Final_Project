@@ -12,6 +12,8 @@ import Business.Pharmacy.MedicineInventory;
  */
 public class PharmacyWorkRequest extends WorkRequest {
     public MedicineInventory medicines;
+    public String prescriptionObj;
+      public int medicinesPrice;
 
     public MedicineInventory getMedicines() {
         return medicines;
@@ -30,6 +32,22 @@ public class PharmacyWorkRequest extends WorkRequest {
         this.patientName = patientName;
     }
     public String patientName;
+
+    public String getPrescriptionObj() {
+        return prescriptionObj;
+    }
+
+    public void setPrescriptionObj(String prescriptionObj) {
+        this.prescriptionObj = prescriptionObj;
+    }
+    
+     public int getMedicinesPrice() {
+        return medicinesPrice;
+    }
+
+    public void setMedicinesPrice(int medicinesPrice) {
+        this.medicinesPrice = medicinesPrice;
+    }
     
     
     

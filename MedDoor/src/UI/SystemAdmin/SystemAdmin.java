@@ -46,6 +46,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     Network network;
     JFrame parentFrame;
     Validation fieldValidation;
+    int xx, xy;
 
     public SystemAdmin(JFrame parentFrame, UserAccount account, 
             Enterprise enterprise, 
@@ -247,7 +248,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         tenantAge = new UI.Components.MyTextFieldLogin();
         addTenant = new UI.Components.Button();
         genderCombo = new UI.Components.Combobox();
-        tenantDob = new UI.Components.MyTextFieldLogin();
+        tenantDob2 = new com.toedter.calendar.JDateChooser();
         button1 = new UI.Components.Button();
         createEnt = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -274,6 +275,16 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         header.setBackground(new java.awt.Color(27, 152, 245));
         header.setPreferredSize(new java.awt.Dimension(800, 50));
+        header.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                headerMouseDragged(evt);
+            }
+        });
+        header.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                headerMousePressed(evt);
+            }
+        });
         header.setLayout(new java.awt.BorderLayout());
 
         iconmaxclose.setBackground(new java.awt.Color(22, 116, 66));
@@ -722,7 +733,7 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BOSTON CITY SERVICE");
+        jLabel1.setText("BOSTON CITY ");
 
         addHouseComCombo.setLabeText("Community");
         addHouseComCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -775,7 +786,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         addTenantN.setBackground(new java.awt.Color(0, 91, 149));
         addTenantN.setForeground(new java.awt.Color(255, 255, 255));
         addTenantN.setText("Add Tenant");
-        addTenantN.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addTenantN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addTenantN.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addTenantNMouseEntered(evt);
@@ -832,7 +843,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         addTenantN1.setBackground(new java.awt.Color(0, 91, 149));
         addTenantN1.setForeground(new java.awt.Color(255, 255, 255));
         addTenantN1.setText("View Tenants");
-        addTenantN1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addTenantN1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addTenantN1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addTenantN1MouseEntered(evt);
@@ -851,12 +862,12 @@ public class SystemAdmin extends javax.swing.JFrame {
         ListHouses.setLayout(ListHousesLayout);
         ListHousesLayout.setHorizontalGroup(
             ListHousesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
             .addComponent(jScrollPane5)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListHousesLayout.createSequentialGroup()
-                .addContainerGap(327, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addTenantN1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -869,7 +880,7 @@ public class SystemAdmin extends javax.swing.JFrame {
                     .addComponent(addTenantN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addTenantN1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("List Houses", ListHouses);
@@ -877,8 +888,18 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(217, 241, 255));
 
         houseAddress.setLabelText("House Address");
+        houseAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                houseAddressFocusGained(evt);
+            }
+        });
 
         houseNumber.setLabelText("Apartment Number");
+        houseNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                houseNumberFocusGained(evt);
+            }
+        });
         houseNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 houseNumberActionPerformed(evt);
@@ -888,7 +909,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         addHouse.setBackground(new java.awt.Color(0, 91, 149));
         addHouse.setForeground(new java.awt.Color(255, 255, 255));
         addHouse.setText("Add House");
-        addHouse.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addHouse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addHouse.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addHouseMouseEntered(evt);
@@ -908,28 +929,30 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(0, 129, Short.MAX_VALUE)
+                .addContainerGap(253, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 129, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(280, 280, 280))))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {houseAddress, houseNumber});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(97, Short.MAX_VALUE)
                 .addComponent(houseAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(houseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(36, 36, 36)
                 .addComponent(addHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGap(69, 69, 69))
         );
 
         jTabbedPane2.addTab("Add House", jPanel4);
@@ -938,25 +961,60 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         tenantContact.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tenantContact.setLabelText("Phone Number");
+        tenantContact.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tenantContactFocusGained(evt);
+            }
+        });
+        tenantContact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tenantContactKeyTyped(evt);
+            }
+        });
 
         tenantEmail.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tenantEmail.setLabelText("Email");
+        tenantEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tenantEmailFocusGained(evt);
+            }
+        });
 
         tenantName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tenantName.setLabelText("Name");
+        tenantName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tenantNameFocusGained(evt);
+            }
+        });
+        tenantName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tenantNameKeyTyped(evt);
+            }
+        });
 
         tenantAge.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         tenantAge.setLabelText("Age");
+        tenantAge.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tenantAgeFocusGained(evt);
+            }
+        });
         tenantAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tenantAgeActionPerformed(evt);
+            }
+        });
+        tenantAge.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tenantAgeKeyTyped(evt);
             }
         });
 
         addTenant.setBackground(new java.awt.Color(0, 91, 149));
         addTenant.setForeground(new java.awt.Color(255, 255, 255));
         addTenant.setText("Add Tenant");
-        addTenant.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addTenant.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         addTenant.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addTenantMouseEntered(evt);
@@ -975,28 +1033,29 @@ public class SystemAdmin extends javax.swing.JFrame {
         genderCombo.setSelectedIndex(-1);
         genderCombo.setLabeText("Gender");
 
-        tenantDob.setLabelText("Date of birth");
+        tenantDob2.setDateFormatString("MM/dd/yyyy");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 70, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tenantName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                    .addComponent(tenantEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                    .addComponent(tenantDob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(60, 60, 60))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tenantName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tenantAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tenantContact, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                        .addComponent(tenantEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(tenantDob2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(110, 110, 110))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(274, 274, 274)
                 .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1009,18 +1068,22 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tenantAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenantEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tenantDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(addTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tenantDob2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47))
         );
 
         jTabbedPane2.addTab("Add Tenant", jPanel5);
 
+        button1.setBackground(new java.awt.Color(0, 91, 149));
+        button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("View ");
+        button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
@@ -1034,27 +1097,27 @@ public class SystemAdmin extends javax.swing.JFrame {
             .addComponent(jTabbedPane2)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(312, 312, 312)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(addHouseComCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1067,13 +1130,18 @@ public class SystemAdmin extends javax.swing.JFrame {
         createEnterpriseName.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         createEnterpriseName.setLabelText("Enterprise Name");
         createEnterpriseName.setLineColor(new java.awt.Color(27, 152, 245));
+        createEnterpriseName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                createEnterpriseNameFocusGained(evt);
+            }
+        });
 
         createEnterpriseType.setLabeText("Enterprise Type");
 
         createEnterpriseButton.setBackground(new java.awt.Color(0, 91, 149));
         createEnterpriseButton.setForeground(new java.awt.Color(255, 255, 255));
-        createEnterpriseButton.setText("Create Admin");
-        createEnterpriseButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        createEnterpriseButton.setText("Create Enterprise");
+        createEnterpriseButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         createEnterpriseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 createEnterpriseButtonMouseEntered(evt);
@@ -1092,27 +1160,27 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createEnterpriseType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createEnterpriseName, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
-                .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(createEnterpriseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(createEnterpriseType, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(216, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(91, 91, 91)
+                .addGap(119, 119, 119)
                 .addComponent(createEnterpriseType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(createEnterpriseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addGap(50, 50, 50)
                 .addComponent(createEnterpriseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntLayout = new javax.swing.GroupLayout(createEnt);
@@ -1133,13 +1201,18 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntUsername.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         cEntUsername.setLabelText("Username");
         cEntUsername.setLineColor(new java.awt.Color(27, 152, 245));
+        cEntUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cEntUsernameFocusGained(evt);
+            }
+        });
 
         cEntName.setLabeText("Enterprise List");
 
         cEntCreateButton.setBackground(new java.awt.Color(0, 91, 149));
         cEntCreateButton.setForeground(new java.awt.Color(255, 255, 255));
         cEntCreateButton.setText("Create Admin");
-        cEntCreateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cEntCreateButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cEntCreateButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cEntCreateButtonMouseClicked(evt);
@@ -1160,30 +1233,40 @@ public class SystemAdmin extends javax.swing.JFrame {
         cEntEEname.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         cEntEEname.setLabelText("Name");
         cEntEEname.setLineColor(new java.awt.Color(27, 152, 245));
+        cEntEEname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cEntEEnameFocusGained(evt);
+            }
+        });
 
         cEntPassword.setLabelText("Password");
+        cEntPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cEntPasswordFocusGained(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(182, 182, 182))
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(93, 93, 93)
+                .addGap(176, 176, 176)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cEntName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cEntEEname, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
-                .addGap(89, 89, 89))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cEntEEname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cEntPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cEntUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cEntName, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(112, 112, 112)
                 .addComponent(cEntName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cEntUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1191,9 +1274,9 @@ public class SystemAdmin extends javax.swing.JFrame {
                 .addComponent(cEntPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(cEntEEname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(53, 53, 53)
                 .addComponent(cEntCreateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout createEntAdminTabLayout = new javax.swing.GroupLayout(createEntAdminTab);
@@ -1215,6 +1298,10 @@ public class SystemAdmin extends javax.swing.JFrame {
 
         vSEntepriseT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
@@ -1247,14 +1334,20 @@ public class SystemAdmin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(vSEntepriseT);
 
+        button2.setBackground(new java.awt.Color(0, 91, 149));
+        button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("View Data");
+        button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button2ActionPerformed(evt);
             }
         });
 
+        button3.setBackground(new java.awt.Color(0, 91, 149));
+        button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Update");
+        button3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         button3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button3ActionPerformed(evt);
@@ -1265,30 +1358,29 @@ public class SystemAdmin extends javax.swing.JFrame {
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 561, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(238, 238, 238)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(55, 55, 55)
                 .addComponent(vSEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(125, 125, 125))
         );
 
         javax.swing.GroupLayout viewSystemTabLayout = new javax.swing.GroupLayout(viewSystemTab);
@@ -1457,22 +1549,61 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tenantAgeActionPerformed
 
     private void addTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTenantActionPerformed
+       if (tenantName.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter Tenant Name");
+             return;
+         }
+          else if(tenantAge.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter Tenant Age");
+             return;
+         }
+          else if(tenantContact.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter Tenant Contact");
+             return;
+         }
+          else if(tenantEmail.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter Tenant Email");
+             return;
+         }
+        if (!tenantEmail.getText().matches("^.+@.+\\..+$")) {
+            JOptionPane.showMessageDialog(this, "Invalid Email Address");
+            return;
+        }
        
+        if (tenantContact.getText().length() >= 11) {
+            JOptionPane.showMessageDialog(this, "Contact Number too Long");
+            return ;
+        }
+        if (tenantContact.getText().length() < 10) {
+            JOptionPane.showMessageDialog(this, "Contact Number too Short");
+            return;
+        }
+         else{
         int selectedRowIndex = houseTable.getSelectedRow();
+        if(selectedRowIndex <0){
+             JOptionPane.showMessageDialog(null, "Please select house first");
+        return;
+        }
+        
+        
        
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
         House selectedHouse = selectedCommunity.getHouse().getHouses().get(selectedRowIndex);
         Date date = new Date(); 
-        try{
-            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            date = format.parse(tenantDob.getText());
-            
-        } catch (ParseException e) {e.printStackTrace();}
+//        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        date = tenantDob2.getDate();
 
         selectedHouse.getTenats().createAndAddTenant(tenantName.getText(), tenantName.getText(), date, String.valueOf(genderCombo.getSelectedItem()), Integer.parseInt(tenantAge.getText()), 
                 tenantEmail.getText(), String.valueOf(tenantContact.getText()),selectedHouse);
         
         JOptionPane.showMessageDialog(this, "Tenant Added!");
+        tenantName.setText(null);
+        tenantAge.setText(null);
+        tenantContact.setText(null);
+        tenantEmail.setText(null);
+        genderCombo.setSelectedItem(-1);
+          }
+       
     }//GEN-LAST:event_addTenantActionPerformed
 
     private void createEnterpriseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEnterpriseButtonActionPerformed
@@ -1503,6 +1634,7 @@ public class SystemAdmin extends javax.swing.JFrame {
         System.out.println(name);
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
         JOptionPane.showMessageDialog(this, "Enterprise Added");
+        
         createEnterpriseName.setText(null);
          }
     }//GEN-LAST:event_createEnterpriseButtonActionPerformed
@@ -1635,7 +1767,6 @@ public class SystemAdmin extends javax.swing.JFrame {
     private void sysAdminTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sysAdminTabMouseClicked
         // TODO add your handling code here:
         int index = sysAdminTab.getSelectedIndex();
-       
         System.out.print(index);
         switch (index) {
             case 0:
@@ -1715,12 +1846,24 @@ public class SystemAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tenantsTableMouseClicked
 
     private void addHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHouseActionPerformed
-       
+        if (houseNumber.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter House Number");
+             
+         }
+          else if(houseAddress.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter House Address");
+          
+         }
+         else{
         Community selectedCommunity = (Community) addHouseComCombo.getSelectedItem();
     
-        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getText(), houseNumber.getText(),selectedCommunity);
+        selectedCommunity.getHouse().createAndAddHouse(houseNumber.getText(), houseAddress.getText(),selectedCommunity);
         
         JOptionPane.showMessageDialog(this, "House Added!");
+        houseAddress.setText(null);
+        houseNumber.setText(null);
+        
+         }
     }//GEN-LAST:event_addHouseActionPerformed
 
     private void cEntCreateButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cEntCreateButtonMouseClicked
@@ -1775,47 +1918,78 @@ public class SystemAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_button3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SystemAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new SystemAdmin().setVisible(true);
-//            }
-//        });
-//    }
+    private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
+       xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_headerMousePressed
+
+    private void headerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_headerMouseDragged
+
+    private void tenantAgeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tenantAgeKeyTyped
+      if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tenantAgeKeyTyped
+
+    private void tenantContactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tenantContactKeyTyped
+      if (!Character.isDigit(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tenantContactKeyTyped
+
+    private void tenantNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tenantNameKeyTyped
+       char c = evt.getKeyChar();
+        if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c)) {
+            tenantName.setEditable(true);
+        } else {
+            tenantName.setEditable(false);
+        }
+    }//GEN-LAST:event_tenantNameKeyTyped
+
+    private void houseAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_houseAddressFocusGained
+        houseAddress.setHelperText(null);
+    }//GEN-LAST:event_houseAddressFocusGained
+
+    private void houseNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_houseNumberFocusGained
+        houseNumber.setHelperText(null);
+    }//GEN-LAST:event_houseNumberFocusGained
+
+    private void tenantNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantNameFocusGained
+        tenantName.setHelperText(null);
+    }//GEN-LAST:event_tenantNameFocusGained
+
+    private void tenantContactFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantContactFocusGained
+       tenantContact.setHelperText(null);
+    }//GEN-LAST:event_tenantContactFocusGained
+
+    private void tenantAgeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantAgeFocusGained
+       tenantAge.setHelperText(null);
+    }//GEN-LAST:event_tenantAgeFocusGained
+
+    private void tenantEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tenantEmailFocusGained
+        tenantEmail.setHelperText(null);
+    }//GEN-LAST:event_tenantEmailFocusGained
+
+    private void createEnterpriseNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_createEnterpriseNameFocusGained
+       createEnterpriseName.setHelperText(null);
+    }//GEN-LAST:event_createEnterpriseNameFocusGained
+
+    private void cEntUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cEntUsernameFocusGained
+        cEntUsername.setHelperText(null);
+    }//GEN-LAST:event_cEntUsernameFocusGained
+
+    private void cEntPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cEntPasswordFocusGained
+        cEntPassword.setHelperText(null);
+    }//GEN-LAST:event_cEntPasswordFocusGained
+
+    private void cEntEEnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cEntEEnameFocusGained
+       cEntEEname.setHelperText(null);
+    }//GEN-LAST:event_cEntEEnameFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ListHouses;
@@ -1887,7 +2061,7 @@ public class SystemAdmin extends javax.swing.JFrame {
     private javax.swing.JTabbedPane sysAdminTab;
     private UI.Components.MyTextFieldLogin tenantAge;
     private UI.Components.MyTextFieldLogin tenantContact;
-    private UI.Components.MyTextFieldLogin tenantDob;
+    private com.toedter.calendar.JDateChooser tenantDob2;
     private UI.Components.MyTextFieldLogin tenantEmail;
     private UI.Components.MyTextFieldLogin tenantName;
     private javax.swing.JTable tenantsTable;

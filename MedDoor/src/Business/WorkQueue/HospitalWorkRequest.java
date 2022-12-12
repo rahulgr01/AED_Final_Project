@@ -15,6 +15,7 @@ import java.util.Date;
 public class HospitalWorkRequest  extends WorkRequest{
     public Tenant patient;
     public Date assignedDate;
+    public int medicinesPrice;
     
     public Tenant getPatient() {
         return patient;
@@ -32,5 +33,12 @@ public class HospitalWorkRequest  extends WorkRequest{
         this.assignedDate = assignedDate;
     }
 
+      public int getMedicinesPrice() {
+        return medicinesPrice;
+    }
+
+    public void setMedicinesPrice(int medicinesPrice) {
+        this.medicinesPrice = medicinesPrice;
+    }
    
 }

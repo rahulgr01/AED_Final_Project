@@ -9,6 +9,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.PharmacyAdmin.PharmacyAdmin;
+import UI.VolunteerAdmin.HomeCareVolunteer;
 import javax.swing.JFrame;
 
 /**
@@ -21,7 +22,7 @@ public class HomeCareVolunteerRole extends Role {
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
-         new PharmacyAdmin(account,organization, enterprise, business,parentFrame).setVisible(true);
+         new HomeCareVolunteer(account,organization, enterprise, business,parentFrame).setVisible(true);
     }
      @Override
     public String toString(){

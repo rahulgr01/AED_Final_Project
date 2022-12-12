@@ -14,7 +14,9 @@ import Business.Community.Tenant;
 public class HomeCareVolunteerWorkRequest extends WorkRequest {
     public House assignedHouse;
     public Tenant patient;
-
+    
+    public int patientAmount;
+    
     public House getAssignedHouse() {
         return assignedHouse;
     }
@@ -30,5 +32,16 @@ public class HomeCareVolunteerWorkRequest extends WorkRequest {
     public void setPatient(Tenant patient) {
         this.patient = patient;
     }
+
+    public int getPatientAmount() {
+        return patientAmount;
+    }
+
+    public void setPatientAmount(int patientAmount) {
+        this.patientAmount = patientAmount;
+    }
+    
+    
+    
     
 }
