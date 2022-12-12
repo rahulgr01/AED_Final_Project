@@ -166,10 +166,6 @@ public class StaffInterface extends javax.swing.JFrame {
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        managePharmacy = new javax.swing.JPanel();
-        side2 = new javax.swing.JPanel();
-        managePharmacylbl = new javax.swing.JLabel();
-        managePharmacyIcon = new javax.swing.JLabel();
         hospitalAdmin = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -437,78 +433,17 @@ public class StaffInterface extends javax.swing.JFrame {
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        managePharmacy.setBackground(new java.awt.Color(0, 91, 149));
-        managePharmacy.setPreferredSize(new java.awt.Dimension(220, 50));
-        managePharmacy.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                managePharmacyMouseExited(evt);
-            }
-        });
-
-        side2.setBackground(new java.awt.Color(0, 91, 149));
-        side2.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
-        side2.setLayout(side2Layout);
-        side2Layout.setHorizontalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side2Layout.setVerticalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        managePharmacylbl.setBackground(new java.awt.Color(51, 51, 51));
-        managePharmacylbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        managePharmacylbl.setForeground(new java.awt.Color(255, 255, 255));
-        managePharmacylbl.setText("Manage Patients");
-
-        managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/health_checkup_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout managePharmacyLayout = new javax.swing.GroupLayout(managePharmacy);
-        managePharmacy.setLayout(managePharmacyLayout);
-        managePharmacyLayout.setHorizontalGroup(
-            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(managePharmacyLayout.createSequentialGroup()
-                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(managePharmacyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(managePharmacylbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        managePharmacyLayout.setVerticalGroup(
-            managePharmacyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, managePharmacyLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(managePharmacylbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(managePharmacyIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
         javax.swing.GroupLayout menuhide1Layout = new javax.swing.GroupLayout(menuhide1);
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
                 .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(managePharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(925, 925, 925))
+                .addGap(987, 987, 987))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -673,7 +608,7 @@ public class StaffInterface extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(114, 114, 114)
                 .addComponent(updatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(434, Short.MAX_VALUE))
         );
 
         dashboard.add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -761,22 +696,6 @@ public class StaffInterface extends javax.swing.JFrame {
         changecolor(pharmacyStaistics, new Color(0, 91, 149));
         changecolor(side1, new Color(0, 91, 149));
     }//GEN-LAST:event_pharmacyStaisticsMouseExited
-
-    private void managePharmacyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseClicked
-        hospitalAdmin.setSelectedIndex(1);
-        changecolor(managePharmacy, new Color(3, 138, 255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_managePharmacyMouseClicked
-
-    private void managePharmacyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseEntered
-        changecolor(managePharmacy, new Color(3, 138, 255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_managePharmacyMouseEntered
-
-    private void managePharmacyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_managePharmacyMouseExited
-        changecolor(managePharmacy, new Color(0, 91, 149));
-        changecolor(side2, new Color(0, 91, 149));
-    }//GEN-LAST:event_managePharmacyMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27, 152, 245));
@@ -1030,9 +949,6 @@ public class StaffInterface extends javax.swing.JFrame {
     private UI.Components.Combobox labCombo;
     private javax.swing.JPanel lineSetting;
     private javax.swing.JPanel linehidemenu;
-    private javax.swing.JPanel managePharmacy;
-    private javax.swing.JLabel managePharmacyIcon;
-    private javax.swing.JLabel managePharmacylbl;
     private javax.swing.JLabel max;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuhide;
@@ -1042,7 +958,6 @@ public class StaffInterface extends javax.swing.JFrame {
     private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
-    private javax.swing.JPanel side2;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;
     private UI.Components.Combobox statusComboBox;

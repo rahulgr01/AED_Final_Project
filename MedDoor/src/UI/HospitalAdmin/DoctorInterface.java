@@ -618,11 +618,8 @@ public class DoctorInterface extends javax.swing.JFrame {
         clickmenu(setting, hidemenu, 1);
         int a = JOptionPane.showConfirmDialog(this, "Do you want to logout?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            this.dispose();
-            MainLoginPage x = new MainLoginPage();
-            x.show(); //display View LoginPage Form
-            //dispose(); //Close SystemAdmin Form
-            x.setVisible(true);
+             this.setVisible(false);
+           parentFrame.setVisible(true);
         }
     }//GEN-LAST:event_buttonLogoutMouseClicked
 

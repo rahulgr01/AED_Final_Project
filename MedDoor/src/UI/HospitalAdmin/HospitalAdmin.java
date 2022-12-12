@@ -1415,7 +1415,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_manageCategoryMouseExited
 
     private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
-        hospitalAdmin.setSelectedIndex(3);
+        hospitalAdmin.setSelectedIndex(0);
         changecolor(manageMedicine, new Color(3, 138, 255));
         changecolor(side4, new Color(190, 224, 236));
     }//GEN-LAST:event_manageMedicineMouseClicked
@@ -1454,14 +1454,12 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 break;
             case 1:
                 //                populateDoctor();
-                break;
+              
+                 populateDoctorTable();
+                   break;
             case 2:
-                //                populateEnterpriseName(network, cEntName);
-                populateDoctorTable();
-                break;
-            case 3:
-                //                populateEnterpriseName(network, vSEnterprise);
-                populateStaffTable();
+               populateStaffTable();     //     populateEnterpriseName(network, cEntName);
+               
                 break;
             default:
                 throw new AssertionError();
@@ -1565,24 +1563,21 @@ public class HospitalAdmin extends javax.swing.JFrame {
         for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
             if (org.getName() == Organization.Type.Doctor.getValue()) {
                 Employee employee = org.getEmployeeDirectory().getEmployeeList().get(selectedRowIndex);
-                if (EcoSystem.isUserUnique(username)) {
+                System.out.println("employee-" + employee.getName());
 
                     employee.setName(name);
                     UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
+                    System.out.println("uswr--"+ user.getPassword());
                     user.setEmployee(employee);
                     user.setPassword(password);
                     user.setUsername(username);
+                     System.out.println("uswr updayed--"+ user.getPassword());
                     clearDoctor();
                     this.populateDoctorTable();
                     JOptionPane.showMessageDialog(this, "Doctor Updated Successfully!");
                    
 
-                } else {
-                    clearDoctor();
-                    this.populateDoctorTable();
-                    JOptionPane.showMessageDialog(this, "Please enter the unique username!");
-                    
-                }
+               
 
             }
         }
@@ -1599,7 +1594,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
     private void addDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorActionPerformed
 
         String username = txtDoctorUsername.getText();
-        //        char[] passwordCharArray = doctorPassword.getPassword();
+        //char[] passwordCharArray = doctorPassword.getPassword();
 
         String password = txtDoctorPassword.getText();//String.valueOf(passwordCharArray);
         String name = txtDoctorName.getText();
@@ -1615,7 +1610,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     this.populateDoctorTable();
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Please try again!");
+                    JOptionPane.showMessageDialog(this, "Please give a unique username!");
                     clearDoctor();
 
                 }
@@ -1692,6 +1687,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                 txtDoctorPassword.setText(user.getPassword());
             }
         }
+        
     }//GEN-LAST:event_crudStaffTableMouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -1726,7 +1722,6 @@ public class HospitalAdmin extends javax.swing.JFrame {
         for (Organization org : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
             if (org.getName() == Organization.Type.HospitalStaff.getValue()) {
                 Employee employee = org.getEmployeeDirectory().getEmployeeList().get(selectedRowIndex);
-                if (EcoSystem.isUserUnique(username)) {
 
                     employee.setName(name);
                     UserAccount user = org.getUserAccountDirectory().getUserAccountList().get(selectedRowIndex);
@@ -1738,12 +1733,7 @@ public class HospitalAdmin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Staff Updated Successfully!");
                     
 
-                } else {
-                    clearDoctor();
-                    this.populateDoctorTable();
-                    JOptionPane.showMessageDialog(this, "Please enter the unique username!");
-                    
-                }
+                
 
             }
         }
