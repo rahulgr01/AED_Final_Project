@@ -4,10 +4,12 @@
  */
 package Business;
 
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.PharmacyAdminRole;
 import Business.Role.Role;
+import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -49,11 +51,31 @@ public class EcoSystem extends Organization {
         roleList.add(new PharmacyAdminRole());
         return roleList;
     }
-    public static boolean isUserUnique(String username) {
+        public static boolean isUserUnique(String username) {
 
-//        if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
-//            return false;
-//        }
+      //  if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
+             for (Network network : business.getNetworkList()) {
+                 
+                for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (UserAccount ua : enterprise.getUserAccountDirectory().getUserAccountList()) {
+                        if(ua.getUsername().equals(username)){
+                            return false;
+                        }
+                    }
+                    
+                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                            for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+                                 if(ua.getUsername().equals(username)){
+                            return false;
+                        }
+                    }
+                            }
+                        }
+                    }
+            
+      //  }
+
+       
 
         return true;
     }

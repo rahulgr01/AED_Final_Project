@@ -6,6 +6,7 @@ package Business.WorkQueue;
 
 import Business.Community.Tenant;
 import Business.Patient.Patient;
+import java.util.Date;
 
 /**
  *
@@ -13,6 +14,7 @@ import Business.Patient.Patient;
  */
 public class HospitalWorkRequest  extends WorkRequest{
     public Tenant patient;
+    public Date assignedDate;
     
     public Tenant getPatient() {
         return patient;
@@ -20,6 +22,14 @@ public class HospitalWorkRequest  extends WorkRequest{
 
     public void setPatient(Tenant patient) {
         this.patient = patient;
+    }
+    
+  public Date getAssignedDate() {
+        return assignedDate;
+    }
+
+    public void setAssignedDate(Date assignedDate) {
+        this.assignedDate = assignedDate;
     }
 
    
