@@ -75,17 +75,18 @@ public class InsurancesAdmin extends javax.swing.JFrame {
     
      public void populateSurveyList() {
         try {
+              DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+               model.setRowCount(0);
             for(Organization org: dEnterprise.getOrganizationDirectory().getOrganizationList()) {
                 if (org instanceof ClaimsOrganization) {
             for(WorkRequest wq: org.getWorkQueue().getWorkRequestList()) {
             if(wq instanceof ClaimsWorkRequest)
             {
-               DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-               model.setRowCount(0);
+             
               
              Object[] row = new Object[5];
-            row[0] = ((PharmacyWorkRequest) wq).getSender().getEmployee().getName();
-            row[1] = ((PharmacyWorkRequest) wq).getReceiver().getEmployee().getName();
+            row[0] = ((ClaimsWorkRequest) wq).getSender().getEmployee().getName();
+            row[1] = ((ClaimsWorkRequest) wq).getReceiver().getEmployee().getName();
             
             
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -699,15 +700,15 @@ public class InsurancesAdmin extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(dOrganizationsCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(employeeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addComponent(employeeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(employeePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(employeeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(createEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addEmployeeLayout = new javax.swing.GroupLayout(addEmployee);
@@ -855,7 +856,22 @@ public class InsurancesAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_employeeNameActionPerformed
 
     private void createEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createEmployeeActionPerformed
- 
+if (employeeUsername.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Please enter Employee Fullname");
+           
+         }
+         else  if(employeePassword.getText().length()>25||employeePassword.getText().length()<5) {
+             JOptionPane.showMessageDialog(null,"Please enter Valid Password");
+           
+         }
+         else if (employeePassword.getText().equals("")){
+             JOptionPane.showMessageDialog(null,"Do not enter an empty password!!!");
+             
+         } else if(employeeName.getText().equals("")) {
+             JOptionPane.showMessageDialog(null,"Please enter UserName");
+            
+         }
+         else{ 
     int index = dOrganizationsCombo.getSelectedIndex();
 
         String username = employeeUsername.getText();
@@ -869,10 +885,14 @@ public class InsurancesAdmin extends javax.swing.JFrame {
             if(org instanceof ClaimsOrganization)
             {
                  org.getUserAccountDirectory().createUserAccount(username, password, employee, new ClaimHandler());
-
-            } 
+                JOptionPane.showMessageDialog(null,"Emplyoee added sucessfully");
+                employeePassword.setText(null);
+                employeeName.setText(null);
+                 employeeUsername.setText(null);
+           } 
             
         }
+         }
 
     }//GEN-LAST:event_createEmployeeActionPerformed
  public void populateEmployeeEnterpriseOrganizations() {

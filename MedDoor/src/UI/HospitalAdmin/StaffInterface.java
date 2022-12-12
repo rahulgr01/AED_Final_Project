@@ -7,6 +7,7 @@ import Business.Enterprise.DiagnosticsEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HospitalEnterprise;
 import Business.Enterprise.VolunteerEnterprise;
+import Business.MailNew;
 import Business.Network.Network;
 import Business.Organization.DoctorOrganization;
 import Business.Organization.HomeCareVolunteerOrganization;
@@ -32,6 +33,9 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -77,39 +81,38 @@ public class StaffInterface extends javax.swing.JFrame {
     }
 
     public void populateRequestTable() {
-        
-        try{
-          DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
+
+        try {
+            DefaultTableModel model = (DefaultTableModel) patientTable.getModel();
 
             model.setRowCount(0);
-            
-        for (WorkRequest wq : organization.getWorkQueue().getWorkRequestList()) {
-            System.out.println("wq--" + wq.getMessage());
-            if (wq instanceof StaffWorkRequest) {
+
+            for (WorkRequest wq : organization.getWorkQueue().getWorkRequestList()) {
                 System.out.println("wq--" + wq.getMessage());
-                Tenant tenant = ((StaffWorkRequest) wq).getPatient();
-                //  tenantList.add(tenant);
-                Object[] row = new Object[8];
-                row[0] = tenant.getFirstName();
-                row[1] = ((StaffWorkRequest) wq).getSender().getEmployee().getName();
+                if (wq instanceof StaffWorkRequest) {
+                    System.out.println("wq--" + wq.getMessage());
+                    Tenant tenant = ((StaffWorkRequest) wq).getPatient();
+                    //  tenantList.add(tenant);
+                    Object[] row = new Object[8];
+                    row[0] = tenant.getFirstName();
+                    row[1] = ((StaffWorkRequest) wq).getSender().getEmployee().getName();
 
-                if (((StaffWorkRequest) wq).getDoctorAssigned() == null) {
-                    row[5] = "Pending";
-                } else {
-                    row[5] = ((StaffWorkRequest) wq).getDoctorAssigned();
+                    if (((StaffWorkRequest) wq).getDoctorAssigned() == null) {
+                        row[5] = "Pending";
+                    } else {
+                        row[5] = ((StaffWorkRequest) wq).getDoctorAssigned();
+                    }
+                    row[4] = ((StaffWorkRequest) wq).getLabStatus();
+                    // row[5] = ((StaffWorkRequest) wq).getLabReport();
+                    row[6] = ((StaffWorkRequest) wq).getPrescription();
+                    row[3] = ((StaffWorkRequest) wq).getStatus();
+                    row[2] = ((StaffWorkRequest) wq).getMessage();
+                    row[7] = ((StaffWorkRequest) wq).getMedicinesPrice();
+                    model.addRow(row);
                 }
-                row[4] = ((StaffWorkRequest) wq).getLabStatus();
-               // row[5] = ((StaffWorkRequest) wq).getLabReport();
-                row[6] = ((StaffWorkRequest) wq).getPrescription();
-                row[3] = ((StaffWorkRequest) wq).getStatus();
-                row[2] = ((StaffWorkRequest) wq).getMessage();
-                 row[7] = ((StaffWorkRequest) wq).getMedicinesPrice();
-                   model.addRow(row);
-            }
 
-        }
-    }
-        catch (Exception e) {
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "system is down please contact system admin");
         }
     }
@@ -828,26 +831,30 @@ public class StaffInterface extends javax.swing.JFrame {
     private void sendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendRequestActionPerformed
 
         // TODO add your handling code here:
-        
         int selectedrow = patientTable.getSelectedRow();
         if (selectedrow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
             return;
         }
+        String message = textAreaMsg.getText();
+
+        if (message.equals("") || message.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter something to send.");
+            return;
+        }
+        int selectedStatusIndex = statusComboBox.getSelectedIndex();
+        if (selectedStatusIndex < 0) {
+            JOptionPane.showMessageDialog(null, "Please select the action to be performed.");
+            return;
+        }
 
         String selectedValue = statusComboBox.getSelectedItem().toString();
-System.out.println("onclick"+selectedValue);
+        System.out.println("onclick" + selectedValue);
         switch (selectedValue) {
 
             case "Send Sample To Lab":
  try {
 
-                String message = textAreaMsg.getText();
-
-                if (message.equals("") || message.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
-                    return;
-                }
                 if (labCombo.getSelectedIndex() < 0) {
 
                     JOptionPane.showMessageDialog(null, "Select Lab Test.");
@@ -862,10 +869,9 @@ System.out.println("onclick"+selectedValue);
                 docRequest.setMessage(message);
                 docRequest.setSender(account);
                 docRequest.setStatus("Sent to Lab");
-            docRequest.setCreatinine("No data");
-            docRequest.setSugar("No Record");
-            docRequest.setLabTest(String.valueOf(labCombo.getSelectedItem()));
-             
+                docRequest.setCreatinine("No data");
+                docRequest.setSugar("No Record");
+                docRequest.setLabTest(String.valueOf(labCombo.getSelectedItem()));
 
                 Organization org = null;
 
@@ -883,11 +889,11 @@ System.out.println("onclick"+selectedValue);
 
                 if (org != null) {
                     org.getWorkQueue().getWorkRequestList().add(docRequest);
-                   account.getWorkQueue().getWorkRequestList().add(docRequest);
+                    account.getWorkQueue().getWorkRequestList().add(docRequest);
                     organization.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent to Lab");
-                    ((StaffWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setLabStatus("Pending");
+                    ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setLabStatus("Pending");
                     hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent to Lab");
-hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Patient is treated");
+                    hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Patient is treated");
                     JOptionPane.showMessageDialog(this, "Work request created successfully!");
                     populateRequestTable();
                 }
@@ -898,22 +904,14 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
             }
 
             break;
-               case "Send Prescription To Pharmacy":
+            case "Send Prescription To Pharmacy":
  try {
 
-                String message = textAreaMsg.getText();
-
-                if (message.equals("") || message.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
-                    return;
-                }
-                
-              
 
                 PharmacyWorkRequest docRequest = new PharmacyWorkRequest();
-               System.out.println("staff"+((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
+                System.out.println("staff" + ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
                         get(selectedrow))).getPrescriptionObj());
-              //   int amounts=Integer.parseInt(medicinePrice);
+                //   int amounts=Integer.parseInt(medicinePrice);
                 docRequest.setPrescriptionObj(((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
                         get(selectedrow))).getPrescriptionObj());
                 docRequest.setMessage(message);
@@ -921,9 +919,8 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
                         get(selectedrow))).getPatient().getFirstName());
                 docRequest.setSender(account);
                 docRequest.setStatus("Sent to Pharmacy");
-            
-            //     docRequest.setMedicinesPrice(amounts);
 
+                //     docRequest.setMedicinesPrice(amounts);
                 Organization org = null;
 
                 for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
@@ -940,9 +937,9 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
 
                 if (org != null) {
                     org.getWorkQueue().getWorkRequestList().add(docRequest);
-                   account.getWorkQueue().getWorkRequestList().add(docRequest);
+                    account.getWorkQueue().getWorkRequestList().add(docRequest);
                     organization.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent to Pharmacy");
-                   
+
                     hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent to Pharmacy");
                     JOptionPane.showMessageDialog(this, "Work request created successfully!");
                     populateRequestTable();
@@ -955,60 +952,33 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
 
             break;
 
-            
-            
-               case "Send Charges To Volunteer":
+            case "Send Charges To Volunteer":
                    try {
-                       
-                String message = textAreaMsg.getText();
 
-                if (message.equals("") || message.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
+
+                String medicinePrice = jLabel10.getText();
+                if (medicinePrice == "" || medicinePrice == "0") {
+                    JOptionPane.showMessageDialog(null, "Enter the total amount!!");
                     return;
                 }
-               
-                String medicinePrice =  jLabel10.getText();
-                if (medicinePrice == ""){
-            JOptionPane.showMessageDialog(null,"Enter the total amount!!");
+                if (amount.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter the hospital amount!!");
             return;
         }
-                  int amounts=Integer.parseInt(medicinePrice);
-//                       HomeCareVolunteerWorkRequest docRequest = new HomeCareVolunteerWorkRequest();
-//                Tenant tenat = ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
-//                        get(selectedrow))).getPatient();
-//
-//                docRequest.setPatient(tenat);
-//                docRequest.setMessage(message);
-//                docRequest.setSender(account);
-//                docRequest.setStatus("Sent to Home Volunteer");
-//           
-//                 docRequest.setPatientAmount(amounts);
-//             
-//
-//                Organization org = null;
-//
-//                for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
-//
-//                    if (enter instanceof VolunteerEnterprise) {
-//                        for (Organization orn : enter.getOrganizationDirectory().getOrganizationList()) {
-//                            if (orn instanceof HomeCareVolunteerOrganization) {
-//                                org = orn;
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                if (org != null) {
-//                    org.getWorkQueue().getWorkRequestList().add(docRequest);
-//                   account.getWorkQueue().getWorkRequestList().add(docRequest);
-//                    organization.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent Charges to Home Care Volunteer");
-                ((HospitalWorkRequest)hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow)).setMedicinesPrice(amounts);
-                    hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent Charges to Home Care Volunteer");
-                   hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Sent Charges to Home Care Volunteer");
-                   
-                    JOptionPane.showMessageDialog(this, "Work request completed successfully!");
-                    populateRequestTable();
+                int amounts = Integer.parseInt(medicinePrice);
+
+                ((HospitalWorkRequest) hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow)).setMedicinesPrice(amounts);
+                hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent Charges to Home Care Volunteer");
+                hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Sent Charges to Home Care Volunteer");
+                 ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setStatus("Sent Charges to Home Care Volunteer");
+                    ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setMedicinesPrice(amounts);
+                JOptionPane.showMessageDialog(this, "Work request completed successfully and mail has been sent!");
+                try {
+                    MailNew m = new MailNew("rahulgr3001@gmail.com", "MedDoor:Hospital Charges ", "Doctor has been assigned and Bill has been generated for patient");
+                } catch (MessagingException ex) {
+                    Logger.getLogger(MainLoginPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                populateRequestTable();
 //                }
 
             } catch (Exception e) {
@@ -1017,18 +987,11 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
             }
 
             break;
-            
-            
-            
+
             case "Assign Doctor":
                  try {
 
-                String message = textAreaMsg.getText();
-
-                if (message.equals("") || message.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please enter something to send.");
-                    return;
-                }
+               
                 if (doctorCombo.getSelectedIndex() < 0) {
 
                     JOptionPane.showMessageDialog(null, "Assign Doctor first.");
@@ -1044,12 +1007,14 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
                 docRequest.setMessage(message);
                 docRequest.setStatus("Doctor Assigned");
                 docRequest.setSender(account);
-                docRequest.setCreatinine("No data");
-            docRequest.setSugar("No Record");
-            docRequest.setLabReport("Not generated");
-            docRequest.setLabTest(String.valueOf(labCombo.getSelectedItem()));
-            docRequest.setPrescription("Not generated");
-                
+                docRequest.setCreatinine(((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
+                        get(selectedrow))).getCreatinine());
+                 docRequest.setSugar(((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
+                        get(selectedrow))).getSugar());
+                docRequest.setLabReport(((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
+                        get(selectedrow))).getLabReport());
+                docRequest.setLabTest(String.valueOf(labCombo.getSelectedItem()));
+                docRequest.setPrescription("Not generated");
 
                 Organization org = null;
                 for (Organization orn : hEnterPrise.getOrganizationDirectory().getOrganizationList()) {
@@ -1062,8 +1027,8 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
                 if (org != null) {
                     org.getWorkQueue().getWorkRequestList().add(docRequest);
 //                    account.getWorkQueue().getWorkRequestList().add(docRequest);
-                    ((StaffWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setStatus("Sent to Doctor");
-                    ((StaffWorkRequest)(organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setDoctorAssigned("Done");
+                    ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setStatus("Sent to Doctor");
+                    ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().get(selectedrow))).setDoctorAssigned("Done");
                     JOptionPane.showMessageDialog(this, "Work request created successfully!");
                     populateRequestTable();
                 }
@@ -1174,21 +1139,21 @@ hEnterPrise.getWorkQueue().getWorkRequestList().get(selectedrow).setMessage("Pat
 
     private void sendRequest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendRequest1ActionPerformed
         // TODO add your handling code here:
-         int selectedrow = patientTable.getSelectedRow();
+        int selectedrow = patientTable.getSelectedRow();
         if (selectedrow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
             return;
         }
 
-         if (amount.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Enter the hospital amount!!");
+        if (amount.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Enter the hospital amount!!");
             return;
         }
-         int amounts=Integer.parseInt(amount.getText());
-         int phamacyAm = ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
-                        get(selectedrow))).getMedicinesPrice();
-         jLabel10.setText(String.valueOf(amounts+phamacyAm));
-         
+        int amounts = Integer.parseInt(amount.getText());
+        int phamacyAm = ((StaffWorkRequest) (organization.getWorkQueue().getWorkRequestList().
+                get(selectedrow))).getMedicinesPrice();
+        jLabel10.setText(String.valueOf(amounts + phamacyAm));
+
     }//GEN-LAST:event_sendRequest1ActionPerformed
 
     private void amountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyTyped

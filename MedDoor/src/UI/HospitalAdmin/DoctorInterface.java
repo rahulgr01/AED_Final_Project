@@ -753,23 +753,30 @@ public class DoctorInterface extends javax.swing.JFrame {
         int selectedrow = patientTable.getSelectedRow();
         if (selectedrow < 0) {
             JOptionPane.showMessageDialog(null, "Please select a row");
-
+            return;
         }
 
         try {
 
             String message = textAreaMsg.getText();
 
+                if(medicinesTextArea.getText() == "" || medicinesTextArea.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Add prescription for patient.");
+                return;
+            }
+            
             if (message.equals("") || message.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter something to send.");
                 return;
             }
             if (statusCombo.getSelectedIndex() < 0) {
 
-                JOptionPane.showMessageDialog(null, "Select Status.");
+                JOptionPane.showMessageDialog(null, "Select action to perform.");
                 return;
             }
-
+            
+            
+            
 //                String listString = String.join(", ", list);
             ((DoctorWorkRequest) organization.getWorkQueue().getWorkRequestList().get(selectedrow)).setPrescription("Prescription Sent");
             organization.getWorkQueue().getWorkRequestList().get(selectedrow).setStatus("Sent Prescription");

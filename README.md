@@ -4,7 +4,7 @@ INFO5100-Application Engineering Development Final Project
 # PROJECT NAME: MEDDOOR 
 
 # Team Members
-1. Ashika Kalmady
+1. Ashika Kalmady 002768984
 2. Gursheen Kaur 002776019
 3. Rahul Gollapalli Ranganatha 002767096
 
@@ -34,7 +34,11 @@ Report collected by survey volunteer is passed over to volunteer admin. Voluntee
 ## Language Used:
 Java 1.8
 
-## External APIs : Google Mail Integration and PDF Report Generation
+## External APIs : 
+1. Google Mail Integration 
+2. PDF Report Generation
+3. Google Map Integration
+4. Chart generation using JFreeChart 
 
 ## Database Used : Database for objects(DB4O)
 ## UML Diagram 
