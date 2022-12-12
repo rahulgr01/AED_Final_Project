@@ -20,7 +20,6 @@ import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,7 +28,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-public class PharmacyAdmin extends javax.swing.JFrame {
+public class Pharmacist extends javax.swing.JFrame {
 
     boolean a = true;
     static boolean maximized = true;
@@ -40,7 +39,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     UserAccount account;
     DiagnosticsEnterprise enterprise;
     JFrame parentFrame;
-    public PharmacyAdmin(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
+    public Pharmacist(UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business,JFrame parentFrame) {
         initComponents();
 //        initListners();
         this.business = business;
@@ -149,14 +148,10 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         buttonLogout = new javax.swing.JLabel();
         menuhide = new javax.swing.JPanel();
         menuhide1 = new javax.swing.JPanel();
-        pharmacyRequests = new javax.swing.JPanel();
+        pharmacyStaistics = new javax.swing.JPanel();
         side1 = new javax.swing.JPanel();
         statisticslbl = new javax.swing.JLabel();
         statisticsimg = new javax.swing.JLabel();
-        processRequests = new javax.swing.JPanel();
-        side2 = new javax.swing.JPanel();
-        processRequest = new javax.swing.JLabel();
-        managePharmacyIcon = new javax.swing.JLabel();
         manageMedicine = new javax.swing.JPanel();
         side4 = new javax.swing.JPanel();
         manageMedicinelbl = new javax.swing.JLabel();
@@ -389,17 +384,17 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
         menuhide1.setBackground(new java.awt.Color(0, 91, 149));
 
-        pharmacyRequests.setBackground(new java.awt.Color(0, 91, 149));
-        pharmacyRequests.setPreferredSize(new java.awt.Dimension(220, 50));
-        pharmacyRequests.addMouseListener(new java.awt.event.MouseAdapter() {
+        pharmacyStaistics.setBackground(new java.awt.Color(0, 91, 149));
+        pharmacyStaistics.setPreferredSize(new java.awt.Dimension(220, 50));
+        pharmacyStaistics.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pharmacyRequestsMouseClicked(evt);
+                pharmacyStaisticsMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pharmacyRequestsMouseEntered(evt);
+                pharmacyStaisticsMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pharmacyRequestsMouseExited(evt);
+                pharmacyStaisticsMouseExited(evt);
             }
         });
 
@@ -420,16 +415,16 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         statisticslbl.setBackground(new java.awt.Color(51, 51, 51));
         statisticslbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         statisticslbl.setForeground(new java.awt.Color(255, 255, 255));
-        statisticslbl.setText("Pharmacy Requests");
+        statisticslbl.setText("Pharmacy Statistics");
 
         statisticsimg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         statisticsimg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/statisticsW_40px.png"))); // NOI18N
 
-        javax.swing.GroupLayout pharmacyRequestsLayout = new javax.swing.GroupLayout(pharmacyRequests);
-        pharmacyRequests.setLayout(pharmacyRequestsLayout);
-        pharmacyRequestsLayout.setHorizontalGroup(
-            pharmacyRequestsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pharmacyRequestsLayout.createSequentialGroup()
+        javax.swing.GroupLayout pharmacyStaisticsLayout = new javax.swing.GroupLayout(pharmacyStaistics);
+        pharmacyStaistics.setLayout(pharmacyStaisticsLayout);
+        pharmacyStaisticsLayout.setHorizontalGroup(
+            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pharmacyStaisticsLayout.createSequentialGroup()
                 .addComponent(side1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statisticsimg, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,72 +432,14 @@ public class PharmacyAdmin extends javax.swing.JFrame {
                 .addComponent(statisticslbl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        pharmacyRequestsLayout.setVerticalGroup(
-            pharmacyRequestsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyRequestsLayout.createSequentialGroup()
+        pharmacyStaisticsLayout.setVerticalGroup(
+            pharmacyStaisticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pharmacyStaisticsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statisticslbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(statisticsimg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(side1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        processRequests.setBackground(new java.awt.Color(0, 91, 149));
-        processRequests.setPreferredSize(new java.awt.Dimension(220, 50));
-        processRequests.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                processRequestsMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                processRequestsMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                processRequestsMouseExited(evt);
-            }
-        });
-
-        side2.setBackground(new java.awt.Color(0, 91, 149));
-        side2.setPreferredSize(new java.awt.Dimension(5, 50));
-
-        javax.swing.GroupLayout side2Layout = new javax.swing.GroupLayout(side2);
-        side2.setLayout(side2Layout);
-        side2Layout.setHorizontalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 5, Short.MAX_VALUE)
-        );
-        side2Layout.setVerticalGroup(
-            side2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        processRequest.setBackground(new java.awt.Color(51, 51, 51));
-        processRequest.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        processRequest.setForeground(new java.awt.Color(255, 255, 255));
-        processRequest.setText("Process Request");
-
-        managePharmacyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        managePharmacyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/management_40px.png"))); // NOI18N
-
-        javax.swing.GroupLayout processRequestsLayout = new javax.swing.GroupLayout(processRequests);
-        processRequests.setLayout(processRequestsLayout);
-        processRequestsLayout.setHorizontalGroup(
-            processRequestsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(processRequestsLayout.createSequentialGroup()
-                .addComponent(side2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(managePharmacyIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(processRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        processRequestsLayout.setVerticalGroup(
-            processRequestsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, processRequestsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(processRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(managePharmacyIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(side2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         manageMedicine.setBackground(new java.awt.Color(0, 91, 149));
@@ -536,10 +473,10 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         manageMedicinelbl.setBackground(new java.awt.Color(51, 51, 51));
         manageMedicinelbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         manageMedicinelbl.setForeground(new java.awt.Color(255, 255, 255));
-        manageMedicinelbl.setText("Add Pharmacy");
+        manageMedicinelbl.setText("Manage Medicine");
 
         manageMedicineIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/pharmacy_shop_40px.png"))); // NOI18N
+        manageMedicineIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/Medicine_40px.png"))); // NOI18N
 
         javax.swing.GroupLayout manageMedicineLayout = new javax.swing.GroupLayout(manageMedicine);
         manageMedicine.setLayout(manageMedicineLayout);
@@ -567,19 +504,16 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         menuhide1.setLayout(menuhide1Layout);
         menuhide1Layout.setHorizontalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pharmacyRequests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(processRequests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         menuhide1Layout.setVerticalGroup(
             menuhide1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuhide1Layout.createSequentialGroup()
-                .addComponent(pharmacyRequests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(processRequests, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addComponent(pharmacyStaistics, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(manageMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(526, 526, 526))
+                .addGap(0, 0, 0))
         );
 
         menuhide.add(menuhide1, java.awt.BorderLayout.CENTER);
@@ -614,72 +548,28 @@ public class PharmacyAdmin extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        button2.setBackground(new java.awt.Color(0, 91, 149));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("Assign to me");
-        button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button2MouseExited(evt);
-            }
-        });
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button2ActionPerformed(evt);
             }
         });
 
-        button3.setBackground(new java.awt.Color(0, 91, 149));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Process");
-        button3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button3MouseExited(evt);
-            }
-        });
         button3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button3ActionPerformed(evt);
             }
         });
 
-        button4.setBackground(new java.awt.Color(0, 91, 149));
-        button4.setForeground(new java.awt.Color(255, 255, 255));
         button4.setText("Refresh");
-        button4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button4MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button4MouseExited(evt);
-            }
-        });
         button4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button4ActionPerformed(evt);
             }
         });
 
-        button5.setBackground(new java.awt.Color(0, 91, 149));
-        button5.setForeground(new java.awt.Color(255, 255, 255));
         button5.setText("Assign to me");
-        button5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        button5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                button5MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                button5MouseExited(evt);
-            }
-        });
         button5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button5ActionPerformed(evt);
@@ -695,11 +585,11 @@ public class PharmacyAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(45, 45, 45)
                         .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
+                        .addGap(21, 21, 21)
                         .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addGap(18, 18, 18)
                         .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -754,7 +644,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(429, Short.MAX_VALUE))
+                .addContainerGap(417, Short.MAX_VALUE))
         );
 
         pharmacy.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -870,7 +760,7 @@ public class PharmacyAdmin extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(medicineQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/vcare/icon/search_30px.png"))); // NOI18N
@@ -1015,9 +905,9 @@ public class PharmacyAdmin extends javax.swing.JFrame {
 
     private void maxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxMouseClicked
         if (maximized) {
-            PharmacyAdmin.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            Pharmacist.this.setExtendedState(JFrame.MAXIMIZED_BOTH);
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            PharmacyAdmin.this.setMaximizedBounds(env.getMaximumWindowBounds());
+            Pharmacist.this.setMaximizedBounds(env.getMaximumWindowBounds());
             maximized = false;
         } else {
             setExtendedState(JFrame.NORMAL);
@@ -1072,6 +962,38 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private void buttonLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonLogoutMouseExited
         changecolor(lineSetting, new Color(4,16,20));
     }//GEN-LAST:event_buttonLogoutMouseExited
+
+    private void pharmacyStaisticsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseClicked
+         pharmacyAdmin.setSelectedIndex(0);
+         changecolor(pharmacyStaistics, new Color(3,138,255));
+        changecolor(side1, new Color(190, 224, 236));
+    }//GEN-LAST:event_pharmacyStaisticsMouseClicked
+
+    private void pharmacyStaisticsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseEntered
+        changecolor(pharmacyStaistics, new Color(3,138,255));
+        changecolor(side1, new Color(190, 224, 236));
+    }//GEN-LAST:event_pharmacyStaisticsMouseEntered
+
+    private void pharmacyStaisticsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyStaisticsMouseExited
+        changecolor(pharmacyStaistics, new Color(0,91,149));
+        changecolor(side1, new Color(0,91,149));
+    }//GEN-LAST:event_pharmacyStaisticsMouseExited
+
+    private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
+       pharmacyAdmin.setSelectedIndex(3);
+       changecolor(manageMedicine, new Color(3,138,255));
+        changecolor(side4, new Color(190, 224, 236));
+    }//GEN-LAST:event_manageMedicineMouseClicked
+
+    private void manageMedicineMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseEntered
+      changecolor(manageMedicine, new Color(3,138,255));
+        changecolor(side4, new Color(190, 224, 236));
+    }//GEN-LAST:event_manageMedicineMouseEntered
+
+    private void manageMedicineMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseExited
+        changecolor(manageMedicine, new Color(0,91,149));
+        changecolor(side4, new Color(0,91,149));
+    }//GEN-LAST:event_manageMedicineMouseExited
 
     private void closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseExited
         changecolor(buttonClose, new Color(27,152,245));
@@ -1147,88 +1069,6 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_button5ActionPerformed
-
-    private void pharmacyRequestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyRequestsMouseClicked
-        pharmacyAdmin.setSelectedIndex(0);
-        changecolor(pharmacyRequests, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyRequestsMouseClicked
-
-    private void pharmacyRequestsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyRequestsMouseEntered
-        changecolor(pharmacyRequests, new Color(3,138,255));
-        changecolor(side1, new Color(190, 224, 236));
-    }//GEN-LAST:event_pharmacyRequestsMouseEntered
-
-    private void pharmacyRequestsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pharmacyRequestsMouseExited
-        changecolor(pharmacyRequests, new Color(0,91,149));
-        changecolor(side1, new Color(0,91,149));
-    }//GEN-LAST:event_pharmacyRequestsMouseExited
-
-    private void processRequestsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_processRequestsMouseClicked
-        pharmacyAdmin.setSelectedIndex(1);
-        changecolor(processRequests, new Color(3,138,255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_processRequestsMouseClicked
-
-    private void processRequestsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_processRequestsMouseEntered
-        changecolor(processRequests, new Color(3,138,255));
-        changecolor(side2, new Color(190, 224, 236));
-    }//GEN-LAST:event_processRequestsMouseEntered
-
-    private void processRequestsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_processRequestsMouseExited
-        changecolor(processRequests, new Color(0,91,149));
-        changecolor(side2, new Color(0,91,149));
-    }//GEN-LAST:event_processRequestsMouseExited
-
-    private void manageMedicineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseClicked
-        pharmacyAdmin.setSelectedIndex(3);
-        changecolor(manageMedicine, new Color(3,138,255));
-        changecolor(side4, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageMedicineMouseClicked
-
-    private void manageMedicineMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseEntered
-        changecolor(manageMedicine, new Color(3,138,255));
-        changecolor(side4, new Color(190, 224, 236));
-    }//GEN-LAST:event_manageMedicineMouseEntered
-
-    private void manageMedicineMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageMedicineMouseExited
-        changecolor(manageMedicine, new Color(0,91,149));
-        changecolor(side4, new Color(0,91,149));
-    }//GEN-LAST:event_manageMedicineMouseExited
- public void changecolorB(JButton hover, Color rand) {
-        hover.setBackground(rand);
-}
-    private void button4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseEntered
-        changecolorB(button4, new Color(3,138,255));
-    }//GEN-LAST:event_button4MouseEntered
-
-    private void button2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button2MouseEntered
-       changecolorB(button2, new Color(3,138,255));
-    }//GEN-LAST:event_button2MouseEntered
-
-    private void button5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button5MouseEntered
-        changecolorB(button5, new Color(3,138,255));
-    }//GEN-LAST:event_button5MouseEntered
-
-    private void button3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button3MouseEntered
-        changecolorB(button3, new Color(3,138,255));
-    }//GEN-LAST:event_button3MouseEntered
-
-    private void button4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button4MouseExited
-       changecolorB(button4, new Color(0,91,149));
-    }//GEN-LAST:event_button4MouseExited
-
-    private void button2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button2MouseExited
-       changecolorB(button2, new Color(0,91,149));
-    }//GEN-LAST:event_button2MouseExited
-
-    private void button5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button5MouseExited
-        changecolorB(button5, new Color(0,91,149));
-    }//GEN-LAST:event_button5MouseExited
-
-    private void button3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_button3MouseExited
-        changecolorB(button3, new Color(0,91,149));
-    }//GEN-LAST:event_button3MouseExited
 
     /**
      * @param args the command line arguments
@@ -1308,7 +1148,6 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel manageMedicine;
     private javax.swing.JLabel manageMedicineIcon;
     private javax.swing.JLabel manageMedicinelbl;
-    private javax.swing.JLabel managePharmacyIcon;
     private javax.swing.JLabel max;
     private javax.swing.JPanel medicine;
     private UI.Components.TextField medicineName;
@@ -1320,13 +1159,10 @@ public class PharmacyAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel menuhide1;
     private javax.swing.JPanel pharmacy;
     private javax.swing.JTabbedPane pharmacyAdmin;
-    private javax.swing.JPanel pharmacyRequests;
-    private javax.swing.JLabel processRequest;
-    private javax.swing.JPanel processRequests;
+    private javax.swing.JPanel pharmacyStaistics;
     private javax.swing.JPanel searchMedicine;
     private javax.swing.JPanel setting;
     private javax.swing.JPanel side1;
-    private javax.swing.JPanel side2;
     private javax.swing.JPanel side4;
     private javax.swing.JLabel statisticsimg;
     private javax.swing.JLabel statisticslbl;

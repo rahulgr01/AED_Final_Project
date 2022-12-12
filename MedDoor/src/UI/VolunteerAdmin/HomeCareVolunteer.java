@@ -4,14 +4,18 @@ package UI.VolunteerAdmin;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.HospitalWorkRequest;
 import UI.Components.TableCustom;
 import UI.Login.MainLoginPage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,12 +29,15 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     boolean a = true;
     static boolean maximized = true;
     private JFrame userProcessContainer;
+    UserAccount account;
+    Network network;
     public HomeCareVolunteer(UserAccount account, 
             Organization organization, 
             Enterprise enterprise, 
             EcoSystem business) {
         initComponents();
-           
+         this.account = account;
+         network = business.getNetworkList().get(0);
     }
     //Method to change panel color on hover
  
@@ -109,7 +116,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         button4 = new UI.Components.Button();
         jLabel1 = new javax.swing.JLabel();
-        button5 = new UI.Components.Button();
         manageTask = new javax.swing.JPanel();
         jPanel22 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -545,7 +551,7 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Patient Name", "Status", "Sender", "Assigned Date"
             }
         ));
         jScrollPane6.setViewportView(jTable3);
@@ -562,32 +568,21 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
         jLabel1.setText("Assigned Patient Deatil:");
 
-        button5.setBackground(new java.awt.Color(0, 91, 149));
-        button5.setForeground(new java.awt.Color(255, 255, 255));
-        button5.setText("Create Work load for Hospital");
-        button5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        button5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel17Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203))
         );
         jPanel17Layout.setVerticalGroup(
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,11 +591,9 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(490, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(493, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout addVolunteerLayout = new javax.swing.GroupLayout(addVolunteer);
@@ -808,12 +801,29 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         // TODO add your handling code here:
-        
+        int selectedRow = jTable3.getSelectedRow();
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null,"Please select a row!!");
+            return;
+        }
+        HospitalWorkRequest hosWR = (HospitalWorkRequest)jTable3.getValueAt(selectedRow, 0);
+        hosWR.setStatus("New");
+        hosWR.setSender(account);
+        hosWR.setReceiver(account);
+        Enterprise org = null;
+        for (Enterprise enter : network.getEnterpriseDirectory().getEnterpriseList()) {
+            
+            if (enter instanceof HospitalEnterprise){
+                org = enter;
+                break;
+            }
+        }
+        if (org!=null){
+            org.getWorkQueue().getWorkRequestList().add(hosWR);
+            account.getWorkQueue().getWorkRequestList().add(hosWR);
+        }        
+        JOptionPane.showMessageDialog(null,"Work request created!!");
     }//GEN-LAST:event_button4ActionPerformed
-
-    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -856,7 +866,6 @@ public class HomeCareVolunteer extends javax.swing.JFrame {
     private javax.swing.JPanel addVolunteer;
     private UI.Components.Button button1;
     private UI.Components.Button button4;
-    private UI.Components.Button button5;
     private javax.swing.JPanel buttonClose;
     private javax.swing.JLabel buttonLogout;
     private javax.swing.JPanel buttonMax;
