@@ -95,7 +95,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         hClistCombo.removeAllItems();
         
         for (Organization org : vEnterPrise.getOrganizationDirectory().getOrganizationList()){
-            if (org.getName() == Organization.Type.HomeCareVolunteer.getValue()) {
+            if (org.getName() == null ? Organization.Type.HomeCareVolunteer.getValue() == null : org.getName().equals(Organization.Type.HomeCareVolunteer.getValue())) {
                 for(UserAccount account : org.getUserAccountDirectory().getUserAccountList()) {
                     hClistCombo.addItem(account.getEmployee());
                 }
@@ -108,7 +108,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         sVCommunity.removeAllItems();
         
         for (Community com : network.getCommunityDirectory().getCommunityList()){
-            sVCommunity.addItem(com.getCommunityName());
+            sVCommunity.addItem(com);
         }
       
     }
@@ -116,10 +116,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
     public void populateHouses() {
         sVHouse.removeAllItems();
         Community com = (Community) sVCommunity.getSelectedItem();
-        for (House house : com.getHouse().getHouses()){
+        if (com != null) {
+        for (House house : com.houselist.getHouses()){
             sVHouse.addItem(house);
         }
-      
+        }
     }
     
     
@@ -127,7 +128,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         sVCommCombo.removeAllItems();
         
         for (Community com : network.getCommunityDirectory().getCommunityList()){
-            sVCommCombo.addItem(account.getEmployee());
+            sVCommCombo.addItem(com);
         }
       
     }
@@ -769,6 +770,11 @@ public class VolunteerAdmin extends javax.swing.JFrame {
         jPanel16.setBackground(new java.awt.Color(217, 241, 255));
 
         vOrganizationsCombo.setLabeText("Organization");
+        vOrganizationsCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vOrganizationsComboActionPerformed(evt);
+            }
+        });
 
         vOrgUN.setLabelText("Username");
 
@@ -1249,26 +1255,31 @@ public class VolunteerAdmin extends javax.swing.JFrame {
 //            return;
 //        }
         Organization org = (Organization) vOrganizationsCombo.getSelectedItem();
-
+int index = vOrganizationsCombo.getSelectedIndex();
         String username = vOrgUN.getText();
         char[] passwordCharArray = vOrgPW.getPassword();
         
         String password = String.valueOf(passwordCharArray);
         String name = vOrgUName.getText();
 
-        Employee employee = org.getEmployeeDirectory().createEmployee(name);
+        
+        for (Organization organ : vEnterPrise.getOrganizationDirectory().getOrganizationList()) {
+            
         if (EcoSystem.isUserUnique(username)) {
-            if (org.toString() == Organization.Type.SurveyVolunteer.toString()) 
+            Employee employee = organ.getEmployeeDirectory().createEmployee(name);
+            if (index == 0) 
             {
-                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
-
-            } else if (org.toString() == Organization.Type.HomeCareVolunteer.toString()) {
-                 org.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
-
+               
+               UserAccount createUserAccount =  organ.getUserAccountDirectory().createUserAccount(username, password, employee, new SurveyVolunteerRole());
+                System.out.println(createUserAccount);
+                break;
+            } else {
+                UserAccount createUserAccount = organ.getUserAccountDirectory().createUserAccount(username, password, employee, new HomeCareVolunteerRole());
+                break;
             }
             
         }
-        
+        } 
     }//GEN-LAST:event_createVolunteerActionPerformed
 
     private void vAdminTaskMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vAdminTaskMouseClicked
@@ -1314,7 +1325,7 @@ public class VolunteerAdmin extends javax.swing.JFrame {
             sV.setStatus("new");
             Employee emp = (Employee)sVolunteerCombo.getSelectedItem();
             sV.setReceiver(getUser(emp.getId()));
-            
+            System.out.print(sV);
             
        Organization org = null;
        for (Organization orn : enterpriseD.getOrganizationDirectory().getOrganizationList())
@@ -1426,6 +1437,10 @@ public void changecolorB(JButton hover, Color rand) {
         } catch (ParseException e) {e.printStackTrace();}
         
     }//GEN-LAST:event_button6ActionPerformed
+
+    private void vOrganizationsComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vOrganizationsComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vOrganizationsComboActionPerformed
 
     /**
      * @param args the command line arguments

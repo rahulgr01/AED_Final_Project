@@ -76,5 +76,8 @@ public class House {
         this.houseId = uniqueID;
         this.tenats = new TenantDirectory();
     }
-    
+    @Override
+    public String toString() {
+        return streeAdredss;
+    }
 }

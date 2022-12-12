@@ -38,21 +38,21 @@ public class EnterpriseDirectory {
         }
         if(type==Enterprise.EnterpriseType.Insurance){
             enterprise=new InsuranceEnterprise(name);
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Policy, "Insurance Policy Org");
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Claims, "Insurance Claim Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Policy, "Policy Organization");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Claims, "Claims Organization");
             
             enterpriseList.add(enterprise);
         }
         if(type==Enterprise.EnterpriseType.Volunteer){
             enterprise=new VolunteerEnterprise(name);
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HomeCareVolunteer, "HomeCare Volunteer Org");
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.SurveyVolunteer, "Survey Volunteer Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.HomeCareVolunteer, "HomeCareVolunteer Organization");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.SurveyVolunteer, "SurveyVolunteer Organization");
             
             enterpriseList.add(enterprise);
         }if(type==Enterprise.EnterpriseType.Diagnostics){
             enterprise=new DiagnosticsEnterprise(name);
             enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Pharmacy, "Pharmacy Org");
-            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabService, "Lab Service Org");
+            enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabService, "LabService Organization");
             
             enterpriseList.add(enterprise);
         }

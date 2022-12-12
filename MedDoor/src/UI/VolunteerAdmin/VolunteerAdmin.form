@@ -912,6 +912,9 @@
                   <Properties>
                     <Property name="labeText" type="java.lang.String" value="Organization"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vOrganizationsComboActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="UI.Components.MyTextFieldLogin" name="vOrgUN">
                   <Properties>
