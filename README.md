@@ -37,6 +37,7 @@ Java 1.8
 ## External APIs : Google Mail Integration and PDF Report Generation
 
 ## Database Used : Database for objects(DB4O)
-## UML Diagram
+## UML Diagram 
+Attached in the document folder
 a)Class Digram 
 b) Component Diagram -![um-component-diagram](https://user-images.githubusercontent.com/113366821/206959192-40478712-1846-46db-9b14-0e77e59007d2.png)
